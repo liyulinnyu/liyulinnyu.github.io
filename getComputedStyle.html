@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+
+</style>
+<body>
+	<div class="det-title">
+		<h1>"getComputedStyle" and "currentStyle", easy ? HEHE</h1>
+	</div>
+	<div class="det-content">
+
+		<div class="text">
+Yesterday, I tried to make the home page in my blog looks better, and decided to make all the DIVs' height adaptable. In another words, the top DIV's height is based on the content's height. I used to think "It's so easy! Ummm". However, I'm wrong, now I know there are also amounts of skills and knowledge about js that I dont really control, even some superficial parts. "getComputedStyle" and "currentStyle" are two of them, yesterday, I have been so stupid trid to used "element.style.height" and "element.height" to get the content's height in DIVs for about half an hour, and the result was obviously nothing. What's wrong?
+    	</div>
+
+    	<div class="imgdiv">
+    		<img src="img/howcanitbe.jpg" alt="how can it be?" style="width:20em; height:20em;">
+    	</div>
+		
+		<div class="text">
+If we write a div element, like this :
+		</div>
+
+		<div class="csscode">iframe { 
+	height:100px; 
+}
+&lt;iframe height="200px" style="height:300px;"&gt;&lt;/iframe&gt;</div>
+		
+		<div class="text">
+At first, we should make sure the priority. As our coders know, the External style sheet &lt; Internal style sheet &lt; Inline style. But if the External style sheet is put after Internal style sheet, there is another thing. OK, so what's the height of "iframe" ? Bingo! 300px, Easy humm. It only uses the style in the iframe label. Without that, it will use the Internal style sheet, and the number of height will become 100px. And finally, if we remove the Internal style sheet, the height will become 200px. This is called Priority Level in Multiple Styles.
+
+So in this way, we should know, JS also has a series of rules to meet the CSS Priority Level in Multiple Styles. Just like the follows:
+		</div>
+		
+		<div class="jscode">(1) iframeid.height    <span class="note">/* 200px */</span>
+(2) iframeid.style.height    <span class="note">/* 300px */</span>
+(3) document.styleSheets[0].cssRules[0].style.height;	<span class="note">/* 100px */</span>
+	document.styleSheets[0].rules[0].style.height;		<span class="note">/* 100px for IE */</span>
+(4) document.defaultView.getComputedStyle(iframeid, null).height;		<span class="note">/* 300px */</span>
+	iframeid.currentStyle.height;		<span class="note">/* 300px for IE */</span></div>
+
+		<div class="text">
+Yep, the code in (1)(2)(3) is so obvious that I should not explain more deeply. If u dont know, just google or baidu, sry for that. And let's go ahead, the code in (4) is get the final style value computed by computer, and we dont have to care about the effect of CSS Priority Level in Multiple Styles. And (4) is read only, but (1)(2)(3) can be used to set the style of an element.
+
+And of course, if we want to get the value of some special attribute, we can use more methods, like follows:
+		</div>
+		
+		<div class="jscode">(1) document.defaultView.getComputedStyle(iframeid, null).height;  
+(2) document.defaultView.getComputedStyle(iframeid, null).getPropertyValue("height");
+(3) iframeid.style.getAttribute("height");         <span class="note">/* for IE */</span></div>
+
+		<div class="text">
+The style name in (1) should be written as Hump Form, like "backgroundColor", and especially, the "float" should be written as "cssFloat" and "styleFloat"(for IE). But the style name in (2) can be written as traditional CSS Form by using "-", like "background-color" and so on. The code in (3) is prepared for IE, if you want to use your code in IE6 and IE7, you should also write the style name as Hump Form, however, if you only want to aim to IE9+, you can use  traditional CSS Form, that's OK.
+		</div>
+
+    </div>
+</body>
+</html>

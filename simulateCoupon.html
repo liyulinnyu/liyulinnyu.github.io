@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/subpage.css">
+<style>
+.coupon{
+	position: relative;
+	height:320px;
+	width:320px;
+	background-color: #f11112;
+	background: radial-gradient(#f11112 0, #f11112 10px, rgba(0, 0, 0, 0) 5px);
+	background-size: 20px 20px;
+	background-position: 0px 0px;
+	overflow: hidden;
+}	
+
+.ban1:before{
+	content:"";
+	position: absolute;
+	left:13px;
+	right:13px;
+	top:13px;
+	bottom:13px;
+	background-color: #f11112;
+	z-index: -1;
+}
+
+.ban1:after{
+	content: '';
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	right: 10px;
+	bottom: 10px;
+	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 1);
+	z-index: -2;
+}
+
+.ban2{
+	position: absolute;
+	left: 18px;
+	top: 24px;
+	right: 18px;
+	bottom: 24px;
+	border: 2px dashed rgba(255,255,255,255);
+	background-color: #82aedb;
+	background-image: linear-gradient(306deg,#6da4da 4%, transparent 4%, transparent 6%, #6da4da 6%, #6da4da 10%, transparent 10%, transparent 12%, #6da4da 12%, #6da4da 16%, transparent 16%, transparent 18%, #6da4da 18%, #6da4da 22%, transparent 22%, transparent 24%, #6da4da 24%, #6da4da 28%, transparent 28%, transparent 30%, #6da4da 30%, #6da4da 34%, transparent 34%, transparent 36%, #6da4da 36%, #6da4da 40%, transparent 40%, transparent 42%, #6da4da 42%, #6da4da 46%, transparent 46%, transparent 48%, #6da4da 48%, #6da4da 52%, transparent 52%, transparent 54%, #6da4da 54%, #6da4da 58%, transparent 58%, transparent 60%, #6da4da 60%, #6da4da 64%, transparent 64%, transparent 66%, #6da4da 66%, #6da4da 70%, transparent 70%, transparent 72%, #6da4da 72%, #6da4da 76%, transparent 76%, transparent 78%, #6da4da 78%, #6da4da 82%, transparent 82%, transparent 84%, #6da4da 84%, #6da4da 88%, transparent 88%, transparent 90%, #6da4da 90%, #6da4da 94%, transparent 94%, transparent 96%, #6da4da 96%, #6da4da 100%);
+	
+}
+
+.ban2 ul{
+	list-style: none;
+	margin-left: -26px;
+	margin-top: 10px;
+	word-wrap:nowrap;
+}
+
+.ban2 li{
+	display: inline-block;
+	width:0;
+	height:0;
+	border:14px solid transparent;
+	border-bottom:10px solid #fff;
+	-moz-transform: rotate(35deg); 
+	-webkit-transform: rotate(35deg); 
+	-ms-transform: rotate(35deg);
+	-o-transform: rotate(35deg);
+	transform: rotate(30deg);
+	border-radius: 5px;
+}
+
+.ban2 li:before{
+	display: block;
+	position: absolute;
+	content: "";
+	width:0;
+	height:0;
+	border:5px solid transparent;
+	border-bottom:13px solid #fff;
+	transform: rotate(-35deg);
+	margin-left: -9px;
+	margin-top: -11px;
+}
+
+.ban2 li:after{
+	display: block;
+	position: absolute;
+	content: "";
+	width:0;
+	height:0;
+	margin-left: -20px;
+	margin-top: -10px;
+	border:14px solid transparent;
+	border-bottom:10px solid #fff;
+	-moz-transform: rotate(-70deg); 
+	-webkit-transform: rotate(-70deg); 
+	-ms-transform: rotate(-70deg);
+	-o-transform: rotate(-70deg);
+	transform: rotate(-60deg);
+	border-radius: 5px;
+}
+
+
+.ban2 span:nth-of-type(1){
+	display: block;
+	color:#fff;
+	margin-top: 20px;
+	font-size: 30px;
+	font-weight: 800;
+	text-align: left;
+	margin-left: 10px;
+}
+
+.ban2 span:nth-of-type(2){
+	display: block;
+	margin-top: 30px;
+	font-size: 110px;
+	font-weight: 800;
+	color: #fff;
+	text-align: center;
+    -ms-transform: scale(1,1.5);
+    -webkit-transform: scale(1,1.5);
+    -moz-transform: scale(1,1.5);
+    -o-transform: scale(1,1.5);
+    transform: scale(1,1.5);
+    z-index: 2;
+	
+    text-shadow:red 2px 0 0,red 0 2px 0,red -2px 0 0,red 0 -2px 0;
+    *filter: Glow(color=red, strength=2);
+    
+}
+
+
+
+
+</style>
+</head>
+<body>
+
+	<div class="det-title">
+		<h1>Draw a Constitution Day Sale Coupon by using CSS3 gradient</h1>
+	</div>
+	<div class="det-content">
+
+		<div class="text">
+This afternoon, a fresh student asked me a question: what's practical application of CSS3 gradient. Yes, as we all know, using pictures will increase our browsers' render time. So in some time, we should use CSS3 instead, and it looks more wonderful than pictures when we magnify the paint drawed by CSS3, for it's drawed by browser. 
+
+So in this blog, I want to draw a Constitution Day Sale Coupon by using CSS3 gradient, at the beginning, let's look at the coupon in picture. And when I draw this coupon, I will also add some shadow to make it more real.
+		</div>
+
+		<div class="imgdiv">
+			<img src="img/ACpost.png" alt="Constitution Day Sale Coupon" style="height:20em;width:20em;">
+		</div>
+
+		<div class="text"><h4>(1) Draw background-1 of coupon.</h4>
+</div>
+
+		<div class="allcode">.coupon{
+	position: relative;
+	height:320px;
+	width:320px;
+	background-color: #f11112;
+	background: radial-gradient(#f11112 0, #f11112 10px, rgba(0, 0, 0, 0) 5px);
+	background-size: 20px 20px;
+	background-position: 0px 0px;
+	overflow: hidden;
+}
+
+&lt;div class="coupon"&gt;&lt;/div&gt;</div>
+
+		<div class="text">
+As the paint shows, we can use the effect of "radial-gradient" to draw a red circle as the background, and use "background-size" to create more red circles if we set the value more than that of "radial-gradient". Of course, you can also use "background-position" to adjust the paint, in this place, we don't need it.
+		</div>
+
+		<div class="imgdiv">
+			<div class="coupon"></div>
+		</div>
+		
+		<div class="text">
+<h4>(2) Draw background-2 of coupon.</h4>
+		</div>
+
+		<div class="allcode">.ban1:before{
+	content:"";
+	position: absolute;
+	left:13px;
+	right:13px;
+	top:13px;
+	bottom:13px;
+	background-color: #f11112;
+	z-index: -1;
+}
+
+.ban1:after{
+	content: '';
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	right: 10px;
+	bottom: 10px;
+	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 1);
+	z-index: -2;
+}
+
+&lt;div class="coupon ban1"&gt;&lt;/div&gt;
+</div>
+		
+		<div class="text">
+In this part, I use " :before " to create a red square with margin 13px to each edge. And use ":after" to create a shadow box under the background. It's looks like a coupon without any words, isn't it? :) Please don't say no... come on ~ 
+		</div>
+
+		<div class="imgdiv">
+			
+			<div class="coupon ban1"></div>
+
+		</div>
+
+		<div class="text">
+<h4>(3) Draw streak background of coupon.</h4>
+		</div>
+
+		<div class="allcode">.ban2{
+	position: absolute;
+	left: 18px;
+	top: 24px;
+	right: 18px;
+	bottom: 24px;
+	border: 2px dashed rgba(255,255,255,255);
+	background-color: #82aedb;
+	background-image: linear-gradient(306deg,#6da4da 4%, transparent 4%, transparent 6%, #6da4da 6%, #6da4da 10%...);	
+}
+
+&lt;div class="coupon ban1"&gt;
+		&lt;div class="ban2">&lt;/div&gt;
+&lt;/div&gt;
+</div>
+		
+		<div class="text">
+How to create the streak background? The answer is "background-image: linear-gradient()", not "background: linear-gradient()". Both of them can create linear gradient, but what's the difference? When we use "transparent" in gradient of "background", it will ignore the background color of this DIV, and in this place, it will show the red color. However, if we use it in gradient of "background-image", it will show the color that we set: #82aedb. Hope you will understand. As for the code, because of the page, I can't show all the code of "linear-gradient", but it is just the loop to 100%. (If needed, you can click right button of mouse to see the source code)
+		</div>
+
+
+		<div class="imgdiv">
+			
+			<div class="coupon ban1">
+				<div class="ban2">
+					
+				</div>
+			</div>
+
+		</div>
+
+		<div class="text">
+<h4>(4) Draw stars of coupon.</h4>
+		</div>
+
+		<div class="allcode">.ban2 ul{
+	list-style: none;
+	margin-left: -26px;
+	margin-top: 10px;
+	word-wrap:nowrap;
+}
+
+.ban2 li{
+	display: inline-block;
+	width:0;
+	height:0;
+	border:14px solid transparent;
+	border-bottom:10px solid #fff;
+	-moz-transform: rotate(35deg); 
+	-webkit-transform: rotate(35deg); 
+	-ms-transform: rotate(35deg);
+	-o-transform: rotate(35deg);
+	transform: rotate(30deg);
+	border-radius: 5px;
+}
+
+.ban2 li:before{
+	display: block;
+	position: absolute;
+	content: "";
+	width:0;
+	height:0;
+	border:5px solid transparent;
+	border-bottom:13px solid #fff;
+	transform: rotate(-35deg);
+	margin-left: -9px;
+	margin-top: -11px;
+}
+
+.ban2 li:after{
+	display: block;
+	position: absolute;
+	content: "";
+	width:0;
+	height:0;
+	margin-left: -20px;
+	margin-top: -10px;
+	border:14px solid transparent;
+	border-bottom:10px solid #fff;
+	-moz-transform: rotate(-70deg); 
+	-webkit-transform: rotate(-70deg); 
+	-ms-transform: rotate(-70deg);
+	-o-transform: rotate(-70deg);
+	transform: rotate(-60deg);
+	border-radius: 5px;
+}
+
+&lt;div class="coupon ban1"&gt;
+	&lt;div class="ban2"&gt;
+		&lt;ul&gt;
+			&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+</div>
+		
+		
+		<div class="text">
+In this part, I will say thanks to the ":after" and ":before" again again and again, they are amazing when creating complex styles. I can only use one "li" to create a	star just like what you can see. If you want to create one, just look at the code above, and don't forget to let all borders be transparent first, and then	set one border that you will use to be seen, after that, you can create a triangle.	
+		</div>
+
+
+		<div class="imgdiv">
+			
+			<div class="coupon ban1">
+				<div class="ban2">
+					<ul>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+			
+		<div class="text">
+<h4>(5) Draw words of coupon.</h4>
+		</div>
+
+	
+		<div class="allcode">.ban2 span:nth-of-type(1){
+	display: block;
+	color:#fff;
+	margin-top: 20px;
+	font-size: 30px;
+	font-weight: 800;
+	text-align: left;
+	margin-left: 10px;
+}
+
+.ban2 span:nth-of-type(2){
+	display: block;
+	margin-top: 30px;
+	font-size: 110px;
+	font-weight: 800;
+	color: #fff;
+	text-align: center;
+    -ms-transform: scale(1,1.5);
+    -webkit-transform: scale(1,1.5);
+    -moz-transform: scale(1,1.5);
+    -o-transform: scale(1,1.5);
+    transform: scale(1,1.5);
+    z-index: 2;
+    text-shadow:red 2px 0 0,red 0 2px 0,red -2px 0 0,red 0 -2px 0;
+    *filter: Glow(color=red, strength=2); 
+}
+
+&lt;div class="coupon ban1"&gt;
+	&lt;div class="ban2"&gt;
+		&lt;span>Constitution&lt;/span&gt;
+		&lt;span>SALE&lt;/span&gt;
+		&lt;ul&gt;
+			&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+</div>
+		
+		
+		<div class="text">
+This part is easy, just show some words in paint. And I'll say sorry for that I don't know the form of the letters in coupon, so I just use the normal form. And I use "transform:scale()" to enlarge the words' height, use "text-shadow" to create the red border of words, of course, "*filter" is for IE.  
+		</div>
+
+
+		<div class="imgdiv">
+			
+			<div class="coupon ban1">
+				<div class="ban2">
+					<span>Constitution</span>
+					<span>SALE</span>
+					<ul>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="text">
+<h4>Conclusion:</h4>
+In this blog, I use CSS3 to create a coupon. There is no doubt that the paint also has some shortcomings, such as the form of letters, the stars cannot be drawed as those in picture, and so on. But I just try my best, and the effect of gradient is wonderful, I think so at least. Hope u will like it, too. 
+		</div>
+
+	</div>
+	
+</body>
+</html>

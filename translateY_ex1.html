@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+#box{
+	width:400px;
+	height:300px;
+	box-shadow: 1px 1px 2px #ccc, -1px -1px 2px #ccc;
+	border: 10px solid #fff;
+}
+#figure{
+	margin: 0;
+	position: relative;
+	width: 100%;
+	height:100%;
+	overflow: hidden;
+}
+#figure img{
+	width: 100%;
+	display: block;
+	height:100%;
+}
+#content{
+	width: 100%;
+	height: 100%;
+}
+#box #figure img {
+	-webkit-transition: -webkit-transform 0.4s;
+	-moz-transition: -moz-transform 0.4s;
+	transition: transform 0.4s;
+}
+#box #figure:hover img{
+	-webkit-transform: translateY(-50px);
+	-moz-transform: translateY(-50px);
+	-ms-transform: translateY(-50px);
+	transform: translateY(-50px);
+}
+#mask{
+	position: absolute;
+	top: 300px;
+	left: 0;
+	height:50px;
+	width: 100%;
+	text-align: center;
+	background: rgb(233, 194, 236);
+	color: #ed4e6e;
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.1s 0.3s;
+	-moz-transition: -moz-transform 0.4s, opacity 0.1s 0.3s;
+	transition: transform 0.4s, opacity 0.1s 0.3s;
+}
+
+#box #figure:hover #mask {
+	-webkit-transform: translateY(-100%);
+	-moz-transform: translateY(-100%);
+	-ms-transform: translateY(-100%);
+	transform: translateY(-100%);
+}
+</style>
+<body>
+	<div class="det-title">
+		<h1>An example of translateY used in online shop store.</h1>
+	</div>
+	<div class="det-content">
+
+		<div class="text">
+We usually meet some pictures in online shop stores which will rise and show another DIV when mouse is over it. Just like follows, picture 1 is static, when you put your mouse over the picture, you will see picture 2. 
+		</div>
+		<div class="imgdiv">
+			<img src="img/online_shores_img1.jpg" alt="">
+			<img src="img/online_shores_img2.jpg" alt="">
+		</div>
+		<div class="text">
+So, in this blog, I just want to use "translateY" and "transition" to imitate this effection. Let's show the code.
+		</div>
+		<div class="csscode">#box{
+	width:400px;
+	height:300px;
+	box-shadow: 1px 1px 2px #ccc, -1px -1px 2px #ccc;
+	border: 10px solid #fff;
+}
+#figure{
+	margin: 0;
+	position: relative;
+	width: 100%;
+	height:100%;
+	overflow: hidden;
+}
+#figure img{
+	width: 100%;
+	display: block;
+	height:100%;
+}
+#content{
+	width: 100%;
+	height: 100%;
+}
+#box #figure img {
+	-webkit-transition: -webkit-transform 0.4s;
+	-moz-transition: -moz-transform 0.4s;
+	transition: transform 0.4s;
+}
+#box #figure:hover img{
+	-webkit-transform: translateY(-50px);
+	-moz-transform: translateY(-50px);
+	-ms-transform: translateY(-50px);
+	transform: translateY(-50px);
+}
+#mask{
+	position: absolute;
+	top: 300px;
+	left: 0;
+	height:50px;
+	width: 100%;
+	text-align: center;
+	background: rgb(233, 194, 236);
+	color: #ed4e6e;
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.1s 0.3s;
+	-moz-transition: -moz-transform 0.4s, opacity 0.1s 0.3s;
+	transition: transform 0.4s, opacity 0.1s 0.3s;
+}
+#box #figure:hover #mask {
+	-webkit-transform: translateY(-100%);
+	-moz-transform: translateY(-100%);
+	-ms-transform: translateY(-100%);
+	transform: translateY(-100%);
+}</div>
+		<div class="text">
+And the HTML code:
+		</div>
+		<div class="htmlcode">&lt;div id="box"&gt;
+	&lt;div id="figure"&gt;
+		&lt;div id="content"&gt;&lt;img src="img/translateY_img1.jpg" alt=""&gt;&lt;/div&gt;
+		&lt;div id="mask"&gt;&lt;p&gt;BIG SALE&lt;/p&gt;&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</div>
+		
+		<div class="text">
+As we can see from the code, I think there are three important things:
+1. The "figure" DIV should set "overflow:hidden", otherwise, the sub DIVs will flow out.
+2. We should use set "transition" in both "content" and "mask" DIVs, and set "transform:translateY" in ":hover".
+3. We just want to let img and "mask" rise, so the code should be set as "#figure:hover img{}" and "#figure:hover #mask{}".
+
+And we can see the final effect as follows:
+		</div>
+		
+		<div class="imgdiv">
+			<div id="box">
+				<div id="figure">
+					<div id="content"><img src="img/translateY_img1.jpg" alt=""></div>
+					<div id="mask"><p>BIG SALE</p></div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+</body>
+</html>

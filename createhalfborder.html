@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+	.border {
+    position: relative;
+    top:1em;
+}
+ 
+.border:before {
+    content: "";
+    position: absolute;
+    width: 50em;
+    height: 10em;
+    border: 1px solid #ff0000;
+    border-radius:5px;
+	font-size:0.8em;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(0.5, 0.5);
+    -ms-transform: scale(0.5, 0.5);
+    -o-transform: scale(0.5, 0.5);
+    transform: scale(0.5, 0.5);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+</style>
+<body>
+	<div class="det-title">
+		<h1>Create 0.5px border used in mobile web pages</h1>
+	</div>
+	<div class="det-content">
+
+		<div class="text">
+If you develop a web page for mobile phone, you will know, the "1px" border isn't look good, for the mobile screen is smaller when compared to computer screen. So as an old saying goes, where there is a need, there will be a supply. Smart coders just think about how to create "0.5px" border or make it more thiner. This afternoon, when I searched the Internet, I found four methods to do this effect.
+
+1. Using HTML "viewport". 
+		</div>
+
+		<div class="htmlcode">
+&lt;meta name="viewport" content="initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no" /&gt;
+		</div>
+		
+		<div class="text">
+In this method, all of the contents will be as half large as real. You know, everything, the border, the picture and so on. So if we want to use this method, we will set all the length ahead of time.
+
+2. Using "border-image".
+As we all know, the most simple method is to use the picture which has the "0.5px" border. However, if you want to change the color of it, you have to create another picture. How about considering using more different borders? Do we need create more pictures? So, we should put the cache of mobile into account. Maybe, we should find another method. Of course if you just want to use border to do some simple effect, you can use this method.
+
+3. Using "linear-gradient".
+		</div>
+
+		<div class="allcode">.jb-border{
+	position:relative;
+}
+.jb-border::after {
+	content: " ";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 1px;
+	background-image: linear-gradient(0deg, transparent 50%, red 50%);
+	background-image: -webkit-linear-gradient(0deg, transparent 50%, red 50%); 
+}
+
+&lt;div class="jb-border"&gt;&lt;/div&gt;</div>
+		
+		<div class="text">
+Using this method doesn't look so obviously in computer webpage, you should use mobile web to show this effect.
+
+4. Using "transform: scale()".
+		</div>
+
+		<div class="allcode">.border {
+    position: relative;
+    top:200px;
+    line-height: 40px;
+}
+.border:before {
+    content: "";/* 注意这里为双引号 */
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    border: 1px solid #ff0000;
+    border-radius:5px;/* 也可以设置圆角 */
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(0.5, 0.5);
+    -ms-transform: scale(0.5, 0.5);
+    -o-transform: scale(0.5, 0.5);
+    transform: scale(0.5, 0.5);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+&lt;div class="border"&gt;&lt;/div&gt;</div>
+
+		<div class="text">
+There are three important points that I should mention:
+1. let "width:200%" and "height:200%";
+2. let "transform:scale(0.5, 0.5)", both 1 and 2 can make sure that source DIV has right length;
+3. let "box-sizing: border-box", this setting is necessary, because we should let border to shrink, too.
+
+Let's see this effect:
+		</div>
+
+		<div class="imgdiv">
+			<div class="border"></div>
+		</div>
+	</div>
+</body>
+</html>

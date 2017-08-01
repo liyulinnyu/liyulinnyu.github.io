@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+
+@media all and (min-width:700px){
+	.cube {
+		display: block;
+    	font-size: 80px;
+    	width: 2em;
+    	-webkit-transform-style: preserve-3d;
+    	transform-style: preserve-3d;
+	}
+	.cube > div {
+    	position: absolute;
+    	width: 2em;
+    	height: 2em;
+    	background: rgba(0, 0, 0, .1);
+    	border: 1px solid #999;
+    	color: white;
+    	text-align: center;
+    	line-height: 2em;
+	}
+	.rx{
+		-webkit-transform: rotateX(30deg) ;
+    	transform: rotateX(30deg) ;
+	}
+	.ry{
+		-webkit-transform: rotateY(30deg) ;
+    	transform: rotateY(30deg) ;
+    	margin-left: 1em;
+	}
+	.rz{
+    	-webkit-transform: rotateZ(30deg) ;
+    	transform: rotateZ(30deg) ;
+    	margin-left: 1em;
+	}
+	.cube1 {
+    	-webkit-transform:rotateX(-90deg) translateZ(1em);
+    	transform:rotateX(-90deg) translateZ(1em);
+	}
+}
+
+@media all and (max-width:700px){
+	.cube {
+		display: block;
+    	font-size: 40px;
+    	width: 2em;
+    	-webkit-transform-style: preserve-3d;
+    	transform-style: preserve-3d;
+	}
+	.cube > div {
+    	position: absolute;
+    	width: 2em;
+    	height: 2em;
+    	background: rgba(0, 0, 0, .1);
+    	border: 1px solid #999;
+    	color: white;
+    	text-align: center;
+    	line-height: 2em;
+	}
+	.rx{
+		-webkit-transform: rotateX(30deg) ;
+    	transform: rotateX(30deg) ;
+	}
+	.ry{
+		-webkit-transform: rotateY(30deg) ;
+    	transform: rotateY(30deg) ;
+    	margin-left: 1em;
+	}
+	.rz{
+    	-webkit-transform: rotateZ(30deg) ;
+    	transform: rotateZ(30deg) ;
+    	margin-left: 1em;
+	}
+	.cube1 {
+    	-webkit-transform:rotateX(-90deg) translateZ(1em);
+    	transform:rotateX(-90deg) translateZ(1em);
+	}
+}
+
+
+.wrapper {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid #000;
+    -webkit-perspective: 150px;
+    perspective: 150px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.w1 {
+    -webkit-perspective-origin: top;
+    perspective-origin: top;
+}
+.w2 {
+    -webkit-perspective-origin: center;
+    perspective-origin: center;
+}
+.w3 {
+    -webkit-perspective-origin: bottom;
+    perspective-origin: bottom;
+}
+.wrapper > div {
+    width: 180px;
+    height: 120px;
+    margin: 40px 10px;
+    background-color: #ccc;
+    -webkit-transform: rotatex(90deg);
+    transform: rotatex(90deg);
+}
+
+
+.backface {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin: 50px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-animation: rotate 5s infinite;
+    animation: rotate 5s infinite;
+}
+.backface > div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, .2);
+    background-color: rgba(255, 255, 255, .1);
+    color: gray;
+    font-size: 20px;
+    line-height: 100px;
+    text-align: center;
+}
+.front {
+    -webkit-transform: translatez(50px);
+    transform: translatez(50px);
+}
+.back {
+    -webkit-transform: rotatey(180deg) translatez(50px);
+    transform: rotatey(180deg) translatez(50px);
+}
+.right {
+    -webkit-transform: rotatey(90deg) translatez(50px);
+    transform: rotatey(90deg) translatez(50px);
+}
+.left {
+    -webkit-transform: rotatey(-90deg) translatez(50px);
+    transform: rotatey(-90deg) translatez(50px);
+}
+.top {
+    -webkit-transform: rotatex(90deg) translatez(50px);
+    transform: rotatex(90deg) translatez(50px);
+}
+.bottom {
+    -webkit-transform: rotatex(-90deg) translatez(50px);
+    transform: rotatex(-90deg) translatez(50px);
+}
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotatey(0);
+    }
+    to {
+        -webkit-transform: rotatey(360deg);
+    }
+}
+@keyframes rotate {
+    from {
+        transform: rotatey(0);
+    }
+    to {
+        transform: rotatey(360deg);
+    }
+}
+.c1 > div {
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+}
+.c2 > div {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+</style>
+<body>
+	
+<div class="det-title">
+	<h1>3D Tranform in CSS3</h1>
+</div>
+<div class="det-content">
+	<div class="text">
+Nowadays, without surprise, CSS3 is everywhere inserted in our Web pages, as web coders, When we're thinking about using 3d pictures or flash in our HTML pages, there are amounts of methods for us to choose, such as, emmmm.. (give me 2 minutes to clear my mind...let's go ~ :) OK, such as using pictures directly, SVG and canvas in HTML5, or just CSS3, maybe more. 
+
+So, when facing different situations, we should choose one of them, relatively the 3d transfrom of CSS3 could help us to solve some problem by using the less code, less DOM, but easy to control. And I'll give some examples to really understand the details of 3d transform.
+
+Here are 6 key words of 3d transform as follows:
+    </div>
+	<div class="csscode"><ul><li>transform			<span class="note">/*check or set the transfrom for obj */</span></li><li>transform-origin		<span class="note">/*check or set the transfrom origin */</span></li><li>transform-style			<span class="note">/*set the sub-node in 3d */</span></li><li>perspective		<span class="note">/*set the distance between the Z=0 and observer */</span></li><li>perspective-origin		<span class="note">/*set the perspective origin */</span></li><li>backface-visibility		<span class="note">/*whether the backface can be seen or not */</span></li></ul></div>
+
+	<div class="text"><h3>1. "transform-style"</h3>If we want to make a 3d picture, we have to set it as "preserve-3d" ( or "-webkit-transform-style: preserve-3d" for webkit), means all the children nodes should be in 3d mode. So this attribute should set in the parent node. And it has the other value: flat. Just 2d, yep.   
+	</div>
+
+	<div class="text"><h3>2. Understand rotateX, rotateY and rotateZ</h3>It will be easy to see the x-axis and y-aris from the computer screen, however, how about z-axis? Easy! Huu? Just Image that your eyes' direction is perpendicular to the screen. Yep, let's show the picture and css code of them:
+	</div>
+
+	<div class="imgdiv">
+		<div class="cube rx">
+    		<div class="cube1">1</div>
+    		<div class="cube2">2</div>
+		</div>
+		<div class="cube ry">
+    		<div class="cube1">1</div>
+    		<div class="cube2">2</div>
+		</div>
+		<div class="cube rz">
+    		<div class="cube1">1</div>
+    		<div class="cube2">2</div>
+		</div>
+	</div>
+
+	<div class="text">I use 2 picture in order to show the effect of 3d, so we just need to see the picture with number "2". The three pictures represent the case where the x-axis and the y-axis and the z-axis rotate clockwise by 30 degrees, respectively.
+	</div>
+
+	<div class="csscode">.rx {
+	-webkit-transform: rotateX(30deg) ;
+    transform: rotateX(30deg) ;
+}</div>
+
+	<div class="text"><h3>3. "perspective" and "perspective-origin"</h3>What is perspective? If we already have some common sense about art or life, we should know when we see something from a remote distance, it looks smaller than it should be, in return, it will looks more larger when we put it in front of our eyes. And "perspective" is to set the distance between the object and our eyes, maybe a fake distance, because the computer don't know where our eyes really are. But here if the thing: the value more big, the object more large. And if we set the value more than a certain number, what will happen? :) The screen will fill with the object, and we can see nothing but the object. Because the screen assumes that the object is near our eyes very close. Just as a Chinese words:" A leaf barrier doesn't see Mount Tai". 
+
+And how about "perspective-origin"? Yep! It's where our eyes are from the screen's point of view. And this attribute will cause the perspective blind spot, refered to PBS. PBS is when we put a card in front of our eyes, and rotate 90 degree, we can only see a line not a card. Nothing is clear than a picture, so let do some exams, I will show 3 pictures from different perspective origin, and all of them are rotated 30 degree based x-axis. We can see that the second picture shows as a line, because the PBS effect.
+	</div>
+
+	<div class="imgdiv">
+		<div class="wrapper w1">
+    		<div>1</div>
+		</div>
+	</div>
+
+	<div class="csscode">-webkit-perspective-origin:center top;
+perspective-origin:center top;</div>
+
+	<div class="imgdiv">
+		<div class="wrapper w2">
+    		<div>1</div>
+		</div>
+	</div>
+
+	<div class="csscode">-webkit-perspective-origin:center center;
+perspective-origin:center center;</div>
+
+	<div class="imgdiv">
+		<div class="wrapper w3">
+    		<div>1</div>
+		</div>
+	</div>
+
+	<div class="csscode">-webkit-perspective-origin:center bottom;
+perspective-origin:center bottom;</div>
+	
+	<div class="text"><h3>4. "backface-visibility"</h3>This attribute has two value: hidden and visible. Just as its name, it sets whether we can see the back of the object, just like a opacity attribue for 3d object. The following has two 3d boxes, the first's backface is visible, and the other is hidden. If you are interested in the details of them. Just click <a href="http://www.css88.com/book/css/properties/transform/backface-visibility.htm" target="_blank">3d boxes</a>.
+	</div>
+
+	<div class="imgdiv">
+		<div class="backface c1">
+    		<div class="front">1</div>
+    		<div class="back">2</div>
+    		<div class="right">3</div>
+    		<div class="left">4</div>
+    		<div class="top">5</div>
+    		<div class="bottom">6</div>
+		</div>
+
+		<div class="backface c2">
+    		<div class="front">1</div>
+    		<div class="back">2</div>
+    		<div class="right">3</div>
+    		<div class="left">4</div>
+    		<div class="top">5</div>
+    		<div class="bottom">6</div>
+		</div>
+	</div>
+	
+
+	<div class="text"><h3>5. Conclusion</h3>For the page space reason, I dont want to give the details about "transform" and "transform-origin", anyway, those two attributes are also, emmmmmm easy to understand, maybe? And in future, if I could remember or meet some examples about CSS 3d, I will add them in this page. Thanks for reading.    
+	</div>
+</div>
+
+<script>
+    
+</script>
+</body>
+</html>
