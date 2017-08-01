@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+<style>
+@media all and (min-width:850px){
+	html{
+	font-size: 100%;  /*for IE*/
+	width: 100%;
+	font-family: "Whitney SSm A", "Whitney SSm B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+}
+body{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-size: 1em; 
+	display: flex;
+	flex-direction: column;
+}
+header,footer{
+	display: flex;
+	flex: 1;
+	height: 5em;
+	justify-content: space-between;
+}
+
+
+#main-header-logo{
+	display: block;
+	height: 100%;
+	flex: 1;
+}
+#main-header-title{
+	display: block;
+	height: 100%;
+	flex: 9;
+}
+#main-header-block{
+	display: block;
+	height: 100%;
+	width:310px;
+	background: #eee;
+}
+#main-body{
+	display: flex;
+  	flex: 1;
+  	background: #336699;
+}
+#main-body:before{
+	content: "";
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    width: 100%;
+    border-bottom: 10px solid rgba(153, 102, 204, 0.8);
+}
+#main-body-content{
+	display: block;
+	flex: 10;
+	background: #8f8f8f;
+	min-height: 100em;
+}
+.button-list{
+	position: relative;
+	top:0;
+	left: 0;
+	display: block;
+	width:100%;
+	background: #333;
+	height: 5em;
+}
+.button-list-det{
+	display: inline-block;
+	height: 100%;
+	line-height: 5em;
+	width: 15%;
+	min-width: 100px;
+	background: #333;
+	margin-left: 2%;
+	vertical-align: middle;
+	color: #f1f1f1;
+	font-size: 1.2em;
+	text-align: center;
+}
+.button-list-det:first-child{
+	margin-left: 10%;
+}
+.button-list-det:hover{
+	line-height: 4em;
+	font-size: 1.5em;
+	background: #444;
+	cursor: pointer;
+}
+.content-list{
+	position: relative;
+	display: flex;
+	flex-direction:raw;
+	flex-wrap:wrap;
+	top:0;
+	left:0;
+	width:100%;
+	min-height:96em;
+	background: #8f8f8f;
+}
+
+aside{
+	display: flex;
+	flex-direction:column;
+	flex-wrap:wrap;
+	width:310px;
+	background: #eee;
+	min-height: 200em;
+}
+#main-contact-text{
+	margin:2em 10%;
+	height:15em;
+	width:80%;
+	background: #fff;
+}
+#main-contact-text > textarea{
+	width:100%;
+	height:100%;
+	resize:none;
+	font-size: 1rem;
+	color:#333;
+	font-family: "Whitney SSm A", "Whitney SSm B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+}
+#main-contact-button{
+	margin:0 10%;
+	height:2em;
+	width:80%;
+	background: #fa8b60;
+	border: 1px solid #fa8b60;
+	color:#fff;
+	font-size: 2em;
+}
+#main-contact-button:hover{
+	cursor: pointer;
+	background: #ef6d3b;
+}
+#main-otherrelated-list{
+	margin:5em 10%;
+	height:20em;
+	width:80%;
+	background: #fff;
+}
+#main-otherrelated-list > span{
+	display: inline-block;
+	padding: 5%;
+	font-size: 0.8em;
+}
+#main-otherrelated-list > span:nth-child(1){
+	padding: 5%;
+	font-size: 2em;
+	font-weight: bold;
+}
+#main-footer-lblock{
+	display: block;
+	flex:10;
+	background: #313131;
+	min-height: 10em;
+}
+#main-footer-rblock{
+	display: block;
+	width:310px;
+	background: #515151;
+	height: 10em;
+}
+#main-footer-rblock>span{
+	display: block;
+	font-size: 1.5em;
+	color: #a1a1a1;
+	padding: 10%;
+}
+
+}
+
+
+@media all and (max-width:850px){
+	html{
+	font-size: 100%;  /*for IE*/
+	width: 100%;
+	font-family: "Whitney SSm A", "Whitney SSm B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+}
+body{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-size: 0.8em; 
+	display: flex;
+	flex-direction: column;
+}
+header,footer{
+	display: flex;
+	flex: 1;
+	height: 5em;
+	justify-content: space-between;
+}
+
+
+#main-header-logo{
+	display: block;
+	height: 100%;
+	flex: 3;
+}
+#main-header-title{
+	display: block;
+	height: 100%;
+	flex: 9;
+}
+#main-header-block{
+	display: none;
+	height: 100%;
+}
+#main-body{
+	display: flex;
+  	flex: 1;
+  	background: #336699;
+  	flex-direction: column;
+  	height:auto;
+}
+#main-body:before{
+	content: "";
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    width: 100%;
+    border-bottom: 8px solid rgba(153, 102, 204, 0.8);
+}
+#main-body-content{
+	display: block;
+	width: 100%;
+	background: #8f8f8f;
+	min-height: 100em;
+}
+.button-list{
+	position: relative;
+	top:0;
+	left: 0;
+	display: block;
+	width:100%;
+	background: #333;
+	height: 5em;
+}
+.button-list-det{
+	display: inline-block;
+	height: 100%;
+	line-height: 5em;
+	width: 15%;
+	min-width: 100px;
+	background: #333;
+	margin-left: 2%;
+	vertical-align: middle;
+	color: #f1f1f1;
+	font-size: 1.2em;
+	text-align: center;
+}
+.button-list-det:first-child{
+	margin-left: 10%;
+}
+.button-list-det:hover{
+	line-height: 4em;
+	font-size: 1.5em;
+	background: #444;
+	cursor: pointer;
+}
+.content-list{
+	position: relative;
+	display: flex;
+	flex-direction:raw;
+	flex-wrap:wrap;
+	top:0;
+	left:0;
+	width:100%;
+	min-height:96em;
+	background: #8f8f8f;
+}
+
+aside{
+	display: flex;
+	flex-direction:rows;
+	flex-wrap:wrap;
+	width:100%;
+	background: #eee;
+	min-height: 40em;
+}
+#main-contact-text{
+	margin:2em 10%;
+	height:15em;
+	width:80%;
+	background: #fff;
+}
+#main-contact-text > textarea{
+	width:100%;
+	height:100%;
+	resize:none;
+	font-size: 1rem;
+	color:#333;
+	font-family: "Whitney SSm A", "Whitney SSm B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+}
+#main-contact-button{
+	margin:0 10%;
+	height:2em;
+	width:80%;
+	background: #fa8b60;
+	border: 1px solid #fa8b60;
+	color:#fff;
+	font-size: 2em;
+}
+#main-contact-button:hover{
+	cursor: pointer;
+	background: #ef6d3b;
+}
+#main-otherrelated-list{
+	margin:5em 10%;
+	height:15em;
+	width:80%;
+	background: #fff;
+}
+#main-otherrelated-list > span{
+	display: block;
+	padding-left: 5%;
+	font-size: 1em;
+	width:100%;
+}
+#main-otherrelated-list > span:nth-child(1){
+	padding: 5%;
+	font-size: 2em;
+	font-weight: bold;
+	
+}
+#main-footer-lblock{
+	display: block;
+	width:100%;
+	background: #313131;
+	min-height: 10em;
+}
+#main-footer-rblock{
+	display: none;
+	width:310px;
+	background: #515151;
+	height: 10em;
+}
+#main-footer-rblock>span{
+	display: none;
+	font-size: 1.5em;
+	color: #a1a1a1;
+	padding: 10%;
+}
+
+}
+
+
+
+</style>
+<script>
+</script>
+</head>
+<body>
+	<header>
+		<div id="main-header-logo"></div>
+		<div id="main-header-title"></div>
+		<div id="main-header-block"></div>
+	</header>
+	<div id="main-body">
+		<div id="main-body-content">
+			<div class="button-list">
+				<div class="button-list-det">Tech</div>
+				<div class="button-list-det">Life</div>
+				<div class="button-list-det">Reso</div>
+				<div class="button-list-det">Game</div>
+			</div>
+			<div class="content-list">
+				<iframe src="main-search.html" frameborder="0" scrolling = "no" 
+					style="width:100%;min-height:5000px; " id="iframe" name="myframe">
+					
+				</iframe>
+			</div>
+		</div>
+		<aside>
+			<div id="main-contact-text">
+				<textarea cols="40" rows="4" maxlength="200"></textarea>
+			</div>
+			<input type="button" id="main-contact-button" value="contact me">
+			<div id="main-otherrelated-list">
+				<span>Related Web</span>
+				<span>Yifeng Ruan's blog ：http://www.ruanyifeng.com</span>
+				<span>Xinxu Zhang's blog ：http://www.zhangxinxu.com</span>
+			</div>
+		</aside>
+	</div>
+	<footer>
+		<div id="main-footer-lblock"></div>
+		<div id="main-footer-rblock"><span>TO CHASE WHAT U WANT, DONT LOSE TO TIME.</span></div>
+	</footer>
+
+
+
+
+
+	<script type="text/javascript">
+
+	(function(){
+
+		var EventUtil = {
+
+			// binding method for obj
+			addHandler : function(obj, method, fname){
+
+				if (obj.addEventListener){
+					// *
+					obj.addEventListener(method, fname, false);
+				}else{
+					// IE
+					obj.attachEvent("on"+method, fname);
+				}
+			},
+
+			removeHandler : function(obj, method, fname){
+
+				if (obj.removeEventListener){
+					// *
+					obj.removeEventListener(method, fname, false);
+				}else{
+					// IE
+					obj.detachEvent("on"+method, fname);
+				}
+			},
+
+			getEvent : function(event){
+
+				return event ? event : window.event;
+			},
+
+			getTarget : function(event){
+
+				return event.target || event.srcElement;
+			},
+
+			preventDefault : function(event){
+
+				if (event.preventDefault){
+					event.preventDefault();
+				}else{
+					event.returnValue = false;
+				}
+			},
+
+			stopPropagation : function(event){
+				
+				if (event.stopPropagation){
+					event.stopPropagation();
+				}else{
+					event.cancelBubble = true;
+				}
+			}
+		};
+		
+
+		var tempiframe = document.querySelector("iframe");
+		function ChangeIframePage(pageid){
+
+			var contentList = document.querySelector(".content-list");
+			contentList.style.background = "#fff";
+			tempiframe.src = pageid;
+		}
+		
+
+
+		function ShowTechPage(event){
+
+			var target = EventUtil.getTarget(event);
+
+			switch (target.innerHTML){
+				case "Tech" : ChangeIframePage("Tech.html");break;
+				case "Life" : ChangeIframePage("life.html");break;
+				case "Reso" : ChangeIframePage("Reso.html");break;
+				case "Game" : ChangeIframePage("Game.html");break;
+			}
+		}
+
+		var techButton = document.querySelectorAll(".button-list-det");
+		
+		for (var i = 0; i < techButton.length; i++){
+
+			EventUtil.addHandler(techButton[i], "click", ShowTechPage);
+		}
+		
+
+
+
+
+	})();
+	</script>
+</body>
+</html>
