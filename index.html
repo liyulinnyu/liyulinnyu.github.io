@@ -6,367 +6,476 @@
 	<title></title>
 	<link rel="stylesheet" href="">
 <style>
-@media all and (min-width:1000px){
-	html{
-	font-size: 100%;  /*for IE*/
+.row{
+	display: none;
+}
+#row1{
+	left:0px;
+	top:0px;
 	width: 100%;
-	font-family: "Whitney SSm A", "Whitney SSm B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
-}
-body{
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	font-size: 1em; 
-	display: flex;
-	flex-direction: column;
-}
-header,footer{
-	display: flex;
-	flex: 1;
-	height: 5em;
-	justify-content: space-between;
-}
-
-
-#main-header-logo{
-	display: block;
-	height: 100%;
-	flex: 1;
-}
-#main-header-title{
-	display: block;
-	height: 100%;
-	flex: 9;
-}
-#main-header-block{
-	display: block;
-	height: 100%;
-	width:310px;
-	background: #eee;
-}
-#main-body{
-	display: flex;
-  	flex: 1;
-  	background: #336699;
-}
-#main-body:before{
-	content: "";
-    position: absolute;
-    z-index: 2;
-    left: 0;
-    width: 100%;
-    border-bottom: 10px solid rgba(153, 102, 204, 0.8);
-}
-#main-body-content{
-	display: block;
-	flex: 10;
-	background: #8f8f8f;
-	min-height: 50em;
-}
-.button-list{
-	position: relative;
-	top:0;
-	left: 0;
-	display: block;
-	width:100%;
-	background: #333;
-	height: 5em;
-}
-.button-list-det{
-	display: inline-block;
-	height: 100%;
-	line-height: 5em;
-	width: 15%;
-	min-width: 100px;
-	background: #333;
-	margin-left: 2%;
-	vertical-align: middle;
-	color: #f1f1f1;
-	font-size: 1.2em;
-	text-align: center;
-}
-.button-list-det:first-child{
-	margin-left: 10%;
-}
-.button-list-det:hover{
-	line-height: 4em;
-	font-size: 1.5em;
-	background: #444;
-	cursor: pointer;
-}
-.content-list{
-	position: relative;
-	display: flex;
-	flex-direction:raw;
-	flex-wrap:wrap;
-	top:0;
-	left:0;
-	width:100%;
-	min-height:50em;
-	background: #8f8f8f;
-}
-
-aside{
-	display: flex;
-	flex-direction:column;
-	flex-wrap:wrap;
-	width:310px;
-	background: #eee;
-	min-height: 50em;
-}
-#main-contact-text{
-	margin:2em 10%;
-	height:15em;
-	width:80%;
-	background: #fff;
-}
-#main-contact-text > textarea{
-	width:100%;
 	height:100%;
-	resize:none;
-	font-size: 1rem;
-	color:#333;
-	font-family: "Whitney SSm A", "Whitney SSm B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
-}
-#main-contact-button{
-	margin:0 10%;
-	height:2em;
-	width:80%;
-	background: #fa8b60;
-	border: 1px solid #fa8b60;
-	color:#fff;
-	font-size: 2em;
-}
-#main-contact-button:hover{
-	cursor: pointer;
-	background: #ef6d3b;
-}
-#main-otherrelated-list{
-	margin:5em 10%;
-	height:20em;
-	width:80%;
-	background: #fff;
-}
-#main-otherrelated-list > span{
-	display: inline-block;
-	padding: 5%;
-	font-size: 0.8em;
-}
-#main-otherrelated-list > span:nth-child(1){
-	padding: 5%;
-	font-size: 2em;
-	font-weight: bold;
-}
-#main-otherrelated-list > a{
 	display: block;
-	padding-left: 5%;
-	font-size: 1em;
-	width:100%;
-	text-decoration: none;
+	display:-webkit-flex;
+	display:flex;
+	-webkit-flex-wrap:wrap;
+	flex-direction:wrap;
+	-webkit-align-content:flex-start;
+	align-content:flex-start;
+	-webkit-justify-content:space-around;
+	justify-content: space-around;
 }
-#main-footer-lblock{
-	display: block;
-	flex:10;
-	background: #313131;
-	min-height: 10em;
-}
-#main-footer-rblock{
-	display: block;
-	width:310px;
-	background: #515151;
-	height: 10em;
-}
-#main-footer-rblock>span{
-	display: block;
-	font-size: 1.5em;
-	color: #a1a1a1;
-	padding: 10%;
-}
-
-}
-
-
-@media all and (max-width:1000px){
+@media all and (min-width:900px){
 	html{
-	font-size: 100%;  /*for IE*/
-	width: 100%;
-	font-family: "Whitney SSm A", "Whitney SSm B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
-}
-body{
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	font-size: 0.8em; 
-	display: flex;
-	flex-direction: column;
-}
-header,footer{
-	display: flex;
-	flex: 1;
-	height: 5em;
-	justify-content: space-between;
+		font-size: 100%;  /*for IE*/
+		width: 100%;
+		font-family: "Whitney SSm A", "Whitney SSm B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+	}
+	body{
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		font-size: 1em; 
+		display: flex;
+		flex-direction: column;
+	}
+	header,footer{
+		display: flex;
+		flex: 1;
+		height: 5em;
+		justify-content: space-between;
+	}
+
+
+	#main-header-logo{
+		display: block;
+		height: 100%;
+		flex: 1;
+	}
+	#main-header-title{
+		display: block;
+		height: 100%;
+		flex: 9;
+	}
+	#main-header-block{
+		display: block;
+		height: 100%;
+		width:310px;
+		background: #eee;
+	}
+	#main-body{
+		display: flex;
+	  	flex: 1;
+	  	background: #336699;
+	}
+	#main-body:before{
+		content: "";
+	    position: absolute;
+	    z-index: 2;
+	    left: 0;
+	    width: 100%;
+	    border-bottom: 10px solid rgba(153, 102, 204, 0.8);
+	}
+	#main-body-content{
+		display: block;
+		flex: 10;
+		background: #8f8f8f;
+		min-height: 50em;
+	}
+	.button-list{
+		position: relative;
+		top:0;
+		left: 0;
+		display: block;
+		width:100%;
+		background: #333;
+		height: 5em;
+	}
+	.button-list-det{
+		display: inline-block;
+		height: 100%;
+		line-height: 5em;
+		width: 15%;
+		min-width: 100px;
+		background: #333;
+		margin-left: 2%;
+		vertical-align: middle;
+		color: #f1f1f1;
+		font-size: 1.2em;
+		text-align: center;
+	}
+	.button-list-det:first-child{
+		margin-left: 10%;
+	}
+	.button-list-det:hover{
+		line-height: 4em;
+		font-size: 1.5em;
+		background: #444;
+		cursor: pointer;
+	}
+	.content-list{
+		padding: 0;
+		margin: 0;
+		top:0;
+		left:0;
+		width:100%;
+		min-height:50em;
+		background: #8f8f8f;
+	}
+
+	aside{
+		display: flex;
+		flex-direction:column;
+		flex-wrap:wrap;
+		width:310px;
+		background: #eee;
+		min-height: 50em;
+	}
+	#main-contact-text{
+		margin:2em 10%;
+		height:15em;
+		width:80%;
+		background: #fff;
+	}
+	#main-contact-text > textarea{
+		width:100%;
+		height:100%;
+		resize:none;
+		font-size: 1rem;
+		color:#333;
+		font-family: "Whitney SSm A", "Whitney SSm B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+	}
+	#main-contact-button{
+		margin:0 10%;
+		height:2em;
+		width:80%;
+		background: #fa8b60;
+		border: 1px solid #fa8b60;
+		color:#fff;
+		font-size: 2em;
+	}
+	#main-contact-button:hover{
+		cursor: pointer;
+		background: #ef6d3b;
+	}
+	#main-otherrelated-list{
+		margin:5em 10%;
+		height:20em;
+		width:80%;
+		background: #fff;
+	}
+	#main-otherrelated-list > span{
+		display: inline-block;
+		padding: 5%;
+		font-size: 0.8em;
+	}
+	#main-otherrelated-list > span:nth-child(1){
+		padding: 5%;
+		font-size: 2em;
+		font-weight: bold;
+	}
+	#main-otherrelated-list > a{
+		display: block;
+		padding-left: 5%;
+		font-size: 1em;
+		width:100%;
+		text-decoration: none;
+	}
+	#main-footer-lblock{
+		display: block;
+		flex:10;
+		background: #313131;
+		min-height: 10em;
+	}
+	#main-footer-rblock{
+		display: block;
+		width:310px;
+		background: #515151;
+		height: 10em;
+	}
+	#main-footer-rblock>span{
+		display: block;
+		font-size: 1.5em;
+		color: #a1a1a1;
+		padding: 10%;
+	}
+	.main-search-div{
+		-moz-box-sizing: border-box;  
+		-webkit-box-sizing: border-box; /*Safari3.2+*/
+		-o-box-sizing: border-box; /*Opera9.6*/
+		-ms-box-sizing: border-box; /*IE8*/
+		box-sizing: border-box;
+		display: block;
+		width:300px;
+		min-height:400px;
+		background: #fff;
+		margin:2em 1em;padding:10px 0;border-radius:5px;
+	}
+	.main-search-div a{
+		display: block;
+	}
+	.main-search-div ul{
+		display: block;
+		list-style-type: none;
+		list-style-position：inside;
+	}
+	.main-search-div li:nth-of-type(1){
+		margin-left: -30px;
+		margin-right: 10px;
+		word-wrap:break-word;
+	}
+	.main-search-div li:nth-of-type(2){
+		margin-left: -40px;
+		margin-right: 0px;
+		background: rgba(153, 102, 204, 0.5);
+		height:2em;
+		line-height: 2em;
+		color:#f1f1f1;
+		text-align: center;
+		font-weight: bolder;
+	}
+	.main-search-div li:nth-of-type(3){
+		margin-left: -30px;
+		margin-right: 10px;
+	}
+	.main-search-div > a:hover, a:visited, a:link, a:active {
+    	text-decoration: none;
+		color: #333;
+	}
 }
 
 
-#main-header-logo{
-	display: block;
-	height: 100%;
-	flex: 3;
-}
-#main-header-title{
-	display: block;
-	height: 100%;
-	flex: 9;
-}
-#main-header-block{
-	display: none;
-	height: 100%;
-}
-#main-body{
-	display: flex;
-  	flex: 1;
-  	background: #336699;
-  	flex-direction: column;
-  	height:auto;
-}
-#main-body:before{
-	content: "";
-    position: absolute;
-    z-index: 2;
-    left: 0;
-    width: 100%;
-    border-bottom: 8px solid rgba(153, 102, 204, 0.8);
-}
-#main-body-content{
-	display: block;
-	width: 100%;
-	background: #8f8f8f;
-	min-height: 100em;
-}
-.button-list{
-	position: relative;
-	top:0;
-	left: 0;
-	display: block;
-	width:100%;
-	background: #333;
-	height: 5em;
-}
-.button-list-det{
-	display: inline-block;
-	height: 100%;
-	line-height: 5em;
-	width: 15%;
-	min-width: 100px;
-	background: #333;
-	margin-left: 2%;
-	vertical-align: middle;
-	color: #f1f1f1;
-	font-size: 1.4em;
-	text-align: center;
-}
-.button-list-det:first-child{
-	margin-left: 10%;
-}
-.button-list-det:hover{
-	line-height: 4em;
-	font-size: 1.6em;
-	background: #444;
-	cursor: pointer;
-}
-.content-list{
-	position: relative;
-	display: flex;
-	flex-direction:raw;
-	flex-wrap:wrap;
-	top:0;
-	left:0;
-	width:100%;
-	min-height:96em;
-	background: #8f8f8f;
-}
+@media all and (max-width:900px){
+	html{
+		font-size: 100%;  /*for IE*/
+		width: 100%;
+		font-family: "Whitney SSm A", "Whitney SSm B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+	}
+	body{
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		font-size: 0.8em; 
+		display: flex;
+		flex-direction: column;
+	}
+	header,footer{
+		display: flex;
+		flex: 1;
+		height: 5em;
+		justify-content: space-between;
+	}
 
-aside{
-	display: flex;
-	flex-direction:rows;
-	flex-wrap:wrap;
-	width:100%;
-	background: #eee;
-	min-height: 40em;
-}
-#main-contact-text{
-	margin:2em 10%;
-	height:15em;
-	width:80%;
-	background: #fff;
-}
-#main-contact-text > textarea{
-	width:100%;
-	height:100%;
-	resize:none;
-	font-size: 1rem;
-	color:#333;
-	font-family: "Whitney SSm A", "Whitney SSm B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
-}
-#main-contact-button{
-	margin:0 10%;
-	height:2em;
-	width:80%;
-	background: #fa8b60;
-	border: 1px solid #fa8b60;
-	color:#fff;
-	font-size: 2em;
-}
-#main-contact-button:hover{
-	cursor: pointer;
-	background: #ef6d3b;
-}
-#main-otherrelated-list{
-	margin:5em 10%;
-	height:20em;
-	width:80%;
-	background: #fff;
-}
-#main-otherrelated-list span{
-	display: block;
-	padding-left: 5%;
-	font-size: 1em;
-	width:100%;
-}
-#main-otherrelated-list > span:nth-child(1){
-	padding: 5%;
-	font-size: 2em;
-	font-weight: bold;
-	
-}
-#main-otherrelated-list > a{
-	display: block;
-	padding-left: 5%;
-	font-size: 1em;
-	width:100%;
-	text-decoration: none;
-}
-#main-footer-lblock{
-	display: block;
-	width:100%;
-	background: #313131;
-	min-height: 10em;
-}
-#main-footer-rblock{
-	display: none;
-	width:310px;
-	background: #515151;
-	height: 10em;
-}
-#main-footer-rblock>span{
-	display: none;
-	font-size: 1.5em;
-	color: #a1a1a1;
-	padding: 10%;
-}
 
+	#main-header-logo{
+		display: block;
+		height: 100%;
+		flex: 3;
+	}
+	#main-header-title{
+		display: block;
+		height: 100%;
+		flex: 9;
+	}
+	#main-header-block{
+		display: none;
+		height: 100%;
+	}
+	#main-body{
+		display: flex;
+	  	flex: 1;
+	  	background: #336699;
+	  	flex-direction: column;
+	  	height:auto;
+	}
+	#main-body:before{
+		content: "";
+	    position: absolute;
+	    z-index: 2;
+	    left: 0;
+	    width: 100%;
+	    border-bottom: 8px solid rgba(153, 102, 204, 0.8);
+	}
+	#main-body-content{
+		display: block;
+		width: 100%;
+		background: #8f8f8f;
+		min-height: 100em;
+	}
+	.button-list{
+		position: relative;
+		top:0;
+		left: 0;
+		display: block;
+		width:100%;
+		background: #333;
+		height: 5em;
+	}
+	.button-list-det{
+		display: inline-block;
+		height: 100%;
+		line-height: 5em;
+		width: 15%;
+		min-width: 100px;
+		background: #333;
+		margin-left: 2%;
+		vertical-align: middle;
+		color: #f1f1f1;
+		font-size: 1.4em;
+		text-align: center;
+	}
+	.button-list-det:first-child{
+		margin-left: 10%;
+	}
+	.button-list-det:hover{
+		line-height: 4em;
+		font-size: 1.6em;
+		background: #444;
+		cursor: pointer;
+	}
+	.content-list{
+		position: relative;
+		top:0;
+		left:0;
+		width:100%;
+		min-height:96em;
+		background: #8f8f8f;
+	}
+
+	aside{
+		display: flex;
+		flex-direction:rows;
+		flex-wrap:wrap;
+		width:100%;
+		background: #eee;
+		min-height: 40em;
+	}
+	#main-contact-text{
+		margin:2em 10%;
+		height:15em;
+		width:80%;
+		background: #fff;
+	}
+	#main-contact-text > textarea{
+		width:100%;
+		height:100%;
+		resize:none;
+		font-size: 1rem;
+		color:#333;
+		font-family: "Whitney SSm A", "Whitney SSm B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+	}
+	#main-contact-button{
+		margin:0 10%;
+		height:2em;
+		width:80%;
+		background: #fa8b60;
+		border: 1px solid #fa8b60;
+		color:#fff;
+		font-size: 2em;
+	}
+	#main-contact-button:hover{
+		cursor: pointer;
+		background: #ef6d3b;
+	}
+	#main-otherrelated-list{
+		margin:5em 10%;
+		height:20em;
+		width:80%;
+		background: #fff;
+	}
+	#main-otherrelated-list span{
+		display: block;
+		padding-left: 5%;
+		font-size: 1em;
+		width:100%;
+	}
+	#main-otherrelated-list > span:nth-child(1){
+		padding: 5%;
+		font-size: 2em;
+		font-weight: bold;
+		
+	}
+	#main-otherrelated-list > a{
+		display: block;
+		padding-left: 5%;
+		font-size: 1em;
+		width:100%;
+		text-decoration: none;
+	}
+	#main-footer-lblock{
+		display: block;
+		width:100%;
+		background: #313131;
+		min-height: 10em;
+	}
+	#main-footer-rblock{
+		display: none;
+		width:310px;
+		background: #515151;
+		height: 10em;
+	}
+	#main-footer-rblock>span{
+		display: none;
+		font-size: 1.5em;
+		color: #a1a1a1;
+		padding: 10%;
+	}
+	.main-search-div{
+		-moz-box-sizing: border-box;  
+		-webkit-box-sizing: border-box; /*Safari3.2+*/
+		-o-box-sizing: border-box; /*Opera9.6*/
+		-ms-box-sizing: border-box; /*IE8*/
+		box-sizing: border-box;
+		width:100%;
+		min-height: 200px;
+		background: #fff;
+		padding:10px;
+		margin-bottom: 5em;
+		font-size: 1em;
+	}
+	.main-search-div::before{
+		-moz-box-sizing: border-box;  
+		-webkit-box-sizing: border-box; /*Safari3.2+*/
+		-o-box-sizing: border-box; /*Opera9.6*/
+		-ms-box-sizing: border-box; /*IE8*/
+		box-sizing: border-box;
+		width:80px;
+		height: 80px;
+		padding:0.5em 1em;
+		background: rgba(153, 102, 204, 1);
+		color:#fff;
+		position: absolute;
+		content:attr(data-content);;
+		margin-left: -moz-calc(100% - 80px);
+  		margin-left: -webkit-calc(100% - 80px);
+  		margin-left: calc(100% - 90px);
+  		margin-top: -10px;
+  		display:table-cell;
+  		vertical-align: middle;
+  		font-weight: bolder;
+  		font-size:1.2em; 
+  		text-align: center;
+	}
+	.main-search-div ul{
+		list-style: none;
+	}
+	.main-search-div li:nth-of-type(1){
+		margin-left: -30px;
+		margin-right: 70px;
+		word-wrap:break-word;
+	}
+	.main-search-div li:nth-of-type(2){
+		display: none;
+	}
+	.main-search-div li:nth-of-type(3){
+		margin-left: -30px;
+		margin-right: 10px;
+	}
+	.main-search-div > a:hover, a:visited, a:link, a:active {
+    	text-decoration: none;
+		color: #333;
+	}
 }
 
 
@@ -390,10 +499,94 @@ aside{
 				<div class="button-list-det">Game</div>
 			</div>
 			<div class="content-list" id="iframeBox">
-				<iframe src="main-search.html" frameborder="0" scrolling = "no" 
-					style="width:100%;height:100%; " id="iframe" name="myframe">
-					
-				</iframe>
+				<div class="row" id="row1">
+					<div class="main-search-div" data-content="June 12th 2017"><a href="createhalfborder.html">
+						<ul>
+							<li><h1>Create 0.5px border used in mobile web pages</h1></li>
+							<li>Jun,12th 2017</li>
+							<li><h3>If you develop a web page for mobile phone, you will know, the "1px" border isn't look good, for the mobile screen is smaller when compared to computer screen. So as an old saying goes, where there is a need, there will be a supply. Smart coders just think about how to create "0.5px" border or make it more thiner.</h3></li>
+						</ul></a>
+					</div>
+
+					<div class="main-search-div" data-content="June 11th 2017"><a href="translateY_ex1.html">
+						<ul>
+							<li><h1>An example of translateY used in online shop store</h1></li>
+							<li>Jun,11th 2017</li>
+							<li><h3>In this blog, I just want to imitate a simple but common used function in some online shop stores.</h3></li>
+						</ul></a>
+					</div>
+
+					<div class="main-search-div" data-content="June  6th 2017"><a href="runner.html" target="_blank">
+						<ul>
+							<li><h1>A Race Game based on Canvas</h1></li>
+							<li>Jun,6th 2017</li>
+							<li><h3>Before this game, I have not made a game with a running man, and now I know that all the actions of runner are formed by pictures. In order to practice how to code a running man controled by user, I also just take one day to code a small game, hope you will like it. If you want to see the source code, just click the right button of mouse.</h3></li>
+						</ul></a>
+					</div>
+
+					<div class="main-search-div" data-content="June  5th 2017"><a href="simulateCoupon.html">
+						<ul>
+							<li><h1>Draw a Constitution Day Sale Coupon by using CSS3 gradient</h1></li>
+							<li>Jun,5th 2017</li>
+							<li><h3>In this blog, I want to use the radial-gradient and linear-gradient in CSS3 to draw a coupon. And show the power of these two attributes. Hope it will look nice.</h3></li>
+						</ul></a>
+					</div>
+
+
+					<div class="main-search-div" data-content="June  4th 2017"><a href="getComputedStyle.html">
+						<ul>
+							<li><h1>The getComputedStyle and currentStyle, easy ? HEHE</h1></li>
+							<li>Jun,4th 2017</li>
+							<li><h3>Sometimes, we get some knowledge, and think we can do everything, we know everything, however, we often overlook our ability, maybe there are also lots of skills that you know but you cant control very well. For me, the "getComputedStyle" and "currentStyle" are good examples. </h3></li>
+						</ul></a>
+					</div>
+
+					<div class="main-search-div" data-content="June  3rd 2017"><a href="css3CompatibleSummary.html">
+						<ul>
+							<li><h1>CSS3 Compatible Summary</h1></li>
+							<li>Jun,3rd 2017</li>
+							<li><h3>I just want to keep a graph of CSS3 compatible grammar in mind. Usually, I tell myself, if I want my code more compatible, just do it, dont be lazy.</h3></li>
+						</ul></a>
+					</div>
+
+					<div class="main-search-div" data-content="June  2nd 2017"><a href="towerdefence.html" target="_blank">
+						<ul>
+							<li><h1>Great! I take just one day to make a Tower Defense Game based on HTML5 Canvas</h1></li>
+							<li>Jun,2nd 2017</li>
+							<li><h3>Before that, I have made a small basketball game, but I just want to do something more complex and deeply, and I think the tower defense game would be nice and meaningful. So just do it and thx god, the result is stunning, I really like it even though it also has some shortcoming anyway. </h3></li>
+						</ul></a>
+					</div>
+
+					<div class="main-search-div" data-content="May 30th 2017"><a href="preserve3d.html">
+						<ul>
+							<li><h1 id="test">3D Tranform in CSS3</h1></li>
+							<li>May,30th 2017</li>
+							<li><h3>When facing different situations, we should choose one of them, relatively the 3d transfrom of CSS3 could help us to solve some problem by using the less code, less DOM, but easy to control. And I'll give some examples to really understand the details of 3d transform...</h3></li>
+						</ul></a>
+					</div>
+
+					<div class="main-search-div" data-content="May 22th 2017"><a href="myFirstGame.html" target="_blank">
+						<ul>
+							<li><h1>A small basketball game based on HTML5 Canvas</h1></li>
+							<li>May,22th 2017</li>
+							<li><h3>In order to learn canvas more deeply, I just want to use it to build a small game, related to basketball, since I like it. :) It would be hard when something is done from the very beginning. However, let's do it! </h3></li>
+						</ul></a>
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="main-search-div">
+					</div>
+					<div class="main-search-div">
+					</div>
+					<div class="main-search-div">
+					</div>
+					<div class="main-search-div">
+					</div>
+					<div class="main-search-div">
+					</div>
+				</div>
 			</div>
 		</div>
 		<aside>
@@ -507,19 +700,6 @@ aside{
 		}
 		
 		
-			var frameWin = document.getElementById("iframe"); 
-			var frameBox = document.getElementById("iframeBox"); 
-			var newHeight; 
-			if (frameWin.Document){ 
-				newHeight = frameWin.Document.body.scrollHeight + 20 + "px"; 
-				alert(newHeight);
-			}else{ 
-				newHeight = frameWin.contentDocument.body.scrollHeight+ 20 + "px"; 
-				alert(frameWin.contentDocument.body.scrollHeight);
-			} 
-			frameWin.style.height = newHeight; 
-			frameBox.style.height = newHeight;
-
 
 	})();
 	</script>
