@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+
+</style>
+<body>
+	<div class="det-title">
+		<h1>"var" in CSS</h1>
+	</div>
+	<div class="det-content">
+		<div class="text">
+Before this time, it could be said without exaggeration that I almost forgot the "var" in CSS, because I could manage CSS code without using "var" in most of the time, in fact it is so. But today, I found a web page of Baidu using this method to improve CSS code reusability. Therefore I want to write a blog to help me remember the application of "var" in CSS.
+
+<h4>1. First of all, let's see the compatibility.</h4>We can see from this chart that "var" is supported perfectly by Firefox, Chrome, Safari, Opera, except IE(Always IE, oh...). But maybe supported in the future, hope so.
+	</div>
+		
+		<div class="imgdiv">
+    		<img src="img/cssvar.jpg" alt="cssvar" >
+    	</div>
+
+    	<div class="text"><h4>2. Three things</h4>(1) How to name a variable of CSS? "--*" ;
+(2) How to use "var"? "var(--*[, ]?)", it means "var( variety name [, defaults])", we can omit the default values;
+(3) What is ":root"? ":root" pseudo-class represents the root element of an HTML document, we can put the variables in ":root".
+		</div>
+		
+		<div class="csscode">
+:root {
+  	--text-color: #000000;
+}
+
+p {
+  	color: var( --text-color );
+  	font-size: 16px;
+}
+		</div>
+
+		<div class="text"><h4>3. Coverage.</h4>If we set many values to a variable, what will happen? Let's see an example:
+		</div>
+
+		<div class="csscode">
+:root { --text-color: green;}
+p { --text-color: red;}
+#parent{ --text-color: blue;}
+*{ color : var(--text-color);}
+		</div>
+
+		<div class="text">
+Let's see the result together:
+&lt;div&gt; <span style="color:green">I use the color of ":root"</span> &lt;/div&gt;
+&lt;p&gt; <span style="color:red">I use the color of "p"</span> &lt;/p&gt;
+&lt;div id="parent"&gt; 
+	<span style="color:blue">I use the color of "#parent"</span> 
+	&lt;div id="child"&gt; <span style="color:blue">I use the color of "#parent"</span> &lt;/div&gt;
+&lt;/div&gt;
+
+Yes, we can see very clearly that the variable follows the CSS selector.
+
+<h4>4. Some precautions.</h4>(1) "var" in CSS cannot be named as a variable, such as "--text-color: background-color;", it will make a mistake.
+(2) Cannot set a variable that does not match the unit. For example:
+
+</div>
+
+		<div class="csscode">
+body {
+  	--text-color: 20px;
+  	background-color: var(--text-color);
+}
+		</div>
+
+		<div class="text">
+(3) Cannot add units when getting variables. The Example as follows will return as "10 px", you should notice that there has a " " between "10" and "px", so it is an invalid value.
+		</div>
+
+		<div class="csscode">
+body {
+  	--size: 10;   
+  	font-size: var(--size)px;
+}
+		</div>
+
+		<div class="text"><h4>5. Two things we can do.</h4>(1) Use "calc()".
+We have said that "var" cannot be added units, but we can use "calc()" to finish this work, the example will return "10px", it's right.
+		</div>
+
+		<div class="csscode">
+body {
+  	--size: 10;   
+  	font-size: calc(var(--size) * 1px);
+}
+		</div>
+
+		<div class="text">
+(2) The transitivity of "var".
+We can use "--one" as a value to name the "--two", as the example shows:
+		</div>
+
+		<div class="csscode">
+body {
+  	--size: 10;   
+  	--text-size: var(--size);
+}
+		</div>
+    </div>
+</body>
+</html>

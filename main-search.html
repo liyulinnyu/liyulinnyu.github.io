@@ -13,7 +13,7 @@ html,body{
 	font-size: 100%;
 	background: #8f8f8f;
 	width:100%;
-	height: 100%;
+	height: 1800px;
 	
 }
 .row{
@@ -35,7 +35,7 @@ html,body{
 	-webkit-justify-content:space-around;
 	justify-content: space-around;
 }
-@media all and (min-width:700px){
+@media all and (min-width:900px){
 	
 	.main-search-div{
 		-moz-box-sizing: border-box;  
@@ -82,7 +82,7 @@ html,body{
 	}
 }
 
-@media all and (max-width:700px){
+@media all and (max-width:900px){
 	.main-search-div{
 		-moz-box-sizing: border-box;  
 		-webkit-box-sizing: border-box; /*Safari3.2+*/
@@ -94,7 +94,7 @@ html,body{
 		background: #fff;
 		padding:10px;
 		margin-bottom: 5em;
-		font-size: 0.8em;
+		font-size: 1em;
 	}
 	.main-search-div::before{
 		-moz-box-sizing: border-box;  
@@ -103,7 +103,7 @@ html,body{
 		-ms-box-sizing: border-box; /*IE8*/
 		box-sizing: border-box;
 		width:80px;
-		height: 75px;
+		height: 80px;
 		padding:0.5em 1em;
 		background: rgba(153, 102, 204, 1);
 		color:#fff;
@@ -116,7 +116,7 @@ html,body{
   		display:table-cell;
   		vertical-align: middle;
   		font-weight: bolder;
-  		font-size:1.4em; 
+  		font-size:1.2em; 
   		text-align: center;
 	}
 	.main-search-div ul{
@@ -325,17 +325,6 @@ html,body{
 			}
 		}
 
-		
-
-		
-
-    			
-
-
-		
-		
-		
-
 
 		function getCss(element){
 			// 计算综合样式
@@ -347,6 +336,11 @@ html,body{
 		}
 
 
+		var newHeight = document.body.scrollHeight + 20 + "px"; 
+		alert(window.top.frames[0].height);
+		top.frames[0].style.height = newHeight; 
+		//以上firefox通过，但是ie6必须加上下面这句，不然iframe高度是改了，但是可见区域没有改 
+		window.parent.document.getElementById("iframeBox").style.height = newHeight;
 
 
 	})();
