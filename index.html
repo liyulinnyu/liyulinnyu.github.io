@@ -6,7 +6,7 @@
 	<title></title>
 	<link rel="stylesheet" href="">
 <style>
-@media all and (min-width:900px){
+@media all and (min-width:1000px){
 	html{
 	font-size: 100%;  /*for IE*/
 	width: 100%;
@@ -187,7 +187,7 @@ aside{
 }
 
 
-@media all and (max-width:900px){
+@media all and (max-width:1000px){
 	html{
 	font-size: 100%;  /*for IE*/
 	width: 100%;
@@ -389,9 +389,9 @@ aside{
 				<div class="button-list-det">Reso</div>
 				<div class="button-list-det">Game</div>
 			</div>
-			<div class="content-list">
+			<div class="content-list" id="iframeBox">
 				<iframe src="main-search.html" frameborder="0" scrolling = "no" 
-					style="width:100%;height:50em; " id="iframe" name="myframe">
+					style="width:100%;height:100%; " id="iframe" name="myframe">
 					
 				</iframe>
 			</div>
@@ -506,18 +506,19 @@ aside{
 			EventUtil.addHandler(techButton[i], "click", ShowTechPage);
 		}
 		
-		var thisframe = document.getElementById("iframe");
-        if(thisframe.attachEvent){
-            thisframe.attachEvent("onload", function(){
-                thisframe.height =  thisframe.contentWindow.document.documentElement.scrollHeight;
-            });
-        }else{
-
-            thisframe.onload = function(){
-                thisframe.height = thisframe.contentDocument.body.scrollHeight;
-            };           
-        }    
-
+		
+			var frameWin = document.getElementById("iframe"); 
+			var frameBox = document.getElementById("iframeBox"); 
+			var newHeight; 
+			if (frameWin.Document){ 
+				newHeight = frameWin.Document.body.scrollHeight + 20 + "px"; 
+				alert(newHeight);
+			}else{ 
+				newHeight = frameWin.contentDocument.body.scrollHeight+ 20 + "px"; 
+				alert(frameWin.contentDocument.body.scrollHeight);
+			} 
+			frameWin.style.height = newHeight; 
+			frameBox.style.height = newHeight;
 
 
 	})();
