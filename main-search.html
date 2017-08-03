@@ -14,6 +14,18 @@ html,body{
 	background: #8f8f8f;
 	width:100%;
 	height: 100%;
+	
+}
+.row{
+	display: none;
+}
+#row1{
+	position: relative;
+	left:0px;
+	top:0px;
+	width: 100%;
+	height:100%;
+	display: block;
 	display:-webkit-flex;
 	display:flex;
 	-webkit-flex-wrap:wrap;
@@ -23,8 +35,8 @@ html,body{
 	-webkit-justify-content:space-around;
 	justify-content: space-around;
 }
-
 @media all and (min-width:700px){
+	
 	.main-search-div{
 		-moz-box-sizing: border-box;  
 		-webkit-box-sizing: border-box; /*Safari3.2+*/
@@ -127,6 +139,7 @@ html,body{
 		color: #333;
 	}
 	
+	
 
 }
 
@@ -135,91 +148,93 @@ html,body{
 	</style>
 </head>
 <body>
-<div class="main-search-div" data-content="June 12th 2017"><a href="createhalfborder.html">
-	<ul>
-		<li><h1>Create 0.5px border used in mobile web pages</h1></li>
-		<li>Jun,12th 2017</li>
-		<li><h3>If you develop a web page for mobile phone, you will know, the "1px" border isn't look good, for the mobile screen is smaller when compared to computer screen. So as an old saying goes, where there is a need, there will be a supply. Smart coders just think about how to create "0.5px" border or make it more thiner.</h3></li>
-	</ul></a>
-</div>
+<div class="row" id="row1">
+	<div class="main-search-div" data-content="June 12th 2017"><a href="createhalfborder.html">
+		<ul>
+			<li><h1>Create 0.5px border used in mobile web pages</h1></li>
+			<li>Jun,12th 2017</li>
+			<li><h3>If you develop a web page for mobile phone, you will know, the "1px" border isn't look good, for the mobile screen is smaller when compared to computer screen. So as an old saying goes, where there is a need, there will be a supply. Smart coders just think about how to create "0.5px" border or make it more thiner.</h3></li>
+		</ul></a>
+	</div>
 
-<div class="main-search-div" data-content="June 11th 2017"><a href="translateY_ex1.html">
-	<ul>
-		<li><h1>An example of translateY used in online shop store</h1></li>
-		<li>Jun,11th 2017</li>
-		<li><h3>In this blog, I just want to imitate a simple but common used function in some online shop stores.</h3></li>
-	</ul></a>
-</div>
+	<div class="main-search-div" data-content="June 11th 2017"><a href="translateY_ex1.html">
+		<ul>
+			<li><h1>An example of translateY used in online shop store</h1></li>
+			<li>Jun,11th 2017</li>
+			<li><h3>In this blog, I just want to imitate a simple but common used function in some online shop stores.</h3></li>
+		</ul></a>
+	</div>
 
-<div class="main-search-div" data-content="June  6th 2017"><a href="runner.html" target="_blank">
-	<ul>
-		<li><h1>A Race Game based on Canvas</h1></li>
-		<li>Jun,6th 2017</li>
-		<li><h3>Before this game, I have not made a game with a running man, and now I know that all the actions of runner are formed by pictures. In order to practice how to code a running man controled by user, I also just take one day to code a small game, hope you will like it. If you want to see the source code, just click the right button of mouse.</h3></li>
-	</ul></a>
-</div>
+	<div class="main-search-div" data-content="June  6th 2017"><a href="runner.html" target="_blank">
+		<ul>
+			<li><h1>A Race Game based on Canvas</h1></li>
+			<li>Jun,6th 2017</li>
+			<li><h3>Before this game, I have not made a game with a running man, and now I know that all the actions of runner are formed by pictures. In order to practice how to code a running man controled by user, I also just take one day to code a small game, hope you will like it. If you want to see the source code, just click the right button of mouse.</h3></li>
+		</ul></a>
+	</div>
 
-<div class="main-search-div" data-content="June  5th 2017"><a href="simulateCoupon.html">
-	<ul>
-		<li><h1>Draw a Constitution Day Sale Coupon by using CSS3 gradient</h1></li>
-		<li>Jun,5th 2017</li>
-		<li><h3>In this blog, I want to use the radial-gradient and linear-gradient in CSS3 to draw a coupon. And show the power of these two attributes. Hope it will look nice.</h3></li>
-	</ul></a>
-</div>
-
-
-<div class="main-search-div" data-content="June  4th 2017"><a href="getComputedStyle.html">
-	<ul>
-		<li><h1>The getComputedStyle and currentStyle, easy ? HEHE</h1></li>
-		<li>Jun,4th 2017</li>
-		<li><h3>Sometimes, we get some knowledge, and think we can do everything, we know everything, however, we often overlook our ability, maybe there are also lots of skills that you know but you cant control very well. For me, the "getComputedStyle" and "currentStyle" are good examples. </h3></li>
-	</ul></a>
-</div>
-
-<div class="main-search-div" data-content="June  3rd 2017"><a href="css3CompatibleSummary.html">
-	<ul>
-		<li><h1>CSS3 Compatible Summary</h1></li>
-		<li>Jun,3rd 2017</li>
-		<li><h3>I just want to keep a graph of CSS3 compatible grammar in mind. Usually, I tell myself, if I want my code more compatible, just do it, dont be lazy.</h3></li>
-	</ul></a>
-</div>
-
-<div class="main-search-div" data-content="June  2nd 2017"><a href="towerdefence.html" target="_blank">
-	<ul>
-		<li><h1>Great! I take just one day to make a Tower Defense Game based on HTML5 Canvas</h1></li>
-		<li>Jun,2nd 2017</li>
-		<li><h3>Before that, I have made a small basketball game, but I just want to do something more complex and deeply, and I think the tower defense game would be nice and meaningful. So just do it and thx god, the result is stunning, I really like it even though it also has some shortcoming anyway. </h3></li>
-	</ul></a>
-</div>
-
-<div class="main-search-div" data-content="May 30th 2017"><a href="preserve3d.html">
-	<ul>
-		<li><h1 id="test">3D Tranform in CSS3</h1></li>
-		<li>May,30th 2017</li>
-		<li><h3>When facing different situations, we should choose one of them, relatively the 3d transfrom of CSS3 could help us to solve some problem by using the less code, less DOM, but easy to control. And I'll give some examples to really understand the details of 3d transform...</h3></li>
-	</ul></a>
-</div>
-
-<div class="main-search-div" data-content="May 22th 2017"><a href="myFirstGame.html" target="_blank">
-	<ul>
-		<li><h1>A small basketball game based on HTML5 Canvas</h1></li>
-		<li>May,22th 2017</li>
-		<li><h3>In order to learn canvas more deeply, I just want to use it to build a small game, related to basketball, since I like it. :) It would be hard when something is done from the very beginning. However, let's do it! </h3></li>
-	</ul></a>
-</div>
+	<div class="main-search-div" data-content="June  5th 2017"><a href="simulateCoupon.html">
+		<ul>
+			<li><h1>Draw a Constitution Day Sale Coupon by using CSS3 gradient</h1></li>
+			<li>Jun,5th 2017</li>
+			<li><h3>In this blog, I want to use the radial-gradient and linear-gradient in CSS3 to draw a coupon. And show the power of these two attributes. Hope it will look nice.</h3></li>
+		</ul></a>
+	</div>
 
 
+	<div class="main-search-div" data-content="June  4th 2017"><a href="getComputedStyle.html">
+		<ul>
+			<li><h1>The getComputedStyle and currentStyle, easy ? HEHE</h1></li>
+			<li>Jun,4th 2017</li>
+			<li><h3>Sometimes, we get some knowledge, and think we can do everything, we know everything, however, we often overlook our ability, maybe there are also lots of skills that you know but you cant control very well. For me, the "getComputedStyle" and "currentStyle" are good examples. </h3></li>
+		</ul></a>
+	</div>
+
+	<div class="main-search-div" data-content="June  3rd 2017"><a href="css3CompatibleSummary.html">
+		<ul>
+			<li><h1>CSS3 Compatible Summary</h1></li>
+			<li>Jun,3rd 2017</li>
+			<li><h3>I just want to keep a graph of CSS3 compatible grammar in mind. Usually, I tell myself, if I want my code more compatible, just do it, dont be lazy.</h3></li>
+		</ul></a>
+	</div>
+
+	<div class="main-search-div" data-content="June  2nd 2017"><a href="towerdefence.html" target="_blank">
+		<ul>
+			<li><h1>Great! I take just one day to make a Tower Defense Game based on HTML5 Canvas</h1></li>
+			<li>Jun,2nd 2017</li>
+			<li><h3>Before that, I have made a small basketball game, but I just want to do something more complex and deeply, and I think the tower defense game would be nice and meaningful. So just do it and thx god, the result is stunning, I really like it even though it also has some shortcoming anyway. </h3></li>
+		</ul></a>
+	</div>
+
+	<div class="main-search-div" data-content="May 30th 2017"><a href="preserve3d.html">
+		<ul>
+			<li><h1 id="test">3D Tranform in CSS3</h1></li>
+			<li>May,30th 2017</li>
+			<li><h3>When facing different situations, we should choose one of them, relatively the 3d transfrom of CSS3 could help us to solve some problem by using the less code, less DOM, but easy to control. And I'll give some examples to really understand the details of 3d transform...</h3></li>
+		</ul></a>
+	</div>
+
+	<div class="main-search-div" data-content="May 22th 2017"><a href="myFirstGame.html" target="_blank">
+		<ul>
+			<li><h1>A small basketball game based on HTML5 Canvas</h1></li>
+			<li>May,22th 2017</li>
+			<li><h3>In order to learn canvas more deeply, I just want to use it to build a small game, related to basketball, since I like it. :) It would be hard when something is done from the very beginning. However, let's do it! </h3></li>
+		</ul></a>
+	</div>
+</div>
 
 
-<div class="main-search-div">
-</div>
-<div class="main-search-div">
-</div>
-<div class="main-search-div">
-</div>
-<div class="main-search-div">
-</div>
-<div class="main-search-div">
+<div class="row">
+	<div class="main-search-div">
+	</div>
+	<div class="main-search-div">
+	</div>
+	<div class="main-search-div">
+	</div>
+	<div class="main-search-div">
+	</div>
+	<div class="main-search-div">
+	</div>
 </div>
 	
 
