@@ -24,6 +24,7 @@
 	-webkit-justify-content:space-around;
 	justify-content: space-around;
 }
+
 @media all and (min-width:1000px){
 	html{
 		font-size: 100%;  /*for IE*/
@@ -122,7 +123,7 @@
 		min-height:50em;
 		background: #8f8f8f;
 	}
-
+	
 	aside{
 		display: flex;
 		flex-direction:column;
@@ -198,6 +199,49 @@
 		font-size: 1.5em;
 		color: #a1a1a1;
 		padding: 10%;
+	}
+	#changeraws-div{
+		display: flex;
+		flex: 1;
+		justify-content: center;
+		height: 5em;
+		background: #8f8f8f;
+	}
+	#changeraws-div span{
+		font-size: 1.5em;
+	}
+	#changeraws-lblock{
+		display: block;
+		width:8em;
+		background: #fff;
+		top: 3em;
+		height: 3em;
+		margin-right: 1em;
+		text-align: center;
+		line-height: 3em;
+		cursor: pointer;
+	}
+	#changeraws-mblock{
+		display: block;
+		width:3em;
+		background: #fa8b60;
+		top: 3em;
+		height: 3em;
+		margin:0 1em;
+	}
+	#changeraws-rblock{
+		display: block;
+		width:8em;
+		background: #fff;
+		top: 3em;
+		height: 3em;
+		margin-left: 1em;
+		text-align: center;
+		line-height: 3em;
+		cursor: pointer;
+	}
+	#changeraws-lblock:hover, #changeraws-rblock:hover{
+		background: #e1e1e1;
 	}
 	.main-search-div{
 		-moz-box-sizing: border-box;  
@@ -334,14 +378,6 @@
 		background: #444;
 		cursor: pointer;
 	}
-	.content-list{
-		position: relative;
-		top:0;
-		left:0;
-		width:100%;
-		min-height:96em;
-		background: #8f8f8f;
-	}
 
 	aside{
 		display: flex;
@@ -421,6 +457,51 @@
 		color: #a1a1a1;
 		padding: 10%;
 	}
+
+	#changeraws-div{
+		display: flex;
+		flex: 1;
+		justify-content: center;
+		height: 5em;
+		background: #8f8f8f;
+	}
+	#changeraws-div span{
+		font-size: 1.5em;
+	}
+	#changeraws-lblock{
+		display: block;
+		width:8em;
+		background: #fff;
+		top: 3em;
+		height: 3em;
+		margin-right: 1em;
+		text-align: center;
+		line-height: 3em;
+		cursor: pointer;
+	}
+	#changeraws-mblock{
+		display: block;
+		width:3em;
+		background: #fa8b60;
+		top: 3em;
+		height: 3em;
+		margin:0 1em;
+	}
+	#changeraws-rblock{
+		display: block;
+		width:8em;
+		background: #fff;
+		top: 3em;
+		height: 3em;
+		margin-left: 1em;
+		text-align: center;
+		line-height: 3em;
+		cursor: pointer;
+	}
+	#changeraws-lblock:hover, #changeraws-rblock:hover{
+		background: #e1e1e1;
+	}
+
 	.main-search-div{
 		-moz-box-sizing: border-box;  
 		-webkit-box-sizing: border-box; /*Safari3.2+*/
@@ -498,6 +579,7 @@
 				<div class="button-list-det">Reso</div>
 				<div class="button-list-det">Game</div>
 			</div>
+			
 			<div class="content-list">
 				<div class="row" id="row1">
 					<div class="main-search-div" data-content="June 12th 2017"><a href="createhalfborder.html">
@@ -575,7 +657,7 @@
 				</div>
 
 
-				<div class="row">
+				<div class="row" id="row2">
 					<div class="main-search-div">
 					</div>
 					<div class="main-search-div">
@@ -588,7 +670,12 @@
 					</div>
 				</div>
 
-				<>
+				
+			</div>
+			<div id="changeraws-div">
+				<div id="changeraws-lblock"><span>&lt;</span>&nbsp; Prev</div>
+				<div id="changeraws-mblock"></div>
+				<div id="changeraws-rblock">Next &nbsp;<span>&gt;</span></div>
 			</div>
 		</div>
 		<aside>
@@ -603,7 +690,9 @@
 				<a href="http://www.zhangxinxu.com">Xinxu Zhang's blog ：<br /> http://www.zhangxinxu.com</a>
 			</div> 
 		</aside>
+		
 	</div>
+	
 	<footer>
 		<div id="main-footer-lblock"></div>
 		<div id="main-footer-rblock"><span>TO CHASE WHAT U WANT, DONT LOSE TO TIME.</span></div>
