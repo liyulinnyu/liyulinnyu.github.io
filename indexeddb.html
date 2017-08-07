@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Front end database : IndexedDB !</h1>
+	</div>
+	<div class="det-content">
+		
+		<div class="text">IndexedDB is a non-relational database, and I want to use a sentence of <a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Basic_Concepts_Behind_IndexedDB">developer.mozilla.org</a> : "IndexedDB is a way for you to persistently store data inside a user's browser. Because it lets you create web applications with rich query abilities regardless of network availability, these applications can work both online and offline."
+Ok, first of all, let's talk about some classic steps when using IndexedDB.
+<span style="font-size:0.8em;color:#666;">	(1) Open database
+	(2) Build and update the version of database
+	(3) Use "createObjectStore()" and "createIndex" methods to create storage space
+	(4) Use transaction("objectStore" method) to add, delete, change, get data
+	(5) Use cursor(set search range)
+	(6) Use index
+	(7) Concurrency
+	(8) Security(same origin policy)</span>
+
+And we should care about the compatibility:
+		</div>
+
+		<div class="jscode">
+	window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+	window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+	window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
+	// (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
+		</div>
+
+		<div class="text"><h4>1. Open database</h4>The IndexedDB object only has one method —— open(), this method has two parameters: database name and version. When opening a non-exist database, the IndexedDB will creat one. And the version should bigger than "1", because when a database is first created, its version is the integer 1. Each database has one version at a time; a database can't exist in multiple versions at once. The only way to change the version is by opening it with a greater version than the current one. But if a database is exist, and we don't want to change the content of it, maybe we can omit the second parameter.
+		</div>
+		
+		<div class="jscode">
+	var request = window.indexedDB.open("Mydb", 2);
+	var db = null;
+	request.onerror = function(event) {
+		alert("Database error: " + event.target.errorCode);
+  		// Do something with request.errorCode!
+	};
+	request.onsuccess = function(event) {
+		db = request.result;
+  		// Do something with request.result!
+	};
+		</div>
+
+		<div class="text">
+Because IndexedDB is fully asynchronous execution, so most of the operations will use "onerror" and "onsuccess" events. And we should know that "request" equals to "event.target". 
+<h4>2. Build and update the version of database</h4>We will use "onupgradeneeded" event to update the version of database, and create some parts of database by using "createIndex" method.
+		</div>
+		
+		<div class="jscode">
+	// our data
+	const user = [
+  		{ id: 1, name: "Bill", tel: 123456},
+  		{ id: 2, name: "Dylan", tel: 456789}
+	];
+
+	var request = indexedDB.open("Mydb", 2);
+
+	request.onerror = function(event) {};
+	request.onupgradeneeded = function(event) {
+  		var db = event.target.result;
+
+  		// create a object store space to save our data
+  		// we will use "id" as the keyPath, because it is unique
+ 	 	var objectStore = db.createObjectStore("users", { keyPath: "id" });
+
+  		// create a index of "name" so that we can search users by "name"
+  		// "name" is not a unique parameter
+  		objectStore.createIndex("name", "name", { unique: false });
+
+  		// create a index of "tel" so that we can search users by "tel"
+  		// we want "tel" to be a unique parameter
+  		objectStore.createIndex("tel", "tel", { unique: true });
+
+  		// save data
+  		for (var i in user) {
+    		objectStore.add(user[i]);
+  		}
+	};
+		</div>
+
+		<div class="text">
+Just remember that "onupgradeneeded" is the only place that we can change the database structure.
+<h4>3. Use transaction</h4>If we want to add, get, delete, put data, we should use transaction.
+		</div>
+
+		<div class="jscode">
+	var transaction = db.transaction(["users"], "readwrite");
+	transaction.oncomplete = function(event) {  alert("All done!"); };
+	transaction.onerror = function(event) {};
+	
+	// add data
+	var objectStore = transaction.objectStore("users");  //load a storage space
+	for (var i in user) {
+  		var request = objectStore.add(user[i]);
+  		request.onsuccess = function(event) {
+    		// event.target.result == user[i].id
+  		};
+	}
+
+	// delete data
+	var request = db.transaction(["users"], "readwrite").objectStore("users").delete("1");
+	request.onsuccess = function(event) {};
+
+	// get data
+	var getdata = db.transaction("users").objectStore("users").get("1");
+	getdata.onsuccess = function(event) {
+  		alert("Name for id = 1 is " + event.target.result.name);
+	};
+		</div>
+		
+		<div class="text"><h4>4. Use cursor</h4>If we want to get data from storage space, we can use "get()" method, but if we want to get all values, just use "openCursor()" function, it has two parameters(of course you can also leave it empty), one is the range of cursor, and the other is direction of traversal.
+		</div>
+		
+		<div class="jscode">
+	var objectStore = db.transaction("users").objectStore("users");
+
+	objectStore.openCursor().onsuccess = function(event) {
+  		var cursor = event.target.result;
+  		if (cursor) {
+    		alert("Name for id " + cursor.key + " is " + cursor.value.name);
+    		cursor.continue();    // must!!
+  		}
+  		else {
+    		alert("No more entries!");
+  		}
+	};
+		</div>
+
+		<div class="text">
+We can also set a range for cursor
+		</div>
+
+		<div class="jscode">
+	// only find "Danna"
+	var singleKeyRange = IDBKeyRange.only("Donna");
+
+	// find all results before "Bill"(include)
+	var lowerBoundKeyRange = IDBKeyRange.lowerBound("Bill");
+
+	// find all results before "Bill"(not include)
+	var lowerBoundOpenKeyRange = IDBKeyRange.lowerBound("Bill", true);
+
+	// find all results after "Donna"(not include)
+	var upperBoundOpenKeyRange = IDBKeyRange.upperBound("Donna", true);
+
+	// Match anything between "Bill" and "Donna", but not including "Donna"
+	var boundKeyRange = IDBKeyRange.bound("Bill", "Donna", false, true);
+
+	index.openCursor(boundKeyRange).onsuccess = function(event) {
+  		var cursor = event.target.result;
+  		if (cursor) {
+    		// Do something with the matches.
+    		cursor.continue();
+  		}
+	};
+		</div>
+
+		<div class="text">
+We can also change the cursor's direction by setting the second parameter, and "IDBCursor.prev" means that the last one will be searched first.
+		</div>
+
+		<div class="jscode">
+	objectStore.openCursor(null, IDBCursor.prev).onsuccess = function(event) {
+  		var cursor = event.target.result;
+  		if (cursor) {
+    		// Do something with the entries.
+    		cursor.continue();
+  		}
+	};
+		</div>
+
+		<div class="text"><h4>5. Use index</h4>In the second part, we just use "creatIndex" method to creat some index for our storage space, such as "name" and "tel" index. So in this part, we can use index to find data, because maybe sometimes the index is not unique (ex: "name"), but the index function only return one result which has minimum keys.
+		</div>
+
+		<div class="jscode">
+	var index = objectStore.index("name");
+	index.get("Donna").onsuccess = function(event) {
+  		alert("Donna's id is " + event.target.result.id);
+	};
+		</div>
+
+		<div class="text"><h4>6. Concurrency</h4>We should care about the version of our database in the different webpages at the same time, if the version has been updated in one page, other pages' version must be changed at the same time. 
+		</div>
+
+		<div class="jscode">
+	var openReq = mozIndexedDB.open("MyTestDatabase", 2);
+
+	openReq.onblocked = function(event) {
+  		// if it has been loaded in other place, we can't use it.
+  		alert("Please close all other tabs with this site open!");
+	};
+  
+	openReq.onupgradeneeded = function(event) {
+  		db.createObjectStore(/* ... */);
+  		useDatabase(db);
+	}  
+  
+	openReq.onsuccess = function(event) {
+  		var db = event.target.result;
+  		useDatabase(db);
+  		return;
+	}
+
+	function useDatabase(db) {
+  		// if we want to update the database, we have to close it.
+  		db.onversionchange = function(event) {
+    		db.close();
+    		alert("A new version of this page is ready. Please reload!");
+  		};
+  		// other operation
+	}
+		</div>
+
+	</div>
+</body>
+</html>
