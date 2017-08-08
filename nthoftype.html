@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>The difference between "nth-child" and "nth-of-type"</h1>
+	</div>
+	<div class="det-content">
+		
+		<div class="text">
+Today, I met a very embarrassed thing, when I did a small demo to help a junior sister apprentice test the assignment, I didn't use "id" and "class" because I just wanted to make it simple, so I used "nth-child" and "nth-of-type" instead. However, something didn't work, how can it be? I thought I knew how to use them, anyway, I was wrong. Now, I just want to write a blog to really discuss the difference between "nth-child" and "nth-of-type".
+<h4>1. Official introduction</h4>(1) "nth-child"
+The :nth-child(an+b) CSS pseudo-class matches an element that has an+b-1 siblings before it, where n is positive or zero. More simply stated, the selector matches elements whose numeric position in a series of siblings matches the pattern an+b. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child">(Click here to see more details)</a>
+
+(2) "nth-of-type"
+The :nth-of-type(an+b) CSS pseudo-class matches an element that has an+b-1 siblings of the same type before it, where n is positive or zero. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-of-type">(Click here to see more details)</a>
+<h4>2. Difference</h4>We will know from the official introduction that the difference is "nth-of-type" must match same type. For example, when we write the following code:
+		</div>
+
+		<div class="allcode">
+	p:nth-child(2) { color: red; }
+	p:nth-of-type(2) { color: red; }
+	&lt;body&gt;
+    	&lt;div&gt;00000&lt;/div&gt;
+    	&lt;p&gt;11111&lt;/p&gt;  // red
+    	&lt;p&gt;22222&lt;/p&gt;  // red
+	&lt;/body&gt;
+		</div>
+
+		<div class="text">
+What's happening? The first and second "p" elements both turn to red color, and we should know that the "p:nth-child(2)" controls the first "p" and "p:nth-of-type(2)" controls the second one.
+		</div>
+
+		<div class="imgdiv" style="min-height:10em;">
+			<img src="img/nthoftype1.jpg" alt="result" >
+		</div>
+
+		<div class="text">Do you think it's easy? Oh, let's see this example:
+		</div>
+
+		<div class="allcode">
+	p:nth-child(2) { color: red; }
+	p:nth-of-type(2) { color: red; }
+	&lt;body&gt;
+    	&lt;div&gt;00000&lt;/div&gt;
+    	&lt;div&gt;00000&lt;/div&gt;
+    	&lt;p&gt;11111&lt;/p&gt;  // not red
+    	&lt;p&gt;22222&lt;/p&gt;  // red
+	&lt;/body&gt;
+		</div>
+
+		<div class="text">
+Ok, even though it has set "p:nth-child(2)", the second element is "div", not "p", so the "nth-child" doesn't work. And we can see from the result that the "nth-of-type" controls the second "p" all the time, and it work very well. 
+		</div>
+
+		<div class="imgdiv" style="min-height:10em;">
+			<img src="img/nthoftype2.jpg" alt="result" >
+		</div>
+
+		<div class="text">From this example we will know: when we want to select an element which has certain order of its parent, we prefer using "nth-child", and if we want the element has certain order of the same label, the "nth-of-type" maybe perform better.
+
+However, I just want to remind you that the "nth-child" and "nth-of-type" don't control only one element, it means when you have two "p" as the second child of different parents, the "nth-child" and "nth-of-type" will control both of them. Let's see an example of controling "input". I just want to set the third input's width to be "500px". Because in this example, the "nth-child" and "nth-of-type" have the same function, so I just use one to show the example.
+		</div>
+		
+		<div class="allcode">
+	input:nth-child(3) { width:500px; }     // Wrong!
+	&lt;body&gt;
+		&lt;div&gt;
+      		&lt;input type="text"&gt;
+      		&lt;input type="text"&gt;
+    	&lt;div&gt;
+    	&lt;input type="text"&gt;	
+	&lt;/body&gt;
+		</div>
+
+		<div class="text">Do you think it will work? No! Should we use "nth-child(3)" because it's the third input of the document? No! Let's see the result:
+		</div>
+
+		<div class="imgdiv" style="min-height:5em;">
+			<img src="img/nthoftype3.jpg" alt="result" >
+		</div>
+
+		<div class="text">All of three "input"s have the same width, so our CSS doesn't work well. Why? Because we should know, the third "input" has only one parent: "body". So it's not "nth-child(3)", it's "nth-child(1)". So let's see this code:
+		</div>
+
+		<div class="csscode">
+	input:nth-child(1) { width:500px; }     
+		</div>
+
+		<div class="text">
+What will happen? We just change the number "3" to number "1". Let's see the result:
+		</div>
+		
+		<div class="imgdiv" style="min-height:5em;">
+			<img src="img/nthoftype4.jpg" alt="result" >
+		</div>
+
+		<div class="text">
+We can see not only the third "input" changed width, but also the first "input". Why? Don't forget the first "input" is also the first child of its parent —— "div". From this example, we will know that the "nth-child" and "nth-of-type" will control all of elements if they match the condition.
+
+Ok, if we just want to select only the third "input", can we do that? No, only use "nth-child" and "nth-of-type" cannot work in this example at least. We have to add "class", "id" or other label to help us.
+
+Finally, there are some other CSS pseudo-class whose function like "nth-child" and "nth-of-type":
+<span style="color:#666;font-size:0.8em;">	:last-child
+	:first-child
+	:only-child
+	:last-of-type
+	:first-of-type
+	:only-of-type</span>
+
+(That's all)  
+		</div>
+
+	</div>
+</body>
+</html>
