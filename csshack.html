@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>CSS Hack</h1>
+	</div>
+	<div class="det-content">
+
+        <div class="text">
+When we use CSS, the most troublesome thing is the compatibility of the various browsers. The different browsers will get different results when analysing the same CSS codes. Therefore, if we want to get better compatibility, we have to use CSS Hack. There are three types of CSS Hack we use most common.
+<h4>1. "[if IE]" Hack</h4>Grammar:
+<span style="color:#666;font-size:0.8em;">    &lt;!-- [if &lt;keywords&gt;? IE &lt;version>?]&gt;
+        CSS codes
+    &lt;![endif]--&gt;
+</span>
+(1) The "keywords" could be set the following values:
+<span style="color:#666;font-size:0.8em;">    empty : make sure whether it is a version of IE
+    "gt" : greater than a certain version of IE (must be used with the second parameter "version")
+    "gte" : greater than or equal a certain version of IE (must be used with the second parameter "version")
+    "lt" : less than a certain version of IE (must be used with the second parameter "version")
+    "lte" : less than or equal a certain version of IE (must be used with the second parameter "version")
+    "!" : except a certain version of IE (must be used with the second parameter "version")
+</span>
+(2) As for the value of "version", I suggest using the number bigger than 6.
+
+An example of "[if IE]" Hack:
+        </div>
+
+        <div class="csscode">
+    &lt;!--[if gt IE 6]&gt;
+        &lt;style&gt;
+            .test{color:red;}
+        &lt;/style&gt;
+    &lt;![endif]--&gt;
+        </div>
+        
+        <div class="text">
+In this example, we set the version of IE greater than IE6, it means we can only see the ".test{color:red;}" in the IE6+.
+<h4>2. Attribute Hack</h4></div>
+
+        <div class="csscode">
+    .all IE{property:value\9;}
+    .gte IE 8{property:value\0;}
+    .lte IE 7{*property:value;}
+    .IE 8/9, .Opera{property:value\0;}
+    .IE 9{property:value\9\0;}
+    .IE 7{+property:value;}
+    .IE 6{_property:value;}
+    .not IE{property//:value;}
+    .webkit{[;property:value;];}      /* For webkit(Chrome and Safari) */
+        </div>
+
+        <div class="text">
+We should look out some parts:
+(1) There is no space between "\9\0" and value, if we add a space, the Hack can only be used in IE9+, and it will not work well in IE8. 
+(2) The Hack for Chrome and Safari has three ";", and must have three!
+
+Let's see an example, you can use different browsers to see different color of ".text".
+        </div>
+
+        <div class="csscode">
+    .test{
+        color:#c30;          /* For Firefox */
+        [;color:#ddd;];      /* For webkit(Chrome and Safari) */
+        color:#090\0;        /* For Opera */
+        color:#00f\9;        /* For IE8+ */
+        *color:#f00;         /* For IE7 */
+        _color:#ff0;         /* For IE6 */
+    }
+        </div>
+
+        <div class="text"><h4>3. Selector Hack</h4>Some versions of browsers don't support a part of CSS selectors, so we have to use Selector Hack to solve this problem:
+<span style="font-size:0.8em;color:#666;">    * html .test{color:#090;}       
+    /* For IE6 and earlier */
+    * + html .test{color:#ff0;}     /* For IE7 */
+    .test:lang(zh-cn){color:#f00;}  /* For IE8+ and not IE */
+    .test:nth-child(1){color:#0ff;} /* For IE9+ and not IE */</span>
+<h4>4. Some Hack skills</h4>(1) "min-height": Sometimes we will use this attribute to set the mininum of an element, however, IE doesn't support it. So we should write like following:(using javascript in css codes)
+<span style="color:#666;font-size:0.8em;">    div{ min-width: 600px; width:expression(document.body.clientWidth &lt; 600? “600px”: “auto” ); }</span>
+
+(2) Clear float:
+<span style="color:#666;font-size:0.8em;">    div{ display:table; }</span>
+    or
+<span style="color:#666;font-size:0.8em;">    div{ clear:both; }</span>
+    or
+<span style="color:#666;font-size:0.8em;">    div:after{ content: “.”; display: block; height: 0; clear: both; visibility: hidden; } // not IE</span>
+
+(3) Parent element's height doesn't match: the height of the outer layer cannot be adjusted automatically when the height of the inner object has been changed, especially when the inner object uses "margin" or "padding". Such as:
+        </div>
+
+        <div class="allcode">
+    #box { background-color:#eee; }
+    #box p { margin-top: 20px;margin-bottom: 20px; text-align:center; }
+    &lt;div id="box"&gt;
+        &lt;p&gt;content&lt;/p&gt;
+    &lt;/div&gt;
+        </div>
+
+        <div class="text">
+The solution is adding two empty "div" before and after the "p" element. And then set css codes:
+<span style="color:#666;font-size:0.8em;">    .emptydiv{ height:0px;overflow:hidden; }</span>  
+
+(That's all)   
+        </div>
+
+		
+	</div>
+</body>
+</html>
