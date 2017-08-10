@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Structured pseudo class selectors</h1>
+	</div>
+	<div class="det-content">
+		
+		<div class="text">
+There are 4 kinds of structured pseudo class selectors in CSS, ":root", ":not", ":empty" and ":target". 
+<h4>1. ":root"</h4>We should know that "root" is "html". It means the following codes have the same function:
+<span style="color:#666;font-size:0.8em;">	:root {background:orange}
+	html {background:orange;}
+</span>
+And ":root" has another function: we can achieve some CSS Hacks by using it, because ":root" is supported by IE9+, now let's see an example.
+		</div>
+
+		<div class="allcode">
+&lt;!--[if lte IE 8]&gt;
+	&lt;style&gt;
+	#demo{filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);}
+	&lt;/style&gt;
+&lt;![endif]--&gt;
+&lt;style&gt;
+	#demo{
+		width: 300px;height: 200px;background-color: #FF80C0;margin: 200px;
+		-moz-transform:translate(-226px,226px) rotate(270deg);
+		-webkit-transform:translate(-226px,226px) rotate(270deg);
+		-ms-transform:translate(-226px,226px) rotate(270deg);
+		-o-transform:translate(-226px,226px) rotate(270deg);
+	}
+&lt;/style&gt;
+<&lt;div id="demo"&gt;
+	A test
+&lt;/div&gt;
+		</div>
+
+		<div class="text">
+In this example, I want to achieve a function that a layer rotate 270deg and all kinds of IE versions can fully compatible. Do you think it's all right? ->.-> Haaaaa, no! The IE9 doesn't work like we think. Because IE9 will use both "filter" and "-ms-transform", so in this situation the block will rotate twice, which will cause the rotation angle to be incorrect. So we should add some codes:
+<span style="color:#666;font-size:0.8em;">	:root #demo{filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=0);}
+</span>
+The added codes means we should delete the rotation in IE9, because "filter" can only be supported by IE9-, and ":root" can only be supported by IE9+, when we put these two factors together, the codes can only be supported by IE9. It isn't equal to "[if IE 9]", you can try it.
+<h4>2. ":not"</h4>From its name we could understand the function: not choose some elements. Easy~ So, let's just see an example, I just want to choose all inputs except submit button.
+		</div>
+
+		<div class="csscode">
+input:not([type="submit"]){
+ 	border:1px solid red;
+}
+		</div>
+
+		<div class="text">
+<h4>3. ":empty"</h4>It's used to select elements without any content. It means no content, even a space. For Instance, if we want to hide "div" which has no content.
+		</div>
+		
+		<div class="allcode">
+div{
+	background: orange;
+	min-height: 30px;
+}
+div:empty{
+	display: none;
+}​
+&lt;div&gt;I'm a div&lt;/div&gt;
+&lt;div&gt; &lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+		</div>
+
+		<div class="text">
+Let's see it in a picture:
+		</div>
+
+		<div class="imgdiv" style="min-height:5em;">
+			<img src="img/pseudoselectors2.jpg" alt="example">
+		</div>
+
+		<div class="text">
+We can only see two orange "div"s, because the third one is empty, and the second one has a space. 
+Be careful! If the content of "div" is empty, but we use "::before" or "::after" and set some value to its "content", do you think the ":empty" pseudo class could work well? Yes! You can try it, or just <a href="http://www.zhangxinxu.com/study/201504/css-empty-before-after.html">click here</a> to see an example(Done by Xinxu Zhang).
+<h4>4. ":target"</h4>It is used to match the target element of a symbol for URL. Let's see an example.
+		</div>
+	
+		<div class="allcode">
+#brand{
+  	display: none;
+}
+#brand:target{     /*:target means the element which id="brand"*/
+  	display:block;
+}
+&lt;h2&gt;&lt;a href="#brand"&gt;Brand&lt;/a&gt;&lt;/h2&gt;
+&lt;div id="brand"&gt;
+    content for Brand
+&lt;/div&gt;
+		</div>
+
+		<div class="text">
+You can copy and run the codes above, when you click the "Brand" link, a "div" will show. What's more, let's see another example with more than one URL.
+		</div>
+		
+		<div class="allcode">
+#brand:target {
+  	background: orange;
+  	color: #fff;
+}
+#jake:target {
+  	background: blue;
+  	color: #fff;
+}
+#aron:target {
+  	background: red;
+  	color: #fff;
+}
+&lt;h2&gt;&lt;a href="#brand"&gt;Brand&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="menuSection" id="brand"&gt;
+  	content for Brand
+&lt;/div&gt;
+&lt;h2&gt;&lt;a href="#jake"&gt;Brand&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="menuSection" id="jake"&gt;
+ 	content for jake
+&lt;/div&gt;
+&lt;h2&gt;&lt;a href="#aron"&gt;Brand&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="menuSection" id="aron"&gt;
+    content for aron
+&lt;/div&gt;
+		</div>
+
+		<div class="text">
+Let's see it's effect:
+		</div>
+
+		<div class="imgdiv" style="min-height:5em;">
+			<img src="img/pseudoselectors1.jpg" alt="example">
+		</div>
+
+		<div class="text">
+We can click links one by one, and you will see "div"s have different background color.
+
+(That's all)
+		</div>
+
+	</div>
+</body>
+</html>
