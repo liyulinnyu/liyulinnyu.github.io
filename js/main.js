@@ -132,6 +132,7 @@
 		function ChangeRows(e){
 			var rows = document.querySelectorAll(".rows");
 			var target = EventUtil.getTarget(e);
+			returnmainpage.scrollIntoView();
 			if(target.id === "changeraws-lblock"){
 				// prev button
 				for (var i = 0; i < rows.length; i++){
