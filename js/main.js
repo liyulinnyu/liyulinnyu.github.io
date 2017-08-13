@@ -129,19 +129,35 @@
 		EventUtil.addHandler(prevbutton, "click", ChangeRows);
 		EventUtil.addHandler(nextbutton, "click", ChangeRows);
 
+		var showpageid = document.getElementById("changeraws-mblock");
+		// 刚进来用window.onload添加页数
+		EventUtil.addHandler(window, "load", AddPageId);
+
+		function AddPageId(){
+			var rows = document.querySelectorAll(".rows");
+			if(rows.length){
+				showpageid.innerHTML = "1/" + rows.length;
+			}else{
+				showpageid.innerHTML = "0/" + rows.length;
+			}
+			
+		}
+
 		function ChangeRows(e){
 			var rows = document.querySelectorAll(".rows");
 			var target = EventUtil.getTarget(e);
-			returnmainpage.scrollIntoView();
+			returnmainpage.scrollIntoView();   // let the beginning show
 			if(target.id === "changeraws-lblock"){
 				// prev button
 				for (var i = 0; i < rows.length; i++){
-					if (getCss(rows[i]).display === "flex"){
+					if (getCss(rows[i]).display === "flex" && rows.length > 1){
 						if (i !== 0){
 							rows[i - 1].className = rows[i].className;
+							showpageid.innerHTML = i + "/" + rows.length;
 						}else{
 							// 已经是第一个了，直接到最后一个
 							rows[rows.length - 1].className = rows[i].className;
+							showpageid.innerHTML = rows.length + "/" + rows.length;
 						}
 						var tempclass = rows[i].className + "";
 						tempclass = "rowhide " + tempclass.split(" ")[1];
@@ -152,12 +168,14 @@
 			}else{
 				// next button
 				for (var i = 0; i < rows.length; i++){
-					if (getCss(rows[i]).display === "flex"){
+					if (getCss(rows[i]).display === "flex" && rows.length > 1){
 						if (i !== rows.length - 1){
 							rows[i + 1].className = rows[i].className;
+							showpageid.innerHTML = (i+2) + "/" + rows.length;
 						}else{
 							// 已经是最后了，直接到第一个
 							rows[0].className = rows[i].className;
+							showpageid.innerHTML = "1/" + rows.length;
 						}
 						var tempclass = rows[i].className + "";
 						tempclass = "rowhide " + tempclass.split(" ")[1];
@@ -166,6 +184,7 @@
 					}
 				}
 			}
+			changeHeight();        // 只能放最后
 		}
 
 	})();
