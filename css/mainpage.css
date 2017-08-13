@@ -237,6 +237,9 @@
 		top: 3em;
 		height: 3em;
 		margin:0 1em;
+		text-align: center;
+		line-height: 3em;
+		color:#fff;
 	}
 	#changeraws-rblock{
 		display: block;
@@ -507,12 +510,15 @@
 		cursor: pointer;
 	}
 	#changeraws-mblock{
-		display: none;
+		display: block;
 		width:3em;
 		background: #fa8b60;
 		top: 3em;
 		height: 3em;
 		margin:0 1em;
+		text-align: center;
+		line-height: 3em;
+		color:#fff;
 	}
 	#changeraws-rblock{
 		display: block;
