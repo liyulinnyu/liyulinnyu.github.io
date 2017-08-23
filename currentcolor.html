@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+	#changecolor{
+        width:200px;
+        height:100px;
+        color:#336699;
+        background: currentColor;
+        border:1px solid currentColor;
+        margin-left:2em;
+    }
+    #changecolor:hover{
+        color:red;
+    }
+</style>
+<body>
+	<div class="det-title">
+		<h1>Use "currentColor" to reduce your work</h1>
+	</div>
+	<div class="det-content">
+
+		<div class="text">
+Before CSS3, if we want to change the color of a "div" and all its children elements, we have to rewrite all the codes of "color", "background", "border" and other attributes. It's often too troublesome. However, now we can use "currentColor" attribute to help us reduce some useless work. 
+First of all, let's see what does the "currentColor" mean? Actually, it means the places where the "color" attribute can appear will use or inherite the font color. For example, we will use two "div"s and set the "color" attribute for the second one, and let's see the "background" attribute. Apparently, the second one's background color uses the font color, and because the font color is black initially, so the first one's background is still black.
+		</div>
+
+		<div class="imgdiv" style="min-height:5em;">
+			<img src="img/currentcolor1.jpg" alt="">
+		</div>
+
+		<div class="text">
+Let's see the HTML and CSS codes:
+		</div>
+
+		<div class="allcode">	#parent1{
+        width:200px;
+        height:100px;
+        background: #336699;
+    }
+    #child1{
+        width:50px;
+        height:50px;
+        background: currentColor;
+        border: 2px solid currentColor;
+    }
+    #parent2{
+        width:200px;
+        height:100px;
+        background: #336699;
+    }
+    #child2{
+        width:50px;
+        height:50px;
+        color:red;   /*!!*/
+        background: currentColor;
+        border: 2px solid currentColor;
+    }
+	
+	&lt;div id="parent1"&gt;
+        &lt;div id="child1"&gt;&lt;/div&gt;
+    &lt;/div>
+    &lt;div id="parent2"&gt;
+        &lt;div id="child2"&gt;&lt;/div&gt;
+    &lt;/div&gt;</div>
+		
+		<div class="text">
+Maybe, you will think how easy it is! Oh, I'm afarid not. If we change only one line codes, it will be different. Let's set the "background" of "parent2" to be "currentColor". What will happen?
+		</div>
+
+		<div class="csscode">	#parent2{
+        width:200px;
+        height:100px;
+        background: currentColor;
+    }</div>
+
+    	<div class="imgdiv" style="min-height:5em;">
+    		<img src="img/currentcolor2.jpg" alt="">
+    	</div>
+
+    	<div class="text">
+Amazing! The "parent2" element shows black, too. How could it be? Maybe you will think the "currentColor" of "child1" effects the "parent2". How to test it? Easy, we can add "color" attribute for "child1". (Don't add "color" for "parent2" due to the CSS priority)
+    	</div>
+		
+		<div class="csscode">	#child1{
+        width:50px;
+        height:50px;
+        color:red;
+        background: currentColor;
+        border: 2px solid currentColor;
+    }</div>
+
+		<div class="imgdiv" style="min-height:5em;">
+			<img src="img/currentcolor3.jpg" alt="">
+		</div>
+
+		<div class="text">
+Ok, in this case, we could understand the "currentColor" cannot effect the brother elements(same level) and the children of brother elements.
+Until now, maybe you will ask what could this attribute do to reduce our work? Don't worry, let's see this example together. If we want to change a "div"s color when our mouse is over it. Normally, we will write as following:
+		</div>
+
+		<div class="csscode">	#changecolor{
+        width:200px;
+        height:100px;
+        color:#336699;
+        background: #336699;
+        border:1px solid #336699;
+    }
+    #changecolor:hover{
+        color:red;
+        background: red;
+        border:1px solid red;
+    }</div>
+		
+		<div class="text">
+However, if we can use "currentColor" to help us, the codes will be like this:			
+		</div>
+
+		<div class="csscode">	#changecolor{
+        width:200px;
+        height:100px;
+        color:#336699;
+        background: currentColor;
+        border:1px solid currentColor;
+    }
+    #changecolor:hover{
+        color:red;
+    }</div>
+
+    	<div class="text">
+Both of them will get the same results. So I just want to show one of them. You can move your mouse or fingers(mobile phone) over it. 
+    	</div>
+
+    	<div id="changecolor">
+    	</div>
+
+    	<div class="text">
+Of course, I just show a very simple example to explain the "currentColor" attribute, if you want to use it into the daily projects, I think you can really understand how amazing it will be.
+
+(That's all)
+    	</div>
+
+
+	</div>
+</body>
+</html>

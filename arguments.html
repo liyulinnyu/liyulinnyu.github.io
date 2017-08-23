@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>"arguments" in JavaScript</h1>
+	</div>
+	<div class="det-content">
+		
+		<div class="text">
+As we all know, there has a parameter which represents variables in JS function —— arguments. And when I was looking for something about "arguments", I found it was also a little bit complex, especially in some details. Therefore I would like to code some examples and also to write a blog to record them.
+<h4>1. Normal case</h4>The "arguments" is an array, and we can use it to represent the variables of function. For example as follows, the "arguments[0]" represents "num1", the "arguments[1]" represents "num2". And we can also use "arguments.length" to find how many variables are given to the function.
+		</div>
+
+		<div class="jscode">	(function test(num1, num2){
+        alert(num1 === arguments[0]);    // true;
+    })(1,2);</div>
+
+    	<div class="text"><h4>2. The second case</h4>It would be difficult to get the variables when the number of actual variables is more than initial. In this case, we have to use "arguments" to help us. For example:
+    	</div>
+
+    	<div class="jscode">	(function test(num1, num2){
+        alert(arguments[2]);
+    })(1,2,3);</div>
+
+        <div class="text">
+In this example, we can't use normal methods to get the third varibale but using "arguments[2]". In return, if the actual variables are less than initial, the "arguments[1]" and "num2" will be "undefined". 
+        </div>
+
+        <div class="jscode">	(function test(num1, num2){
+        alert(arguments[1]);    // undefined
+        alert(num2);	// undefined
+    })(1);</div>
+
+    	<div class="text">
+How about changing the value of varibales? Let's look at an example, when we change the value of "num1", the "argument[0]" will change its value, too. And it will be the same when we change the value of "arguments[0]".
+		</div>
+
+		<div class="jscode">	(function test(num1){
+        num1 = 2;
+        alert(arguments[0]);    // 2;
+    })(1);</div>
+
+    	<div class="text">
+However, the "arguments" will not change if the variables don't get values initially.    		
+    	</div>
+
+    	<div class="jscode">	(function test(num1, num2){
+        num2 = 2;
+        alert(arguments[1]);    // undefined;
+    })(1);</div>
+
+    	<div class="text">
+What's more, as we all know, the length of array can be changed, so how about "arguments"? Can its length be changed? No. It doesn't work. Let's see an instance: 
+    	</div>
+
+    	<div class="jscode">	(function test(num1, num2){
+        alert(num2);    // 2;
+        arguments.length = 1;
+        alert(num2);    // 2;
+    })(1,2);</div>
+
+    	<div class="text">
+So we should remember that the length of "arguments" only dependes on the number of initial variables.
+<h4>3. The third case</h4>The finally situation is that when we use the strict mode, the "arguments" can't be change, for example:
+    	</div>
+
+    	<div class="jscode">	(function test(num1, num2){
+        "use strict"
+        arguments[1] = 3;
+        alert(num2);    // 2;
+        alert(arguments[1]);    // 3;
+		
+        num2 = 4;
+        alert(num2);    // 4;
+        alert(arguments[1]);    // 3;
+    })(1,2);</div>
+
+    	<div class="text">
+Therefore, when we use strict mode, maybe the "arguments" will not equal to the initial variables. 
+
+(That's all) 
+    	</div>
+
+
+		
+	</div>
+</body>
+</html>
