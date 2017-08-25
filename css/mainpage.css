@@ -157,10 +157,12 @@
 		border: 1px solid #fa8b60;
 		color:#fff;
 		font-size: 2em;
+		-webkit-appearance:none;
 	}
 	#main-contact-button:hover{
 		cursor: pointer;
 		background: #ef6d3b;
+		-webkit-appearance:none;
 	}
 	#main-otherrelated-list{
 		margin:5em 10%;
@@ -433,10 +435,12 @@
 		border: 1px solid #fa8b60;
 		color:#fff;
 		font-size: 2em;
+		-webkit-appearance:none;
 	}
 	#main-contact-button:hover{
 		cursor: pointer;
 		background: #ef6d3b;
+		-webkit-appearance:none;
 	}
 	#main-otherrelated-list{
 		margin:5em 10%;
