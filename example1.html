@@ -16,29 +16,14 @@
 </style>
 <body>
     
-    <iframe src="test.html" frameborder="0" id="myFrame" style="height:400px"></iframe>
+    <iframe src="test.html" frameborder="0" id="myFrame"></iframe>
 
 
     <script type="text/javascript">
-    try{
-        var iframe = document.getElementById("myFrame");
-        var temp = 0;
-        if(iframe.attachEvent){
-            iframe.attachEvent("onload", function(){
-                temp =  iframe.contentWindow.document.documentElement;
-                alert(temp);
-            });
-            return;
-        }else{
-            iframe.onload = function(){
-                temp = iframe.contentDocument.body;
-                alert(temp);
-            };
-            return;                 
-        }     
-    }catch(e){
-        throw new Error('setIframeHeight Error');
-    }
+    var myframe = document.getElementById("myFrame");
+
+    var temp = myframe.contentDocument.body;
+    alert(temp.scrollHeight);   
     
 
     </script>
