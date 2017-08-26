@@ -25,13 +25,14 @@
         var temp = 0;
         if(iframe.attachEvent){
             iframe.attachEvent("onload", function(){
-                temp =  iframe.contentWindow.document.documentElement.scrollHeight;
+                temp =  iframe.contentWindow.document.documentElement;
+                alert(temp);
             });
             return;
         }else{
             iframe.onload = function(){
-                temp = iframe.contentDocument.body.scrollHeight;
-                alert(temp.height);
+                temp = iframe.contentDocument.body;
+                alert(temp);
             };
             return;                 
         }     
