@@ -47,6 +47,21 @@ html{
 		display: flex;
 		flex-direction: column;
 	}
+	.text{
+		-moz-box-sizing: border-box;  
+		-webkit-box-sizing: border-box; /*Safari3.2+*/
+		-o-box-sizing: border-box; /*Opera9.6*/
+		-ms-box-sizing: border-box; /*IE8*/
+		box-sizing: border-box;
+		width:100%;
+		white-space: pre-wrap;
+		padding-left: 2em;
+		padding-right: 2em;
+		color:#333;
+		font-size: 1.2em;
+		line-height: 2em;
+		word-spacing: 0.5em;
+	}
 }
 @media all and (max-width:1000px){
 	body{
@@ -88,6 +103,21 @@ html{
 		background: #fff;
 		display: flex;
 		flex-direction: column;
+	}
+	.text{
+		-moz-box-sizing: border-box;  
+		-webkit-box-sizing: border-box; /*Safari3.2+*/
+		-o-box-sizing: border-box; /*Opera9.6*/
+		-ms-box-sizing: border-box; /*IE8*/
+		box-sizing: border-box;
+		width:100%;
+		white-space: pre-wrap;
+		padding-left: 1em;
+		padding-right: 1em;
+		color:#333;
+		font-size: 1.2em;
+		line-height: 2em;
+		word-spacing: 0.5em;
 	}
 }
 
@@ -192,22 +222,7 @@ html{
     perspective: 1000px;
     display: flex;
 }
-.text{
-	-moz-box-sizing: border-box;  
-	-webkit-box-sizing: border-box; /*Safari3.2+*/
-	-o-box-sizing: border-box; /*Opera9.6*/
-	-ms-box-sizing: border-box; /*IE8*/
-	box-sizing: border-box;
-	width:100%;
-	white-space: pre-wrap;
-	padding-left: 2em;
-	padding-right: 2em;
-	color:#333;
-	font-size: 1.2em;
-	line-height: 2em;
-	word-wrap:break-word;
-	word-spacing: 0.5em;
-}
+
 .note{
 	color:#888;
 	font-size: 0.6em;
