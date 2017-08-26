@@ -110,7 +110,7 @@ html{
 		-o-box-sizing: border-box; /*Opera9.6*/
 		-ms-box-sizing: border-box; /*IE8*/
 		box-sizing: border-box;
-		width:100%;
+		width:99%;
 		white-space: pre-wrap;
 		padding-left: 2em;
 		padding-right: 2em;
@@ -118,7 +118,6 @@ html{
 		font-size: 1.2em;
 		line-height: 2em;
 		word-spacing: 0.5em;
-		word-break:break-all;
 	}
 }
 
