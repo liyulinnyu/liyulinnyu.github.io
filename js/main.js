@@ -56,7 +56,7 @@
 		
 
 		// 返回主页面
-		var returnmainpage = document.querySelector("#main-header-title");
+		var returnmainpage = document.querySelector("#main-header-logo");
 		EventUtil.addHandler(returnmainpage, "click", ReturnToMain);
 		function ReturnToMain(){
 			location.href = "index.html";
