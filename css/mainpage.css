@@ -49,6 +49,7 @@
 		height: 100%;
 		margin-left: 2em;
 		flex: 1;
+		cursor: pointer;
 	}
 	#main-header-title{
 		display: block;
@@ -57,7 +58,7 @@
 		line-height: 2.5em;
 		margin-left:1em;
 		flex: 9;
-		cursor: pointer;
+		
 	}
 	#main-header-block{
 		display: block;
@@ -337,7 +338,7 @@
 		width: 10em;
 		margin-left: 2em;
 		flex: 1;
-
+		cursor: pointer;
 	}
 	#main-header-title{
 		display: block;
@@ -347,7 +348,7 @@
 		padding-left: 1em;
 		flex: 9;
 		width:calc(90%-10em);
-		cursor: pointer;
+		
 	}
 	#main-header-block{
 		display: none;
