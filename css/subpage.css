@@ -110,10 +110,9 @@ html{
 		-o-box-sizing: border-box; /*Opera9.6*/
 		-ms-box-sizing: border-box; /*IE8*/
 		box-sizing: border-box;
-		width:99%;
+		width:100%;
 		white-space: pre-wrap;
 		padding-left: 2em;
-		padding-right: 2em;
 		color:#333;
 		font-size: 1.2em;
 		line-height: 2em;
