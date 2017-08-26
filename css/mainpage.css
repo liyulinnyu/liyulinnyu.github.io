@@ -337,6 +337,7 @@
 		width: 10em;
 		margin-left: 2em;
 		flex: 1;
+
 	}
 	#main-header-title{
 		display: block;
@@ -345,6 +346,7 @@
 		line-height: 2.5em;
 		padding-left: 1em;
 		flex: 9;
+		width:calc(90%-10em);
 		cursor: pointer;
 	}
 	#main-header-block{
@@ -386,7 +388,7 @@
 	.button-list-det{
 		display: inline-block;
 		height: 100%;
-		line-height: 5em;
+		line-height: 4em;
 		width: 15%;
 		min-width: 100px;
 		background: #333;
@@ -400,7 +402,7 @@
 		margin-left: 10%;
 	}
 	.button-list-det:hover{
-		line-height: 4em;
+		line-height: 3.5em;
 		font-size: 1.6em;
 		background: #444;
 		cursor: pointer;
@@ -498,16 +500,18 @@
 		display: flex;
 		display: -webkit-flex;
 		flex: 1;
+		width:100%;
 		justify-content: center;
 		-webkit-justify-content: center;
 		height: 5em;
 		background: #8f8f8f;
+		text-align: center;
 	}
 	#changeraws-div span{
 		font-size: 1.5em;
 	}
 	#changeraws-lblock{
-		display: block;
+		display: inline-block;
 		width:8em;
 		background: #fff;
 		top: 3em;
@@ -518,7 +522,7 @@
 		cursor: pointer;
 	}
 	#changeraws-mblock{
-		display: block;
+		display: inline-block;
 		width:3em;
 		background: #fa8b60;
 		top: 3em;
@@ -529,7 +533,7 @@
 		color:#fff;
 	}
 	#changeraws-rblock{
-		display: block;
+		display: inline-block;
 		width:8em;
 		background: #fff;
 		top: 3em;
@@ -541,6 +545,7 @@
 	}
 	#changeraws-lblock:hover, #changeraws-rblock:hover{
 		background: #e1e1e1;
+		text-decoration: none;
 	}
 
 	.main-search-div{
