@@ -20,11 +20,24 @@
 
 
     <script type="text/javascript">
-    var myframe = document.getElementById("myFrame");
-
-    var frameObj = myframe.contentDocument.body;
-    var temp = document.defaultView.getComputedStyle(frameObj, null);
-    alert(temp.height);
+    try{
+        var iframe = document.getElementById("myFrame");
+        var temp = 0;
+        if(iframe.attachEvent){
+            iframe.attachEvent("onload", function(){
+                temp =  iframe.contentWindow.document.documentElement.scrollHeight;
+            });
+            return;
+        }else{
+            iframe.onload = function(){
+                temp = iframe.contentDocument.body.scrollHeight;
+                alert(temp.height);
+            };
+            return;                 
+        }     
+    }catch(e){
+        throw new Error('setIframeHeight Error');
+    }
     
 
     </script>
