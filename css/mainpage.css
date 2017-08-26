@@ -47,6 +47,7 @@
 	#main-header-logo{
 		display: block;
 		height: 100%;
+		margin-left: 2em;
 		flex: 1;
 	}
 	#main-header-title{
@@ -54,6 +55,7 @@
 		height: 100%;
 		font-size: 2em;
 		line-height: 2.5em;
+		margin-left:1em;
 		flex: 9;
 		cursor: pointer;
 	}
@@ -330,16 +332,18 @@
 
 
 	#main-header-logo{
-		display: none;
+		display: block;
 		height: 100%;
-		flex: 3;
+		width: 10em;
+		margin-left: 2em;
+		flex: 1;
 	}
 	#main-header-title{
 		display: block;
 		height: 100%;
 		font-size: 2em;
 		line-height: 2.5em;
-		padding-left: 2em;
+		padding-left: 1em;
 		flex: 9;
 		cursor: pointer;
 	}
