@@ -198,6 +198,7 @@ html{
 		min-height: 5em;
 		background: #fff;
 		padding-left:1em;
+		padding-right:1em;
 		padding-top:20px;
 		color:#333;
 		border-bottom:1px solid #ccc;
@@ -226,6 +227,7 @@ html{
 		-ms-box-sizing: border-box; /*IE8*/
 		box-sizing: border-box;
 		width:100%;
+		left:0;
 		white-space: pre-wrap;
 		padding-left: 1em;
 		padding-right: 1em;
