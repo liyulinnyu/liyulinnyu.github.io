@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+#browsepicture-divider{
+    position: relative;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box; /* Safari */
+    margin-left:4em;
+    margin-right:4em;
+    height:400px;
+    border:1px solid #ccc;
+}
+#browserpicture-text{
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box; /* Safari */
+    float:left;
+    border-right: 1px solid #ccc;
+    width:50%;
+    height:100%;
+    padding:2em 4em;
+}
+#browserpicture-img{
+    position: relative;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box; /* Safari */
+    height:100%;
+    width:50%;
+    overflow: hidden;
+    display: inline-block;
+}
+#browserpicture-img > img{
+    width:100%;
+}
+.nomove{
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+}
+.moving{
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: grabbing;
+}
+</style>
+<body>
+	<div class="det-title">
+		<h1>An example of browsing long pictures</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+Just imagine that we want to develop a webpage contains two columns, the left column shows some texts and the right one shows a long picture. And the function is when browsing the long picture, the left column won't move. It's very common in some online shopping websites, especially in some mobile terminals. So today I just want to use "scrollTop", "pageY" and some CSS attributes to implement this function.
+<h4>1. HTML</h4>We will use a "div" and a "img". The height of "div" is fixed, and we can only move the top value of "div". 
+        </div>
+
+        <div class="htmlcode">    &lt;div class="container"&gt;
+        &lt;img src="yourpicture" class="longpicture"&gt;
+    &lt;/div&gt;</div>
+
+        <div class="text"><h4>2. "mousedown" event</h4>The "mousedown" event should compute the result of "pageY" and "scrollTop". And we can also add the "grab/grabbing" attributes to improve using experience.
+        </div>
+
+        <div class="jscode">    var longpicture = document.querySelector(".longpictrue");
+    var container = document.querySelector(".container");
+    var tempstart = 0;   // record the value 
+    var isMove = 0;      // record if the div is moving
+    longpicture.addEventListener("mousedown", function(event){
+        longpicture.className = "moving";
+        isMove = 1;
+        tempstart = event.pageY + container.scrollTop;
+        event.preventDefault();
+    }, false);</div>
+
+        <div class="text"><h4>3. "mousemove" event</h4>In the "mouseove" event we should let the picture move and follows our mouse. How to do? We should let the "scrollTop" of "div" to be "tempstart - pageY". Let's see the codes: 
+        </div>
+
+        <div class="jscode">    document.addEventListener("mousemove", function(event){
+        if (isMove === 1){
+            container.scrollTop = tempstart - event.pageY;
+        }
+        event.preventDefault();
+    }, false);</div>
+
+        <div class="text"><h4>4. "mouseup" event</h4>After moving, we should set the value of "isMove" to be "0".
+        </div>
+
+        <div class="jscode">    document.addEventListener("mouseup", function(event){
+        longpicture.className = "nomove";
+        isMove = 0;
+        event.preventDefault();
+    }, false);</div>
+
+        <div class="text"><h4>5. CSS code</h4>Finally, let's see the CSS styles, maybe you have noticed changing "className" in both "mousedown" and "mouseup" events.
+        </div>
+
+        <div class="csscode">   .container{
+        height:400px;
+        overflow:hidden;
+    }
+    .moving{
+        cursor:-webkit-grab;
+        cursor:-moz-grab;
+        cursor:grab;
+    }
+    .nomove{
+        cursor:-webkit-grabbing;
+        cursor:-moz-grabbing;
+        cursor:grabbing;
+    }</div>
+
+        <div class="text">
+All in all, let's see the result as follows. You can browser the long picture without moving the left texts.
+        </div>
+
+        <div id = "browsepicture-divider">
+            <div id = "browserpicture-text">
+                You can use your mouse or finger(mobile phone users) to browser the right picture, when you move the right picture, the left column won't move.
+            </div>
+            <div id = "browserpicture-img">
+                <img src="img/longpicture.jpg" class="nomove" />
+            </div>
+        </div>
+
+        <div class="text">
+Have a nice day.
+(That's all)
+        </div>
+
+	</div>
+
+
+
+
+
+
+    <script type="text/javascript">
+    var container = document.querySelector("#browserpicture-img");
+    var nomove = document.querySelector(".nomove");
+    var isMove = 0;
+    var start = 0;
+    nomove.addEventListener("mousedown", function(event){
+        nomove.className = "moving";
+        isMove = 1;
+        start = event.pageY + container.scrollTop;
+        event.preventDefault();
+    }, false);
+
+    document.addEventListener("mousemove", function(event){
+        if (isMove === 1){
+            container.scrollTop = start - event.pageY;
+        }
+        event.preventDefault();
+    }, false);
+
+    document.addEventListener("mouseup", function(event){
+        nomove.className = "nomove";
+        isMove = 0;
+        event.preventDefault();
+    }, false);
+
+
+    </script>
+</body>
+</html>
