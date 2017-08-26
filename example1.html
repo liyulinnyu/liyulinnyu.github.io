@@ -22,8 +22,12 @@
     <script type="text/javascript">
     var myframe = document.getElementById("myFrame");
 
-    var temp = myframe.contentDocument.body;
-    alert(temp.scrollHeight);   
+    myframe.addEventListener("load", function(){
+        alert("sss");
+        var temp = myframe.contentDocument.body;
+        alert(temp.scrollHeight);
+    }, false);
+       
     
 
     </script>
