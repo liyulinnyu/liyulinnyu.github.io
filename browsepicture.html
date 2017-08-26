@@ -12,48 +12,81 @@
     <link rel="stylesheet" href="css/subpage.css">
 </head>
 <style>
-#browsepicture-divider{
-    position: relative;
-    box-sizing:border-box;
-    -moz-box-sizing:border-box; /* Firefox */
-    -webkit-box-sizing:border-box; /* Safari */
-    margin-left:4em;
-    margin-right:4em;
-    height:400px;
-    border:1px solid #ccc;
+@media all and (min-width:1000px){
+
+    #browsepicture-divider{
+        position: relative;
+        box-sizing:border-box;
+        -moz-box-sizing:border-box; /* Firefox */
+        -webkit-box-sizing:border-box; /* Safari */
+        margin-left:4em;
+        margin-right:4em;
+        height:400px;
+        border:1px solid #ccc;
+    }
+    #browserpicture-text{
+        box-sizing:border-box;
+        -moz-box-sizing:border-box; /* Firefox */
+        -webkit-box-sizing:border-box; /* Safari */
+        float:left;
+        border-right: 1px solid #ccc;
+        width:50%;
+        height:100%;
+        padding:2em 4em;
+    }
+    #browserpicture-img{
+        position: relative;
+        box-sizing:border-box;
+        -moz-box-sizing:border-box; /* Firefox */
+        -webkit-box-sizing:border-box; /* Safari */
+        height:100%;
+        width:50%;
+        overflow: hidden;
+        display: inline-block;
+    }
+    #browserpicture-img > img{
+        width:100%;
+    }
+    .nomove{
+        cursor: -webkit-grab;
+        cursor: -moz-grab;
+        cursor: grab;
+    }
+    .moving{
+        cursor: -webkit-grabbing;
+        cursor: -moz-grabbing;
+        cursor: grabbing;
+    }
+    #browsepicture-smallshow{
+        display: none;
+    }
 }
-#browserpicture-text{
-    box-sizing:border-box;
-    -moz-box-sizing:border-box; /* Firefox */
-    -webkit-box-sizing:border-box; /* Safari */
-    float:left;
-    border-right: 1px solid #ccc;
-    width:50%;
-    height:100%;
-    padding:2em 4em;
-}
-#browserpicture-img{
-    position: relative;
-    box-sizing:border-box;
-    -moz-box-sizing:border-box; /* Firefox */
-    -webkit-box-sizing:border-box; /* Safari */
-    height:100%;
-    width:50%;
-    overflow: hidden;
-    display: inline-block;
-}
-#browserpicture-img > img{
-    width:100%;
-}
-.nomove{
-    cursor: -webkit-grab;
-    cursor: -moz-grab;
-    cursor: grab;
-}
-.moving{
-    cursor: -webkit-grabbing;
-    cursor: -moz-grabbing;
-    cursor: grabbing;
+@media all and (max-width: 1000px){
+    #browsepicture-divider{
+        display: none;
+    }
+    #browserpicture-text{
+        display: none;
+    }
+    #browserpicture-img{
+        display: none;
+    }
+    #browserpicture-img > img{
+        display: none;
+    }
+    #browsepicture-smallshow{
+        position: relative;
+        box-sizing:border-box;
+        -moz-box-sizing:border-box; /* Firefox */
+        -webkit-box-sizing:border-box; /* Safari */
+        margin-left:4em;
+        margin-right:4em;
+        height:5em;
+        color:#ccc;
+        font-size: 0.6em;
+        text-align: center;
+    }
+
 }
 </style>
 <body>
@@ -133,6 +166,10 @@ All in all, let's see the result as follows. You can browser the long picture wi
             <div id = "browserpicture-img">
                 <img src="img/longpicture.jpg" class="nomove" />
             </div>
+        </div>
+
+        <div id = "browsepicture-smallshow">
+            Your screen is too small. Please use computer screen to see this example.
         </div>
 
         <div class="text">
