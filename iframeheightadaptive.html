@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Iframe height adaptive</title>
+    <link rel="shortcut icon" href="icon/lyl.ico">
+    <link rel="bookmark" href="icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Iframe height adaptive</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+A big problem about iframe height adaptive has perplexed me for a long time. Before I writed my blog website, I just wanted to use "iframe". However, the iframe height adaptive didn't work well in the static webpage. And I had make sure that there had no grammar mistakes in JS and browsers compatibility, but what was wrong? For a long time, I have searched the internet and books for help, and they only told me how to write the codes of height adaptive, nothing helped. But thanks god, today when I was looking for the "contentDocument" attribute, I saw a very significant sentence about "iframe", it says that iframe can only get values from the same domain. Great! Another words, if we only test the iframe height adaptive function in static pages, it won't work, because the parent page and the child page do not exist in the same domain! So, how to get it? Easy, put the static web pages to the server and it will work since they are in one domain in this case.
+Therefore, in this blog, I will put some screenshots to illustrate THE REAL WAY TO IMPLEMENT IFRAME HEIGHT ADAPTIVE.
+<h4>1. HTML code</h4>We should write two pages, the parent page and the child page.
+    </div>
+
+        <div class="htmlcode">   &lt;iframe src="test.html" frameborder="0" id="myFrame"&gt;&lt;/iframe&gt; 
+    <span class="note">// parent page, and the "test.html" is the child page</span></div>
+
+        <div class="text"><h4>2. CSS code</h4></div>
+
+        <div class="csscode">   #myFrame{
+        left:10%;
+        top:10px;
+        width:80%;
+        border:1px solid #ccc;
+    }   <span class="note">// parent</span>
+
+    body{
+        height:1000px;
+    }   <span class="note">// child</span></div>
+
+        <div class="text"><h4>3. JS code</h4></div>
+
+        <div class="jscode">    var myframe = document.getElementById("myFrame");
+
+    myframe.addEventListener("load", function(){
+        var temp = myframe.contentDocument.body;
+        myframe.height = temp.style.height;
+    }, false);
+    <span class="note">// for ie:
+    myframe.attachEvent("onload", function(){
+        var temp = myframe.contentWindow.document.body;
+        myframe.height = temp.style.height;
+    });</span></div>
+
+        <div class="text">
+And the following are the results of static pages and pages in server. It would be obvious that there has nothing in static pages, but the iframe'height has been changed when pages are in server. 
+        </div>
+
+
+		
+	</div>
+</body>
+</html>
