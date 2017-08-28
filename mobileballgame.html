@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+	body,html{
+    	overflow-y: hidden;
+	}
+	#canvasone{
+    	position: absolute;
+    	top:0px;
+    	left:0px;
+    	-o-box-sizing:border-box;
+    	-webkit-box-sizing:border-box;
+    	-ms-box-sizing:border-box;
+    	-moz-box-sizing:border-box;
+    	box-sizing:border-box;
+		
+	}
+	</style>
+</head>
+<body>
+
+	<script>
+
+	(function(){
+
+		// get a canvas
+		var totalwidth = screen.availWidth;
+		var totalheight = screen.availHeight;
+
+		var createCanvas = "<canvas id='canvasone' width='" + totalwidth + "px' height='" + totalheight + "px'></canvas>";
+		document.body.insertAdjacentHTML("beforeEnd", createCanvas);
+		var theCanvas = document.querySelector("#canvasone");
+		var context = theCanvas.getContext("2d");
+
+		// 玩家控制的球对象
+		var Ball = {
+			x : totalwidth/2 - 20, 
+			y : totalheight/2 - 20,
+			r : 20,
+			speedx : 0,    // x方向的速度
+			speedy : 0,    // y方向的速度
+			addspeedx : 0,  // x方向的加速度
+			addspeedy : 0   // y方向的加速度
+		};
+
+		// 线对象
+		function Line(ishor, x, y, width, height, speed){
+			this.ishor = ishor;   // 是否是横向出现true/false, 如果是横向出现则width>height，否则height>width
+			this.x = x;
+			this.y = y;
+			this.width = width;
+			this.height = height;
+			this.speed = speed;
+			// +color
+		}
+
+		// 游戏相关参数
+		var gameloop = null;   // 游戏循环
+		var begintime = 0,
+			endtime = 0;     // 计时
+
+		var totalline = [];    // 保存所有的线对象
+
+
+		window.addEventListener("load", canvasApp, false);   // 开始游戏
+		window.addEventListener("deviceorientation", changeBallPosition);   // 根据移动设备的方向改变小球位置
+
+		function canvasApp(){
+
+			// 开始计时
+			begintime = +new Date();
+
+			function drawScreen(){
+
+				// 画小球的位置
+				drawBall();
+				// 画所有横线的位置
+
+			}
+
+			gameloop = setInterval(drawScreen, 20);
+		};
+
+		// 画小球位置函数
+		function drawBall(){
+
+			context.beginPath();
+			context.fillStyle = "#8234aa";
+			context.arc(Ball.x, Ball.y, Ball.r, 0, 2*Math.PI, true);
+			context.fill();
+			context.closePath();
+		}
+
+		// 改变小球位置函数
+		function changeBallPosition(event){
+			alert("sss");
+			if (event.beta > 30){
+				alert("设备旋转了！");
+			}
+		}
+
+
+
+
+	})();
+
+
+	</script>
+	
+</body>
+</html>
