@@ -28,10 +28,10 @@
 
 	(function(){
 
-		// get a canvas
-		var totalwidth = window.innerWidth;
+		// get a canvas, 只有innerWidth和innerHeight有用， screen和client取不到移动设备全屏
+		var totalwidth = window.innerWidth;    
 		var totalheight = window.innerHeight;
-		alert(totalwidth);
+
 		var createCanvas = "<canvas id='canvasone' width='" + totalwidth + "px' height='" + totalheight + "px'></canvas>";
 		document.body.insertAdjacentHTML("beforeEnd", createCanvas);
 		var theCanvas = document.querySelector("#canvasone");
@@ -113,10 +113,15 @@
 			if (Ball.addspeedx < 0){
 				Ball.x = (Ball.x - Ball.r) <= 0 ? Ball.r : (Ball.x + Ball.addspeedx);
 			}else{
-				Ball.x = Ball.x + Ball.addspeedx;
+				Ball.x = (Ball.x + Ball.r) >= totalwidth ? (totalwidth - Ball.r) : (Ball.x + Ball.addspeedx);
+			}
+
+			if (Ball.addspeedy < 0){
+				Ball.y = (Ball.y - Ball.r) <= 0 ? Ball.r : (Ball.y + Ball.addspeedy);
+			}else{
+				Ball.y = (Ball.y + Ball.r) >= totalheight ? (totalheight - Ball.r) : (Ball.y + Ball.addspeedy);
 			}
 			
-			Ball.y = Ball.y + Ball.addspeedy;
 
 		}
 
