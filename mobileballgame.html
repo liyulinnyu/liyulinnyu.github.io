@@ -93,8 +93,12 @@
 					maxnum = 10;
 				}else if (intertime > 400 && intertime < 600){
 					maxnum = 15;
-				}else if (intertime > 600){
+				}else if (intertime > 600 && intertime < 800){
 					maxnum = 20;
+				}else if (intertime > 800 && intertime < 1000){
+					maxnum = 25;
+				}else if (intertime > 1000){
+					maxnum = 30;
 				}
 			}
 
@@ -163,7 +167,7 @@
 					if (tempy > totalheight - 20){
 						tempy = totalheight - 20;
 					}
-					tempspeed = Math.random()*10 + 5;
+					tempspeed = Math.random()*maxnum + 5;
 
 				}else{	// 纵向
 
@@ -174,7 +178,7 @@
 					if (tempx > totalwidth - 20){
 						tempx = totalwidth - 20;
 					}
-					tempspeed = Math.random()*10 + 5;
+					tempspeed = Math.random()*maxnum + 5;
 				}
 
 
