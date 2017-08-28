@@ -29,8 +29,8 @@
 	(function(){
 
 		// get a canvas
-		var totalwidth = screen.availWidth;
-		var totalheight = screen.availHeight;
+		var totalwidth = screen.width;
+		var totalheight = screen.height;
 
 		var createCanvas = "<canvas id='canvasone' width='" + totalwidth + "px' height='" + totalheight + "px'></canvas>";
 		document.body.insertAdjacentHTML("beforeEnd", createCanvas);
@@ -109,7 +109,9 @@
 			*/ 
 
 			Ball.addspeedx = parseInt(event.gamma);
+			Ball.addspeedy = parseInt(event.beta);
 			Ball.x = Ball.x + Ball.addspeedx;
+			Ball.y = Ball.y + Ball.addspeedy;
 
 		}
 
