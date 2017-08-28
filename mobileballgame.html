@@ -85,7 +85,7 @@
 				// 画所有横线的位置
 				drawLine();
 				// 判断小球是否碰到横线
-				checkBall();
+				//checkBall();
 			}
 
 			gameloop = setInterval(drawScreen, 20);
@@ -150,8 +150,8 @@
 					tempheight = 20;
 					tempx = -tempwidth;
 					tempy = Math.random()*totalheight;
-					if (tempy > totalheight - 10){
-						tempy = totalheight - 10;
+					if (tempy > totalheight - 20){
+						tempy = totalheight - 20;
 					}
 					tempspeed = Math.random()*10 + 5;
 
@@ -161,8 +161,8 @@
 					tempwidth = 20;
 					tempy = -tempheight;
 					tempx = Math.random()*totalwidth;
-					if (tempx > totalwidth - 10){
-						tempx = totalwidth - 10;
+					if (tempx > totalwidth - 20){
+						tempx = totalwidth - 20;
 					}
 					tempspeed = Math.random()*10 + 5;
 				}
@@ -206,6 +206,7 @@
 		}
 
 		// 判断小球是否碰到横线
+		/*
 		function checkBall(){
 
 			for (var i = 0; i < totalline.length; i++){
@@ -215,9 +216,17 @@
 					temptop = totalline[i].y,
 					tempbottom = totalline[i].y + totalline[i].height;
 
-				
+				for (var j = 0; j < 360; j++){
+					var pointx = Ball.x + Math.sin(j*Math.PI/180)*Ball.r;
+					var pointy = Ball.y + Math.cos(j*Math.PI/180)*Ball.r;
+
+					if (pointx >= templeft && pointx <= tempright && pointy >= tempbottom && pointy <= temptop){
+						clearInterval(gameloop);
+					}
+				}
 			}
 		}
+		*/
 
 
 	})();
