@@ -86,6 +86,16 @@
 				drawLine();
 				// 判断小球是否碰到横线
 				checkBall();
+				// 判断时间，增加横线数量
+				var temptime = +new Date();
+				var intertime = (temptime - begintime)/100;
+				if (intertime > 200 && intertime < 400){
+					maxnum = 10;
+				}else if (intertime > 400 && intertime < 600){
+					maxnum = 15;
+				}else if (intertime > 600){
+					maxnum = 20;
+				}
 			}
 
 			gameloop = setInterval(drawScreen, 20);
