@@ -124,14 +124,15 @@
 		function drawBall(){
 
 			if (iscracked){
+
 				window.removeEventListener("deviceorientation", changeBallPosition);
 				context.beginPath();
 				context.drawImage(crackimg, Ball.x-2*Ball.r, Ball.y-2*Ball.r, 4*Ball.r, 4*Ball.r);
 				context.closePath();
 
 				setTimeout(function(){
-					iscracked = false;
 					location.reload();
+					iscracked = false;
 				}, 500);
 			}else{
 				context.beginPath();
