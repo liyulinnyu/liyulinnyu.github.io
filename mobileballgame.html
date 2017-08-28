@@ -215,14 +215,7 @@
 					temptop = totalline[i].y,
 					tempbottom = totalline[i].y + totalline[i].height;
 
-				for (var j = 0; j < 360; j++){
-					var pointx = Ball.x + Math.sin(j*Math.PI/180)*Ball.r;
-					var pointy = Ball.y + Math.cos(j*Math.PI/180)*Ball.r;
-
-					if (pointx >= templeft && pointx <= tempright && pointy >= tempbottom && pointy <= temptop){
-						clearInterval(gameloop);
-					}
-				}
+				
 			}
 		}
 
