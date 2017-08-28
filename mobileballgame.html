@@ -88,13 +88,6 @@
 			begintime = +new Date();
 
 			function drawScreen(){
-				if (iscracked){
-					if (reloadtime > 20){
-						location.reload();
-					}else{
-						reloadtime++;   // 过200ms重置游戏
-					}
-				}
 				
 				context.clearRect(0, 0, totalwidth, totalheight);
 				// 画小球的位置
@@ -136,7 +129,10 @@
 				context.drawImage(crackimg, Ball.x-2*Ball.r, Ball.y-2*Ball.r, 4*Ball.r, 4*Ball.r);
 				context.closePath();
 
-				
+				setTimeout(function(){
+					iscracked = false;
+					location.reload();
+				}, 500);
 			}else{
 				context.beginPath();
 				context.fillStyle = "#00baff";
