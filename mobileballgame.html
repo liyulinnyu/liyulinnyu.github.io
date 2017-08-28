@@ -98,7 +98,18 @@
 
 		// 改变小球位置函数
 		function changeBallPosition(event){
-			alert(event.beta+" " +event.gamma);
+
+		   /* 
+			*	beta > 0 手机向前旋转 (0~180)
+			*	beta < 0 手机向后旋转 (-180~0)
+			*	gamma > 0 手机水平向右翻转 (0~90)
+			*	gamma < 0 手机水平向左翻转 (-90~0)
+			*	在取值的时候取整数即可，不然对于用户使用太敏感
+			*   alert(event.beta+" " +event.gamma);
+			*/ 
+
+			Ball.addspeedx = parseInt(event.gamma);
+			Ball.x = Ball.x - Ball.addspeedx;
 
 		}
 
