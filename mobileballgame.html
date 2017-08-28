@@ -20,19 +20,10 @@
     	box-sizing:border-box;
 		
 	}
-	#controldiv{
-		position: absolute;
-		top:0px;
-		left: 0px;
-		background: #336699;
-		width: 100%;
-		height:100px;
-	}
 	</style>
 </head>
 <body>
 	
-	<div id="controldiv"></div>
 
 
 	<script>
@@ -41,7 +32,7 @@
 
 		// get a canvas, 只有innerWidth和innerHeight有用， screen和client取不到移动设备全屏
 		var totalwidth = window.innerWidth;    
-		var totalheight = window.innerHeight-100;
+		var totalheight = window.innerHeight;
 
 		var createCanvas = "<canvas id='canvasone' width='" + totalwidth + "px' height='" + totalheight + "px'></canvas>";
 		document.body.insertAdjacentHTML("beforeEnd", createCanvas);
@@ -206,7 +197,16 @@
 			for (var i = 0; i < totalline.length; i++){
 
 				context.beginPath();
-				context.fillStyle = "#000";
+				var color = "";
+				switch (maxnum){
+					case 10 : color = "#000";break;
+					case 20 : color = "blue";break;
+					case 30 : color = "green"; break;
+					case 40 : color = "yellow";break;
+					case 50 : color = "orange";break;
+					case 60 : color = "red";break;
+ 				}
+				context.fillStyle = color;
 				context.fillRect(totalline[i].x, totalline[i].y, totalline[i].width, totalline[i].height);
 				context.fill();
 				context.closePath();
