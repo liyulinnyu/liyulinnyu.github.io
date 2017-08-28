@@ -41,9 +41,9 @@
 
 		// get a canvas, 只有innerWidth和innerHeight有用， screen和client取不到移动设备全屏
 		var totalwidth = window.innerWidth;    
-		var totalheight = window.innerHeight;
+		var totalheight = window.innerHeight-100;
 
-		var createCanvas = "<canvas id='canvasone' width='" + totalwidth + "px' height='" + (totalheight-100) + "px'></canvas>";
+		var createCanvas = "<canvas id='canvasone' width='" + totalwidth + "px' height='" + totalheight + "px'></canvas>";
 		document.body.insertAdjacentHTML("beforeEnd", createCanvas);
 		var theCanvas = document.querySelector("#canvasone");
 		var context = theCanvas.getContext("2d");
