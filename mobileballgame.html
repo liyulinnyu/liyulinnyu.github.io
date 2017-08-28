@@ -88,6 +88,14 @@
 			begintime = +new Date();
 
 			function drawScreen(){
+				if (iscracked){
+					if (reloadtime > 20){
+						location.reload();
+					}else{
+						reloadtime++;   // 过200ms重置游戏
+					}
+				}
+				
 				context.clearRect(0, 0, totalwidth, totalheight);
 				// 画小球的位置
 				drawBall();
@@ -104,7 +112,6 @@
 					maxnum = 30;
 				}else if (intertime > 300 && intertime < 400){
 					maxnum = 40;
-					Ball.r = 30;     // 增大r
 				}else if (intertime > 400 && intertime < 500){
 					maxnum = 50;
 				}else if (intertime > 500){
@@ -129,11 +136,7 @@
 				context.drawImage(crackimg, Ball.x-2*Ball.r, Ball.y-2*Ball.r, 4*Ball.r, 4*Ball.r);
 				context.closePath();
 
-				if (reloadtime > 50){
-					location.reload();
-				}else{
-					reloadtime++;   // 过200ms重置游戏
-				}
+				
 			}else{
 				context.beginPath();
 				context.fillStyle = "#00baff";
