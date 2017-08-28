@@ -66,7 +66,7 @@
 
 		var totalline = [];    // 保存所有的线对象
 
-		var maxnum = 5;     // 实时最大横线数量
+		var maxnum = 10;     // 实时最大横线数量
 		var createlineinterval = 0;
 
 
@@ -90,15 +90,15 @@
 				var temptime = +new Date();
 				var intertime = (temptime - begintime)/100;
 				if (intertime > 200 && intertime < 400){
-					maxnum = 10;
-				}else if (intertime > 400 && intertime < 600){
-					maxnum = 15;
-				}else if (intertime > 600 && intertime < 800){
 					maxnum = 20;
-				}else if (intertime > 800 && intertime < 1000){
-					maxnum = 25;
-				}else if (intertime > 1000){
+				}else if (intertime > 400 && intertime < 600){
 					maxnum = 30;
+				}else if (intertime > 600 && intertime < 800){
+					maxnum = 40;
+				}else if (intertime > 800 && intertime < 1000){
+					maxnum = 50;
+				}else if (intertime > 1000){
+					maxnum = 60;
 				}
 			}
 
@@ -160,7 +160,7 @@
 
 				if (temphor){    // 横向
 
-					tempwidth = Math.random()*30 + 40;  // 先得到宽度，依照宽度设置x坐标
+					tempwidth = Math.random()*50 + 50;  // 先得到宽度，依照宽度设置x坐标
 					tempheight = 20;
 					tempx = -tempwidth;
 					tempy = Math.random()*totalheight;
@@ -171,7 +171,7 @@
 
 				}else{	// 纵向
 
-					tempheight = Math.random()*30 + 40;
+					tempheight = Math.random()*50 + 50;
 					tempwidth = 20;
 					tempy = -tempheight;
 					tempx = Math.random()*totalwidth;
