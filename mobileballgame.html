@@ -146,7 +146,7 @@
 
 				if (temphor){    // 横向
 
-					tempwidth = Math.random()*20 + 30;  // 先得到宽度，依照宽度设置x坐标
+					tempwidth = Math.random()*30 + 40;  // 先得到宽度，依照宽度设置x坐标
 					tempheight = 20;
 					tempx = -tempwidth;
 					tempy = Math.random()*totalheight;
@@ -157,7 +157,7 @@
 
 				}else{	// 纵向
 
-					tempheight = Math.random()*20 + 30;
+					tempheight = Math.random()*30 + 40;
 					tempwidth = 20;
 					tempy = -tempheight;
 					tempx = Math.random()*totalwidth;
@@ -216,13 +216,14 @@
 					temptop = totalline[i].y,
 					tempbottom = totalline[i].y + totalline[i].height;
 
-				for (var j = 0; j < 360; j++){
-					var pointx = Ball.x + Math.sin(j*Math.PI/180)*Ball.r;
-					var pointy = Ball.y + Math.cos(j*Math.PI/180)*Ball.r;
+				var ballleft = Ball.x - Ball.r,
+					ballright = Ball.x + Ball.r,
+					balltop = Ball.y - Ball.r,
+					ballbottom = Ball.y + Ball.r;
 
-					if (pointx >= templeft && pointx <= tempright && pointy >= tempbottom && pointy <= temptop){
-						clearInterval(gameloop);
-					}
+				if ((ballleft >= templeft && ballleft <= tempright && Ball.y >= temptop && Ball.y <= tempbottom)||(balltop >= temptop && balltop <= tempbottom && Ball.x >= templeft && Ball.x <= tempright)||(ballright >= templeft && ballright <= tempright && Ball.y >= temptop && Ball.y <= tempbottom)||(ballbottom >= temptop && ballbottom <= tempbottom && Ball.x >= templeft && Ball.y <= tempright)){
+
+					clearInterval(gameloop);
 				}
 			}
 		}
