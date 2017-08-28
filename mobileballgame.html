@@ -74,6 +74,10 @@
 		var crackimg = new Image();   // 球炸裂时的图片
 		crackimg.src = "gameimg/mobileballgame/mobileball.png";
 
+		var iscracked = false;  // 球是否碎了
+
+		var reloadtime = 0;
+
 
 		window.addEventListener("load", canvasApp, false);   // 开始游戏
 		window.addEventListener("deviceorientation", changeBallPosition);   // 根据移动设备的方向改变小球位置
@@ -107,7 +111,9 @@
 					maxnum = 60;
 				}else if (intertime > 600){
 					clearInterval(gameloop);
-					alert("Stunning!");
+					if (confirm("Stunning! Play again?")){
+						window.reload();
+					}
 				}
 			}
 
@@ -117,11 +123,24 @@
 		// 画小球位置函数
 		function drawBall(){
 
-			context.beginPath();
-			context.fillStyle = "#00baff";
-			context.arc(Ball.x, Ball.y, Ball.r, 0, 2*Math.PI, true);
-			context.fill();
-			context.closePath();
+			if (iscracked){
+				context.beginPath();
+				context.drawImage(crackimg, Ball.x-2*Ball.r, Ball.y-2*Ball.r, 4*Ball.r, 4*Ball.r);
+				context.closePath();
+
+				if (reloadtime > 10){
+					window.reload();
+				}else{
+					reloadtime++;   // 过200ms重置游戏
+				}
+			}else{
+				context.beginPath();
+				context.fillStyle = "#00baff";
+				context.arc(Ball.x, Ball.y, Ball.r, 0, 2*Math.PI, true);
+				context.fill();
+				context.closePath();
+			}
+			
 		}
 
 		// 改变小球位置函数
@@ -256,11 +275,9 @@
 				if ((ballleft >= templeft && ballleft <= tempright && Ball.y >= temptop && Ball.y <= tempbottom)||(balltop >= temptop && balltop <= tempbottom && Ball.x >= templeft && Ball.x <= tempright)||(ballright >= templeft && ballright <= tempright && Ball.y >= temptop && Ball.y <= tempbottom)||(ballbottom >= temptop && ballbottom <= tempbottom && Ball.x >= templeft && Ball.y <= tempright)){
 
 					// 球碎了
-					context.beginPath();
-					context.drawImage(crackimg, Ball.x-2*Ball.r, Ball.y-2*Ball.r, 4*Ball.r, 4*Ball.r);
-					context.closePath();
+					iscracked = true;
 
-					clearInterval(gameloop);
+
 				}
 			}
 		}
