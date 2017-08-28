@@ -66,6 +66,9 @@
 
 		var totalline = [];    // 保存所有的线对象
 
+		var maxnum = 5;     // 实时最大横线数量
+		var createlineinterval = 0;
+
 
 		window.addEventListener("load", canvasApp, false);   // 开始游戏
 		window.addEventListener("deviceorientation", changeBallPosition);   // 根据移动设备的方向改变小球位置
@@ -80,7 +83,7 @@
 				// 画小球的位置
 				drawBall();
 				// 画所有横线的位置
-
+				drawLine();
 			}
 
 			gameloop = setInterval(drawScreen, 20);
@@ -122,10 +125,83 @@
 				Ball.y = (Ball.y + Ball.r) >= totalheight ? (totalheight - Ball.r) : (Ball.y + Ball.addspeedy);
 			}
 			
-
 		}
 
 
+		// 画所有横线
+		function drawLine(){
+
+			// 少于最大值就开始生成
+			if ((totalline.length < maxnum && createlineinterval > 10) || totalline.length === 0){
+				//Line(ishor, x, y, width, height, speed)
+				var temphor = Math.random() >= 0.5 ? true : false;  // true是横向， false是纵向
+
+				var tempx = 0,
+					tempy = 0,
+					tempwidth = 0,
+					tempheight = 0,
+					tempspeed = 0;
+
+				if (temphor){    // 横向
+
+					tempwidth = Math.random()*10 + 30;  // 先得到宽度，依照宽度设置x坐标
+					tempheight = 10;
+					tempx = -tempwidth;
+					tempy = Math.random()*totalheight;
+					if (tempy > totalheight - 10){
+						tempy = totalheight - 10;
+					}
+					tempspeed = Math.random()*10 + 5;
+
+				}else{	// 纵向
+
+					tempheight = Math.random()*10 + 30;
+					tempwidth = 10;
+					tempy = -tempheight;
+					tempx = Math.random()*totalwidth;
+					if (tempx > totalwidth - 10){
+						tempx = totalwidth - 10;
+					}
+					tempspeed = Math.random()*10 + 5;
+				}
+
+
+				totalline.push(new Line(temphor, tempx, tempy, tempwidth, tempheight, tempspeed));
+				createlineinterval = 0;   // 计时器归0
+			}else{
+				createlineinterval++;
+			}
+
+
+
+			// 开始画线
+
+			for (var i = 0; i < totalline.length; i++){
+
+				context.beginPath();
+				context.fillStyle = "#000";
+				context.fillRect(totalline[i].x, totalline[i].y, totalline[i].width, totalline[i].height);
+				context.fill();
+				context.closePath();
+
+				if (totalline[i].ishor){
+					totalline[i].x += totalline[i].speed;
+					if (totalline[i].x >= totalwidth){
+						totalline.splice(i, 1);
+						i--;
+					}
+				}else{
+					totalline[i].y += totalline[i].speed;
+					if (totalline[i].y >= totalheight){
+						totalline.splice(i, 1);
+						i--;
+					}
+				}
+
+				//出屏幕了就把它去掉
+			}
+
+		}
 
 
 	})();
