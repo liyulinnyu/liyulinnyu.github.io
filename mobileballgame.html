@@ -112,7 +112,7 @@
 				}else if (intertime > 600){
 					clearInterval(gameloop);
 					if (confirm("Stunning! Play again?")){
-						window.reload();
+						location.reload();
 					}
 				}
 			}
@@ -124,12 +124,13 @@
 		function drawBall(){
 
 			if (iscracked){
+				window.removeEventListener("deviceorientation", changeBallPosition);
 				context.beginPath();
 				context.drawImage(crackimg, Ball.x-2*Ball.r, Ball.y-2*Ball.r, 4*Ball.r, 4*Ball.r);
 				context.closePath();
 
-				if (reloadtime > 10){
-					window.reload();
+				if (reloadtime > 50){
+					location.reload();
 				}else{
 					reloadtime++;   // 过200ms重置游戏
 				}
