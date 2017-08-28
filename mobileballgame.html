@@ -110,7 +110,12 @@
 
 			Ball.addspeedx = parseInt(event.gamma);
 			Ball.addspeedy = parseInt(event.beta);
-			Ball.x = (Ball.x - Ball.r) <= 0 ? Ball.r : (Ball.x + Ball.addspeedx);
+			if (Ball.addspeedx < 0){
+				Ball.x = (Ball.x - Ball.r) <= 0 ? Ball.r : (Ball.x + Ball.addspeedx);
+			}else{
+				Ball.x = Ball.x + Ball.addspeedx;
+			}
+			
 			Ball.y = Ball.y + Ball.addspeedy;
 
 		}
