@@ -69,7 +69,10 @@
 		var totalline = [];    // 保存所有的线对象
 
 		var maxnum = 10;     // 实时最大横线数量
-		var createlineinterval = 0;
+		var createlineinterval = 0;   // 间隔时间创建横线
+
+		var crackimg = new Image();   // 球炸裂时的图片
+		crackimg.src = "gameimg/mobileballgame/mobileball.png";
 
 
 		window.addEventListener("load", canvasApp, false);   // 开始游戏
@@ -97,6 +100,7 @@
 					maxnum = 30;
 				}else if (intertime > 300 && intertime < 400){
 					maxnum = 40;
+					Ball.r = 30;     // 增大r
 				}else if (intertime > 400 && intertime < 500){
 					maxnum = 50;
 				}else if (intertime > 500){
@@ -114,7 +118,7 @@
 		function drawBall(){
 
 			context.beginPath();
-			context.fillStyle = "#8234aa";
+			context.fillStyle = "#00baff";
 			context.arc(Ball.x, Ball.y, Ball.r, 0, 2*Math.PI, true);
 			context.fill();
 			context.closePath();
@@ -205,8 +209,8 @@
 					case 10 : color = "#000";break;
 					case 20 : color = "blue";break;
 					case 30 : color = "green"; break;
-					case 40 : color = "yellow";break;
-					case 50 : color = "orange";break;
+					case 40 : color = "orange";break;
+					case 50 : color = "#8b4513";break;
 					case 60 : color = "red";break;
  				}
 				context.fillStyle = color;
@@ -250,6 +254,11 @@
 					ballbottom = Ball.y + Ball.r;
 
 				if ((ballleft >= templeft && ballleft <= tempright && Ball.y >= temptop && Ball.y <= tempbottom)||(balltop >= temptop && balltop <= tempbottom && Ball.x >= templeft && Ball.x <= tempright)||(ballright >= templeft && ballright <= tempright && Ball.y >= temptop && Ball.y <= tempbottom)||(ballbottom >= temptop && ballbottom <= tempbottom && Ball.x >= templeft && Ball.y <= tempright)){
+
+					// 球碎了
+					context.beginPath();
+					context.drawImage(crackimg, Ball.x-2*Ball.r, Ball.y-2*Ball.r, 4*Ball.r, 4*Ball.r);
+					context.closePath();
 
 					clearInterval(gameloop);
 				}
