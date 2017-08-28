@@ -101,6 +101,9 @@
 					maxnum = 50;
 				}else if (intertime > 500){
 					maxnum = 60;
+				}else if (intertime > 600){
+					clearInterval(gameloop);
+					alert("Stunning!");
 				}
 			}
 
