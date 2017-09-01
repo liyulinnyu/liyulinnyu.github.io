@@ -167,7 +167,7 @@
 			this.y = y;
 			this.allblood = 20;           // 总血量
 			this.nowblood = 20;           // 当前血量
-			this.speed = 5;
+			this.speed = 2;
 			this.r = 100;
 		}
 		MonsterA.prototype.num = 0;   // 记录A的数量
@@ -420,10 +420,13 @@
 		// 画monster位置
 		function drawMonster(){
 
-			if (MonsterA.prototype.interval > 50){    // 到了时间间隔就开始增加怪物
-				var tempx = Math.random()*totalwidth,
-					tempy = 0;
-				totalmonster.push(new MonsterA(tempx, tempy));
+			if (MonsterA.prototype.interval > 100){    // 到了时间间隔就开始增加怪物
+				if (MonsterA.prototype.num < 5){
+					var tempx = Math.random()*totalwidth,
+						tempy = 0;
+					totalmonster.push(new MonsterA(tempx, tempy));
+					MonsterA.prototype.num++;
+				}
 				MonsterA.prototype.interval = 0;
 			}else{
 				MonsterA.prototype.interval++;
@@ -446,6 +449,7 @@
 				// 如果血条为0或者位置>totalheight，则去掉这个怪物
 				if (tempmonster.nowblood <= 0 || tempmonster.y >= totalheight){
 					totalmonster.splice(i, 1);
+					MonsterA.prototype.num--;      // 总数减去
 					i--;
 				}
 
