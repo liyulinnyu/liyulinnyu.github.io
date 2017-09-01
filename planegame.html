@@ -420,10 +420,11 @@
 		// 画monster位置
 		function drawMonster(){
 
-			if (MonsterA.prototype.interval > 100){    // 到了时间间隔就开始增加怪物
+			if (MonsterA.prototype.interval > 300){    // 到了时间间隔就开始增加怪物
 				if (MonsterA.prototype.num < 5){
-					var tempx = Math.random()*totalwidth,
+					var tempx = Math.random()*totalwidth + 100,
 						tempy = 0;
+					tempx = tempx >= totalwidth ? (totalwidth - 100) : tempx;
 					totalmonster.push(new MonsterA(tempx, tempy));
 					MonsterA.prototype.num++;
 				}
@@ -456,6 +457,32 @@
 				// 怪物移动
 				tempmonster.y += tempmonster.speed;
 			}
+
+			// 判断怪物是否被击中
+			isAttackMonster();
+		}
+
+
+
+		// 判断怪物是否被击中
+		function isAttackMonster(){
+
+			totalmonster.forEach(function(item, index, array){
+				for (var i = 0; i < totalbullet.length; i++){
+					var tempbullet = totalbullet[i];
+					if (tempbullet.x >= item.x && tempbullet.x <= item.x+200 && tempbullet.y >= item.y && tempbullet.y <= item.y + 200){
+						// 子弹击中
+						item.nowblood -= tempbullet.atk; 
+						// 去掉这个子弹
+						totalbullet.splice(i, 1);
+						i--;
+					}
+				}
+
+				for (var j = 0; j < totalmissle.length; j++){
+
+				}
+			});
 		}
 
 	})();
