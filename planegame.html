@@ -182,6 +182,7 @@
 		function MBoomObj(x, y){
 			this.x = x;
 			this.y = y;
+			this.speed = 2;     // 爆炸图片移动速度
 			this.time = 0;      // 显示时间
 		} 
 
@@ -528,6 +529,7 @@
 					i--;
 				}else{
 					tempmboomobj.time++;
+					tempmboomobj.y += tempmboomobj.speed;
 				}
 			}
 		}
