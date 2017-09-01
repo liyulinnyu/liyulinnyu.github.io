@@ -15,8 +15,23 @@
 		left:0;
 		top:0;
 		background: #000;
+		z-index: 1;
 	}
-
+	#bullet{
+		position: absolute;
+		left:0;
+		width:200px;
+		height:200px;
+		border-radius: 50px;
+		background: #333;
+		opacity: 0.8;
+		filter:alpha(opacity=80);
+		z-index: 2;
+	}
+	#missle{
+		position: absolute;
+		z-index: 2;
+	}
 	</style>
 
 </head>
@@ -71,7 +86,18 @@
 		};
 
 
-		// start game
+		// 控制面板
+		var bulletdiv = "<div id='bullet'></div>",
+			misslediv = "<div id='missle'></div>";
+
+		document.body.insertAdjacentHTML("beforeEnd", bulletdiv);
+		document.body.insertAdjacentHTML("beforeEnd", misslediv);
+
+		bulletdiv = document.querySelector("#bullet");
+		bulletdiv.style.top = (totalheight) - 200 + "px";
+
+/////////////////////////////////////////////////////////// start game/////////////////////////////////////////////////////////
+
 		window.addEventListener("load", canvasApp, false);
 		window.addEventListener("deviceorientation", changePlanePosition, false);
 
