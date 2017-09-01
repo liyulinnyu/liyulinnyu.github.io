@@ -27,11 +27,15 @@
 		background: #333;
 		opacity: 0.8;
 		filter:alpha(opacity=80);
-		font-size: 2em;
-		line-height: 150px;
+		font-size: 100px;
+		line-height: 300px;
 		text-align: center;
 		color:#999;
 		z-index: 2;
+	}
+	#bullet:hover{
+		background: red;
+		color:#fff;
 	}
 	#missle{
 		position: absolute;
@@ -99,7 +103,7 @@
 		document.body.insertAdjacentHTML("beforeEnd", misslediv);
 
 		bulletdiv = document.querySelector("#bullet");
-		bulletdiv.style.top = (totalheight) - 200 + "px";
+		bulletdiv.style.top = (totalheight) - 300 + "px";
 
 /////////////////////////////////////////////////////////// start game/////////////////////////////////////////////////////////
 
