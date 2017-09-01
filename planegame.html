@@ -147,8 +147,9 @@
 			this.y = y;
 			this.speed = 30;
 			this.pos = pos;             // 0表示左边， 1表示右边
-			this.bufferx = 50;
-			this.buffery = 50;
+			this.bufferx = 1;
+			this.buffery = 1;
+			this.buffercount = 40;      // 总共缓冲时间
 		}
 
 
@@ -371,13 +372,13 @@
 				context.drawImage(missleimg, tempmissle.x, tempmissle.y, 10, 50);
 				context.closePath();
 				// 改变导弹位置
-				if (tempmissle.bufferx > 0){
+				if (tempmissle.buffercount-- > 0){
 					if (tempmissle.pos === 0){      // 左边的导弹
-						tempmissle.x -= tempmissle.bufferx--;
-						tempmissle.y += tempmissle.buffery--;
+						tempmissle.x -= tempmissle.bufferx;
+						tempmissle.y += tempmissle.buffery;
 					}else{
-						tempmissle.x += tempmissle.bufferx--;
-						tempmissle.y += tempmissle.buffery--;
+						tempmissle.x += tempmissle.bufferx;
+						tempmissle.y += tempmissle.buffery;
 					}
 				}else{
 					tempmissle.y -= tempmissle.speed;
