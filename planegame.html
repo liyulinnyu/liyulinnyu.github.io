@@ -35,6 +35,30 @@
 	}
 	#missle{
 		position: absolute;
+		width:200px;
+		height:200px;
+		border-radius: 100px;
+		background: #333;
+		opacity: 0.8;
+		filter:alpha(opacity=80);
+		font-size: 100px;
+		line-height: 200px;
+		text-align: center;
+		color:#999;
+		z-index: 2;
+	}
+	#atom{
+		position: absolute;
+		width:200px;
+		height:200px;
+		border-radius: 100px;
+		background: #333;
+		opacity: 0.8;
+		filter:alpha(opacity=80);
+		font-size: 100px;
+		line-height: 200px;
+		text-align: center;
+		color:#999;
 		z-index: 2;
 	}
 	</style>
@@ -93,21 +117,57 @@
 
 		// 控制面板
 		var bulletdiv = "<div id='bullet'>B</div>",
-			misslediv = "<div id='missle'></div>";
+			misslediv = "<div id='missle'>M</div>",
+			atomdiv = "<div id='atom'>A</div>",
 
 		document.body.insertAdjacentHTML("beforeEnd", bulletdiv);
 		document.body.insertAdjacentHTML("beforeEnd", misslediv);
+		document.body.insertAdjacentHTML("beforeEnd", atomdiv);
 
 		// 调整子弹div特效
 		bulletdiv = document.querySelector("#bullet");
-		bulletdiv.style.top = (totalheight) - 300 + "px";
+		bulletdiv.style.top = (totalheight - 300) + "px";
 		bulletdiv.addEventListener("touchstart", function(event){
-			event.target.style.background = "red";
-			event.target.style.color = "#fff";
+			event.target.style.background = "#fff";
+			event.target.style.color = "#333";
+			event.target.style.opacity = "0.8";
 		}, false);
 		bulletdiv.addEventListener("touchend", function(event){
 			event.target.style.background = "#333";
 			event.target.style.color = "#999";
+			event.target.style.opacity = "0.8";
+		}, false);
+
+
+		// 调整导弹div特效
+		misslediv = document.querySelector("#missle");
+		misslediv.style.top = (totalheight - 200) + "px";
+		misslediv.style.left = (totalwidth - 200) + "px";
+		misslediv.addEventListener("touchstart", function(event){
+			event.target.style.background = "#336699";
+			event.target.style.color = "#fff";
+			event.target.style.opacity = "0.8";
+		}, false);
+		bulletdiv.addEventListener("touchend", function(event){
+			event.target.style.background = "#333";
+			event.target.style.color = "#999";
+			event.target.style.opacity = "0.8";
+		}, false);
+
+
+		// 调整原子弹div特效
+		atomdiv = document.querySelector("#atom");
+		atomdiv.style.top = (totalheight - 450) + "px";
+		atomdiv.style.left = (totalwidth - 200) + "px";
+		atomdiv.addEventListener("touchstart", function(event){
+			event.target.style.background = "red";
+			event.target.style.color = "#fff";
+			event.target.style.opacity = "0.8";
+		}, false);
+		atomdiv.addEventListener("touchend", function(event){
+			event.target.style.background = "#333";
+			event.target.style.color = "#999";
+			event.target.style.opacity = "0.8";
 		}, false);
 
 /////////////////////////////////////////////////////////// start game/////////////////////////////////////////////////////////
