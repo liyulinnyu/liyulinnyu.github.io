@@ -313,11 +313,15 @@
 			// 画白球
 			for (var i = 0; i < totalcircle.length; i++){
 				var thiscircle = totalcircle[i];
+
+				context.save();
+				context.globalAlpha = 0.5;
 				context.beginPath();
 				context.fillStyle = "#333";
 				context.arc(thiscircle.x, thiscircle.y, thiscircle.r, 0, 2*Math.PI, true);
 				context.fill();
 				context.closePath();
+				context.restore();
 				// 纵向移动
 				thiscircle.y += thiscircle.speed;
 				// 超过屏幕则删除
@@ -333,7 +337,7 @@
 			if (totalcircle.length < maxcirclenum){
 				var tempx = Math.random()*totalwidth,
 					tempy = 0;
-					tempr = Math.random()*10 + 2,
+					tempr = Math.random()*15 + 5,
 					tempspeed = 2;
 
 				totalcircle.push(new whiteCircle(tempx, tempy, tempr, tempspeed));
