@@ -122,6 +122,9 @@
 		// 怪物A图片
 		var monsteraimg = new Image();
 		monsteraimg.src = "gameimg/planegame/monstera.png";
+		// 怪物爆炸图片
+		var monsterboomimg = new Image();
+		monsterboomimg.src = "gameimg/planegame/monsterboom.png";
 
 		var Plane = {
 			x : totalwidth/2,
@@ -171,7 +174,16 @@
 			this.r = 100;
 		}
 		MonsterA.prototype.num = 0;   // 记录A的数量
-		MonsterA.prototype.interval = 0;    // 记录出怪间隔  
+		MonsterA.prototype.interval = 0;    // 记录出怪间隔
+
+
+		// 怪物爆炸图片对象
+		var totalmboomobj = [];
+		function MBoomObj(x, y){
+			this.x = x;
+			this.y = y;
+			this.time = 0;      // 显示时间
+		} 
 
 
 
@@ -279,6 +291,9 @@
 
 				// 画monster的位置
 				drawMonster();
+
+				// 画爆炸图片的位置
+				drawBoomImg();
 			}
 
 			gameloop = setInterval(drawScreen, 20);
@@ -449,6 +464,10 @@
 
 				// 如果血条为0或者位置>totalheight，则去掉这个怪物
 				if (tempmonster.nowblood <= 0 || tempmonster.y >= totalheight){
+
+					totalmboomobj.push(new MBoomObj(tempmonster.x, tempmonster.y));   // 添加把爆炸位置对象
+
+					// 去掉这个怪物
 					totalmonster.splice(i, 1);
 					MonsterA.prototype.num--;      // 总数减去
 					i--;
@@ -492,6 +511,25 @@
 					}
 				}
 			});
+		}
+
+
+		// 画爆炸图片的位置
+		function drawBoomImg(){
+
+			for (var i = 0; i < totalmboomobj.length; i++){
+				var tempmboomobj = totalmboomobj[i];
+				context.beginPath();
+				context.drawImage(monsterboomimg, tempmboomobj.x, tempmboomobj.y, 200, 200);
+				context.closePath();
+				if (tempmboomobj.time > 100){
+					// 去掉这个爆炸图片
+					totalmboomobj.splice(i, 1);
+					i--;
+				}else{
+					tempmboomobj.time++;
+				}
+			}
 		}
 
 	})();
