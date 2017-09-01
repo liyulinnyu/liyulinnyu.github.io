@@ -98,7 +98,7 @@
 
 
 		// 游戏对象
-		var maxcirclenum = 15;
+		var maxcirclenum = 20;
 		var circleinterval = 0;      // 创建小球的间隔时间
 		var totalcircle = [];
 		function whiteCircle(x, y, r, speed){
@@ -304,7 +304,7 @@
 		function drawBackground(){
 
 			context.clearRect(0, 0, totalwidth, totalheight);     // 清理屏幕
-			if (circleinterval > 50){
+			if (circleinterval > 100){
 				circleinterval = 0;
 				createCircle();
 			}else{
@@ -333,7 +333,7 @@
 			if (totalcircle.length < maxcirclenum){
 				var tempx = Math.random()*totalwidth,
 					tempy = 0;
-					tempr = Math.random()*5 + 2,
+					tempr = Math.random()*10 + 2,
 					tempspeed = 2;
 
 				totalcircle.push(new whiteCircle(tempx, tempy, tempr, tempspeed));
