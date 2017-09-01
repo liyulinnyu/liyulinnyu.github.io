@@ -127,6 +127,16 @@
 			// atk, def 
 		};
 
+		// 子弹，导弹，原子弹数组, 对象
+		var totalbullet = [],
+			totalmissle = [],
+			totalatom = [];
+
+		function AllBullet(x, y, speed){
+			this.x = x;
+			this.y = y;
+			this.speed = speed;
+		}
 
 ////////////////////////////////////////////////////// 控制面板 ////////////////////////////////////////////////////////
 		var bulletdiv = "<div id='bullet'>B</div>",
@@ -150,6 +160,10 @@
 			event.target.style.color = "#999";
 			event.target.style.opacity = "0.8";
 		}, false);
+		bulletdiv.addEventListener("click", function(event){
+			totalbullet.push(new AllBullet(Plane.x - 50, Plane.y + 5, 5));  // 左边子弹
+			totalbullet.push(new AllBullet(Plane.x + 50, Plane.y + 5, 5));  // 右边子弹
+		}, false);   // 加子弹
 
 
 		// 调整导弹div特效
@@ -206,6 +220,9 @@
 
 				// 画玩家位置
 				drawPlane();
+
+				// 画子弹位置
+				drawBullet();
 			}
 
 			gameloop = setInterval(drawScreen, 20);
@@ -292,6 +309,25 @@
 			}else{
 				Plane.y = (Plane.y + Plane.r + 100) >= totalheight ? (totalheight - Plane.r - 100) : (Plane.y + Plane.addspeedy);
 			}
+		}
+
+
+		// 画子弹位置
+		function drawBullet(){
+
+			context.beginPath();
+			context.fillStyle = "#eee";
+			for (var i = 0; i < totalbullet.length; i++){
+				var tempbullet = totalbullet[i];
+				context.arc(tempbullet.x, tempbullet.y, 0, 2*Math.PI, true);
+				context.fill();
+				tempbullet.y -= tempbullet.speed;
+				if (tempbullet.y <= 0){
+					totalbullet.splice(i, 1);
+					i--;
+				}
+			}
+			context.closePath();
 		}
 
 	})();
