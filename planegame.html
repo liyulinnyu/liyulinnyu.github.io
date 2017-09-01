@@ -61,17 +61,6 @@
 		color:#999;
 		z-index: 2;
 	}
-	#blooddiv{
-		position: absolute;
-		left:350px;
-		height: 100px;
-		background: red;
-		text-align: center;
-		color:#fff;
-		line-height: 100px;
-		font-size:50px;
-		z-index: 2;
-	}
 	</style>
 
 </head>
@@ -138,7 +127,8 @@
 			addspeedx : 0,              // 初始速度
 			addspeedy : 0,
 			r : 100,                  // 飞机大小  
-			blood : 100
+			allblood : 100,
+			nowblood : 100
 			// atk, def 
 		};
 
@@ -265,14 +255,9 @@
 			target.opacity = "0.8";
 		}, false);
 
-/////////////////////////////////////////////////////////// 飞机血条，导弹数量等参数 /////////////////////////////////////
+/////////////////////////////////////////////////////////// 导弹数量等参数 /////////////////////////////////////
 
-		var blooddiv = "<div id='blooddiv'>100 / 100</div>";
-		document.body.insertAdjacentHTML("beforeEnd", blooddiv);
-
-		blooddiv = document.querySelector("#blooddiv");
-		blooddiv.style.width = (totalwidth - 600) + "px";
-		blooddiv.style.top = (totalheight - 100) + "px";
+		
 
 /////////////////////////////////////////////////////////// start game/////////////////////////////////////////////////////////
 
@@ -300,6 +285,12 @@
 
 				// 画爆炸图片的位置
 				drawBoomImg();
+
+				// 判断怪物是否撞到飞机
+				isAttackPlane();
+
+				// 画血条
+				drawPlaneBlood();
 			}
 
 			gameloop = setInterval(drawScreen, 20);
@@ -550,6 +541,36 @@
 					tempmboomobj.y += tempmboomobj.speed;
 				}
 			}
+		}
+
+
+		// 判断是否撞到飞机
+		function isAttackPlane(){
+
+			totalmonster.forEach(function(item, index, array){
+
+				for (var i = Plane.x - 100; i < Plane.x + 100; i++){
+					if (i >= item.x && i <= item.x + 200 && Plane.y - 100 >= item.y && Plane.y - 100 <= item.y + 200){
+						// 上边缘撞到了
+						Plane.nowblood -= 10;   // 飞机伤血 
+					}
+				}
+			});
+		}
+
+		// 画飞机血条
+		function drawPlaneBlood(){
+
+			context.save();
+			context.beginPath();
+			context.fillStyle = "red";
+			context.strokeStyle = "red";
+			context.fillRect(350, totalheight-100, (totalwidth-600)*Plane.nowblood/Plane.allblood, 100);
+			context.strokeRect(350, totalheight-100, totalwidth-600, 100);
+			context.fill();
+			context.stroke();
+			context.closePath();
+			context.restore();
 		}
 
 	})();
