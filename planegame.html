@@ -422,9 +422,9 @@
 
 			if (MonsterA.prototype.interval > 300){    // 到了时间间隔就开始增加怪物
 				if (MonsterA.prototype.num < 5){
-					var tempx = Math.random()*totalwidth + 100,
+					var tempx = Math.random()*totalwidth,
 						tempy = 0;
-					tempx = tempx >= totalwidth ? (totalwidth - 100) : tempx;
+					tempx = (tempx + 200) >= totalwidth ? (totalwidth - 200) : tempx;
 					totalmonster.push(new MonsterA(tempx, tempy));
 					MonsterA.prototype.num++;
 				}
@@ -481,7 +481,15 @@
 				}
 
 				for (var j = 0; j < totalmissle.length; j++){
-
+					var tempmissle = totalmissle[i];
+					if ((tempmissle.x+10) >= item.x && (tempmissle.x+10) <= item.x+200 && tempmissle.y >= item.y && tempmissle.y <= item.y + 200){
+						
+						// 导弹击中
+						item.nowblood -= tempmissle.atk; 
+						// 去掉这个导弹
+						totalmissle.splice(j, 1);
+						j--;
+					}
 				}
 			});
 		}
