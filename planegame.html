@@ -59,6 +59,8 @@
 		//planeimg2.src = "gameimg/planegame/plane2.png";
 		var fireimg = new Image();
 		fireimg.src = "gameimg/planegame/fire.png";
+		var fireinterval = 0;       // 点火间隔
+
 		var Plane = {
 			x : totalwidth/2,
 			y : totalheight - 250,   // 到底部250px
@@ -133,8 +135,13 @@
 			// 画飞机
 			context.drawImage(planeimg1, Plane.x-Plane.r, Plane.y-Plane.r, 2*Plane.r, 2*Plane.r);
 			// 画喷火
-			if (circleinterval > 40){
+			if ((fireinterval > 90 && fireinterval < 100) || (fireinterval > 120 && fireinterval < 130)){
 				context.drawImage(fireimg, Plane.x-Plane.r, Plane.y+Plane.r, 2*Plane.r, Plane.r/2);
+				if (fireinterval > 130){
+					fireinterval = 0;
+				}
+			}else{
+				fireinterval++;
 			}
 			context.closePath();
 		}
