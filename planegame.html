@@ -441,7 +441,7 @@
 				context.drawImage(monsteraimg, tempmonster.x, tempmonster.y, 2*tempmonster.r, 2*tempmonster.r);
 				context.fillStyle = "red";
 				context.strokeStyle = "red";
-				context.fillRect(tempmonster.x, tempmonster.y-40, 2*tempmonster.r*parseInt(tempmonster.nowblood/tempmonster.allblood), 20);
+				context.fillRect(tempmonster.x, tempmonster.y-40, 2*tempmonster.r*(tempmonster.nowblood/tempmonster.allblood), 20);
 				context.strokeRect(tempmonster.x, tempmonster.y-40, 2*tempmonster.r, 20);
 				context.stroke();
 				context.fill();
@@ -471,11 +471,11 @@
 				for (var i = 0; i < totalbullet.length; i++){
 					var tempbullet = totalbullet[i];
 					if (tempbullet.x >= item.x && tempbullet.x <= item.x+200 && tempbullet.y >= item.y && tempbullet.y <= item.y + 200){
-						totalbullet.splice(i, 1);
+						
 						// 子弹击中
-						item.nowblood -= 1; 
+						item.nowblood -= tempbullet.atk; 
 						// 去掉这个子弹
-						alert(item.nowblood);
+						totalbullet.splice(i, 1);
 						i--;
 					}
 				}
