@@ -189,7 +189,7 @@
 		document.body.insertAdjacentHTML("beforeEnd", blooddiv);
 
 		blooddiv = document.querySelector("#blooddiv");
-		blooddiv.style.width = (totalwidth - 500) + "px";
+		blooddiv.style.width = (totalwidth - 600) + "px";
 		blooddiv.style.top = (totalheight - 100) + "px";
 
 /////////////////////////////////////////////////////////// start game/////////////////////////////////////////////////////////
@@ -290,7 +290,7 @@
 			if (Plane.addspeedy < 0){
 				Plane.y = (Plane.y - Plane.r) <= 0 ? Plane.r : (Plane.y + Plane.addspeedy);
 			}else{
-				Plane.y = (Plane.y + Plane.r) >= totalheight ? (totalheight - Plane.r) : (Plane.y + Plane.addspeedy);
+				Plane.y = (Plane.y + Plane.r + 100) >= totalheight ? (totalheight - Plane.r - 100) : (Plane.y + Plane.addspeedy);
 			}
 		}
 
