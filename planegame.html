@@ -147,9 +147,9 @@
 			this.y = y;
 			this.speed = 30;
 			this.pos = pos;             // 0表示左边， 1表示右边
-			this.bufferx = 1;
-			this.buffery = 1;
-			this.buffercount = 40;      // 总共缓冲时间
+			this.bufferx = 2;
+			this.buffery = 2;
+			this.buffercount = 20;      // 总共缓冲时间
 		}
 
 
@@ -203,8 +203,8 @@
 			target.opacity = "0.8";
 		}, false);
 		misslediv.addEventListener("click", function(event){
-			totalmissle.push(new Missle(Plane.x - 60, Plane.y + 10, 0));
-			totalmissle.push(new Missle(Plane.x + 60, Plane.y + 10, 1));
+			totalmissle.push(new Missle(Plane.x - 70, Plane.y + 10, 0));
+			totalmissle.push(new Missle(Plane.x + 70, Plane.y + 10, 1));
 		}, false);
 
 
@@ -369,7 +369,7 @@
 			for (var i = 0; i < totalmissle.length; i++){
 				var tempmissle = totalmissle[i];
 				context.beginPath();
-				context.drawImage(missleimg, tempmissle.x, tempmissle.y, 10, 50);
+				context.drawImage(missleimg, tempmissle.x, tempmissle.y, 20, 100);
 				context.closePath();
 				// 改变导弹位置
 				if (tempmissle.buffercount-- > 0){
