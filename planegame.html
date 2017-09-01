@@ -178,7 +178,7 @@
 			target.opacity = "0.8";
 		}, false);
 		bulletdiv.addEventListener("click", function(event){
-			totalbullet.push(new Bullet(Plane.x - 70, Plane.y + 10));  // 左边子弹
+			totalbullet.push(new Bullet(Plane.x - 80, Plane.y + 10));  // 左边子弹
 			totalbullet.push(new Bullet(Plane.x + 60, Plane.y + 10));  // 右边子弹
 			if (bullettype === 1){
 				totalbullet.push(new Bullet(Plane.x, Plane.y - 110));  // 中间子弹
