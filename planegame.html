@@ -61,6 +61,16 @@
 		color:#999;
 		z-index: 2;
 	}
+	#blooddiv{
+		position: absolute;
+		left:250px;
+		height: 50px;
+		background: red;
+		text-align: center;
+		color:#fff;
+		line-height: 50px;
+		z-index: 2;
+	}
 	</style>
 
 </head>
@@ -80,7 +90,7 @@
 		var context = theCanvas.getContext("2d");
 
 
-		// 相关参数
+////////////////////////////////////////////////////////// 相关参数//////////////////////////////////////////////////////
 		var gameloop = null;
 		var starttime = "",      // 开始时间
 			endtime = "";        // 结束时间
@@ -111,11 +121,13 @@
 			dir : 0,                // 0向左，1向右
 			addspeedx : 0,              // 初始速度
 			addspeedy : 0,
-			r : 100                  // 飞机大小
+			r : 100,                  // 飞机大小  
+			blood : 100
+			// atk, def 
 		};
 
 
-		// 控制面板
+////////////////////////////////////////////////////// 控制面板 ////////////////////////////////////////////////////////
 		var bulletdiv = "<div id='bullet'>B</div>",
 			misslediv = "<div id='missle'>M</div>",
 			atomdiv = "<div id='atom'>A</div>";
@@ -169,6 +181,15 @@
 			event.target.style.color = "#999";
 			event.target.style.opacity = "0.8";
 		}, false);
+
+/////////////////////////////////////////////////////////// 飞机血条，导弹数量等参数 /////////////////////////////////////
+
+		var blooddiv = "<div id='blooddiv'>100 / 100</div>";
+		document.body.insertAdjacentHTML("beforeEnd", blooddiv);
+
+		blooddiv = document.querySelector("#blooddiv");
+		blooddiv.style.width = (totalwidth - 400) + "px";
+		blooddiv.style.top = (totalheight - 100) + "px";
 
 /////////////////////////////////////////////////////////// start game/////////////////////////////////////////////////////////
 
