@@ -96,6 +96,7 @@
 		var starttime = "",      // 开始时间
 			endtime = "";        // 结束时间
 
+
 		// 游戏对象
 		var maxcirclenum = 15;
 		var circleinterval = 0;      // 创建小球的间隔时间
@@ -118,6 +119,9 @@
 		// 导弹图片
 		var missleimg = new Image();
 		missleimg.src = "gameimg/planegame/missle.png";
+		// 怪物A图片
+		var monsteraimg = new Image();
+		monsteraimg.src = "gameimg/planegame/monstera.png";
 
 		var Plane = {
 			x : totalwidth/2,
@@ -140,17 +144,35 @@
 			this.x = x;
 			this.y = y;
 			this.speed = 20;
+			this.atk = 1;           // 攻击力
 		}
 
 		function Missle(x, y, pos){
 			this.x = x;
 			this.y = y;
-			this.speed = 30;
+			this.speed = 50;
 			this.pos = pos;             // 0表示左边， 1表示右边
 			this.bufferx = 2;
 			this.buffery = 2;
 			this.buffercount = 40;      // 总共缓冲时间
+			this.atk = 5;			
 		}
+
+
+
+		// 怪物对象
+		var totalmonster = [];
+		function MonsterA(x, y){
+			this.x = x;
+			this.y = y;
+			this.allblood = 20;           // 总血量
+			this.nowblood = 20;           // 当前血量
+			this.speed = 5;
+			this.r = 100;
+		}
+		MonsterA.prototype.num = 0;   // 记录A的数量
+		MonsterA.prototype.interval = 0;    // 记录出怪间隔  
+
 
 
 ////////////////////////////////////////////////////// 控制面板 ////////////////////////////////////////////////////////
@@ -254,6 +276,9 @@
 
 				// 画导弹位置
 				drawMissle();
+
+				// 画monster的位置
+				drawMonster();
 			}
 
 			gameloop = setInterval(drawScreen, 20);
@@ -388,6 +413,44 @@
 					totalmissle.splice(i, 1);
 					i--;
 				}
+			}
+		}
+
+
+		// 画monster位置
+		function drawMonster(){
+
+			if (MonsterA.prototype.interval > 50){    // 到了时间间隔就开始增加怪物
+				var tempx = Math.random()*totalwidth,
+					tempy = 0;
+				totalmonster.push(new MonsterA(tempx, tempy));
+				MonsterA.prototype.interval = 0;
+			}else{
+				MonsterA.prototype.interval++;
+			}
+
+			// 画怪物位置
+			for (var i = 0; i < totalmonster.length; i++){
+
+				var tempmonster = totalmonster[i];
+				context.beginPath();
+				context.drawImage(monsteraimg, tempmonster.x, tempmonster.y, 2*tempmonster.r, 2*tempmonster.r);
+				context.fillStyle = "red";
+				context.strokeStyle = "red";
+				context.fillRect(tempmonster.x, tempmonster.y-40, 2*tempmonster.r*parseInt(tempmonster.nowblood/tempmonster.allblood), 20);
+				context.strokeRect(tempmonster.x, tempmonster.y-40, 2*tempmonster.r, 20);
+				context.stroke();
+				context.fill();
+				context.closePath();
+
+				// 如果血条为0或者位置>totalheight，则去掉这个怪物
+				if (tempmonster.nowblood <= 0 || tempmonster.y >= totalheight){
+					totalmonster.splice(i, 1);
+					i--;
+				}
+
+				// 怪物移动
+				tempmonster.y += tempmonster.speed;
 			}
 		}
 
