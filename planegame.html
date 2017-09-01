@@ -549,11 +549,13 @@
 
 			var hasatk = false;
 			for (var i = 0; i < totalmonster.length; i++){
-
+				var item = totalmonster[i];
 				// 上边缘
 				for (var j = Plane.x - 100; j < Plane.x + 100; j++){
 					if (j >= item.x && j <= item.x + 200 && Plane.y - 100 >= item.y && Plane.y - 100 <= item.y + 200){
-						cutPlaneBlood(i);
+						Plane.nowblood -= 10;          // 伤血
+						totalmonster.splice(n, 1);     // 去掉这个怪物
+						hasatk = true;   // 表示撞上了， 剩下的不用检测了
 						i--;
 					}
 				}
@@ -589,11 +591,6 @@
 				}*/
 			}
 
-			function cutPlaneBlood(n){
-				Plane.nowblood -= 10;          // 伤血
-				totalmonster.splice(n, 1);     // 去掉这个怪物
-				hasatk = true;   // 表示撞上了， 剩下的不用检测了
-			}
 		}
 
 		// 画飞机血条
@@ -609,7 +606,7 @@
 			context.stroke();
 			context.fillStyle = "#fff";
 			context.font = "50px YH";
-            context.fillText(Plane.nowblood + "/" + Plane.allblood, 300+(totalwidth-600)/2, totalheight-75);
+            context.fillText(Plane.nowblood + "/" + Plane.allblood, 300+(totalwidth-600)/2, totalheight-50);
 			context.closePath();
 			context.restore();
 		}
