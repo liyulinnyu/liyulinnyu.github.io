@@ -115,6 +115,9 @@
 		var fireimg = new Image();
 		fireimg.src = "gameimg/planegame/fire.png";
 		var fireinterval = 0;       // 点火间隔
+		// 导弹图片
+		var missleimg = new Image();
+		missleimg.src = "gameimg/planegame/missle.png";
 
 		var Plane = {
 			x : totalwidth/2,
@@ -132,12 +135,22 @@
 			totalmissle = [],
 			totalatom = [];
 
-		var bullettype = 1;     // 子弹样式
-		function Bullet(x, y, speed, type){
+		var bullettype = 0;     // 子弹样式
+		function Bullet(x, y){
 			this.x = x;
 			this.y = y;
-			this.speed = speed;
+			this.speed = 20;
 		}
+
+		function Missle(x, y, pos){
+			this.x = x;
+			this.y = y;
+			this.speed = 30;
+			this.pos = pos;             // 0表示左边， 1表示右边
+			this.bufferx = 50;
+			this.buffery = 50;
+		}
+
 
 ////////////////////////////////////////////////////// 控制面板 ////////////////////////////////////////////////////////
 		var bulletdiv = "<div id='bullet'>B</div>",
@@ -152,20 +165,22 @@
 		bulletdiv = document.querySelector("#bullet");
 		bulletdiv.style.top = (totalheight - 300) + "px";
 		bulletdiv.addEventListener("touchstart", function(event){
-			event.target.style.background = "#fff";
-			event.target.style.color = "#333";
-			event.target.style.opacity = "0.8";
+			var target = event.target.style;
+			target.background = "#fff";
+			target.color = "#333";
+			target.opacity = "0.8";
 		}, false);
 		bulletdiv.addEventListener("touchend", function(event){
-			event.target.style.background = "#333";
-			event.target.style.color = "#999";
-			event.target.style.opacity = "0.8";
+			var target = event.target.style;
+			target.background = "#333";
+			target.color = "#999";
+			target.opacity = "0.8";
 		}, false);
 		bulletdiv.addEventListener("click", function(event){
-			totalbullet.push(new Bullet(Plane.x - 60, Plane.y + 10, 20));  // 左边子弹
-			totalbullet.push(new Bullet(Plane.x + 60, Plane.y + 10, 20));  // 右边子弹
+			totalbullet.push(new Bullet(Plane.x - 60, Plane.y + 10));  // 左边子弹
+			totalbullet.push(new Bullet(Plane.x + 60, Plane.y + 10));  // 右边子弹
 			if (bullettype === 1){
-				totalbullet.push(new Bullet(Plane.x, Plane.y - 110, 20));  // 中间子弹
+				totalbullet.push(new Bullet(Plane.x, Plane.y - 110));  // 中间子弹
 			}
 		}, false);   // 加子弹
 
@@ -175,14 +190,20 @@
 		misslediv.style.top = (totalheight - 200) + "px";
 		misslediv.style.left = (totalwidth - 200) + "px";
 		misslediv.addEventListener("touchstart", function(event){
-			event.target.style.background = "#336699";
-			event.target.style.color = "#fff";
-			event.target.style.opacity = "0.8";
+			var target = event.target.style;
+			target.background = "#336699";
+			target.color = "#fff";
+			target.opacity = "0.8";
 		}, false);
 		misslediv.addEventListener("touchend", function(event){
-			event.target.style.background = "#333";
-			event.target.style.color = "#999";
-			event.target.style.opacity = "0.8";
+			var target = event.target.style;
+			target.background = "#333";
+			target.color = "#999";
+			target.opacity = "0.8";
+		}, false);
+		misslediv.addEventListener("click", function(event){
+			totalmissle.push(new Missle(Plane.x - 60, Plane.y + 10, 0));
+			totalmissle.push(new Missle(Plane.x + 60, Plane.y + 10, 1));
 		}, false);
 
 
@@ -191,14 +212,16 @@
 		atomdiv.style.top = (totalheight - 450) + "px";
 		atomdiv.style.left = (totalwidth - 200) + "px";
 		atomdiv.addEventListener("touchstart", function(event){
-			event.target.style.background = "red";
-			event.target.style.color = "#fff";
-			event.target.style.opacity = "0.8";
+			var target = event.target.style;
+			target.background = "red";
+			target.color = "#fff";
+			target.opacity = "0.8";
 		}, false);
 		atomdiv.addEventListener("touchend", function(event){
-			event.target.style.background = "#333";
-			event.target.style.color = "#999";
-			event.target.style.opacity = "0.8";
+			var target = event.target.style;
+			target.background = "#333";
+			target.color = "#999";
+			target.opacity = "0.8";
 		}, false);
 
 /////////////////////////////////////////////////////////// 飞机血条，导弹数量等参数 /////////////////////////////////////
@@ -227,6 +250,9 @@
 
 				// 画子弹位置
 				drawBullet();
+
+				// 画导弹位置
+				drawMissle();
 			}
 
 			gameloop = setInterval(drawScreen, 20);
@@ -319,7 +345,6 @@
 		// 画子弹位置
 		function drawBullet(){
 
-			
 			for (var i = 0; i < totalbullet.length; i++){
 				var tempbullet = totalbullet[i];
 				context.beginPath();
@@ -333,7 +358,36 @@
 					i--;
 				}
 			}
-			
+		}
+
+
+
+		// 画导弹位置
+		function drawMissle(){
+
+			for (var i = 0; i < totalmissle.length; i++){
+				var tempmissle = totalmissle[i];
+				context.beginPath();
+				context.drawImage(misslediv, tempmissle.x, tempmissle.y, 10, 50);
+				context.closePath();
+				// 改变导弹位置
+				if (tempmissle.bufferx > 0){
+					if (tempmissle.pos === 0){      // 左边的导弹
+						tempmissle.x -= tempmissle.bufferx--;
+						tempmissle.y += tempmissle.buffery--;
+					}else{
+						tempmissle.x += tempmissle.bufferx--;
+						tempmissle.y += tempmissle.buffery--;
+					}
+				}else{
+					tempmissle.y -= tempmissle.speed;
+				}
+
+				if (tempmissle.y <= 0){
+					totalmissle.splice(i, 1);
+					i--;
+				}
+			}
 		}
 
 	})();
