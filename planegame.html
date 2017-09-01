@@ -42,7 +42,7 @@
 			endtime = "";        // 结束时间
 
 		// 游戏对象
-		var maxcirclenum = 12;
+		var maxcirclenum = 15;
 		var circleinterval = 0;      // 创建小球的间隔时间
 		var totalcircle = [];
 		function whiteCircle(x, y, r, speed){
@@ -57,16 +57,19 @@
 		planeimg1.src = "gameimg/planegame/plane1.png";
 		//var planeimg2 = new Image();
 		//planeimg2.src = "gameimg/planegame/plane2.png";
-		var plane = {
+		var Plane = {
 			x : totalwidth/2,
 			y : totalheight - 250,   // 到底部250px
 			dir : 0,                // 0向左，1向右
-			speed : 0               // 初始速度
+			addspeedx : 0,              // 初始速度
+			addspeedy : 0,
+			r : 100                  // 飞机大小
 		};
 
 
 		// start game
 		window.addEventListener("load", canvasApp, false);
+		window.addEventListener("deviceorientation", changePlanePosition, false);
 
 		function canvasApp(){
 
@@ -84,8 +87,9 @@
 
 
 		function drawBackground(){
+
 			context.clearRect(0, 0, totalwidth, totalheight);     // 清理屏幕
-			if (circleinterval > 30){
+			if (circleinterval > 50){
 				circleinterval = 0;
 				createCircle();
 			}else{
@@ -110,6 +114,7 @@
 		}
 
 		function createCircle(){
+
 			if (totalcircle.length < maxcirclenum){
 				var tempx = Math.random()*totalwidth,
 					tempy = 0;
@@ -123,8 +128,34 @@
 		function drawPlane(){
 
 			context.beginPath();
-			context.drawImage(planeimg1, plane.x-100, plane.y-100, 200, 200);
+			context.drawImage(planeimg1, Plane.x-Plane.r, Plane.y-Plane.r, 2*Plane.r, 2*Plane.r);
 			context.closePath();
+		}
+
+
+		// 根据移动设备转向，变换飞机位置
+		function changePlanePosition(event){
+ 			/* 
+			*	beta > 0 手机向前旋转 (0~180)
+			*	beta < 0 手机向后旋转 (-180~0)
+			*	gamma > 0 手机水平向右翻转 (0~90)
+			*	gamma < 0 手机水平向左翻转 (-90~0)
+			*	在取值的时候取整数即可，不然对于用户使用太敏感
+			*   alert(event.beta+" " +event.gamma);
+			*/
+			Plane.addspeedx = parseInt(event.gamma);
+			Plane.addspeedy = parseInt(event.beta);
+			if (Plane.addspeedx < 0){
+				Plane.x = (Plane.x - Plane.r) <= 0 ? Plane.r : (Plane.x + Plane.addspeedx);
+			}else{
+				Plane.x = (Plane.x + Plane.r) >= totalwidth ? (totalwidth - Plane.r) : (Plane.x + Plane.addspeedx);
+			}
+
+			if (Plane.addspeedy < 0){
+				Plane.y = (Plane.y - Plane.r) <= 0 ? Plane.r : (Plane.y + Plane.addspeedy);
+			}else{
+				Plane.y = (Plane.y + Plane.r) >= totalheight ? (totalheight - Plane.r) : (Plane.y + Plane.addspeedy);
+			}
 		}
 
 	})();
