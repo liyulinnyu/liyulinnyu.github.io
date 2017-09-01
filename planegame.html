@@ -137,7 +137,7 @@
 			// 画喷火
 			if ((fireinterval > 90 && fireinterval < 100) || (fireinterval > 120 && fireinterval < 130)){
 				context.drawImage(fireimg, Plane.x-Plane.r, Plane.y+Plane.r, 2*Plane.r, Plane.r/2);
-				
+				fireinterval++;
 			}else if(fireinterval > 130){
 				fireinterval = 0;
 			}else{
