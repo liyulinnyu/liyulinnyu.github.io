@@ -109,8 +109,13 @@
 		}
 
 		// 飞机对象
-		var planeimg1 = new Image();
+		var planeimg1 = new Image(),
+			planeleftimg = new Image(),
+			planerightimg = new Image();
 		planeimg1.src = "gameimg/planegame/plane1.png";
+		planeleftimg.src = "gameimg/planegame/planeleft.png";
+		planerightimg.src = "gameimg/planegame/planeright.png";
+
 		//var planeimg2 = new Image();
 		//planeimg2.src = "gameimg/planegame/plane2.png";
 		var fireimg = new Image();
@@ -129,7 +134,7 @@
 		var Plane = {
 			x : totalwidth/2,
 			y : totalheight - 250,   // 到底部250px
-			dir : 0,                // 0向左，1向右
+			dir : 0,                // 0水平，1向左，2向右
 			addspeedx : 0,              // 初始速度
 			addspeedy : 0,
 			r : 100,                  // 飞机大小  
@@ -348,7 +353,12 @@
 
 			context.beginPath();
 			// 画飞机
-			context.drawImage(planeimg1, Plane.x-Plane.r, Plane.y-Plane.r, 2*Plane.r, 2*Plane.r);
+			switch (Plane.dir){
+				case 0: context.drawImage(planeimg1, Plane.x-Plane.r, Plane.y-Plane.r, 2*Plane.r, 2*Plane.r);break;
+				case 1: context.drawImage(planeleftimg, Plane.x-Plane.r, Plane.y-Plane.r, 2*Plane.r, 2*Plane.r);break;
+				case 2: context.drawImage(planerightimg, Plane.x-Plane.r, Plane.y-Plane.r, 2*Plane.r, 2*Plane.r);break;
+			}
+			
 			// 画喷火
 			if ((fireinterval > 90 && fireinterval < 100) || (fireinterval > 120 && fireinterval < 130)){
 				context.drawImage(fireimg, Plane.x-Plane.r, Plane.y+Plane.r, 2*Plane.r, Plane.r/2);
@@ -374,15 +384,19 @@
 			*/
 			Plane.addspeedx = parseInt(event.gamma);
 			Plane.addspeedy = parseInt(event.beta);
-			if (Plane.addspeedx < 0){
+			if (Plane.addspeedx < -10){
 				Plane.x = (Plane.x - Plane.r) <= 0 ? Plane.r : (Plane.x + Plane.addspeedx);
-			}else{
+				Plane.dir = 1;   // 左转
+			}else if(Plane.addspeedx > 10){
 				Plane.x = (Plane.x + Plane.r) >= totalwidth ? (totalwidth - Plane.r) : (Plane.x + Plane.addspeedx);
+				Plane.dir = 2;   // 右转
+			}else{
+				Plane.dir = 0;
 			}
 
-			if (Plane.addspeedy < 0){
+			if (Plane.addspeedy < -10){
 				Plane.y = (Plane.y - Plane.r) <= 0 ? Plane.r : (Plane.y + Plane.addspeedy);
-			}else{
+			}else if(Plane.addspeedy > 10){
 				Plane.y = (Plane.y + Plane.r + 100) >= totalheight ? (totalheight - Plane.r - 100) : (Plane.y + Plane.addspeedy);
 			}
 		}
