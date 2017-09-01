@@ -471,10 +471,11 @@
 				for (var i = 0; i < totalbullet.length; i++){
 					var tempbullet = totalbullet[i];
 					if (tempbullet.x >= item.x && tempbullet.x <= item.x+200 && tempbullet.y >= item.y && tempbullet.y <= item.y + 200){
-						// 子弹击中
-						item.nowblood -= tempbullet.atk; 
-						// 去掉这个子弹
 						totalbullet.splice(i, 1);
+						// 子弹击中
+						item.nowblood -= 1; 
+						// 去掉这个子弹
+						alert(item.nowblood);
 						i--;
 					}
 				}
