@@ -101,9 +101,13 @@
 		// 调整子弹div特效
 		bulletdiv = document.querySelector("#bullet");
 		bulletdiv.style.top = (totalheight) - 300 + "px";
-		bulletdiv.addEventListener("click", function(event){
+		bulletdiv.addEventListener("touchstart", function(event){
 			event.target.style.background = "red";
 			event.target.style.color = "#fff";
+		}, false);
+		bulletdiv.addEventListener("touchend", function(event){
+			event.target.style.background = "#333";
+			event.target.style.color = "#999";
 		}, false);
 
 /////////////////////////////////////////////////////////// start game/////////////////////////////////////////////////////////
