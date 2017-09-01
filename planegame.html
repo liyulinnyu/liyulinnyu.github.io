@@ -132,7 +132,8 @@
 			totalmissle = [],
 			totalatom = [];
 
-		function AllBullet(x, y, speed){
+		var bullettype = 1;     // 子弹样式
+		function Bullet(x, y, speed, type){
 			this.x = x;
 			this.y = y;
 			this.speed = speed;
@@ -161,8 +162,11 @@
 			event.target.style.opacity = "0.8";
 		}, false);
 		bulletdiv.addEventListener("click", function(event){
-			totalbullet.push(new AllBullet(Plane.x - 60, Plane.y + 10, 20));  // 左边子弹
-			totalbullet.push(new AllBullet(Plane.x + 60, Plane.y + 10, 20));  // 右边子弹
+			totalbullet.push(new Bullet(Plane.x - 60, Plane.y + 10, 20));  // 左边子弹
+			totalbullet.push(new Bullet(Plane.x + 60, Plane.y + 10, 20));  // 右边子弹
+			if (bullettype === 1){
+				totalbullet.push(new Bullet(Plane.x, Plane.y + 110, 20));  // 中间子弹
+			}
 		}, false);   // 加子弹
 
 
