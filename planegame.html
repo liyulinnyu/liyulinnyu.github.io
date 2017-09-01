@@ -559,12 +559,13 @@
 					}
 				}
 
-				/*/ 右边缘
+				// 右边缘
 				if (hasatk === false){
 					for (j = Plane.y - 100; j < Plane.y + 100; j++){
 						if (j >= item.y && j <= item.y + 200 && Plane.x + 100 >= item.x && Plane.x + 100 <= item.x + 200){
 							cutPlaneBlood(i);
 							i--;
+							break;
 						}
 					}
 				}
@@ -575,6 +576,7 @@
 						if (j >= item.x && j <= item.x + 200 && Plane.y + 100 >= item.y && Plane.y + 100 <= item.y + 200){
 							cutPlaneBlood(i);
 							i--;
+							break;
 						}
 					}
 				}
@@ -585,9 +587,10 @@
 						if (j >= item.y && j <= item.y + 200 && Plane.x - 100 >= item.x && Plane.x - 100 <= item.x + 200){
 							cutPlaneBlood(i);
 							i--;
+							break;
 						}
 					}
-				}*/
+				}
 			}
 
 			function cutPlaneBlood(n){
