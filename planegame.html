@@ -595,7 +595,9 @@
 
 			function cutPlaneBlood(n){
 				Plane.nowblood -= 10;          // 伤血
+				totalmboomobj.push(new MBoomObj(totalmonster[n].x, totalmonster[n].y));   // 添加爆炸位置对象
 				totalmonster.splice(n, 1);     // 去掉这个怪物
+				MonsterA.prototype.num--;      // 怪物总数减去
 				hasatk = true;   // 表示撞上了， 剩下的不用检测了
 			}
 		}
