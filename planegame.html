@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+
+	<style>
+	body,html{
+    	overflow-y: hidden;
+	}
+	#canvasone{
+		position: absolute;
+		left:0;
+		top:0;
+		background: #000;
+	}
+
+	</style>
+
+</head>
+<body>
+	
+
+	<script>
+
+	(function(){
+
+		var totalwidth = window.innerWidth;    
+		var totalheight = window.innerHeight;
+
+		var createCanvas = "<canvas id='canvasone' width='" + totalwidth + "px' height='" + totalheight + "px'></canvas>";
+		document.body.insertAdjacentHTML("beforeEnd", createCanvas);
+		var theCanvas = document.querySelector("#canvasone");
+		var context = theCanvas.getContext("2d");
+
+
+		// 相关参数
+		var gameloop = null;
+		var starttime = "",      // 开始时间
+			endtime = "";        // 结束时间
+
+		// 游戏对象
+		var maxcirclenum = 12;
+		var circleinterval = 0;      // 创建小球的间隔时间
+		var totalcircle = [];
+		function whiteCircle(x, y, r, speed){
+			this.x = x;
+			this.y = y;
+			this.r = r;
+			this.speed = speed;
+		}
+
+		// 飞机对象
+		var planeimg1 = new Image();
+		planeimg1.src = "gameimg/planegame/plane1.png";
+		//var planeimg2 = new Image();
+		//planeimg2.src = "gameimg/planegame/plane2.png";
+		var plane = {
+			x : totalwidth/2,
+			y : totalheight - 250,   // 到底部250px
+			dir : 0,                // 0向左，1向右
+			speed : 0               // 初始速度
+		};
+
+
+		// start game
+		window.addEventListener("load", canvasApp, false);
+
+		function canvasApp(){
+
+			function drawScreen(){
+
+				// 初始化背景
+				drawBackground();
+
+				// 画玩家位置
+				drawPlane();
+			}
+
+			gameloop = setInterval(drawScreen, 20);
+		}
+
+
+		function drawBackground(){
+			context.clearRect(0, 0, totalwidth, totalheight);     // 清理屏幕
+			if (circleinterval > 30){
+				circleinterval = 0;
+				createCircle();
+			}else{
+				circleinterval++;
+			}
+			// 画白球
+			for (var i = 0; i < totalcircle.length; i++){
+				var thiscircle = totalcircle[i];
+				context.beginPath();
+				context.fillStyle = "#333";
+				context.arc(thiscircle.x, thiscircle.y, thiscircle.r, 0, 2*Math.PI, true);
+				context.fill();
+				context.closePath();
+				// 纵向移动
+				thiscircle.y += thiscircle.speed;
+				// 超过屏幕则删除
+				if (thiscircle.y >= totalheight){
+					totalcircle.splice(i, 1);
+					i--;
+				}
+			}
+		}
+
+		function createCircle(){
+			if (totalcircle.length < maxcirclenum){
+				var tempx = Math.random()*totalwidth,
+					tempy = 0;
+					tempr = Math.random()*5 + 2,
+					tempspeed = 2;
+
+				totalcircle.push(new whiteCircle(tempx, tempy, tempr, tempspeed));
+			}
+		}
+
+		function drawPlane(){
+
+			context.beginPath();
+			context.drawImage(planeimg1, plane.x-150, plane.y-150, 300, 300);
+			context.closePath();
+		}
+
+	})();
+
+
+	</script>
+
+</body>
+</html>
