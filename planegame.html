@@ -118,7 +118,7 @@
 		// 控制面板
 		var bulletdiv = "<div id='bullet'>B</div>",
 			misslediv = "<div id='missle'>M</div>",
-			atomdiv = "<div id='atom'>A</div>",
+			atomdiv = "<div id='atom'>A</div>";
 
 		document.body.insertAdjacentHTML("beforeEnd", bulletdiv);
 		document.body.insertAdjacentHTML("beforeEnd", misslediv);
@@ -148,7 +148,7 @@
 			event.target.style.color = "#fff";
 			event.target.style.opacity = "0.8";
 		}, false);
-		bulletdiv.addEventListener("touchend", function(event){
+		misslediv.addEventListener("touchend", function(event){
 			event.target.style.background = "#333";
 			event.target.style.color = "#999";
 			event.target.style.opacity = "0.8";
