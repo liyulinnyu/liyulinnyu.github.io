@@ -63,12 +63,13 @@
 	}
 	#blooddiv{
 		position: absolute;
-		left:250px;
-		height: 50px;
+		left:350px;
+		height: 100px;
 		background: red;
 		text-align: center;
 		color:#fff;
-		line-height: 50px;
+		line-height: 100px;
+		font-size:50px;
 		z-index: 2;
 	}
 	</style>
@@ -188,7 +189,7 @@
 		document.body.insertAdjacentHTML("beforeEnd", blooddiv);
 
 		blooddiv = document.querySelector("#blooddiv");
-		blooddiv.style.width = (totalwidth - 400) + "px";
+		blooddiv.style.width = (totalwidth - 500) + "px";
 		blooddiv.style.top = (totalheight - 100) + "px";
 
 /////////////////////////////////////////////////////////// start game/////////////////////////////////////////////////////////
