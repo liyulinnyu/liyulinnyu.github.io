@@ -558,7 +558,7 @@
 					}
 				}
 
-				// 右边缘
+				/*/ 右边缘
 				if (hasatk === false){
 					for (j = Plane.y - 100; j < Plane.y + 100; j++){
 						if (j >= item.y && j <= item.y + 200 && Plane.x + 100 >= item.x && Plane.x + 100 <= item.x + 200){
@@ -586,7 +586,7 @@
 							i--;
 						}
 					}
-				}
+				}*/
 			}
 
 			function cutPlaneBlood(n){
@@ -607,6 +607,9 @@
 			context.strokeRect(350, totalheight-100, totalwidth-600, 100);
 			context.fill();
 			context.stroke();
+			context.fillStyle = "#fff";
+			context.font = "50px YH";
+            context.fillText(Plane.nowblood + "/" + Plane.allblood, 300+(totalwidth-600)/2, totalheight-75);
 			context.closePath();
 			context.restore();
 		}
