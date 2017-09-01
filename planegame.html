@@ -315,19 +315,21 @@
 		// 画子弹位置
 		function drawBullet(){
 
-			context.beginPath();
-			context.fillStyle = "#eee";
+			
 			for (var i = 0; i < totalbullet.length; i++){
 				var tempbullet = totalbullet[i];
+				context.beginPath();
+				context.fillStyle = "#eee";
 				context.arc(tempbullet.x, tempbullet.y, 0, 2*Math.PI, true);
 				context.fill();
+				context.closePath();
 				tempbullet.y -= tempbullet.speed;
 				if (tempbullet.y <= 0){
 					totalbullet.splice(i, 1);
 					i--;
 				}
 			}
-			context.closePath();
+			
 		}
 
 	})();
