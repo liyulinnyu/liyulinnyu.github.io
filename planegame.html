@@ -547,15 +547,53 @@
 		// 判断是否撞到飞机
 		function isAttackPlane(){
 
-			totalmonster.forEach(function(item, index, array){
+			var hasatk = false;
+			for (var i = 0; i < totalmonster.length; i++){
 
-				for (var i = Plane.x - 100; i < Plane.x + 100; i++){
-					if (i >= item.x && i <= item.x + 200 && Plane.y - 100 >= item.y && Plane.y - 100 <= item.y + 200){
-						// 上边缘撞到了
-						Plane.nowblood -= 10;   // 飞机伤血 
+				// 上边缘
+				for (var j = Plane.x - 100; j < Plane.x + 100; j++){
+					if (j >= item.x && j <= item.x + 200 && Plane.y - 100 >= item.y && Plane.y - 100 <= item.y + 200){
+						cutPlaneBlood(i);
+						i--;
 					}
 				}
-			});
+
+				// 右边缘
+				if (hasatk === false){
+					for (j = Plane.y - 100; j < Plane.y + 100; j++){
+						if (j >= item.y && j <= item.y + 200 && Plane.x + 100 >= item.x && Plane.x + 100 <= item.x + 200){
+							cutPlaneBlood(i);
+							i--;
+						}
+					}
+				}
+
+				// 下边缘
+				if (hasatk === false){
+					for (j = Plane.x - 100; j < Plane.x + 100; j++){
+						if (j >= item.x && j <= item.x + 200 && Plane.y + 100 >= item.y && Plane.y + 100 <= item.y + 200){
+							cutPlaneBlood(i);
+							i--;
+						}
+					}
+				}
+
+				// 左边缘
+				if (hasatk === false){
+					for (j = Plane.y - 100; j < Plane.y + 100; j++){
+						if (j >= item.y && j <= item.y + 200 && Plane.x - 100 >= item.x && Plane.x - 100 <= item.x + 200){
+							cutPlaneBlood(i);
+							i--;
+						}
+					}
+				}
+			}
+
+			function cutPlaneBlood(n){
+				Plane.nowblood -= 10;          // 伤血
+				totalmonster.splice(n, 1);     // 去掉这个怪物
+				hasatk = true;   // 表示撞上了， 剩下的不用检测了
+			}
 		}
 
 		// 画飞机血条
