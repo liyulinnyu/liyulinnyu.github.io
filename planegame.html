@@ -270,21 +270,21 @@
 		}, false);
 
 /////////////////////////////////////////////////////////// 暂停控制 /////////////////////////////////////
-		var pausediv = "<div id='pause'>||</div>";
+		var pausediv = "<div id='pause'>| |</div>";
 		document.body.insertAdjacentHTML("beforeEnd", pausediv);
 		pausediv = document.querySelector("#pause");
 		pausediv.style.left = totalwidth - 100 + "px";
 
 		pausediv.addEventListener("click", function(event){
 			var target = event.target;
-			if (target.innerHTML === "||"){
+			if (target.innerHTML === "| |"){
 				// 点击后暂停
 				clearInterval(gameloop);
 				target.innerHTML = ">";
 			}else{
 				// 点击后继续
 				gameloop = setInterval(drawScreen, 20);
-				target.innerHTML = "||";
+				target.innerHTML = "| |";
 			}
 		}, false);
 
