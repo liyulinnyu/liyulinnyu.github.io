@@ -240,6 +240,8 @@
 			target.background = "#fff";
 			target.color = "#333";
 			target.opacity = "0.8";
+			// 查看作弊码
+			isCheatCode("b");
 		}, false);
 		bulletdiv.addEventListener("touchend", function(event){
 			var target = event.target.style;
@@ -253,8 +255,7 @@
 			if (bullettype === 1){
 				totalbullet.push(new Bullet(Plane.x, Plane.y - 110));  // 中间子弹
 			}
-			// 查看作弊码
-			isCheatCode("b");
+			
 		}, false);   // 加子弹
 
 
@@ -267,6 +268,8 @@
 			target.background = "#336699";
 			target.color = "#fff";
 			target.opacity = "0.8";
+			// 查看作弊码
+			isCheatCode("m");
 		}, false);
 		misslediv.addEventListener("touchend", function(event){
 			var target = event.target.style;
@@ -280,8 +283,6 @@
 				totalmissle.push(new Missle(Plane.x + 70, Plane.y + 10, 1));
 				missleinterval = 0;
 			}
-			// 查看作弊码
-			isCheatCode("m");
 		}, false);
 
 
@@ -807,6 +808,7 @@
 			var length = cheatcode.length;
 			if (length > 0 && cheatcode[length - 1] === "m" && c === "b"){
 				// 正确排序
+				alert("s");
 				cheatcode += c;
 				// 只可能在b后面出现cheatcode，所以只用检测这里
 				if (cheatcode === "mbmbmmb"){
