@@ -545,15 +545,15 @@
       				context.drawImage(lightblueimg, totalwidth/2-50, 0, 100, totalheight*3/5);
       			}else if (showtime > 50 && showtime < 100){
       				context.drawImage(lightredimg, totalwidth/2-50, 0, 100, totalheight*3/5);
+      			}else if (showtime > 100 && showtime < 150){
+      				context.drawImage(boss_img2, totalwidth/2-50, 0, 100, totalheight*3/5);
       			}
       			context.restore();
-
-      			
 
 
       			showtime++;
 
-				if (showtime > 400){
+				if (showtime > 150){
 					// 去掉这个原子弹
 					totalatom.pop();
 					// 给飞机加上deviceorientation
@@ -676,50 +676,53 @@
 		function isAttackPlane(){
 
 			var hasatk = false;
-			for (var i = 0; i < totalmonster.length; i++){
-				var item = totalmonster[i];
-				// 上边缘
-				for (var j = Plane.x - 100; j < Plane.x + 100; j++){
-					if (j >= item.x && j <= item.x + 200 && Plane.y - 100 >= item.y && Plane.y - 100 <= item.y + 200){
-						cutPlaneBlood(i);
-						i--;
-						break;
-					}
-				}
-
-				// 右边缘
-				if (hasatk === false){
-					for (j = Plane.y - 100; j < Plane.y + 100; j++){
-						if (j >= item.y && j <= item.y + 200 && Plane.x + 100 >= item.x && Plane.x + 100 <= item.x + 200){
+			if (totalatom.length === 0){ // 表示没有发射原子弹
+				for (var i = 0; i < totalmonster.length; i++){
+					var item = totalmonster[i];
+					// 上边缘
+					for (var j = Plane.x - 100; j < Plane.x + 100; j++){
+						if (j >= item.x && j <= item.x + 200 && Plane.y - 100 >= item.y && Plane.y - 100 <= item.y + 200){
 							cutPlaneBlood(i);
 							i--;
 							break;
 						}
 					}
-				}
 
-				// 下边缘
-				if (hasatk === false){
-					for (j = Plane.x - 100; j < Plane.x + 100; j++){
-						if (j >= item.x && j <= item.x + 200 && Plane.y + 100 >= item.y && Plane.y + 100 <= item.y + 200){
-							cutPlaneBlood(i);
-							i--;
-							break;
+					// 右边缘
+					if (hasatk === false){
+						for (j = Plane.y - 100; j < Plane.y + 100; j++){
+							if (j >= item.y && j <= item.y + 200 && Plane.x + 100 >= item.x && Plane.x + 100 <= item.x + 200){
+								cutPlaneBlood(i);
+								i--;
+								break;
+							}
+						}
+					}
+
+					// 下边缘
+					if (hasatk === false){
+						for (j = Plane.x - 100; j < Plane.x + 100; j++){
+							if (j >= item.x && j <= item.x + 200 && Plane.y + 100 >= item.y && Plane.y + 100 <= item.y + 200){
+								cutPlaneBlood(i);
+								i--;
+								break;
+							}
+						}
+					}
+
+					// 左边缘
+					if (hasatk === false){
+						for (j = Plane.y - 100; j < Plane.y + 100; j++){
+							if (j >= item.y && j <= item.y + 200 && Plane.x - 100 >= item.x && Plane.x - 100 <= item.x + 200){
+								cutPlaneBlood(i);
+								i--;
+								break;
+							}
 						}
 					}
 				}
-
-				// 左边缘
-				if (hasatk === false){
-					for (j = Plane.y - 100; j < Plane.y + 100; j++){
-						if (j >= item.y && j <= item.y + 200 && Plane.x - 100 >= item.x && Plane.x - 100 <= item.x + 200){
-							cutPlaneBlood(i);
-							i--;
-							break;
-						}
-					}
-				}
-			}
+			} 
+			
 
 			function cutPlaneBlood(n){
 				Plane.nowblood -= 10;          // 伤血
