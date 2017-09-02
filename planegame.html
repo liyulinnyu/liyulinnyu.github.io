@@ -808,14 +808,13 @@
 			var length = cheatcode.length;
 			if (length > 0 && cheatcode[length - 1] === "m" && c === "b"){
 				// 正确排序
-				alert("s");
 				cheatcode += c;
 				// 只可能在b后面出现cheatcode，所以只用检测这里
 				if (cheatcode === "mbmbmmb"){
 					ischeatavailable = true;
 					cheatcode = "";
 				}
-			}else if ((length === 0 && c === "m") || (length > 0 && cheatcode[length - 1] === "b" && c === "m")){
+			}else if ((length === 0 && c === "m") || (length > 0 && cheatcode[length - 1] === "b" && c === "m") || (cheatcode === "mbmbm" && c === "m")){
 				cheatcode += c;
 			}else{
 				cheatcode = "";
