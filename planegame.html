@@ -621,15 +621,15 @@
 				// 随机水平移动
 				if (Math.random() >= 0.5){
 					if (tempmonster.x + tempmonster.r*2 >= totalwidth){
-						tempmonster.x -= Math.random()*3;
+						tempmonster.x -= Math.random()*5 + 5;
 					}else{
-						tempmonster.x += Math.random()*3;
+						tempmonster.x += Math.random()*5 + 5;
 					}
 				}else{
 					if (tempmonster.x <= 0){
-						tempmonster.x += Math.random()*3;
+						tempmonster.x += Math.random()*5 + 5;
 					}else{
-						tempmonster.x -= Math.random()*3;
+						tempmonster.x -= Math.random()*5 + 5;
 					}
 				}
 				
