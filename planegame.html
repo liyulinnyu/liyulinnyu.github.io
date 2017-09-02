@@ -516,7 +516,7 @@
 					totalatom.pop();
 					// 所有怪物进入爆炸状态
 					for (var i = 0; i < totalmonster.length; i++){
-						totalmboomobj.push(new MBoomObj(totalmonster[i].x, totalmonster[j].y));   // 添加把爆炸位置对象
+						totalmboomobj.push(new MBoomObj(totalmonster[i].x, totalmonster[i].y));   // 添加把爆炸位置对象
 					}
 					totalmonster = [];         // 怪物数组归0
 					MonsterA.prototype.num = 0;      // 总数归0
