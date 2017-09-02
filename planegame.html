@@ -237,6 +237,7 @@
 ///////////////////////////////////////////////////////计分板/////////////////////////////////////////////////////////
 		var scorediv = "<div id='score'>0</div>";
 		document.body.insertAdjacentHTML("beforeEnd", scorediv);
+		scorediv = document.querySelector("#score");
 
 ///////////////////////////////////////////////////////作弊码////////////////////////////////////////////////////////
 		var cheatcode = "";    // mbmbmmb = 无限导弹模式
@@ -641,8 +642,7 @@
 					totalmboomobj.push(new MBoomObj(tempmonster.x, tempmonster.y));   // 添加把爆炸位置对象
 
 					// 如果是血条为0，则表示是被击杀的
-					scorediv.innerHTML = (parseInt(scorediv.innerHTML) + 1) + "";
-					alert(scorediv.innerHTML);
+					scorediv.innerHTML = parseInt(scorediv.innerHTML) + 1;
 
 					// 去掉这个怪物
 					totalmonster.splice(i, 1);
