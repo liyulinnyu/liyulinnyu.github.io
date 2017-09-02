@@ -642,8 +642,10 @@
 					totalmboomobj.push(new MBoomObj(tempmonster.x, tempmonster.y));   // 添加把爆炸位置对象
 
 					// 如果是血条为0，则表示是被击杀的
-					scorediv.innerHTML = parseInt(scorediv.innerHTML) + 1;
-
+					if (tempmonster.nowblood <= 0){
+						scorediv.innerHTML = parseInt(scorediv.innerHTML) + 1;
+					}
+					
 					// 去掉这个怪物
 					totalmonster.splice(i, 1);
 					MonsterA.prototype.num--;      // 总数减去
