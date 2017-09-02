@@ -336,6 +336,9 @@ html{
 	    display:-webkit-flex;
 		display:flex;
 	}
+	.imgdiv img{
+		width: 100%;
+	}
 
 	.note{
 		color:#888;
