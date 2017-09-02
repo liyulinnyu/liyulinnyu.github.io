@@ -149,7 +149,8 @@
 		// 子弹，导弹，原子弹数组, 对象
 		var totalbullet = [],
 			totalmissle = [],
-			totalatom = [];
+			totalatom = [],
+			missleinterval = 100;    // 导弹发射间隔
 
 		var bullettype = 0;     // 子弹样式
 		function Bullet(x, y){
@@ -247,12 +248,11 @@
 			target.opacity = "0.8";
 		}, false);
 		misslediv.addEventListener("click", function(event){
-			//totalmissle.push(new Missle(Plane.x - 70, Plane.y + 10, 0));
-			//totalmissle.push(new Missle(Plane.x + 70, Plane.y + 10, 1));
-			event.target.setAttribute("disabled", "disabled");
-			//setTimeout(function(){
-			//	event.target.disabled = false;
-			//},500);
+			if (missleinterval > 100){
+				totalmissle.push(new Missle(Plane.x - 70, Plane.y + 10, 0));
+				totalmissle.push(new Missle(Plane.x + 70, Plane.y + 10, 1));
+				missleinterval = 0;
+			}
 		}, false);
 
 
@@ -300,6 +300,8 @@
 		function canvasApp(){
 
 			function drawScreen(){
+				// 导弹间隔冷却
+				missleinterval++;
 
 				// 初始化背景
 				drawBackground();
