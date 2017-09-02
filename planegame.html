@@ -140,6 +140,12 @@
 		// 大招gif
 		var boss_img1 = new Image();
 		boss_img1.src = "gameimg/planegame/boss1.gif";
+		var boss_img2 = new Image();
+		boss_img2.src = "gameimg/planegame/boss2.gif";
+		var lightblueimg = new Image();
+		lightblueimg.src = "gameimg/planegame/lightblue.gif";
+		var lightredimg = new Image();
+		lightredimg.src = "gameimg/planegame/lightred.gif";
 
 //////////////////////////////////////////////////////////各种对象////////////////////////////////////////////////////
 
@@ -272,6 +278,7 @@
 
 
 		// 调整原子弹div特效
+		var showtime = 0;               // 特效时间
 		atomdiv = document.querySelector("#atom");
 		atomdiv.style.top = (totalheight - 450) + "px";
 		atomdiv.style.left = (totalwidth - 200) + "px";
@@ -514,21 +521,31 @@
 				Plane.y = totalheight - 300;
 				window.removeEventListener("deviceorientation", changePlanePosition);
 
-				// 画原子弹
+				/*/ 画原子弹
 				var tempatom = totalatom[0];
 				context.save();
 				context.drawImage(atomimg, tempatom.x, tempatom.y, 80, 200);
 				context.restore();
+				*/
+
 				// 特效
 				context.save();
       			context.translate(totalwidth/2, totalheight/2);
       			context.rotate(90 * Math.PI / 180);//旋转47度
       			context.translate(-totalwidth/2, -totalheight/2);
+      			if (showtime > 0 && showtime < 50){
+      				context.drawImage(lightblueimg, totalwidth/2-100, 0, 200, totalheight);
+      			}else if (showtime > 50 && showtime < 100){
+      				context.drawImage(lightredimg, totalwidth/2-100, 0, 200, totalheight);
+      			}
       			context.drawImage(boss_img1, totalwidth/2, totalheight/4, totalwidth, totalheight/2);
       			context.restore();
 
-				//tempatom.y -= tempatom.speed;
-				if (tempatom.y <= 0){
+
+
+      			showtime++;
+
+				if (showtime > 400){
 					// 去掉这个原子弹
 					totalatom.pop();
 					// 给飞机加上deviceorientation
@@ -539,6 +556,7 @@
 					}
 					totalmonster = [];         // 怪物数组归0
 					MonsterA.prototype.num = 0;      // 总数归0
+					showtime = 0;
 				}
 			}
 		}
