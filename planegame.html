@@ -61,6 +61,20 @@
 		color:#999;
 		z-index: 2;
 	}
+	#pause{
+		position: absolute;
+		top:0;
+		width:100px;
+		height: 100px;
+		background: #333;
+		opacity: 0.8;
+		filter:alpha(opacity=80);
+		font-size: 50px;
+		line-height: 100px;
+		text-align: center;
+		color:#999;
+		z-index: 2;
+	}
 	</style>
 
 </head>
@@ -255,9 +269,24 @@
 			target.opacity = "0.8";
 		}, false);
 
-/////////////////////////////////////////////////////////// 导弹数量等参数 /////////////////////////////////////
+/////////////////////////////////////////////////////////// 暂停控制 /////////////////////////////////////
+		var pausediv = "<div id='pause'>||</div>";
+		document.body.insertAdjacentHTML("beforeEnd", pausediv);
+		pausediv = document.querySelector("#pause");
+		pausediv.style.left = totalwidth - 100 + "px";
 
-		
+		pausediv.addEventListener("click", function(event){
+			var target = event.target;
+			if (target.value === "||"){
+				// 点击后暂停
+				clearInterval(gameloop);
+				target.value = ">";
+			}else{
+				// 点击后继续
+				gameloop = setInterval(drawScreen, 20);
+				target.value = "||";
+			}
+		}, false);
 
 /////////////////////////////////////////////////////////// start game/////////////////////////////////////////////////////////
 
@@ -291,6 +320,9 @@
 
 				// 画血条
 				drawPlaneBlood();
+
+				// 判断游戏是否结束
+				isGameOver();
 			}
 
 			gameloop = setInterval(drawScreen, 20);
@@ -445,8 +477,8 @@
 		// 画monster位置
 		function drawMonster(){
 
-			if (MonsterA.prototype.interval > 300){    // 到了时间间隔就开始增加怪物
-				if (MonsterA.prototype.num < 5){
+			if (MonsterA.prototype.interval > 200){    // 到了时间间隔就开始增加怪物
+				if (MonsterA.prototype.num < 10){
 					var tempx = Math.random()*totalwidth,
 						tempy = 0;
 					tempx = (tempx + 200) >= totalwidth ? (totalwidth - 200) : tempx;
@@ -618,6 +650,20 @@
             context.fillText(Plane.nowblood + "/" + Plane.allblood, 250+(totalwidth-600)/2, totalheight-30);
 			context.closePath();
 			context.restore();
+		}
+
+
+		// 判断游戏是否结束
+		function isGameOver(){
+
+			if (Plane.nowblood <= 0){
+				clearInterval(gameloop);
+				if (confirm("Noob! Play again? -.-")){
+					window.reload();
+				}else{
+					window.close();
+				}
+			}
 		}
 
 	})();
