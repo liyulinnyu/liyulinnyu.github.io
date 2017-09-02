@@ -509,18 +509,30 @@
 
 			// 因为只有一个，直接取[0];
 			if (totalatom.length > 0){
+				// 飞机回到固定点。并且取消deviceorientation事件
+				Plane.x = totalwidth/2;
+				Plane.y = totalheight - 300;
+				window.removeEventListener(changePlanePosition);
+
+				// 画原子弹
 				var tempatom = totalatom[0];
 				context.save();
-				context.beginPath();
 				context.drawImage(atomimg, tempatom.x, tempatom.y, 80, 200);
-				context.drawImage(boss_img1, 0, totalheight/2, totalwidth, totalheight/2);
-				context.closePath();
 				context.restore();
+				// 特效
+				context.save();
+      			context.translate(totalwidth/2, totalheight/2);
+      			context.rotate(90 * Math.PI / 180);//旋转47度
+      			context.translate(-totalwidth/2, -totalheight/2);
+      			context.drawImage(boss_img1, 0, totalheight/2, totalwidth, totalheight/2);
+      			context.restore();
 
 				tempatom.y -= tempatom.speed;
 				if (tempatom.y <= 0){
 					// 去掉这个原子弹
 					totalatom.pop();
+					// 给飞机加上deviceorientation
+					window.addEventListener("deviceorientation", changePlanePosition, false);
 					// 所有怪物进入爆炸状态
 					for (var i = 0; i < totalmonster.length; i++){
 						totalmboomobj.push(new MBoomObj(totalmonster[i].x, totalmonster[i].y));   // 添加把爆炸位置对象
