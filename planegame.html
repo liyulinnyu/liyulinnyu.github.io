@@ -512,7 +512,7 @@
 				// 飞机回到固定点。并且取消deviceorientation事件
 				Plane.x = totalwidth/2;
 				Plane.y = totalheight - 300;
-				window.removeEventListener(changePlanePosition);
+				window.removeEventListener("deviceorientation", changePlanePosition);
 
 				// 画原子弹
 				var tempatom = totalatom[0];
