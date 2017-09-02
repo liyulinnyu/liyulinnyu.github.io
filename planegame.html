@@ -165,7 +165,7 @@
 		var totalbullet = [],
 			totalmissle = [],
 			totalatom = [],
-			missleinterval = 100,    // 导弹发射间隔
+			missleinterval = 50,    // 导弹发射间隔
 			atominterval = 1000;     // 原子弹发射间隔
 
 		var bullettype = 0;     // 子弹样式
@@ -219,7 +219,9 @@
 			this.time = 0;      // 显示时间
 		} 
 
-
+///////////////////////////////////////////////////////作弊码////////////////////////////////////////////////////////
+		var cheatcode = "";    // mbmbmmb = 无限导弹模式
+		var ischeatavailable = false;
 
 ////////////////////////////////////////////////////// 控制面板 ////////////////////////////////////////////////////////
 		var bulletdiv = "<div id='bullet'>B</div>",
@@ -251,6 +253,8 @@
 			if (bullettype === 1){
 				totalbullet.push(new Bullet(Plane.x, Plane.y - 110));  // 中间子弹
 			}
+			// 查看作弊码
+			isCheatCode("b");
 		}, false);   // 加子弹
 
 
@@ -271,11 +275,13 @@
 			target.opacity = "0.8";
 		}, false);
 		misslediv.addEventListener("click", function(event){
-			if (missleinterval > 50){
+			if (missleinterval > 50 || ischeatavailable === true){
 				totalmissle.push(new Missle(Plane.x - 70, Plane.y + 10, 0));
 				totalmissle.push(new Missle(Plane.x + 70, Plane.y + 10, 1));
 				missleinterval = 0;
 			}
+			// 查看作弊码
+			isCheatCode("m");
 		}, false);
 
 
@@ -791,6 +797,26 @@
 				}else{
 					window.close();
 				}
+			}
+		}
+
+
+
+		// 查看作弊码
+		function isCheatCode(c){
+			var length = cheatcode.length;
+			if (length > 0 && cheatcode[length - 1] === "m" && c === "b"){
+				// 正确排序
+				cheatcode += c;
+				// 只可能在b后面出现cheatcode，所以只用检测这里
+				if (cheatcode === "mbmbmmb"){
+					ischeatavailable = true;
+					cheatcode = "";
+				}
+			}else if ((length === 0 && c === "m") || (length > 0 && cheatcode[length - 1] === "b" && c === "m")){
+				cheatcode += c;
+			}else{
+				cheatcode = "";
 			}
 		}
 
