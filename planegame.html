@@ -137,6 +137,12 @@
 		var monsterboomimg = new Image();
 		monsterboomimg.src = "gameimg/planegame/monsterboom.png";
 
+		// 大招gif
+		var boss_img1 = new Image();
+		boss_img1.src = "gameimg/planegame/boss1.gif";
+
+//////////////////////////////////////////////////////////各种对象////////////////////////////////////////////////////
+
 		var Plane = {
 			x : totalwidth/2,
 			y : totalheight - 250,   // 到底部250px
@@ -189,7 +195,7 @@
 			this.y = y;
 			this.allblood = 20;           // 总血量
 			this.nowblood = 20;           // 当前血量
-			this.speed = 2;
+			this.speed = 3;
 			this.r = 100;
 		}
 		MonsterA.prototype.num = 0;   // 记录A的数量
@@ -507,6 +513,7 @@
 				context.save();
 				context.beginPath();
 				context.drawImage(atomimg, tempatom.x, tempatom.y, 80, 200);
+				context.drawImage(boss_img1, 0, totalheight/2, totalwidth, totalheight/2);
 				context.closePath();
 				context.restore();
 
