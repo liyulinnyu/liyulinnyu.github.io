@@ -75,11 +75,26 @@
 		color:#999;
 		z-index: 2;
 	}
+	#score{
+		position: absolute;
+		top:0;
+		left: 0;
+		width:200px;
+		height:100px;
+		background: #333;
+		opacity: 0.8;
+		filter:alpha(opacity=80);
+		font-size: 50px;
+		line-height: 100px;
+		text-align: center;
+		color:#ddd;
+		z-index: 2;
+	}
 	</style>
 
 </head>
 <body>
-	
+			
 
 	<script>
 
@@ -218,6 +233,10 @@
 			this.speed = 2;     // 爆炸图片移动速度
 			this.time = 0;      // 显示时间
 		} 
+
+///////////////////////////////////////////////////////计分板/////////////////////////////////////////////////////////
+		var scorediv = "<div id='score'>0</div>";
+		document.body.insertAdjacentHTML("beforeEnd", scorediv);
 
 ///////////////////////////////////////////////////////作弊码////////////////////////////////////////////////////////
 		var cheatcode = "";    // mbmbmmb = 无限导弹模式
@@ -575,6 +594,9 @@
 					for (var i = 0; i < totalmonster.length; i++){
 						totalmboomobj.push(new MBoomObj(totalmonster[i].x, totalmonster[i].y));   // 添加把爆炸位置对象
 					}
+					// 记分
+					scorediv.innerHTML = parseInt(scorediv.innerHTML) + totalmonster.length;
+
 					totalmonster = [];         // 怪物数组归0
 					MonsterA.prototype.num = 0;      // 总数归0
 					showtime = 0;
@@ -617,6 +639,9 @@
 				if (tempmonster.nowblood <= 0 || tempmonster.y >= totalheight){
 
 					totalmboomobj.push(new MBoomObj(tempmonster.x, tempmonster.y));   // 添加把爆炸位置对象
+
+					// 如果是血条为0，则表示是被击杀的
+					scorediv.innerHTML = parseInt(scorediv.innerHTML) + 1;
 
 					// 去掉这个怪物
 					totalmonster.splice(i, 1);
@@ -766,6 +791,8 @@
 				totalmonster.splice(n, 1);     // 去掉这个怪物
 				MonsterA.prototype.num--;      // 怪物总数减去
 				hasatk = true;   // 表示撞上了， 剩下的不用检测了
+				// 怪物被击杀，score加分
+				scorediv.innerHTML = parseInt(scorediv.innerHTML) + 1;
 			}
 		}
 
