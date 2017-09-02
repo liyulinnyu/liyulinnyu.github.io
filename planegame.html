@@ -491,7 +491,7 @@
 					Plane.y = (Plane.y - Plane.r) <= 0 ? Plane.r : (Plane.y - Plane.addspeedy);
 				}
 				
-			}else if(Plane.addspeedy > 30){
+			}else if(Plane.addspeedy > 20){
 				Plane.y = (Plane.y + Plane.r + 100) >= totalheight ? (totalheight - Plane.r - 100) : (Plane.y + Plane.addspeedy);
 			}
 		}
