@@ -529,21 +529,23 @@
 				*/
 
 				// 特效
-				context.save();
-      			context.translate(totalwidth/2, totalheight/2);
-      			context.translate(-totalwidth/2, -totalheight/2);
-      			if (showtime > 0 && showtime < 50){
-      				context.drawImage(lightblueimg, totalwidth/2-100, 0, 200, totalheight);
-      			}else if (showtime > 50 && showtime < 100){
-      				context.drawImage(lightredimg, totalwidth/2-100, 0, 200, totalheight);
-      			}
-      			context.restore();
-      			
+				
+
 				context.save();
       			context.translate(totalwidth/2, totalheight/2);
       			context.rotate(90 * Math.PI / 180);
       			context.translate(-totalwidth/2, -totalheight/2);
       			context.drawImage(boss_img1, totalwidth/2, totalheight/4, totalwidth, totalheight/2);
+      			context.restore();
+
+      			context.save();
+      			context.translate(totalwidth/2, totalheight/2);
+      			context.translate(-totalwidth/2, -totalheight/2);
+      			if (showtime > 0 && showtime < 50){
+      				context.drawImage(lightblueimg, totalwidth/2-50, 0, 100, totalheight*3/4);
+      			}else if (showtime > 50 && showtime < 100){
+      				context.drawImage(lightredimg, totalwidth/2-50, 0, 100, totalheight*3/4);
+      			}
       			context.restore();
 
       			
