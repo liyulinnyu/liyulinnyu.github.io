@@ -127,6 +127,9 @@
 		// 导弹图片
 		var missleimg = new Image();
 		missleimg.src = "gameimg/planegame/missle.png";
+		// 原子弹图片
+		var atomimg = new Image();
+		atomimg.src = "gameimg/planegame/atom.png";
 		// 怪物A图片
 		var monsteraimg = new Image();
 		monsteraimg.src = "gameimg/planegame/monstera.png";
@@ -150,7 +153,8 @@
 		var totalbullet = [],
 			totalmissle = [],
 			totalatom = [],
-			missleinterval = 100;    // 导弹发射间隔
+			missleinterval = 100,    // 导弹发射间隔
+			atominterval = 1000;     // 原子弹发射间隔
 
 		var bullettype = 0;     // 子弹样式
 		function Bullet(x, y){
@@ -171,6 +175,11 @@
 			this.atk = 5;			
 		}
 
+		function Atom(x, y){          // 原子弹对象
+			this.x = x;
+			this.y = y;
+			this.speed = 30;		
+		}
 
 
 		// 怪物对象
@@ -272,6 +281,12 @@
 			target.color = "#999";
 			target.opacity = "0.8";
 		}, false);
+		atomdiv.addEventListener("click", function(event){
+			if (atominterval > 1000){
+				totalatom.push(new Atom(Plane.x - 40, Plane.y - 100));
+				atominterval = 0;
+			}
+		}, false);
 
 /////////////////////////////////////////////////////////// 暂停控制 /////////////////////////////////////
 		var pausediv = "<div id='pause'>| |</div>";
@@ -302,6 +317,7 @@
 			function drawScreen(){
 				// 导弹间隔冷却
 				missleinterval++;
+				atominterval++；
 
 				// 初始化背景
 				drawBackground();
@@ -314,6 +330,9 @@
 
 				// 画导弹位置
 				drawMissle();
+
+				// 画原子弹位置
+				drawAtom();
 
 				// 画monster的位置
 				drawMonster();
@@ -475,6 +494,32 @@
 				if (tempmissle.y <= 0){
 					totalmissle.splice(i, 1);
 					i--;
+				}
+			}
+		}
+
+		// 画原子弹位置
+		function drawAtom(){
+
+			// 因为只有一个，直接取[0];
+			if (totalatom.length > 0){
+				var tempatom = totalatom[0];
+				context.save();
+				context.beginPath();
+				context.drawImage(atomimg, tempatom.x, tempatom.y, 80, 200);
+				context.closePath();
+				context.restore();
+
+				tempatom.y -= tempatom.speed;
+				if (tempatom.y <= 0){
+					// 去掉这个原子弹
+					totalatom.pop();
+					// 所有怪物进入爆炸状态
+					for (var i = 0; i < totalmonster.length; i++){
+						totalmboomobj.push(new MBoomObj(totalmonster[i].x, totalmonster[j].y));   // 添加把爆炸位置对象
+					}
+					totalmonster = [];         // 怪物数组归0
+					MonsterA.prototype.num = 0;      // 总数归0
 				}
 			}
 		}
