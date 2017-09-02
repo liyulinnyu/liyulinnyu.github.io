@@ -828,6 +828,14 @@
 				}else{
 					window.close();
 				}
+			}else if (scorediv.innerHTML === 10){
+				// 赢了
+				clearInterval(gameloop);
+				if (confirm("Stunning! Play again? ^.^")){
+					location.reload();
+				}else{
+					window.close();
+				}
 			}
 		}
 
