@@ -277,14 +277,14 @@
 
 		pausediv.addEventListener("click", function(event){
 			var target = event.target;
-			if (target.value === "||"){
+			if (target.innerHTML === "||"){
 				// 点击后暂停
 				clearInterval(gameloop);
-				target.value = ">";
+				target.innerHTML = ">";
 			}else{
 				// 点击后继续
 				gameloop = setInterval(drawScreen, 20);
-				target.value = "||";
+				target.innerHTML = "||";
 			}
 		}, false);
 
