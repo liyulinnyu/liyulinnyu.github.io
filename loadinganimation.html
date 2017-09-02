@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Loading Animation</title>
+    <link rel="shortcut icon" href="icon/lyl.ico">
+    <link rel="bookmark" href="icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+    .container {  
+      margin: 0 auto;  
+      width: 50px;  
+      height: 50px;  
+      text-align: center;  
+      font-size: 5px;  
+    }  
+      
+    .container > div {  
+      background-color: #67CF22;  
+      height: 100%;  
+      width: 5px;  
+      display: inline-block;  
+      -webkit-animation: animation 1.2s infinite ease-in-out;  
+      animation: animation 1.2s infinite ease-in-out;  
+    }  
+      
+    .container>.bar2 {  
+      -webkit-animation-delay: -1.1s;  
+      animation-delay: -1.1s;  
+    }  
+      
+    .container>.bar3 {  
+      -webkit-animation-delay: -1.0s;  
+      animation-delay: -1.0s;  
+    }  
+      
+    .container>.bar4 {  
+      -webkit-animation-delay: -0.9s;  
+      animation-delay: -0.9s;  
+    }  
+      
+    .container>.bar5 {  
+      -webkit-animation-delay: -0.8s;  
+      animation-delay: -0.8s;  
+    }  
+      
+    @-webkit-keyframes animation {  
+      0%, 40%, 100% { -webkit-transform: scaleY(0.4) }    
+      20% { -webkit-transform: scaleY(1.0) }  
+    }  
+      
+    @keyframes animation {  
+      0%, 40%, 100% {   
+        transform: scaleY(0.4);  
+        -webkit-transform: scaleY(0.4);  
+      }  20% {   
+        transform: scaleY(1.0);  
+        -webkit-transform: scaleY(1.0);  
+      }  
+    }
+</style>
+<body>
+	<div class="det-title">
+		<h1>Loading Animation</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+In this blog, I just want to try to develop some loading animations by using CSS3. Actually, when I was a freshman in college, I was so excited about loading animations for their beautiful and amazing effects. In that time, I haven't contacted with CSS3, so today I just want to realize this little dream. 
+First of all, let's see some effects:
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="img/loadinganimation.jpg" alt="">
+        </div>
+
+        <div class="text">
+I will implement this function step by step. First, let's make sure the framework. If we want to realize the first one, we need one container and five vertical bars.
+        </div>
+
+        <div class="htmlcode">    &lt;div class="container"&gt;  
+        &lt;div class="bar1"&gt;&lt;/div&gt;  
+        &lt;div class="bar2"&gt;&lt;/div&gt; 
+        &lt;div class="bar3"&gt;&lt;/div&gt;  
+        &lt;div class="bar4"&gt;&lt;/div&gt;  
+        &lt;div class="bar5"&gt;&lt;/div&gt;  
+    &lt;/div></div>
+
+        <div class="text">
+And the CSS of container:
+        </div>
+
+        <div class="csscode">   .container {  
+        margin: 0 auto;  
+        width: 50px;  
+        height: 50px;  
+        text-align: center;  
+        font-size: 5px;  
+    }</div>
+
+        <div class="text">
+The finally thing is to set animations of vertical bars. Because we want the bars moving. And in order to reduce the number of codes, we can use the following method to set animations: 
+        </div>
+
+        <div class="csscode">   .container > div {  
+        background-color: #67CF22;  
+        height: 100%;  
+        width: 5px;  
+        display: inline-block;  
+        -webkit-animation: animation 1.2s infinite ease-in-out;  
+        animation: animation 1.2s infinite ease-in-out;  
+    }
+    
+    @-webkit-keyframes animation {  
+        0%, 40%, 100% { -webkit-transform: scaleY(0.4) }    
+        20% { -webkit-transform: scaleY(1.0) }  
+    }  
+      
+    @keyframes animation {  
+        0%, 40%, 100% {   
+            transform: scaleY(0.4);  
+            -webkit-transform: scaleY(0.4);  
+        }
+        20% {   
+            transform: scaleY(1.0);  
+            -webkit-transform: scaleY(1.0);  
+        }  
+    }</div>
+
+        <div class="text">
+However, in this time, all the vertical bars will move together, but we want they can move one by one. So let's reduce their delay time individually.
+        </div>
+
+        <div class="csscode">   .container>.bar2 {  
+        -webkit-animation-delay: -1.1s;  
+        animation-delay: -1.1s;  
+    }  
+    .container>.bar3 {  
+        -webkit-animation-delay: -1.0s;  
+        animation-delay: -1.0s;  
+    } 
+    .container>.bar4 {  
+        -webkit-animation-delay: -0.9s;  
+        animation-delay: -0.9s;  
+    }  
+    .container>.bar5 {  
+        -webkit-animation-delay: -0.8s;  
+        animation-delay: -0.8s;  
+    }</div>
+		
+        <div class="text">
+Ok, everything is done. So let's see the effect. It's easy to achieve. Just think about it, and try to do it. You can finish every loading animation, please believe me, they are amazing.
+        </div>
+    
+        <div class="container">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+            <div class="bar4"></div>
+            <div class="bar5"></div>
+        </div>
+        
+        <div class="text">
+(That's all)
+        </div>
+
+
+	</div>
+</body>
+</html>
