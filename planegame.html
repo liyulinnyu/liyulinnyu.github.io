@@ -269,7 +269,7 @@
 			target.opacity = "0.8";
 		}, false);
 		misslediv.addEventListener("click", function(event){
-			if (missleinterval > 100){
+			if (missleinterval > 50){
 				totalmissle.push(new Missle(Plane.x - 70, Plane.y + 10, 0));
 				totalmissle.push(new Missle(Plane.x + 70, Plane.y + 10, 1));
 				missleinterval = 0;
@@ -617,6 +617,22 @@
 
 				// 怪物移动
 				tempmonster.y += tempmonster.speed;
+
+				// 随机水平移动
+				if (Math.random() >= 0.5){
+					if (tempmonster.x + tempmonster.r*2 >= totalwidth){
+						tempmonster.x -= Math.random()*3;
+					}else{
+						tempmonster.x += Math.random()*3;
+					}
+				}else{
+					if (tempmonster.x <= 0){
+						tempmonster.x += Math.random()*3;
+					}else{
+						tempmonster.x -= Math.random()*3;
+					}
+				}
+				
 			}
 
 			// 判断怪物是否被击中
