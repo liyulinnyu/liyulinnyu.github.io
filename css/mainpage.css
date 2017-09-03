@@ -99,7 +99,7 @@
 		display: inline-block;
 		height: 100%;
 		line-height: 5em;
-		width: 20%;
+		width: 19.5%;
 		min-width: 100px;
 		background: #333;
 		margin-left: 0;
@@ -389,17 +389,14 @@
 		display: inline-block;
 		height: 100%;
 		line-height: 4em;
-		width: 15%;
+		width: 19.5%;
 		min-width: 100px;
 		background: #333;
-		margin-left: 2%;
+		margin-left: 0;
 		vertical-align: middle;
 		color: #f1f1f1;
 		font-size: 1.4em;
 		text-align: center;
-	}
-	.button-list-det:first-child{
-		margin-left: 10%;
 	}
 	.button-list-det:hover{
 		line-height: 3.5em;
