@@ -71,7 +71,7 @@
 			switch (target.innerHTML){
 				case "Tech" : location.href = "tech.html";break;
 				case "Life" : location.href = "life.html";break;
-				case "Reso" : location.href = "reso.html";break;
+				case "Inte" : location.href = "Inte.html";break;
 				case "Game" : location.href = "game.html";break;
 			}
 		}
