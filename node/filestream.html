@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>File Stream</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>File Stream</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+This blog will record some skills of file stream in "node.js".
+<h4>1. Read stream</h4>First, we should create a file named "read.txt", because the default path of node.js is desktop. So we should write the absolute path. 
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="nodeimg/1_1.png" alt="">
+        </div>
+
+        <div class="text">
+The read stream has three events: "data", "end" and "error". Event "data" means being processed, and we can use "nowdata" parameter to get the data. Actually, this parameter contains all data of file. 
+<h4>2. Write stream</h4>The write file stream has two events: "finish" and "error". But we can use "end" to mark the finish event as follows.
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="nodeimg/1_2.png" alt="">
+        </div>
+
+        <div class="text">
+In this example, I write two "write" function in order to remind you the difference. When you write one "write" function, the data will overwrite the file. But if you write more than twice, the data will be appended into the file, it means the second "write" function will not overwrite the file. You can copy the codes and test it.  
+<h4>3. Read stream unions write stream</h4>Actually, we can union read stream and write stream which can reduce some workloads. In order to achieve this function, we will use "pipe" method of read stream.
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="nodeimg/1_3.png" alt="">
+        </div>
+
+        <div class="text">
+In most cases, when we want to read and write big files, we can use "pipe" method to help us.
+<h4>4. Compress and decompress file</h4>Add "zlib" package into our code so that we can use "createGzip" and "createGunzip" methods to help us compress and decompress files.
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="nodeimg/1_4.png" alt="">
+        </div>
+            
+        <div class="text">
+And the decompress function:
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="nodeimg/1_5.png" alt="">
+        </div>
+
+        <div class="text">
+Ok, let's see the effect:
+        </div>
+        
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="nodeimg/1_6.png" alt="">
+        </div>
+
+        <div class="text">
+(That's all)
+        </div>
+
+		
+	</div>
+</body>
+</html>
