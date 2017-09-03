@@ -100,7 +100,6 @@
 		height: 100%;
 		line-height: 5em;
 		width: 19.5%;
-		min-width: 50px;
 		background: #333;
 		margin-left: 0;
 		vertical-align: middle;
@@ -390,7 +389,6 @@
 		height: 100%;
 		line-height: 4em;
 		width: 19.5%;
-		min-width: 100px;
 		background: #333;
 		margin-left: 0;
 		vertical-align: middle;
