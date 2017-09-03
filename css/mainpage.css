@@ -320,6 +320,7 @@
 		display: -webkit-flex;
 		flex-direction: column;
 		-webkit-flex-direction: column;
+		min-width: 550px;
 	}
 	header,footer{
 		display: flex;
