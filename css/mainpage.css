@@ -108,9 +108,6 @@
 		font-size: 1.2em;
 		text-align: center;
 	}
-	.button-list-det:first-child{
-		margin-left: 10%;
-	}
 	.button-list-det:hover{
 		line-height: 4em;
 		font-size: 1.5em;
