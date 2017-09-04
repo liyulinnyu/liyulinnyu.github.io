@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Create Server</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Create Server("Get", "Post")</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+This blog will explain how to create a nodejs server, discuss the "Get" and "Post" requests simplicity. As we all know, the difference between "Get" and "Post" is that "Get" put the parameters in the URL, but "Post" has a request body. Therefore the most important thing is to get the content.
+<h4>1. Create a server</h4>In order to create a server, we should use "http" package and its "createServer" method. The method has two parameters: request and response. We can use "request" to get the content sent by client and use "response" to put information back to client.
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="nodeimg/2_1.png" alt="">
+        </div>
+
+        <div class="text">
+<h4>2. Create a "Get" request server</h4>As for getting the query information in url, we should use "url" package and its "parse", "query" methods. After that, we can use the method similar to fetching properties to get the values.
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="nodeimg/2_2.png" alt="">
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="nodeimg/2_3.png" alt="">
+        </div>
+
+        <div class="text">
+<h4>3. Create a "Post" request server</h4>Because the "post" request doesn't have url parameters, we have to find another solution to get the query body —— "querystring" package. The function of this package is to turn a query body into an accessible object.
+        </div>
+
+        <div class="imgdiv">
+            <img src="nodeimg/2_4.png" alt="">
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="nodeimg/2_5.png" alt="">
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="nodeimg/2_6.png" alt="">
+        </div>
+
+        <div class="text">
+(That's all)
+        </div>
+		
+	</div>
+</body>
+</html>
