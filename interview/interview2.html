@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Interview Question(2)</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Interview Question(2)</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+1. What content or API has been added to HTML5? What have you used?
+(1) Media：video, audio
+(2) Game: canvas, webgl
+(3) Storage: localstorage, sessonstorage, websql, indexedDB
+(4) Small API: getElementsByClassName(), classList, data-, insertAdjacentHTML()
+(5) Big API: requestAnimationFrame(), file API, Web Workers, drop file, fullScreen(), page visibility, dns-prefetch(link)
+(6) Others: contenteditable="true"(内容可编辑editable content), placeholders, required, autofocus, pattern,
+
+2. Using div to simulate textarea
+The "outline:0" is for Firefox. The codes are from <a href="http://www.zhangxinxu.com/wordpress/2010/12/div-textarea-height-auto/">ZhangXinxu</a></div>
+
+        <div class="imgdiv">
+            <img src="interviewimg/2_1.png" alt="">
+        </div>
+
+        <div class="text">
+3. Left and right layout</div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/2_2.png" alt="">
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/2_3.png" alt="">
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/2_4.png" alt="">
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/2_5.png" alt="">
+        </div>
+
+        <div class="text">
+4. BFC (Block Formatting Contexts)
+Block Formatting Contexts is an isolated rendering area on the page, and the child elements inside the container do not affect the layout of the external elements.
+Float cannot be none, overflow cannot be visible, position cannot be relative and static, display should be one of [table-cell, table-caption, inline-block].
+
+5. IFC (Inline Formatting Contexts)
+The height of the line box (line frame) of the IFC is calculated from the highest actual height contained in the elements within the row (not affected by the vertical padding/margin)
+
+6. FFC (Flex Formatting Contexts)
+An element with a display value of flex or inline-flex will generate an adaptive container (Flex, container)
+
+7. Picture lazy loading
+Principle: If page contains too many pictures and we want to load them at once, it would be cost amounts of time. So the lazy load method is to delay loading when the pictures aren't in visual page. In order to achieve this method, we should use "data-" property instand of "src", and when showing pictures we will let the "src" be "data-". Before that, we can use an array to save all "data-" properties and reduce workloads. 
+There has a ready-made package you can use <a href="https://github.com/helijun/documents/blob/master/plugin/echo/js/echo.min.js">echo.js</a>
+
+8. Page loading progress bar
+Unluckily, there has no method to give us the number of loaded data. So we have to simulate the loading progress bar. How to simulate? We should insert some javascript blocks into our html codes. And increase the progress bar based on the number of loaded html codes.
+        </div>
+
+        <div class="imgdiv">
+            <img src="interviewimg/2_6.png" alt="">
+        </div>
+		
+	</div>
+</body>
+</html>
