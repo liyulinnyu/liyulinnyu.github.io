@@ -167,6 +167,10 @@ html{
 		display:flex;
 	}
 
+	.imgdiv>img{
+		max-width: 100%;
+	}
+
 	.note{
 		color:#888;
 		font-size: 0.6em;
