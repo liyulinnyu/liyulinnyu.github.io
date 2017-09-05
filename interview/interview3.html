@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Interview Question(3)</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+.container{
+        position: relative;
+        width:80%;
+        height:300px;
+        left:10%;
+        top:0;
+    } 
+    .bar{
+        width:100%;
+        height:50px;
+        border: 1px solid #ccc;
+    }
+    .bar:not(:first-child){
+        margin-top: 10px;
+    }
+</style>
+<body>
+	<div class="det-title">
+		<h1>Interview Question(3)</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+Q : Drag event, for example, drag the last node of 5 sibling nodes to the position between node 1 and node 2.
+        </div>
+
+        <div class="imgdiv">
+            <img src="interviewimg/3_1.png" alt="">
+        </div>
+
+        <div class="imgdiv">
+            <img src="interviewimg/3_2.png" alt="">
+        </div>
+
+        <div class="imgdiv">
+            <img src="interviewimg/3_3.png" alt="">
+        </div>
+
+        <div class="imgdiv">
+            <img src="interviewimg/3_4.png" alt="">
+        </div>
+
+        <div class="text">
+And I have written a case that you can try: 
+        </div>
+
+        <div class="container">
+            <div class="bar" draggable="true">list1</div>
+            <div class="bar" draggable="true">list2</div>
+            <div class="bar" draggable="true">list3</div>
+            <div class="bar" draggable="true">list4</div>
+            <div class="bar" draggable="true">list5</div>
+        </div>
+		
+	</div>
+
+
+
+    <script>
+
+    var container = document.querySelector(".container");
+    var bars = document.querySelectorAll(".bar");
+    var thisbar = null;
+
+    for (var i = 0; i < bars.length; i++){
+        bars[i].onselectstart = function() {
+            return false;
+        };
+        bars[i].addEventListener("dragstart", function(event){
+            event.dataTransfer.effectAllowed = "move";
+            thisbar = event.target;
+        }, false);
+        bars[i].addEventListener("drag", function(event){
+
+        }, false);
+        bars[i].addEventListener("dragend", function(event){
+            thisbar = null;
+        }, false);
+
+        bars[i].addEventListener("dragenter", function(event){
+            event.preventDefault();
+            event.target.style.border = "1px solid red";
+        }, false);
+
+        bars[i].addEventListener("dragover", function(event){
+            event.preventDefault();
+        }, false);
+
+        bars[i].addEventListener("drop", function(event){
+            event.preventDefault();
+            event.target.style.border = "1px solid #ccc";
+            thisbar.parentNode.insertBefore(thisbar, event.target);
+        }, false);
+
+        bars[i].addEventListener("dragleave", function(event){
+            event.target.style.border = "1px solid #ccc";
+        }, false);
+    }
+
+
+
+    </script>
+</body>
+</html>
