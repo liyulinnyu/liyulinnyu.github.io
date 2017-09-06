@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Interview Question(4)</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Interview Question(4)</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+1. JS gets media query.
+Use "window.matchMedia" function, and it has two methods: addListener and removeListener.
+(1)
+        </div>
+		
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/4_1.png" alt="">
+        </div>
+
+        <div class="text">
+(2)
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/4_2.png" alt="">
+        </div> 
+
+        <div class="text">
+2. What's the shortcoming of "typeof bar === 'Object'"?
+It cannot distinguish real object from empty array and null. So we can use "instanceof" or "Object.prototype.toString.call(bar) === '[object Object]'" to help us.
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/4_3.png" alt="">
+        </div>
+
+        <div class="text">
+3. What does the following code return?
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/4_4.png" alt="">
+        </div>
+
+        <div class="text">
+Because the self executing function is equivalent to {b = 3;var a = b;}, so "b" will be a global variable.
+
+4. What does the following code return?
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/4_5.png" alt="">
+        </div>
+
+        <div class="text">
+5. What is IIFE? (Immediately-Invoked Function Expression)
+If we put a code block into a function, and let it be the self executing function, that means IIFE.
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/4_6.png" alt="">
+        </div>
+
+        <div class="text">
+6. How to solve the question: "0.1 + 0.2 === 0.3" return false
+Because the operands are first converted into binary, and then computed, so this question always exists. We can use "x.toFix(2)" and "x.toPrecision()" to help us.
+
+7. Find the output order of digital 1-4.
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/4_7.png" alt="">
+        </div>
+
+        <div class="text">
+Why does "3" appear later than "4"? Because the "setTimeout" function will be executed after JS main parts(JS operating mechanism). For more details, you can search <a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html">RuanYifeng's blog</a>. 
+
+8. Finding palindrome
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/4_8.png" alt="">
+        </div>
+
+        <div class="text">
+9. What is the output?
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/4_9.png" alt="">
+        </div>
+
+        <div class="text">
+Because the "reverse()" function will return the reference of original array, the "arr1" and "arr2" are the same thing. What's more, "arr2.push(arr3)" is to let the whole arr3 be the last element of arr2.  
+
+(That's all)
+        </div>
+
+	</div>
+
+
+</body>
+</html>
