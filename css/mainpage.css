@@ -569,16 +569,40 @@
 		background: rgba(153, 102, 204, 1);
 		color:#fff;
 		position: absolute;
+		left:0;
 		content:attr(data-content);;
 		margin-left: -moz-calc(100% - 80px);
   		margin-left: -webkit-calc(100% - 80px);
-  		margin-left: calc(100% - 90px);
+  		margin-left: calc(100% - 80px);
   		margin-top: -10px;
   		display:table-cell;
   		vertical-align: middle;
   		font-weight: bolder;
   		font-size:0.8em; 
   		text-align: center;
+	}
+	.main-search-div::after{
+		-moz-box-sizing: border-box;  
+		-webkit-box-sizing: border-box; /*Safari3.2+*/
+		-o-box-sizing: border-box; /*Opera9.6*/
+		-ms-box-sizing: border-box; /*IE8*/
+		box-sizing: border-box;
+		width:80px;
+		height: 30px;
+		background: #e1e1e1;
+		color:#999;
+		position: absolute;
+		left:0;
+		content:attr(data-type);;
+		margin-left: -moz-calc(100% - 80px);
+  		margin-left: -webkit-calc(100% - 80px);
+  		margin-left: calc(100% - 80px);
+  		margin-top: -20px;
+  		display:table-cell;
+  		vertical-align: middle;
+  		font-size:0.8em; 
+  		text-align: center;
+  		line-height: 30px;
 	}
 	.main-search-div ul{
 		list-style: none;
