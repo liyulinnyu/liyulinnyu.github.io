@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Get pseudo element</title>
+    <link rel="shortcut icon" href="icon/lyl.ico">
+    <link rel="bookmark" href="icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Get pseudo element</h1>
+	</div>
+	<div class="det-content">
+		
+		<div class="text">
+When you use pseudo elements to create a variety of brilliant effects, have you ever thought about how to get them and change their attributes? Yep, the selectors such as "getElementById" and "querySelector" cannot help us. That means we should find another way. And in this blog, I will divide the problem into two parts, one is how to get the attributes, the other is how to change the value of attributes.
+<h4>1. Get attributes</h4>Just think about it, which method contains pseudo elements? The anwser is "getComputedStyle". How about others? No! Only this method. If you know something about "getComputedStyle" and "currentStyle"(for IE), you will worry about the compatibility of IE. After all only IE9+ supports "getComputedStyle". However, it doesn't matter because only IE9+ supports pseudo elements. Perfect! So let's begin!
+        </div>
+
+        <div class="allcode">   .container::before{
+        position: absolute;
+        width:200px;
+        height:50px;
+        background: #000;
+        content:attr(data-type);
+        color:#fff;
+    }
+
+    &lt;div class="container"&gt;&lt;/div&gt;
+
+    var container = document.querySelector(".container");
+    var p = window.getComputedStyle(container, "::before");
+    alert(p.width);
+    alert(p.getPropertyValue("width"));</div>
+
+        <div class="text">
+There has two methods to get attributes: "p.width" and "p.getPropertyValue". The difference is the former should use hump form.
+<h4>2. Change style</h4>Maybe you have ignored "getComputedStyle" can only read attributes, but cannot be used to rewrite values. And I have said there has no another methods to use pseudo elements. So it seems that we meet a block. Don't be worry, we have the clutch shot —— change class!  
+        </div>
+
+        <div class="allcode">   .changed::before{
+        position: absolute;
+        width:200px;
+        height:50px;
+        background: #000;
+        content:"Good";
+        color:red;
+    }
+    .container::before{
+        position: absolute;
+        width:200px;
+        height:50px;
+        background: #000;
+        content:"Good";
+        color:#fff;
+    }
+
+    &lt;div class="container"&gt;&lt;/div&gt;
+
+    var container = document.querySelector(".container");
+    var p = window.getComputedStyle(container, "::before");
+    
+    container.addEventListener("click", function(event){
+        event.target.className = "changed";
+    }, false);</div>
+
+        <div class="text">
+Only change the style of "container" can we achieve our goal. And in this place, I want to remind that the "className" can rewrite class. And if we add more than one class name, the appearance style is only depended on the order of CSS style instead of the order of class name. It's important!
+<h4>3. Change content</h4>If we only want to change the content value, it would make a fuss over a trifle to rewrite class. So we should use a small tip —— "data-"
+        </div>
+
+        <div class="allcode">   .container::before{
+        position: absolute;
+        width:200px;
+        height:50px;
+        background: #000;
+        content:attr(data-type);
+        color:#fff;
+    }
+
+    &lt;div class="container" data-type="Bad"&gt;&lt;/div&gt;
+
+    var container = document.querySelector(".container");
+    container.addEventListener("click", function(event){
+        event.target.setAttribute("data-type", "Good");
+    }, false);</div>
+
+        <div class="text">
+In this case, the content is connected to the "data-type" attribute. So if we change the value of "data-type", the value of content will be changed. 
+All in all, pseudo elements are powerful, but pseudo elements only exist in CSS rendering tree, but don't exist in the real DOM tree. So it's better not to contain related document in the pseudo elements.
+
+(That's all)
+        </div>
+    
+
+		
+	</div>
+</body>
+</html>
