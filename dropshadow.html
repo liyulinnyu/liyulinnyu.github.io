@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Drop-shadow</title>
+    <link rel="shortcut icon" href="icon/lyl.ico">
+    <link rel="bookmark" href="icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Drop-shadow</h1>
+	</div>
+	<div class="det-content">
+		
+		<div class="text">
+This morning, when I was searching the Github and found the "drop-shadow" attribute, my first reaction was "Is that wrong? Maybe it is box-shadow." Ok, the truth is I am stupid. I began to search the "drop-shadow" in the github, web and the help manual of CSS3. Finally, I found some good blogs about it, such as <a href="http://www.zhangxinxu.com/wordpress/2016/05/css3-filter-drop-shadow-vs-box-shadow/">ZhangXinxu's blog</a>. Actually, I want to write a blog to introduce some interesting features about "drop-shadow" except those in ZhangXinxu's blog.  
+But first, let's look at the difference between "drop-shadow" and "box-shadow".
+<h4>1. Compatibility</h4>Another reason why I was not familiar with "drop-shadow" is for its compatibility. These years I have always cared about compatibility, so some attributes of poor compatibility are less concerned. Obviously it's not a good idea and I have to pay for my mistakes. Now, just learn something new!   
+        </div>
+
+        <div class="imgdiv">
+            <img src="img/dropshadow.png" alt="">
+        </div>
+
+        <div class="text">
+From the chart we can see the bad compatibility in IE and IE mobile. But IE13+ has already supported this attribute. As for the future, who knows? Maybe it will be a amazing factor for its cherubic effect compared to "box-shadow".
+<h4>2. Grammar</h4>The "drop-shadow"'s parameters are similar to "box-shadow"'s.
+        </div>
+
+        <div class="csscode">   filter:drop-shadow(offsetX, offsetY, ambiguity, color);
+    -webkit-filter:drop-shadow(offsetX, offsetY, ambiguity, color);</div>
+
+        <div class="text">
+<h4>3. Difference</h4>Let's use a small case to show the difference. Just imagine that we want to add a shadow to a heart picture, and the shadow also should be a heart. Let's go "box-shadow" first.
+        </div>
+
+        <div class="allcode">   .container {
+        width:200px;
+        height:200px;
+        box-shadow: 20px 20px 20px red;
+        background: url(tfimg/littleheart.png) no-repeat center;
+    }
+    &lt;div class="container"&gt;&lt;/div&gt;</div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="img/dropshadow2.png" alt="">
+        </div>
+
+        <div class="text">
+Ok, what's happening? The "box-shadow" can only add shadow to the whole picture, but it's not we want. And let's see the amazing effect of "drop-shadow".
+        </div>
+
+        <div class="allcode">   .container {
+        width:200px;
+        height:200px;
+        background: url(tfimg/littleheart.png) no-repeat center;
+        filter:drop-shadow(20px 20px 20px red);
+        -webkit-filter:drop-shadow(20px 20px 20px red);
+    }
+    &lt;div class="container"&gt;&lt;/div&gt;</div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="img/dropshadow3.png" alt="">
+        </div>
+
+        <div class="text">
+Isn't it amazing? The "drop-shadow" can, emmmmmmmmmmm, can through the ".png" picture where there is transparent and only project opaque areas. Ok, maybe this is the foundation function of "drop-shadow", and if you want to learn more details, just look at the ZhangXinxu's blog.
+<h4>4. Amazing effect</h4> Is that all? No! When I was coding some cases of "drop-shadow", I found an interesting thing accidentally. What will happen if we put "box-shadow" and "drop-shadow" together?   
+        </div>
+        
+        <div class="allcode">   .container{
+        width:200px;
+        height:200px;
+        background: url(tfimg/littleheart.png) no-repeat center;
+        filter:drop-shadow(20px 20px red);
+        -webkit-filter:drop-shadow(20px 20px red);
+        box-shadow: 20px 20px black;
+    }
+    &lt;div class="container"&gt;&lt;/div&gt;</div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="img/dropshadow4.png" alt="">
+        </div>
+
+        <div class="text">
+The "drop-shadow" will add a shadow to the layer of "box-shadow". We realize the "box-shadow" can create a "div". So does "drop-shadow" also create a "div"? Let's see another case, in this case, I will change the DOM tree in order to show the difference.
+        </div>
+
+        <div class="allcode">   .container{
+        width:200px;
+        height:200px;
+    }
+    .container>img{
+        filter:drop-shadow(50px 50px red);
+        box-shadow: 20px 20px 20px black;
+    }
+    &lt;div class="container"&gt;
+        &lt;img src="tfimg/littleheart.png" alt=""&gt;
+    &lt;/div&gt;</div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="img/dropshadow5.png" alt="">
+        </div>
+
+        <div class="text">
+How to explain this effect? Actually, the "drop-shadow" will project all the opacity areas including the shadow areas, border areas and so on. And it will create a...emmmmmmm I name it "half-div". What is "half-div"? Actually it is a real "div", but some areas don't obey the hierarchical order, it only care about transparent —— "If there is transparent and I will show!"
+So if we add "drop-shadow" attribute in the parent "div", the effect will be the same, because the default parent is  transparent, and the only opacity area is the heart picture.  
+        </div>
+
+        <div class="allcode">   .container{
+        width:200px;
+        height:200px;
+        filter:drop-shadow(50px 50px red);
+    }
+    .container>img{}
+    &lt;div class="container"&gt;
+        &lt;img src="tfimg/littleheart.png" alt=""&gt;
+    &lt;/div&gt;</div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="img/dropshadow6.png" alt="">
+        </div>
+
+        <div class="text">
+Ok, I think these cases will help you understand it. But the best way to learn something is to use your hands and try it! Finally let's say it again! "If there is transparent and I will show!"
+
+(That's all)
+        </div>
+
+
+		
+	</div>
+</body>
+</html>
