@@ -590,7 +590,7 @@
 		width:80px;
 		height: 30px;
 		background: #e1e1e1;
-		color:#777;
+		color:#666;
 		position: absolute;
 		left:0;
 		content:attr(data-type);;
