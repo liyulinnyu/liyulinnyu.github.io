@@ -65,7 +65,11 @@
                 }
             }
             
-            alert(particles.length);                        
+            context.clearRect(0, 0, totalwidth, totalheight);
+            for (i = 0; i < particles.length; i++){
+                context.fillStyle = particles[i].fillStyle;
+                context.fillRect(particles[i].x, particles[i].y, 1, 1);
+            }                       
         }
 
         // 放函数里不行？？ 为什么: 同源！！
