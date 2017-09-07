@@ -108,7 +108,7 @@ A = [(j-1)*data.width + (i-1)]*4 + 3</span>
         </div>
 
         <div class="jscode">    context.clearRect(0, 0, totalwidth, totalheight);
-    for (i = 0; i < particles.length; i++){
+    for (i = 0; i &lt; particles.length; i++){
         context.fillStyle = particles[i].fillStyle;
         context.fillRect(particles[i].x, particles[i].y, 1, 1);
     }</div>
@@ -117,8 +117,8 @@ A = [(j-1)*data.width + (i-1)]*4 + 3</span>
 Ok, let's see the final particle effect. Actually, we can also use the pixels to do some amazing effects, such as particle trajectory, particle collision and so on. Just use some math formulas or Bezier curves.
         </div>
         
-        <div class="imgdiv">
-            <img src="" alt="">
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="img/particle4.png" alt="">
         </div>
 
         <div class="text">
