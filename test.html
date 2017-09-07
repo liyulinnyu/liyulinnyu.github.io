@@ -58,7 +58,7 @@
                         var particle = {
                             x : totalwidth*0.5-100 + i*s_cols + (Math.random()-0.5)*20,
                             y : totalheight*0.5-100 + j*s_rows + (Math.random()-0.5)*20,
-                            fillStyle : "#"+data[pos]+data[pos+1]+data[pos+2]
+                            fillStyle : "rgb("+data[pos]+","+data[pos+1]+","+data[pos+2]+")"
                         }
                         particles.push(particle);
                     }
