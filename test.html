@@ -61,6 +61,13 @@
                             fillStyle : "rgb("+data[pos]+","+data[pos+1]+","+data[pos+2]+")"
                         }
                         particles.push(particle);
+                    }else if (data[pos] >= 200){
+                        var particle = {
+                            x : totalwidth*0.5-100 + i*s_cols,
+                            y : totalheight*0.5-100 + j*s_rows,
+                            fillStyle : "rgb("+data[pos]+","+data[pos+1]+","+data[pos+2]+")"
+                        }
+                        particles.push(particle);
                     }
                 }
             }
