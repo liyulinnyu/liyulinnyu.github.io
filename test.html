@@ -54,7 +54,7 @@
                 for (var j = 0; j < rows; j++){
                     var pos = [(j*s_rows - 1)*imgdata.width + (i*s_cols - 1)]*4;
                     // 判断是否符合标准
-                    if (data[pos] > 50){
+                    if (data[pos] > 50 && data[pos] < 200){
                         var particle = {
                             x : totalwidth*0.5-100 + i*s_cols + (Math.random()-0.5)*20,
                             y : totalheight*0.5-100 + j*s_rows + (Math.random()-0.5)*20,
