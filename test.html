@@ -47,18 +47,16 @@
             imgdata = context.getImageData(totalwidth*0.5-100, totalheight*0.5-100, 200, 200);
             var cols = 200,
                 rows = 200,
-                s_cols = parseInt(imgdata.width/cols),
-                s_rows = parseInt(imgdata.height/rows),
                 pos = 0, // 粒子在data中的位置
                 data = imgdata.data;   // 整体数值
             for (var i = 0; i < cols; i++){
                 for (var j = 0; j < rows; j++){
-                    var pos = [(j*s_rows - 1)*imgdata.width + (i*s_cols - 1)]*4;
+                    var pos = [(j - 1)*imgdata.width + (i - 1)]*4;
                     // 判断是否符合标准
                     if (data[pos] > 50){
                         var particle = {
-                            x : totalwidth*0.5-100 + i*s_cols + (Math.random()-0.5)*20,
-                            y : totalheight*0.5-100 + j*s_rows + (Math.random()-0.5)*20,
+                            x : totalwidth*0.5-100 + i + (Math.random()-0.5)*20,
+                            y : totalheight*0.5-100 + j + (Math.random()-0.5)*20,
                             fillStyle : "rgb("+data[pos]+","+data[pos+1]+","+data[pos+2]+")"
                         }
                         particles.push(particle);
@@ -69,7 +67,6 @@
             draw();                  
         }
 
-        // 放函数里不行？？ 为什么: 同源！！
         
         function draw(){
             context.clearRect(0, 0, totalwidth, totalheight);
@@ -79,7 +76,6 @@
                 context.fillStyle = particles[i].fillStyle;
                 context.fillRect(particles[i].x, particles[i].y, 1, 1);
 
-                particles[i].y -= (totalheight-particles[i].y)*0.1;
             }  
 
             

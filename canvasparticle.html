@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Canvas particle</title>
+    <link rel="shortcut icon" href="icon/lyl.ico">
+    <link rel="bookmark" href="icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>How to build particle effects with Canvas</h1>
+	</div>
+	<div class="det-content">
+		
+		<div class="text">
+When you design a Canvas game, in most cases, you can finish it well without particle effects. However, it's not perfect. When you really want to achieve something, just make it perfect and flawlessness! Some effects are cherubic and amazing, why not use them to improve user experience? Particle effect is one of them. And it is also the most powerful function of Canvas which is totally different from "SVG" and CSS animation. The former is pixel level, and the latter is block level.
+Ok, it's easy, don't wait, let's begin!
+<h4>1. Put picture on the canvas</h4>In order to let the canvas fill the entire screen, we should use JS to help us, because if using CSS, the width and height of canvas will be scaled down. And another thing to remind is when using "drawImage" function to put picture on the canvas, we should wait some time until the picture has been loaded. So the "drawImage" function should be written in the "image.onload()" or "window.onload()", both work. 
+        </div>
+
+        <div class="jscode">    var totalwidth = window.innerWidth;
+    var totalheight = window.innerHeight;
+
+    var canvas = "&lt;canvas id='thecanvas' width='"+totalwidth+"px' height='"+totalheight+"px'&gt;&lt;/canvas&gt;";
+    document.body.insertAdjacentHTML("beforeEnd", canvas);
+    var thecanvas = document.querySelector("#thecanvas");
+    var context = thecanvas.getContext("2d");
+
+    var nyuimg = new Image();
+    nyuimg.src = "img/nyu.jpg";
+
+    nyuimg.onload = function(){
+        <span class="note">// you can also write here</span>
+    }
+
+    window.addEventListener("load", canvasApp, false);
+
+    function canvasApp(){
+        context.drawImage(nyuimg, totalwidth*0.5-100, totalheight*0.5-100, 200, 200);
+    }</div>
+
+        <div class="text">
+Let's see the effect, we can see that we put the "nyu" picture on the canvas.
+        </div>
+        
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="img/particle1.png" alt="">
+        </div>
+
+        <div class="text">
+<h4>2. "getImageData"</h4>Before discussing the parameters, I want to remind you a detail, when we want to use both "getImageData" and "drawImage" at the same time, our browsers will warn because it does not seem safe for its different domain. So how to solve it? We have to put this case into our online server. You can put it on the github or your own server, anyway, you should let them in the same domain from the browsers' view.
+Ok, come back. The "getImageData" function has three attributes: width, height and data. The "data" attribute is an Uint8ClampedArray type array. It contains all the color information as follows. (The picture is provided by <a href="http://web.jobbole.com/87602/">Jobbole</a>. )
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="img/particle2.png" alt="">
+        </div>
+
+        <div class="text">
+Every pixel will have four values in array(R, G, B, A). And the array's length is (data.width * data.height * 4). (The picture is provided by <a href="http://web.jobbole.com/87602/">Jobbole</a>. )
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="img/particle3.png" alt="">
+        </div>
+
+        <div class="text">
+So if we want to find a certain color of pixel, we can use the following method:
+<span style="font-size:0.8em;color:#336699;">R = [(j-1)*data.width + (i-1)]*4
+G = [(j-1)*data.width + (i-1)]*4 + 1
+B = [(j-1)*data.width + (i-1)]*4 + 2
+A = [(j-1)*data.width + (i-1)]*4 + 3</span>
+<h4>3. Get the right pixels</h4>So now we can get the pixels we want by comparing RGBA. In this code, in order to show the particle effect, you should use "Math.random()" method to change pixel position randomly to leave them apart. What's more, if you want to keep the color of pixels, you should use a variable, and the color should record by using "rgb()" or "rgba()", but don't use "#" plus numbers since it cannot get the right color. (Little trick)
+        </div>
+
+        <div class="jscode">    var imgdata = null,
+        particles = [];
+    function canvasApp(){
+        <span class="note">// ...</span>
+        var cols = 200,
+            rows = 200,
+            pos = 0, 
+            data = imgdata.data;   
+            for (var i = 0; i &lt; cols; i++){
+                for (var j = 0; j &lt; rows; j++){
+                    var pos = [(j - 1)*imgdata.width + (i - 1)]*4;
+                    if (data[pos] > 50){
+                        var particle = {
+                            x : totalwidth*0.5-100 + i + (Math.random()-0.5)*20,
+                            y : totalheight*0.5-100 + j + (Math.random()-0.5)*20,
+                            fillStyle : "rgb("+data[pos]+","+data[pos+1]+","+data[pos+2]+")"
+                        }
+                        particles.push(particle);
+                    }
+                }
+            }                  
+        }</div>
+
+        <div class="text">
+<h4>4. Draw particles</h4>The final thing is to draw pixels.
+        </div>
+
+        <div class="jscode">    context.clearRect(0, 0, totalwidth, totalheight);
+    for (i = 0; i < particles.length; i++){
+        context.fillStyle = particles[i].fillStyle;
+        context.fillRect(particles[i].x, particles[i].y, 1, 1);
+    }</div>
+
+        <div class="text">
+Ok, let's see the final particle effect. Actually, we can also use the pixels to do some amazing effects, such as particle trajectory, particle collision and so on. Just use some math formulas or Bezier curves.
+        </div>
+        
+        <div class="imgdiv">
+            <img src="" alt="">
+        </div>
+
+        <div class="text">
+(That's all)
+        </div>
+
+
+		
+	</div>
+</body>
+</html>
