@@ -40,10 +40,11 @@
 
         window.addEventListener("load", canvasApp, false);
 
+        var imgdata = null,
+            particles = [];
         function canvasApp(){
             context.drawImage(nyuimg, totalwidth*0.5-100, totalheight*0.5-100, 200, 200);
-            var imgdata = context.getImageData(totalwidth*0.5-100, totalheight*0.5-100, 200, 200);
-            var particles = [];
+            imgdata = context.getImageData(totalwidth*0.5-100, totalheight*0.5-100, 200, 200);
             var cols = 200,
                 rows = 200,
                 s_cols = parseInt(imgdata.width/cols),
@@ -82,7 +83,7 @@
             }  
 
             
-            requestId = requestAnimationFrame(draw);   
+            setTimeout(draw, 20);   
         }
 
 
