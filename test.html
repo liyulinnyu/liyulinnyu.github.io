@@ -46,8 +46,8 @@
             alert(imgdata.data);
         }
 
-        // 放函数里不行？？ 为什么
-        /*
+        // 放函数里不行？？ 为什么: 同源！！
+        
         var particles = [];
         var cols = 200,
             rows = 200,
@@ -60,7 +60,7 @@
             for (var j = 0; j < rows; j++){
                 var pos = [(j*s_rows - 1)*imgdata.width + (i*s_cols - 1)]*4;
                 // 判断是否符合标准
-                if (data[pos] > 100){
+                if (data[pos] > 250){
                     var particle = {
                         x : totalwidth*0.5-100 + i*s_cols + (Math.random()-0.5)*20,
                         y : totalheight*0.5-100 + j*s_rows + (Math.random()-0.5)*20,
@@ -70,7 +70,8 @@
                 }
             }
         }
-        */
+        
+        alert(particles.length);
 
 
 
