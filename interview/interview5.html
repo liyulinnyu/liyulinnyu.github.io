@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Interview Question(5)</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Interview Question(5)</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+1. white-space, word-wrap, word-break
+"white-space: no-wrap" : The text will not wrap in paragraph except "&lt;br&gt;".
+"word-wrap: break-word": Change the long words to the next line.
+"word-break: break-all": Break the long words, put the rest to the next line.
+
+2. Centered unknown height picture
+Use "display: table-cell"(Must let the parent node have "display:table").
+For IE6,7:
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/5_1.png" alt="">
+        </div>
+
+        <div class="text">
+3. Clear float
+Method (1):</div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/5_2.png" alt="">
+        </div>
+
+        <div class="text">
+Method (2):</div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/5_3.png" alt="">
+        </div>
+
+        <div class="text">
+Method (3):</div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/5_4.png" alt="">
+        </div>
+
+        <div class="text">
+4. Clear combine margin
+For parent-child type: Set "overflow:hidden" to the parent node.
+For sibiling type: Set "position:absolute" or "float".
+
+5. Different between sort letter and number:
+Letter: use sort() directly.
+Number: use sort(function(n1, n2)...).
+
+6. IE Hack types:
+Selector Hack: such as *html(IE6), * + html(IE7);
+Attribute Hack: such as _(IE6), *(IE7), \0(IE8), :root(IE9), \0\9(IE8, IE9);
+Condition Hack: &lt;!--[if ? IE ?]&gt;HTML&lt;![endif]--&gt;
+
+7. Difference between "em" and "rem":
+The "em" is based on the parent node. But "rem" is based on the "html".
+
+8. Rules of "em":
+(1) Browser default font size is 16px.
+(2) If a element doesn't set "font-size" value, others attributes will be based on following formula:</div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/5_5.png" alt="">
+        </div>
+
+        <div class="text">
+(3) If a element has "font-size" value, the method to compute "font-size" is the same as formula above. But others attributes will be based on "font-size" of itself:</div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/5_6.png" alt="">
+        </div>
+
+        <div class="text">
+Remember, when you are using the formulars above, just translate the "font-size" unit into "px".
+
+(That's all)
+        </div>
+
+	</div>
+
+
+</body>
+</html>
