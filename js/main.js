@@ -72,7 +72,7 @@
 				case "Tech" : location.href = "tech.html";break;
 				case "Node" : location.href = "node.html";break;
 				case "Game" : location.href = "game.html";break;
-				case "Life" : location.href = "life.html";break;
+				case "Life" : location.href = "game.html";break;
 				case "Inte" : location.href = "inte.html";break;
 				
 			}
