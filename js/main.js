@@ -64,7 +64,7 @@
 		
 
 		// 根据button改变页面
-		/*
+		
 		function ShowTechPage(event){
 
 			var target = EventUtil.getTarget(event);
@@ -78,7 +78,7 @@
 				
 			}
 		}
-		*/
+		
 
 		var techButton = document.querySelectorAll(".button-list-det");
 		
