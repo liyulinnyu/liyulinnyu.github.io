@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Interview Question(6)</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Interview Question(6)</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+1. How to let input and button/div in the same line?
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/6_1.png" alt="">
+        </div>
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/6_2.png" alt="">
+        </div>
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/6_3.png" alt="">
+        </div>
+
+        <div class="text">
+2. How to forbid enlarging the screen in mobile devices when touching input button? Thanks to <a href="https://m.aliyun.com/yunqi/ziliao/40464">the link</a>.
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="interviewimg/6_4.png" alt="">
+        </div>
+
+        <div class="text">
+3. Front end security
+(1) XSS: JS injection.
+    ① Use "lt" and "gt" to filter "<" and ">".
+    ② Don't use eval() and new Function() methods.
+    ③ Add "httpOnly" attributes to the cookies, so that js cannot rewrite cookies.
+(2) CSRF:
+    ① Check if http referer is the same domain.
+    ② Use check code.
+(3) HTTP attack:
+    Use https.
+
+4. What's happenning when using new Foo()?
+(1) Create a new object.
+(2) "this" will point to the object.
+(3) Run the code of constructor.
+(4) Return the new object.
+
+5. Principle of browser render.
+(1) HTML -> DOM tree
+(2) CSS -> CSS Rule tree
+(3) DOM and CSS Rule tree -> Render tree
+(4) Put elements on the web page.
+
+6. Front end routing
+(1) HTML5:
+    history.pushState() and history.replaceState()
+(2) Hash:
+    window.location
+
+7. Restful API
+(1) Put the API into the special origin.
+(2) Put the version of API into the URL
+(3) "Get": get resource
+    "Post": create resource
+    "put": update resource
+    "delete": delete resource
+(4) Don't use JSP, PHP, try to use AngularJS and so on.
+
+8. Error monitoring
+(1) try..catch
+(2) object.onerror
+
+9. How to get the error when using js to cross origin?
+Add "crossorigin" attribute to the script.
+
+10. How to send error to the back end?
+(1) Ajax
+(2) Image
+
+11. The steps of event capture
+window -> document -> documentElement(html) -> body -> ... -> object
+
+12. Application of Event object
+(1) event.preventDefault().
+(2) event.stopPropagation().
+(3) event.stopImmediatePropagation().
+(4) event.currentTarget
+(5) event.target
+
+13. How to create responsible picture?
+(1) JS resize event
+(2) img srcset
+(3) picture -> source
+(4) svg
+
+14. How to make sure an object is an array?
+(1) a instanceof Array
+(2) a.constructor === Array
+(3) Array.prototype.isPrototypeOf(a)
+(4) Object.getPrototypeOf(a)
+(5) Array.isArray(a)
+(6) Object.prototype.toString.apply(a) === "[object Array]"
+The (6) method is the best one.
+
+15. IE expression:
+e.g height:expression(this.offsetHeight);
+(less use)
+
+(That's all)
+        </div>
+
+	</div>
+
+
+</body>
+</html>
