@@ -8,6 +8,9 @@
 </head>
 <style>
 @media all and (max-width: 1000px){
+    html, body{
+        font-size: 120%;
+    }
     #theCanvas{
         position: absolute;
         left:0;
@@ -17,10 +20,11 @@
 }
 
 @media all and (min-width: 1000px){
+    html, body{
+        font-size: 100%;
+    }
     #theCanvas{
         position: absolute;
-        left:calc(50%-500px);
-        left:-webkit-calc(50%-500px);
         top:0;
         background: #000;
     }
@@ -32,15 +36,20 @@
     
     <script>
     (function(){
-        var totalwidth = window.innerWidth;
+        var totalwidth = window.innerWidth > 1000 ? 1000 : window.innerWidth;
         var totalheight = window.innerHeight/2;
 
-        var canvas = "<canvas id='theCanvas' width='" + totalwidth +"px' height='" + totalheight + "px' style='max-width:1000px;' ></canvas>"
+        var canvas = "<canvas id='theCanvas' width='" + totalwidth +"px' height='" + totalheight + "px' ></canvas>"
 
         document.body.insertAdjacentHTML("beforeEnd", canvas);
 
         var thecanvas = document.querySelector("#theCanvas");
         var context = theCanvas.getContext("2d");
+
+        if (totalwidth === 1000){
+            // 证明是大屏
+            thecanvas.style.left = (window.innerWidth - totalwidth)/2 + "px";
+        }
 
         var text = [
             "Look Look",
@@ -122,7 +131,7 @@
             if (addinterval > 20){
                 // add x, y, fontsize, color, speed, text
                 var tempx = Math.min(totalwidth, 1000),
-                    tempsize = Math.random()*10 + 16,
+                    tempsize = Math.random() + 1,
                     tempy = Math.random()*totalheight + tempsize,
                     tempcolor = colors[Math.floor(Math.random()*colors.length)],
                     tempspeed = Math.random()*5 + 1,
@@ -146,7 +155,7 @@
                 var temp = allbullet[i];
 
                 context.fillStyle = temp.color;
-                context.font = temp.fontsize + "px YH";
+                context.font = temp.fontsize + "em YH";
                 var text = temp.text;
                 temp.width = context.measureText(text).width;   // 给弹幕对象加上width属性
                 context.fillText(text, temp.x, temp.y);
