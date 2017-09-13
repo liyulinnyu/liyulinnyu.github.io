@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Monitor orientation of mobile devices</title>
+    <link rel="shortcut icon" href="icon/lyl.ico">
+    <link rel="bookmark" href="icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>How to monitor orientation of mobile devices</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+It is very significant to monitor the changes of mobile screen when you design or develop a web page for mobile devices. As we all know, the mobile phone will have totally different width and height of screen when changing its orientation, so sometimes it causes bad rendering of CSS and bad user experience. Therefore, the question of how to monitor orientation is very important for us. I will discuss three methods and their compatibilities.
+<h4>1. "orientationchange" event</h4>The mobile device has a "orientationchange" event, which is added in Safari first. And the window has an attribute to monitor the orientation —— winodw.orientation. It has three values: 90, 0, -90. The value "0" represent portrait, and "90" means left rotate, and "-90" means right rotate. Let's see an example and its effect as follows:  
+        </div>
+
+        <div class="jscode">    window.addEventListener('orientationchange',function(){
+    alert(window.orientation);
+    },false);</div>
+        
+        <div class="text">
+         </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="img/changeorientation.jpg" alt="">
+        </div>
+
+        <div class="text">
+The picture is the screen cut from my phone. And from my test, both the Safari and Android browsers support this event. It's a good news.  
+<h4>2. CSS method</h4>This is a common method, we all know that CSS has "@media" method. And this method is supported by IOS3.2+ and Android2.0+, it's also a good way.
+        </div>
+
+        <div class="csscode">   @media all and (orientation: portrait) {
+        body div {background: red;} 
+    }
+    @media all and (orientation: landscape) { 
+        body div {background: blue; } 
+    }</div>
+
+        <div class="text"><h4>3. Resize event</h4>The last one is old but gets more compatibilities. When we use resize event to monitor change of screen, we can compare innerWidth and innerHeight. When innerWidth &lt; innerHeight, it's portrait, otherwise it's landscape.
+        </div>
+
+        <div class="jscode">    window.addEventListener('resize', function(){
+        var orientation = (window.innerWidth > window.innerHeight) ? 'landscape' : 'portrait';
+        <span class="note">// do something</span>
+    }, false);</div>
+
+        <div class="text">
+Ok, all those methods to monitor orientation are mentioned above, you can select one to achieve your goals.
+
+(That's all)
+        </div>
+
+		
+	</div>
+</body>
+</html>
