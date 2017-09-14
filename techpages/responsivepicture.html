@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Responsive Picture</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Responsive Picture</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+(First of all, this is the blog which is translated from my Chinese blog written in 2016. So I also think this blog should belong to the 2016's blogs even I have changed some pictrues and words of it.) 
+
+Now it's 2 p.m. New York time on September 14th, I just finished my PL class and came back, ate some sweet dumplings, tired. But I want to translate my blog written in 2016 into English which is related to the responsive picture skill. Because as time goes by, the support ability of our browsers is increased,  for example, one method to create responsive picture is using "srcset" attribute, before 2016, we can see the support ability as follows: (The picture is from <a href="http://www.zhangxinxu.com/wordpress/2014/10/responsive-images-srcset-size-w-descriptor/">Zhang Xinxu's blog</a>)
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="../img/responsive_z.png" alt="">
+        </div>
+
+        <div class="text">
+But now, let's see the support ability:
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="../img/responsivesmall1.png" srcset="../img/responsivebig1.png 1000w" alt="">
+        </div>
+
+        <div class="text">
+You can see the "srcset" attribute has been supported well, at least much better than 2014. 
+Ok, no more nonsense, let's begin.
+<h4>1. "srcset" attribute</h4>The compatibility graph is showed above. And this attribute is from browser's view, because it's embedded in the tag.
+        </div>
+
+        <div class="htmlcode">    &lt;img src="test1.png" srcset="test2.png 1000w" alt=""&gt;</div>
+
+        <div class="text">
+Before 2016, we have to add the device pixel ratio information, such as "test2.png 1000w 2x". But now, just like what I have said this attribute is supported by browser, so we don't need to add device pixel ratio information, this task is given to the browser.
+
+And this attribute is also easy to understand, if the browser screen is bigger than 1000, the img tag will use "test2.png", otherwise it will use "test1.png". 
+
+Ok, this attribute only tells us which picture we should select, but we don't know which width is better to show the picture in that situation. Although for the most of time, we often use "width:100%" to achieve this goal, however, sometimes we want to change our layout in some special devices in order to get better user experience. So we can use "size" attribute.
+        </div>
+
+        <div class="htmlcode">    &lt;img src="test1.png" srcset="test2.png 1000w" 
+    sizes="(max-width: 1000px) 500px, (min-width:1000px) 100%"&gt;</div>
+
+        <div class="text">
+It's also easy to understand, the media query is in parentheses, the number is width of picture in that situation.
+<h4>2. "picture" tag</h4>The "picture" tag is from coders' view, it's just like HTML5 video. We should put some "source" tags to link different pictures in order to suit to different devices.
+
+First let's see the compatibility:
+        </div>
+
+        <div class="imgdiv" style="min-height:2em;">
+            <img src="../img/responsivesmall2.png" srcset="../img/responsivebig2.png 1000w" alt="">
+        </div>
+
+        <div class="text">
+The compatibility is almost the same as "srcset". 
+
+Second let's discuss how to use this tag.
+        </div>
+
+        <div class="htmlcode">    &lt;picture&gt;
+        &lt;source srcset="nyu.jpg" media="(min-width: 768px)"&gt;
+        &lt;source srcset="test.jpg" media="(min-width: 300px)"&gt;
+        &lt;img srcset="timg.jpg"&gt;
+    &lt;/picture&gt;</div>
+
+        <div class="text">
+If you have used HTML5 video, you must be familiar with "source" tag. It's just use media query and put different picture in the different situation, and the "img" tag will be showed when the screen is less than 300px or the browser doesn't support "picture" tag.
+
+In this place, I want to mention two things:
+(1) The "img" tag must be required.
+(2) Some blogs use "src" attribute instead of "srcset" in "source" tag, but from my tests, it doesn't work, so it's better to use "srcset" attribute in "source" tag, but this lead one more question as follows.
+
+My question:
+If the "source" tag can only use "srcset" attribute(I have tested "src", it really cannot work), why does "picture" tag get better compatibility than "srcset" in IE14 and IE15? (You can look the compatibility pictures above)
+
+I'm confused, maybe I think too less? If you have any explanations, please don't hesitate to contact me: <span style="text-decoration:underline;">liyulinnyu@gmail.com</span>. Thank you so much.
+
+(That's all)  
+        </div>
+		
+	</div>
+</body>
+</html>
