@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Interview Question(7)</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Interview Question(7)</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text"><h4>1. CSS Sprite</h4>Put all the small pictures into one large picture. 
+(1) It's better not to use it in content pictures(img label). But some descriptive pictures can use it.
+(2) For both horizontal and vertical tiled images also cannot be merged into the Sprite map.
+(3) Put all horizontal tiled pictures together, arranged vertically.
+(4) Put all vertical tiled pictures together, arranged horizontally.
+(5) In the CSS, you should use "background-position:x y;" to cut the pictures you want.
+
+Advantages:
+(1) Less HTTP requests
+(2) Increase the loading speed
+
+DisAdvantages:
+(1) Have some white space that you won't use in the picture, because you have to use them to divide pictures.
+(2) Affects browser scaling
+(3) CSS Sprite pictures cannot be printed, unless using "@print"
+
+<h4>2. Base64</h4>Display pictures by using Base64 encoding. (Google voice search button)
+Such as: {background: url(data:image/gif;base64,R0lGOQW9LT1TRk1V7S2xYJADs=) no-repeat center;}
+
+Advantages:
+(1) Less HTTP requests
+
+Disadvantages:
+(1) Only used in small pictures(10k)
+(2) After conversion, the file is about 1/3 larger than the picture, you have to use GZIP to compress it
+(3) IE8+ support
+(4) The time of CSS CRP(Critical Rendering Path) will increase
+
+<h4>3. Picture types</h4>(1) "gif": mainly used in small icons
+(2) "jpg": HD, big picture(Losing)
+(3) "png8": used to replace gif, smaller size
+(4) "png24": used to replace jpg, but its size is more bigger, sometimes used in half transparent picture
+(5) "svg": vector diagram. Used in some icons, logos.
+
+        </div>
+
+	</div>
+
+
+</body>
+</html>
