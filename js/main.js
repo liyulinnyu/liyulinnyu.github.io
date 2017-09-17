@@ -150,7 +150,7 @@
 		function ChangeRows(e){
 			var rows = document.querySelectorAll(".rows");
 			var target = EventUtil.getTarget(e);
-			returnmainpage.scrollIntoView();   // let the beginning show
+			//returnmainpage.scrollIntoView();   // let the beginning show
 			if(target.id === "changeraws-lblock"){
 				// prev button
 				for (var i = 0; i < rows.length; i++){
@@ -189,6 +189,18 @@
 				}
 			}
 			changeHeight();        // 只能放最后
+
+
+			// 滑到最上面
+			var topheight =  (document.documentElement.scrollTop || 0) + (document.body.scrollTop || 0);
+			var step = parseInt(topheight / 20);
+			(function(){
+				topheight -= step;
+				if (topheight > -step){
+					document.documentElement.scrollTop === 0? document.body.scrollTop = topheight : document.documentElement.scrollTop = topheight;
+               		setTimeout(arguments.callee, 20);
+				}
+			})();
 		}
 
 	})();
