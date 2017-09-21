@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Interview Question(8)</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Interview Question(8)</h1>
+	</div>
+	<div class="det-content">
+		
+       <div class="text">
+<h4>1. "for in" and "for of"</h4>(1) "for in" belongs to ES5 and "for of" belongs to ES6
+(2) The two lines of code in following picture are the same.
+       </div>
+
+       <div class="imgdiv">
+           <img src="interviewimg/8_1.png" alt="">
+       </div>
+
+       <div class="text">
+<h4>2. Web optimization</h4>(1) Priority loading and defer loading:
+    &lt;link rel="preload"&gt;
+    &lt;script src="" defer&gt;
+(2) Cache, Compress, CDN
+(3) Picture optimization:
+    a. Right picture type
+    b. Lazy loading
+    c. CSS Sprites
+    d. Use SVG and canvas
+    e. Use "srcset" and "picture" attributes
+    f. Use base64 code
+(4) Use Webpack, Glup...
+(5) Use Reactjs, Angularjs
+(6) Build reuse components
+
+<h4>3. Clear the space when using "inline-block"</h4>   Set "font-size:0;"
+<h4>4. Disable all click events</h4>    .ele {pointer-events:none;}  (Include links)
+<h4>5. Use pseudo class to show the link when printing "a" tag</h4>    @media print {
+        a[href]:after{
+            content:"("attr(href)")";
+        }
+    }
+<h4>6. What is AB testing?</h4>In marketing and web analytics, A/B testing (bucket tests or split-run testing) is a controlled experiment with two variants, A and B. It is a form of statistical hypothesis testing or "two-sample hypothesis testing" as used in the field of statistics. In online settings, such as web design (especially user experience design), the goal of A/B testing is to identify changes to web pages that increase or maximize an outcome of interest (e.g., click-through rate for a banner advertisement). Formally the current web page is associated with the null hypothesis. A/B testing is a way to compare two versions of a single variable typically by testing a subject's response to variable A against variable B, and determining which of the two variables is more effective.
+
+<h4>7. ES6 Map and Set</h4>    Map: </div>
+
+       <div class="imgdiv">
+           <img src="interviewimg/8_2.png" alt="">
+       </div>
+
+       <div class="text">    Set:</div>
+
+       <div class="imgdiv">
+           <img src="interviewimg/8_3.png" alt="">
+       </div>
+
+       <div class="text">
+<h4>8. ES6 Weakmap and Weakset</h4>    Weakmap:</div>
+
+        <div class="imgdiv">
+            <img src="interviewimg/8_4.png" alt="">
+        </div>
+
+        <div class="text">    Weakset:</div>
+
+        <div class="imgdiv">
+            <img src="interviewimg/8_5.png" alt="">
+        </div>
+
+        <div class="text">
+<h4>9. Difference between weakmap/weakset and map/set? </h4>(1) map/set is strong type, they cannot be garbage collected, so if we put some elements in it, maybe it would be hard to clear them in memory.
+(2) However, weakmap/weakset is weak type, which means the type of key should be an object!!! Because object can be cleared if we don't need it by setting "object = null".
+
+<h4>10. How to explain the following example? (Write by Nicholas C. Zakas)</h4></div>
+
+        <div class="imgdiv">
+            <img src="interviewimg/8_6.png" alt="">
+        </div>
+
+        <div class="text">
+It uses a weakmap to contain private variables, because the key should be an object, so he uses "this" to be the key, and set a {name:name} to be the value. 
+In the Person.prototype.getName() function, he uses "get()" method to get the value whose key === "this"! And this function returns an object, so that we can use "obj.name" to get the value.
+<span style="color:red;">(This example is stunning for using "this" to be the key.) </span>
+
+(That's all)
+        </div>
+
+
+
+	</div>
+
+
+</body>
+</html>
