@@ -1,7 +1,7 @@
 html{
 	font-size: 100%;  /*for IE*/
 	width: 100%;
-	font-family: "Whitney SSm A", "Whitney SSm B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+	font-family: "Helvetica", "Sans-serif", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
 	overflow-x: hidden; 
 }
 @media all and (min-width:1000px){
@@ -160,7 +160,7 @@ html{
 		padding-left: 2em;
 		padding-right: 2em;
 		width:100%;
-		min-height: 20em;
+		min-height: 2em;
 		 -webkit-perspective: 1000px;
 	    perspective: 1000px;
 	    display:-webkit-flex;
@@ -334,7 +334,7 @@ html{
 		padding-left: 1em;
 		padding-right: 1em;
 		width:100%;
-		min-height: 20em;
+		min-height: 2em;
 		 -webkit-perspective: 1000px;
 	    perspective: 1000px;
 	    display:-webkit-flex;
