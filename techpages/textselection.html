@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Cancel Text Selection</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+textarea{
+    margin:0 2em;
+    color:#333;
+    resize:none;
+}
+</style>
+<body>
+	<div class="det-title">
+		<h1>Cancel all text selection of web page</h1>
+	</div>
+	<div class="det-content">
+		
+		<div class="text">
+Wow, to begin with, if you have already known the "onselectstart", that's fine. But do you know how to deal with the compatibility of mobile devices? How to cancel the text selection of input button and textarea, and how to let its compatibility be supported by IE8-?
+
+If you know everything...emmmm, that's a question, why are you still staying here?! Just go and play football! If you don't know, that's also fine. Because it means I can speak carelessly... Haa, ok just a joke, every cases and examples in my blogs is tested carefully by myself, just trust me.
+<h4>1. Cancel user selection in Div</h4>Yes, someone maybe know the "onselectstart" event, it can help us ahchieve this effect, let's see an example:
+        </div>
+
+        <div class="htmlcode">&lt;div onselectstart="return false;">Today is a sunny day.&gt;&lt;/div&gt;</div>
+
+        <div class="text">
+Ok, you can copy this case into your editor, and test it. The text in Div cannot be selected. 
+
+Let's see its compatibility: 
+        </div>
+
+        <div class="imgdiv">
+            <img src="../img/9_24_1.png" alt="">
+        </div>
+
+        <div class="text">
+Ok, every is fine except iOS Safari. It support "window.getSelection()" method, but do not support "onselectstart" event! So how to do? Wow, you might remember "user-select:none;". Yes! That's great. You can put this in CSS style, let's see its compatibility:
+        </div>
+
+        <div class="imgdiv">
+            <img src="../img/9_24_3.png" alt="">
+        </div>
+
+        <div class="text">
+Until now, every is totally fine(We don't care about Opera mini). 
+
+Maybe you will ask can we use "window.getSelection()" method to achieve this effect? It's a good idea. The answer is YES! Let's see an example, and this case is also supported by IE8-.
+        </div>
+
+        <div class="jscode">    function cancelSelect(){
+        window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+    }
+    document.onmouseup = cancelSelect;</div>
+
+        <div class="text">
+The "winodw.getSelection()" method is supported by IE9+, so for IE8-, we have to use "document.selection". These two method have the same effect, when the user select any text in any place of document, they will get the text. We can use the following code to get the selected text in anywhere.
+        </div>
+
+        <div class="jscode">    function getSelect(){
+        var txt = window.getSelection?window.getSelection():document.selection.createRange().text;
+        alert(txt);  
+    }
+    document.onmouseup = getSelect;</div>
+
+        <div class="text">
+Ok, those are some methods to cancel text selection of Div. Next, let's see the case in textarea.
+
+<h4>2. Cancel user selection in Input/Textarea</h4>First, have you ever considered can we use "onselectstart" method? Of course not! It doesn't work, otherwise, I wouldn't discuss this situation. Ok, let's begin.
+
+There is a "select" event in Input/Textarea. Maybe you have heared it, we can get the selected text by using it. Let's see an example.
+        </div>
+
+        <div class="jscode">    var textarea = document.querySelector("textarea");
+    textarea.addEventListener("select", function(event){
+        alert(this.value.substring(this.selectionStart, this.selectionEnd));
+    }, false);</div>
+
+        <div class="text">
+Ok, you can see two attributes —— "selectionStart" and "selectionEnd". They belongs to Input/Textarea, from their names you will know that they represent the start index and end index of selected text.
+
+Let's see the compatibility:
+        </div>
+
+        <div class="imgdiv">
+            <img src="../img/9_24_2.png" alt="">
+        </div>
+
+        <div class="text">
+I have to mention here those methods can be supported by IE9+, in the IE8-, unluckily, we have to use "document.selection.createRange().text" method.
+
+However, we have to use them in the events of Input/Textarea. But what we should do if we want to click a button and select some text in a textarea automatically? Like this:
+        </div>
+        
+        <div class="imgdiv">
+            <img src="../img/9_24_4.png" alt="">
+        </div>
+
+        <div class="text">
+In this case I click the button, the computer should select the first three characters automatically. How to achieve it? Do we have some easy methods? YES! HTML5 gives us a "setSelectionRange()" method which we can use besides the events of Input/Textarea.
+        </div>
+
+        <div class="jscode">    input.addEventListener("click", function(event){
+        textarea.setSelectionRange(0, 3);
+        textarea.focus();   <span class="note">// must add</span>
+    }, false);</div>
+
+        <div class="text">
+The above code shows how to use "setSelectionRange()" method. We should put the start index and end index into this method. And "focus()" method is required. Don't forget!
+
+Ok, until now, we know how to get the selected text of Input/Textarea and how to use "select" event. That's very important! Next let's begin to cancal user selection.
+
+Maybe you will think:
+<span class="note">we can do like this: when user is selecting some text, we can set "selectionStart" and "selectionStart" to be the same value or set "setSelectionRange()" method to be zero in the "select" event.</span>
+
+Ye, you are smart. However, it doesn't work very well, actually it only work well in the first time. After that, our mouse cursor is freezed. What is "freezed"? It means we cannot change our mouse cursor in the textarea, it stay, it fixed. How could it be? 
+
+Let's back to the sentence above, all words are fine except the last two words. We cannot use those method in "select" event, because it prevents our next step! So we should put them in "mouseup" event!! That's work!
+        </div>
+
+        <div class="jscode">    textarea.addEventListener("mouseup", function(event){
+        <span class="note">// if user selects some texts</span>
+        if (this.value.substring(this.selectionStart, this.selectionEnd).length > 0){
+            this.setSelectionRange(this.selectionEnd, this.selectionEnd);  <span class="note">// it works well</span>
+            <span class="note">this.selectionStart = this.selectionEnd;  // it also works well<span>
+        }  
+    }, false);</div>
+
+        <div class="text">
+You can also test it, I write a example below:
+        </div>
+
+        <textarea name="" id="" cols="30" rows="10" >You can't select me.</textarea>
+
+        <div class="text">
+(That's all)
+        </div>
+
+
+		
+	</div>
+
+    <script>
+    var textarea = document.querySelector("textarea");
+
+    textarea.addEventListener("mouseup", function(event){
+        if (this.value.substring(this.selectionStart, this.selectionEnd).length > 0){
+            //textarea.setSelectionRange(this.selectionEnd, this.selectionEnd);  // 这个可以
+            this.selectionStart = this.selectionEnd;  // 这个也可以
+        }
+    }, false);
+    </script>
+</body>
+</html>
