@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Redux</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+.basic-redux-note{
+    font-size: 1em;
+}
+</style>
+<body>
+	<div class="det-title">
+		<h1>Basic Concept of Redux</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+I have seen lots of courses about Redux, only a small number of them that can be worthful, most of them are useless, even made me more confused. So I will write this blog in a different way. What's difference? Introduce the whole construction first! Redux is a technology, but also an idea of how to manage the whole situation. Since it's an idea, we should start with the overall construction and divide it gradually, so that people can understand. All right, let's begin!   
+
+<h4>1. Why Redux?</h4>If you have already used Reactjs to develope some projects, you will find it has some weakness. It lacks the communication of components which means the "state" attributes cannot be used by parent components. And components' states lack an object to manage, you will find the project would be hard to maintain when the project becomes complex. 
+
+But in what situation should we use Redux? Here are some cases:
+<span class="note basic-redux-note">(1) Multi-user cooperation</span>
+<span class="note basic-redux-note">(2) Interacting with the server or using WebSocket</span>
+<span class="note basic-redux-note">(3) Components need to be modified or shared with each other</span>
+<span class="note basic-redux-note">(4) Components affect global state</span>
+
+<h4>2. Whole construction!</h4></div>
+
+        <div class="imgdiv">
+            <img src="../img/2017_9_30_1.png" alt="">
+        </div>
+
+        <div class="text">
+(1) createStore(): 
+A whole project has only one "store", which contains all states. And we can use "createStore()" method to create it. This method needs at lease one parameter —— Reducer.
+
+(2) Reducer:
+Actually, it's an integral function that acts like an array, which contains all sub reducer functions(No.6 in above picture). 
+
+(3) Store:
+Contain all states, and it can get old state and return new state.
+
+(4) Action Creator:
+A simple function which can create action objects.
+
+(5) Action:
+The Store changes state based on different action objects. The action object is just a simple object. Only "type" attribute is required. And you should use "store.dispatch()" method to send an action object to the Store. 
+
+The following example explains how above methods work together.
+        </div>
+
+        <div class="jscode">    var store = createStore(Reducer);
+    var action = {
+        type : "ADD_NUM",
+        others: [ ]
+    }
+    store.dispatch(action);
+
+    function Reducer(state, action){
+        switch(action.type){
+            case "ADD_NUM" : <span class="note">do something</span>
+        }
+    } </div>
+
+        <div class="text">
+(6) reducer:
+For different action.type, use different functions.
+
+(7) new state:
+When finishing the Reducer function, it will return a new state to the Store.
+
+(8) store.subscribe(listener):
+Let Store bind a listening function, and call the function to render the front page as soon as state changes.
+
+Ok, I wll use a simple example to explain how to use them:
+        </div>
+
+        <div class="jscode">    var store = createStore(Reducer);
+    window.addEventListener("load", function(){
+        var action = {
+            type : "ADD_NUM"
+        }
+        store.dispatch(action);
+    }, false);
+    
+    store.subscribe(Render);
+
+    function Reducer(state = initialstate, action){
+        <span class="note">// Assume we already have initialstate</span>
+        switch(action.type){
+            case "ADD_NUM": var nowstate = state;
+                       nowtate.num++;
+                       return nowstate;
+            default: return state;
+        }
+    }
+
+    function Render(){
+        var state = store.getState();
+        this.setState(state);
+    }</div>
+
+        <div class="text">
+In this example, we bind a "load" event to the window object. And it will trigger "dispatch()" method to send action to Store automatically. And the Store use Reducer function to return a new state, the value of "num" attribute plus 1. Then, because we use "subscribe()" method to bind a Render function, when the state change, the Render function will be triggered, and render the new page.
+
+Ok, this blog only discuss some simple concepts of Redux, and in the next blog, I will write something about Middleware, which is very important to async calls.
+
+(That's all)
+        </div>
+		
+	</div>
+</body>
+</html>
