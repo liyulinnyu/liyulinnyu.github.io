@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Async operation</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+</style>
+<body>
+	<div class="det-title">
+		<h1>Async operation in JS(4 methods)</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+This blog will discuss four methods of async operations in JS. But first, let's talk about what is the async in JS? 
+
+The async and multithreading are different, but their purposes are the same: Avoid thread congestion. The async operation is doing several works in one threading, the following picture represents the different between async and multithreading.
+        </div>
+
+        <div class="imgdiv">
+            <img src="nodeimg/9_27_1.png" alt="">
+        </div>
+
+        <div class="text">
+In the picture(a), the Work A is running first, and then the server stops Work A and gives the thread to Work B, after Work B is finished, the thread will back to run Work A. All the operations will happen in the one thread. However, in the picture (b), the two threads can work individually, independently, so the Work A doesn't need to wait. There are different but have the same purpose. If you want to know something about multithreading in JS, just go to my another blog: <a href="#">JS Web Worker</a>. Because some limited of multithreading(You can click the link above), the async method in JS is very important. 
+No more nonsense, let's begin! 
+
+<h4>1. Callback function</h4>As we all know, JS is a single threading coding language, so we have to use some tricks before ES2015. That is callback function. If you have ever used node.js before, you must know the "readFile" function, it's a classical callback function. Let's see an example:
+        </div>
+
+        <div class="jscode">    fs.readFile('test.txt', function (err, data) {
+        console.log(data);
+    });</div>
+
+        <div class="text">
+This function will print data after finish reading file "test.txt". It's fine in some cases, however, if we want to read many files one by one, we have to put another "readFile" function in the callback function which will make the code very very complex and hard to read. So in the ES2015, we will have another method, called "Promise" object.
+
+<h4>2. Promise</h4>Let's see an example of using Promise object first.
+        </div>
+
+        <div class="jscode">    readFile(filename).then(function(data) {
+        console.log(data.toString());
+    });</div>
+
+        <div class="text">
+Yes, it only add a "then" method to represent callback function, it make the code easier to read. Maybe a little, it changes nothing but the coding style. So why do we call it Promise Object? Is it an object? Absolutely YES! Let's code a simple Promise Object and see how it works.
+        </div>
+
+        <div class="jscode">    var promise = function( value ) {
+        <span class="note">// do something to the value</span>
+        return {
+            then : function( fn ) {
+                <span class="note">// run fn</span>
+            },
+            catch : function( err ) {
+                <span class="note">// print err</span>
+            }
+        }
+    }</div>
+
+        <div class="text">
+It returns an object with "then" method and "catch" method to catch err. And we can put the parameters of "then" method directly from outside. 
+
+It's also fine, however, do you want to see so many "then then then" in your code blocks? So we need another method right now!
+
+<h4>3. Generator and Thunk</h4>The ES2015 gives us a key word "yield" and its "next", "value", "done" methods. It provides a method to cut down the running thread.
+        </div>
+
+        <div class="jscode">    function* test(x){
+        try {
+            var y = yield x + 2;
+        } catch (e){ 
+            console.log(e);
+        }
+        return y;
+    }
+
+    var g = test(1);  <span class="note">// run x = 1, then stop running</span>
+    g.next();       <span class="note">// run x + 2. value = 3, done = false</span>
+    g.next(2);      <span class="note">// run y = 2. value = 2, done = true</span></div>
+
+        <div class="text">
+The "next" method is to continue running function, when meeting "yield" keyword, the function will stop until the "next" method. Every period, the generator function will have two attributes: value and done. The "value" is real-time value of function, and "done" represent is the function finished? It's a boolean type. You must notice the "*" before the function name, it is required if you use this method.
+
+However, do you want to write "next" method over and over again? No! You must ask can we write a function to run the "next" method automatically? Absolutely YES! That is Thunk! But before that, I want to talk about Function Currying(函数柯里化). This concept will help us to learn Thunk. Ok, what is function currying? Let's see a very simple example first.  
+        </div>
+        
+        <div class="jscode">    function currying(value1) {
+        console.log(value1);
+        return function(value2) {
+            console.log(value2);
+        };
+    }
+
+    var test = currying(1)(2);   <span class="note">// print 1, 2</span>
+    <span class="note">// the same as:
+    var test = currying(1);
+    test(2);</span></div>
+
+        <div class="text">
+This example will run the "currying" function first, then get the value2 from outside to run the callback function. So we can add parameters of callback function from the outside. 
+
+So we can use this concept to write the Thunk function, let's see how it works: 
+        </div>
+
+        <div class="jscode">    function thunk( fn ) {
+        var g = fn();
+        function next( data ){
+            var result = g.next( data );
+            if (result.done) return result.value;
+            result.value.then( function(data){
+                next(data);
+            });
+        } 
+        next();
+    }
+
+    thunk( function *() {   <span class="note">// call thunk function</span>
+        var f1 = yield readFile("book1.txt");
+        var f2 = yield readFile("book2.txt");
+    });</div>
+
+
+        <div class="text">
+So, in this way, we can run the thunk function to trigger "next" method automatically.
+
+Ye, everything looks great. But maybe for some reasons, I guess maybe all JS coders do not want to use "*" or pointer at all! Whatever, changes come in. The last method is perfect, I mean not only is it easy to read, but also easy to write. 
+
+<h4>4. "async" and "await"</h4>Just see the exapmle directly:
+        </div>
+
+        <div class="jscode">    async function readfile(){
+        var f1 = await readFile("book1.txt");
+        var f2 = await readFile("book2.txt");
+        console.log("This is async method");
+    };</div>
+
+        <div class="text">
+It only change "*" to "async", and change "yield" to "await". But we don't need to write a Thunk function again. And this method is apparently more easier to read. And its compatibility picture is below.
+        </div>
+
+        <div class="imgdiv">
+            <img src="nodeimg/9_27_2.png" alt="">
+        </div>
+
+        <div class="text">
+Ok, those are all async methods of JS I have known. Maybe you will worry about the compatibility of "async", however, trust me, it will become the most practical method very soon.
+
+(That's all) 
+        </div>
+
+
+
+        
+		
+	</div>
+</body>
+</html>
