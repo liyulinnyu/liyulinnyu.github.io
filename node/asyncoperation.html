@@ -30,7 +30,7 @@ The async and multithreading are different, but their purposes are the same: Avo
         </div>
 
         <div class="text">
-In the picture(a), the Work A is running first, and then the server stops Work A and gives the thread to Work B, after Work B is finished, the thread will back to run Work A. All the operations will happen in the one thread. However, in the picture (b), the two threads can work individually, independently, so the Work A doesn't need to wait. There are different but have the same purpose. If you want to know something about multithreading in JS, just go to my another blog: <a href="#">JS Web Worker</a>. Because some limited of multithreading(You can click the link above), the async method in JS is very important. 
+In the picture(a), the Work A is running first, and then the server stops Work A and gives the thread to Work B, after Work B is finished, the thread will back to run Work A. All the operations will happen in the one thread. However, in the picture (b), the two threads can work individually, independently, so the Work A doesn't need to wait. There are different but have the same purpose. If you want to know something about multithreading in JS, just go to another blog: <a href="http://blog.csdn.net/dojotoolkit/article/details/25030289">JS Web Worker</a>. Because some limited of multithreading(You can click the link above), the async method in JS is very important. 
 No more nonsense, let's begin! 
 
 <h4>1. Callback function</h4>As we all know, JS is a single threading coding language, so we have to use some tricks before ES2015. That is callback function. If you have ever used node.js before, you must know the "readFile" function, it's a classical callback function. Let's see an example:
