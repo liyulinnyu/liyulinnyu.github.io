@@ -189,6 +189,13 @@ Ok, have a nice day!
             showdiv.setAttribute("transform","translateY(-150px)");
         }, false);
 
+        container.addEventListener("touchend", function(e){
+            showdiv.removeAttribute("-webkit-transform");
+            showdiv.removeAttribute("-moz-transform");
+            showdiv.removeAttribute("-ms-transform");
+            showdiv.removeAttribute("transform");
+        }, false);
+
         alert("ss");
     })();
 
