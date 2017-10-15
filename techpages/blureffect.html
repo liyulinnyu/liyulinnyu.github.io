@@ -176,6 +176,23 @@ Ok, have a nice day!
 
     <script>
     
+    (function(){
+
+        var container = document.querySelector("#blur-container");
+        var blurback = document.querySelector("#blur-background");
+        var showdiv = document.querySelector("#blur-showdiv");
+
+        container.addEventListener("touchstart", function(e){
+            showdiv.setAttribute("-webkit-transform","translateY(-150px)");
+            showdiv.setAttribute("-moz-transform","translateY(-150px)");
+            showdiv.setAttribute("-ms-transform","translateY(-150px)");
+            showdiv.setAttribute("transform","translateY(-150px)");
+        }, false);
+
+        alert("ss");
+    })();
+
+
     </script>
 </body>
 </html>
