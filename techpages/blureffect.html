@@ -190,13 +190,13 @@ Ok, have a nice day!
         }, false);
 
         container.addEventListener("touchend", function(e){
-            showdiv.removeAttribute("-webkit-transform");
-            showdiv.removeAttribute("-moz-transform");
-            showdiv.removeAttribute("-ms-transform");
-            showdiv.removeAttribute("transform");
+            showdiv.setAttribute("-webkit-transform","translateY(150px)");
+            showdiv.setAttribute("-moz-transform","translateY(150px)");
+            showdiv.setAttribute("-ms-transform","translateY(150px)");
+            showdiv.setAttribute("transform","translateY(150px)");
         }, false);
 
-        alert("cc");
+        alert("a");
     })();
 
 
