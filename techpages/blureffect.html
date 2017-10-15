@@ -167,6 +167,15 @@ It's fine, but not in this example. For this example, because your mouse hover t
         <div class="text">
 Ok, if you don't know how "transition" or "transform" works, just learn it. The purpose of this blog is just to show how to do the effect. 
 
+Oh! I forget one thing, it has a little bug in the mobile browsers: "hover" operation doesn't work! Wooow, how could it be? Don't worry, just use a small tips, you should add a "touchstart" event to the "blur-container" element like below:
+        </div>
+
+        <div class="jscode">    var container = document.querySelector("#blur-container");
+    container.addEventListener("touchstart", function(e){}, false);</div>
+
+        <div class="text">
+Everything is fine. Why do we need "touchstart" event? That's a long story, maybe I will find another day to tell it.
+
 The final thing I would like to mention is that CSS selectors can only choose the next sibling and children nodes, the parent node and the previous sibling cannot be selected by CSS, for this reason we have to do the "hover" operation in the parent node!
 
 Ok, have a nice day!
@@ -185,7 +194,6 @@ Ok, have a nice day!
         container.addEventListener("touchstart", function(e){
         }, false);
 
-        alert("q");
     })();
 
     </script>
