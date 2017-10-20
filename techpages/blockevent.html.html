@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+	<title>My block event</title>
+	<link rel="stylesheet" href="">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<style>
+@media all and (min-width: 801px){
+	html, body{
+		padding: 0;
+		margin: 0;
+		font-size: 100%;
+		overflow-x: hidden;
+	}
+	.be-header{
+		border-bottom: :1px solid #ccc;
+		left:0;
+		top:0;
+		width:100%;
+		height:50px;
+		padding-left: 10%;
+		padding-right: 10%;
+		box-sizing: border-box;
+		-moz-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		box-shadow: 0px 5px 5px #ccc;
+		-moz-box-shadow:0px 5px 5px #ccc;
+		-ms-box-shadow:0px 5px 5px #ccc;
+		-o-box-shadow:0px 5px 5px #ccc;
+	}
+	.be-header-text{
+		float:left;
+		top:0;
+		left:0;
+		display: inline-block;
+		width:250px;
+		height:80%;
+		line-height: 50px;
+		font-size: 1.5em;
+		font-weight: bold;
+		color:#ccc;
+	}
+	.be-mobilecontroler{
+		display: none;
+	}
+	.be-controler{
+		float:right;
+		top:0;
+		left:0;
+		display: inline-block;
+		width:60%;
+		height:80%;
+		line-height: 50px;
+	}
+	.be-controler>input[type=text]{
+		box-sizing: border-box;
+		-moz-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		display: inline-block;
+		width:100px;
+		padding-left:5px;
+	}
+	.be-controler>input[type=button]{
+		display: inline-block;
+		width:70px;
+		border:1px solid #8234aa;
+		background: #8234aa;
+		transition: all 1s;
+		cursor: pointer;
+		color:#fff;
+		font-size: 1.2em;
+		border-radius: 4px;
+	}
+	.be-controler>input[type=button]:hover{
+		opacity: 0.6;
+	}
+
+	.be-controler>input{
+		float:right;
+		height:30px;
+		margin-top:10px;
+	}
+	.be-controler>input:not(:first-child){
+		margin-right: 10px;
+	}
+	.be-showyear {
+		display: inline-block;
+		left:0;
+		top:0;
+		height:30px;
+		margin-left: 10%;
+		margin-top: 20px;
+		color:#aaa;
+		font-size: 1.2em;
+	}
+	.be-selectmonth {
+		display: inline-block;
+		width:100px;
+		height:30px;
+		box-sizing: border-box;
+		-moz-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		display: inline-block;
+		margin-left: 10px;
+		color:#aaa;
+	}
+	.be-content{
+		left:0;
+		top:0;
+		width:80%;
+		min-height:500px;
+		margin-left: 10%;
+		margin-top: 10px;
+	}
+	.be-content-blur{
+		left:0;
+		top:0;
+		width:80%;
+		min-height:500px;
+		margin-left: 10%;
+		margin-top: 10px;
+		-webkit-filter: blur(5px); /* Chrome, Opera */
+        -moz-filter: blur(5px);
+        -ms-filter: blur(5px);    
+        filter: blur(5px);
+	}
+	.be-block{
+		display: inline-block;
+		width:30px;
+		height:30px;
+		margin-right:1px;
+		border: 1px solid #ccc;
+		background: #ccc;
+		transition: all 0.5s;
+		z-index: 1;
+	}
+	.be-block:hover{
+		opacity: 0.5;
+		cursor: pointer;
+	}
+	.be-lightblock {
+		animation-name: changeborderlight;
+		animation-duration: 1s;
+		animation-timing-function: ease-in-out;
+		animation-iteration-count: 3;
+	}
+	@keyframes changeborderlight {
+		from{
+			opacity:1;
+		}
+		to{
+			opacity:0.5;
+		}
+	}
+	.be-blurblock{
+		opacity: 0.5;
+	}
+	.be-showdiv{
+		position: fixed;
+		border: 1px solid #336699;
+		background: #fff;
+		opacity: 0.8;
+		z-index: 2;
+	}
+	.be-showdiv-close{
+		float: right;
+		width:30px;
+		height: 30px;
+		background: #ccc;
+		text-align: center;
+		line-height: 30px;
+		cursor: pointer;
+		transition: all 0.5s;
+	}
+	.be-showdiv-close:hover{
+		background: red;
+		color:#fff;
+	}
+	.be-showdiv > span{
+		margin-top: 2.5%;
+		display: inline-block;
+		margin-left: 2%;
+		font-size: 1.2em;
+		color:#333;
+		font-weight: bold;
+	}
+	.be-showdiv > input {
+		margin-top: 2.5%;
+		box-sizing: border-box;
+		-moz-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		display: inline-block;
+	}
+	.be-showdiv > input[type=text]{
+		display: inline-block;
+		margin-left:5px;
+		min-width: 150px;
+		width:40%;
+		height:10%; 
+		font-size: 1.2em;
+        padding-left:5px;
+	}
+	.be-showdiv > input[type=color]{
+		display: inline-block;
+		margin-left:5px;
+		width:30px;
+		height:30px;
+	}
+	.be-showdiv > textarea {
+		box-sizing: border-box;
+		-moz-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		display: inline-block;
+		margin-top: 2.5%;
+		margin-left: 2%;
+		font-size: 1.1em;
+		color:#333;
+		height:40%;
+		width:93%;
+		resize:none;
+	}
+	.be-showdiv > input[type=submit] {
+		box-sizing: border-box;
+		-moz-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		display: inline-block;
+		float:right;
+		margin-right: 5%;
+		width:100px;
+		height:35px;
+		background: #32CD32;
+		border: 1px solid #32CD32;
+		color:#fff;
+		border-radius: 4px;
+		font-size: 1.2em;
+		transition: all 0.5s;
+		cursor: pointer;
+	}
+	.be-showdiv > input[type=submit]:hover{
+		opacity: 0.7;
+	}
+}
+
+
+
+@media all and (max-width: 801px){
+	html, body{
+		padding: 0;
+		margin: 0;
+		font-size: 100%;
+	}
+	.be-header{
+		border-bottom:1px solid #ccc;
+		left:0;
+		top:0;
+		width:100%;
+		min-width:400px;
+		height:50px;
+		box-sizing: border-box;
+		-moz-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		box-shadow: 0px 5px 5px #ccc;
+		-moz-box-shadow:0px 5px 5px #ccc;
+		-ms-box-shadow:0px 5px 5px #ccc;
+		-o-box-shadow:0px 5px 5px #ccc;
+	}
+	.be-header-text{
+		float:left;
+		position: relative;
+		top:0;
+		margin-left:1em;
+		display: inline-block;
+		width:250px;
+		height:80%;
+		line-height: 50px;
+		font-size: 1.5em;
+		font-weight: bold;
+		color:#ccc;
+	}
+	.be-mobilecontroler{
+		float:right;
+		position: relative;
+		top:0;
+		left:0;
+		display: inline-block;
+		width:50px;
+		height:100%;
+		margin-right: 2em;
+		line-height: 50px;
+		cursor: pointer;
+	}
+	.be-mobilecontroler > img {
+		margin-top: 10%;
+		height:80%;
+		width:100%;
+	}
+	.be-controler{
+		float:left;
+		left:0;
+		margin-top:10px;
+		margin-left: 100%;
+		width:100%;
+		height:100px;
+		line-height: 40px;
+		display: none;
+	}
+	.be-controler>input[type=text]{
+		box-sizing: border-box;
+		-moz-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		display: inline-block;
+		width:60%;
+		margin-left: 5%;
+	}
+	.be-controler>input[type=button]{
+		display: inline-block;
+		width:20%;
+		border:1px solid #8234aa;
+		background: #8234aa;
+		transition: all 1s;
+		cursor: pointer;
+		color:#fff;
+		font-size: 1.2em;
+		border-radius: 4px;
+		margin-left: 5%;
+	}
+	.be-controler>input[type=button]:hover{
+		opacity: 0.6;
+	}
+
+	.be-controler>input{
+		float:left;
+		height:30px;
+		margin-top:10px;
+	}
+	.be-controler>input:not(:first-child){
+	}
+	.be-showyear {
+		display: inline-block;
+		left:0;
+		top:0;
+		height:30px;
+		margin-left: 2em;
+		margin-top: 20px;
+		color:#aaa;
+		font-size: 1.2em;
+	}
+	.be-selectmonth {
+		display: inline-block;
+		width:100px;
+		height:30px;
+		box-sizing: border-box;
+		-moz-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		display: inline-block;
+		margin-left: 10px;
+		color:#aaa;
+	}
+	.be-content{
+		left:0;
+		top:0;
+		width:100%;
+		min-width: 400px;
+		min-height:500px;
+		margin-top: 10px;
+	}
+	.be-content-blur{
+		left:0;
+		top:0;
+		width:100%;
+		min-height:500px;
+		margin-top: 10px;
+		-webkit-filter: blur(5px); /* Chrome, Opera */
+        -moz-filter: blur(5px);
+        -ms-filter: blur(5px);    
+        filter: blur(5px);
+	}
+	.be-block{
+		display: inline-block;
+		width:2em;
+		height:2em;
+		margin-right:1px;
+		border: 1px solid #ccc;
+		background: #ccc;
+		transition: all 0.5s;
+		z-index: 1;
+	}
+	.be-block:hover{
+		opacity: 0.5;
+		cursor: pointer;
+	}
+	.be-lightblock {
+		animation-name: changeborderlight;
+		animation-duration: 1s;
+		animation-timing-function: ease-in-out;
+		animation-iteration-count: 3;
+	}
+	@keyframes changeborderlight {
+		from{
+			opacity:1;
+		}
+		to{
+			opacity:0.5;
+		}
+	}
+	.be-blurblock{
+		opacity: 0.5;
+	}
+	.be-showdiv{
+		position: fixed;
+		border: 1px solid #336699;
+		background: #fff;
+		opacity: 0.8;
+		z-index: 2;
+	}
+	.be-showdiv-close{
+		float: right;
+		width:30px;
+		height: 30px;
+		background: #ccc;
+		text-align: center;
+		line-height: 30px;
+		cursor: pointer;
+		transition: all 0.5s;
+	}
+	.be-showdiv-close:hover{
+		background: red;
+		color:#fff;
+	}
+	.be-showdiv > span{
+		margin-top: 2.5%;
+		display: inline-block;
+		margin-left: 2%;
+		font-size: 1.2em;
+		color:#333;
+		font-weight: bold;
+	}
+	.be-showdiv > input {
+		margin-top: 2.5%;
+		box-sizing: border-box;
+		-moz-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		display: inline-block;
+	}
+	.be-showdiv > input[type=text]{
+		display: inline-block;
+		margin-left:5px;
+		min-width: 150px;
+		width:40%;
+		height:10%; 
+		font-size: 1.2em;
+        padding-left:5px;
+	}
+	.be-showdiv > input[type=color]{
+		display: inline-block;
+		margin-left:5px;
+		width:30px;
+		height:30px;
+	}
+	.be-showdiv > textarea {
+		box-sizing: border-box;
+		-moz-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		display: inline-block;
+		margin-top: 2.5%;
+		margin-left: 2%;
+		font-size: 1.1em;
+		color:#333;
+		height:40%;
+		width:93%;
+		resize:none;
+	}
+	.be-showdiv > input[type=submit] {
+		box-sizing: border-box;
+		-moz-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		display: inline-block;
+		float:right;
+		margin-right: 5%;
+		width:100px;
+		height:35px;
+		background: #32CD32;
+		border: 1px solid #32CD32;
+		color:#fff;
+		border-radius: 4px;
+		font-size: 1.2em;
+		transition: all 0.5s;
+		cursor: pointer;
+	}
+	.be-showdiv > input[type=submit]:hover{
+		opacity: 0.7;
+	}
+}
+</style>
+<body>
+
+		<div class="be-header">
+			<span class="be-header-text">
+				BlockEvent &nbsp;&nbsp;Hi, Dylan
+			</span>
+			<div class="be-mobilecontroler">
+				<img src="img/mobilecontrolbutton.png" alt="">
+			</div>
+			<div class="be-controler">
+				<input type="text" name="" placeholder="search event"><input type="button" name="" value="Event">
+				<input type="text" name="" placeholder="year"><input type="button" name="" value="Time">
+			</div>
+		</div>
+		<span class="be-showyear">
+			# 2017
+		</span>
+		<select name="" class="be-selectmonth">
+			<option value="all">all</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+			<option value="11">11</option>
+			<option value="12">12</option>
+		</select>
+		<div class="be-content">
+			
+		</div>
+	
+		<div class="be-showdiv">
+			<div class="be-showdiv-close">X</div>
+			<span>Title:</span>
+			<input type="text" name="">
+			<br />
+			<span>Content: (2017-12-1)</span>
+			<br />
+			<textarea name=""></textarea>
+			<span>Block Color:</span>
+			<input type="color" name="" id="colorbutton">
+			<input type="submit" name="" id="submitbutton">
+		</div>
+
+<script>
+	
+	(function(){
+
+		var daynum = 365;
+
+		var container = document.querySelector(".be-content");
+
+		var mediamatch = window.matchMedia("(max-width: 801px)");
+
+		var selectbutton = document.querySelector(".be-selectmonth");
+
+		var controlbutton = document.querySelector(".be-controler");
+
+		for (var i = 0; i < daynum; i++){
+			var temp = document.createElement("div");
+			temp.className = "be-block";
+			temp.title = "2017-12-1";
+			temp.setAttribute("data-month", "1");
+			container.appendChild(temp);
+		}
+
+		var allblock = document.querySelectorAll(".be-block");
+
+		for (i = 0; i < allblock.length; i++){
+			allblock[i].addEventListener("click", showcontent, false);
+		}
+
+		var showdiv = document.querySelector(".be-showdiv");
+		var screenheight = window.screen.height;
+		var pageheight = window.innerHeight;
+		$(".be-showdiv").hide();
+
+		window.addEventListener("resize", function(e){
+			mediamatch = window.matchMedia("(max-width: 801px)");
+			pageheight = window.innerHeight;
+			if (!$(".be-showdiv").is(":hidden")){
+				// show
+				if (mediamatch.matches){
+					// < 801px
+					showdiv.style.left = "0px";
+					showdiv.style.top = pageheight-screenheight/2+"px";
+					showdiv.style.width = window.innerWidth*0.9 + "px";
+					showdiv.style.height = screenheight/2+"px";
+				}else{
+					// > 801px
+					showdiv.style.left = window.innerWidth*0.1 + "px";
+					showdiv.style.top = pageheight-screenheight/2+"px";
+					showdiv.style.width = window.innerWidth*0.8 + "px";
+					showdiv.style.height = screenheight/2+"px";
+				}
+			}
+
+			if (!mediamatch.matches){
+				$(".be-controler").css("display", "block");
+				$(".be-controler").css("margin-left", "0px");
+				$(".be-controler").show();
+
+			}else{
+				$(".be-controler").css("display", "none");
+				$(".be-controler").css("margin-left", "100%");
+				$(".be-controler").hide();
+			}
+		}, false);
+
+		////////////////////////////////////////////////////////show div
+		var tempid = 0;
+		var colorbutton = document.querySelector("#colorbutton");
+
+		function showcontent(e){
+			// cannot use searchbutton
+			if (e.target.className.indexOf("be-blurblock") === -1){
+				selectbutton.setAttribute("disabled","disabled");
+
+				container.className = "be-content-blur";
+				// cancel all block click event
+				for (i = 0; i < allblock.length; i++){
+					allblock[i].removeEventListener("click", showcontent);
+				}
+
+				// jquery
+				$(".be-showdiv").show();
+				showdiv.style.left = $(this).offset().left + 15 + "px";
+				showdiv.style.top = $(this).offset().top + 15 + "px";
+				tempid = $(this).index();
+
+				if (mediamatch.matches){
+					// < 801px
+					$(".be-showdiv").animate({
+					    top:pageheight-screenheight/2+"px",
+					    height:screenheight/2+"px",
+					    left:"0px",
+					    width:window.innerWidth*0.9 + "px"
+					});
+				}else{
+					// > 801px
+					$(".be-showdiv").animate({
+					    top:pageheight-screenheight/2+"px",
+					    height:screenheight/2+"px",
+					    left:window.innerWidth*0.1 + "px",
+					    width:window.innerWidth*0.8 + "px"
+					});
+				}
+				
+
+				// change color button value
+				colorbutton.value = RGBtoHex($(this).css("background-color"));
+			}
+		}
+		
+		// change rgb to hex
+		function RGBtoHex(rgb){
+			var color = rgb.toString().match(/\d+/g);
+			var hex = "#";
+			for (var i = 0; i < 3; i++){
+				hex += ("0" + Number(color[i]).toString(16)).slice(-2);
+			}
+			return hex;
+		}
+
+		/////////////// close the showdiv
+		var closediv = document.querySelector(".be-showdiv-close");
+		closediv.addEventListener("click", CloseShowdiv, false);
+
+		function CloseShowdiv(e){
+			var $p = $(".be-block").eq(tempid);
+			
+			$(".be-showdiv").animate({
+			    top:$p.offset().top + 15 +"px",
+			    height:"0px",
+			    left:$p.offset().left + 15 + "px",
+			    width:"0px"
+			 }, function(){
+			 	$(".be-showdiv").hide();
+			 });
+			
+			container.className = "be-content";
+			for (i = 0; i < allblock.length; i++){
+				allblock[i].addEventListener("click", showcontent, false);
+			}
+			showdiv.style.width = "0px";
+			showdiv.style.height = "0px";
+
+			// can use selectbutton
+			selectbutton.removeAttribute("disabled");
+		}
+
+
+
+		//////////////////////////////////////////////////////change the select button
+
+		
+		selectbutton.addEventListener("change", function(e){
+			var value = e.target.value;
+			for (var i = 0; i < allblock.length; i++){
+				var bmonth = allblock[i].getAttribute("data-month");
+				allblock[i].className = "be-block";
+				if (bmonth === value){
+					allblock[i].className += " be-lightblock";
+				}else{
+					if (value !== "all"){
+						allblock[i].className += " be-blurblock";
+					}
+				}
+			}
+
+		}, false);
+
+
+		/////// submit button
+		var submitbutton = document.querySelector("#submitbutton");
+		
+		submitbutton.addEventListener("click", function(e){
+			$(".be-block").eq(tempid).css("background", colorbutton.value);
+			CloseShowdiv(e);
+		}, false);
+
+
+		///////////mobile device show control button
+		var mobilecontrol = document.querySelector(".be-mobilecontroler");
+
+		mobilecontrol.addEventListener("click", function(e){
+
+			if (!$(".be-controler").is(":hidden")){
+				$(".be-controler").animate({
+				    marginLeft:"100%"
+			 	}, function(){
+			 		$(".be-controler").css("display", "none");
+					$(".be-controler").hide();
+			 	});
+			}else{
+				$(".be-controler").css("display", "block");
+				$(".be-controler").show();
+				$(".be-controler").animate({
+				    marginLeft:"0px"
+			 	});
+			}
+
+		}, false);
+		
+
+	})();
+
+</script>
+</body>
+</html>
