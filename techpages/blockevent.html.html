@@ -573,11 +573,14 @@
 
 		var container = document.querySelector(".be-content");
 
+		
 		var mediamatch = window.matchMedia("(max-width: 801px)");
+		var isrealchange = mediamatch.matches ? 1 : 0; // 0 means big, 1 means small
 
 		var selectbutton = document.querySelector(".be-selectmonth");
 
 		var controlbutton = document.querySelector(".be-controler");
+
 
 		for (var i = 0; i < daynum; i++){
 			var temp = document.createElement("div");
@@ -598,7 +601,7 @@
 		var pageheight = window.innerHeight;
 		$(".be-showdiv").hide();
 
-		alert("aa");
+		
 		window.addEventListener("resize", function(e){
 			mediamatch = window.matchMedia("(max-width: 801px)");
 			pageheight = window.innerHeight;
@@ -619,18 +622,21 @@
 				}
 			}
 
-			if (!mediamatch.matches){
-				alert("sss");
-				$(".be-controler").css("display", "block");
-				$(".be-controler").css("margin-left", "0px");
-				$(".be-controler").show();
-
-			}else{
-				alert("sss");
-				$(".be-controler").css("display", "none");
-				$(".be-controler").css("margin-left", "100%");
-				$(".be-controler").hide();
+			var tempmatch = mediamatch.matches ? 1 : 0;
+			if (tempmatch === isrealchange){
+				if (!mediamatch.matches){
+					$(".be-controler").css("display", "block");
+					$(".be-controler").css("margin-left", "0px");
+					$(".be-controler").show();
+					isrealchange = 0;
+				}else{
+					$(".be-controler").css("display", "none");
+					$(".be-controler").css("margin-left", "100%");
+					$(".be-controler").hide();
+					isrealchange = 1;
+				}
 			}
+			
 		}, false);
 
 		////////////////////////////////////////////////////////show div
