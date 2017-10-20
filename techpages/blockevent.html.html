@@ -12,6 +12,9 @@
 </head>
 <style>
 @media all and (min-width: 801px){
+	input {
+		-webkit-appearance:none;
+	}
 	html, body{
 		padding: 0;
 		margin: 0;
@@ -256,6 +259,9 @@
 
 
 @media all and (max-width: 801px){
+	input {
+		-webkit-appearance:none;
+	}
 	html, body{
 		padding: 0;
 		margin: 0;
@@ -517,7 +523,7 @@
 				BlockEvent &nbsp;&nbsp;Hi, Dylan
 			</span>
 			<div class="be-mobilecontroler">
-				<img src="img/mobilecontrolbutton.png" alt="">
+				<img src="../img/mobilecontrolbutton.png" alt="">
 			</div>
 			<div class="be-controler">
 				<input type="text" name="" placeholder="search event"><input type="button" name="" value="Event">
@@ -601,7 +607,7 @@
 					// < 801px
 					showdiv.style.left = "0px";
 					showdiv.style.top = pageheight-screenheight/2+"px";
-					showdiv.style.width = window.innerWidth*0.9 + "px";
+					showdiv.style.width = window.innerWidth + "px";
 					showdiv.style.height = screenheight/2+"px";
 				}else{
 					// > 801px
@@ -651,7 +657,7 @@
 					    top:pageheight-screenheight/2+"px",
 					    height:screenheight/2+"px",
 					    left:"0px",
-					    width:window.innerWidth*0.9 + "px"
+					    width:window.innerWidth + "px"
 					});
 				}else{
 					// > 801px
