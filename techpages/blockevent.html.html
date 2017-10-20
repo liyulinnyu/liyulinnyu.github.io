@@ -598,6 +598,7 @@
 		var pageheight = window.innerHeight;
 		$(".be-showdiv").hide();
 
+		alert("cc");
 		window.addEventListener("resize", function(e){
 			mediamatch = window.matchMedia("(max-width: 801px)");
 			pageheight = window.innerHeight;
@@ -619,6 +620,7 @@
 			}
 
 			if (!mediamatch.matches){
+				alert("sss");
 				$(".be-controler").css("display", "block");
 				$(".be-controler").css("margin-left", "0px");
 				$(".be-controler").show();
