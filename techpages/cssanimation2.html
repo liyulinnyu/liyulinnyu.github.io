@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>CSS loading animation</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+.wrap { width: 60px; height: 60px; position: relative; left:45%; }
+.temp { width: 60px; height: 60px; position: relative; left:45%; }
+.outer { position: absolute; width: 100%; height: 100%; border-radius: 60px; background: -webkit-linear-gradient(top,#fff,#01b468); animation: spin 800ms infinite linear; }
+.outer:before {
+    position: absolute;
+    content:"";
+    width:50px;
+    height:50px;
+    background: #fff;
+    border-radius: 50px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.inner, .inner2 { position: absolute; width: 40px; height: 40px; border-radius: 40px; overflow: hidden; left: 10px; top: 10px; }
+.inner { opacity: 1; background-color: #019858; animation: second-half-hide 1.6s steps(1, end) infinite; }
+.inner2 { opacity: 0; background-color: #01b468; animation: second-half-show 1.6s steps(1, end) infinite; }
+.spiner{ position: absolute; width: 50%; height: 100%; }
+.inner:before, .inner:after, .inner2:before, .inner2:after { position: absolute; width: 50%; height: 100%;content:""; }
+.spiner { border-radius: 40px 0 0 40px; background-color: #01b468; transform-origin: right center; animation: spin 800ms infinite linear; left: 0; top: 0; }
+.inner:before,  .inner2:before { border-radius: 0 40px 40px 0; background-color: #01b468; animation: second-half-hide 800ms steps(1, end) infinite; left: 50%; top: 0; opacity: 1; }
+.inner:after,  .inner2:after{ border-radius: 40px 0 0 40px; background-color: #019858; animation: second-half-show 800ms steps(1, end) infinite; left: 0; top: 0; opacity: 0; }
+@-webkit-keyframes spin {
+  0%   { -webkit-transform: rotate(360deg); }
+  100% { -webkit-transform: rotate(0deg); }
+}
+@keyframes spin {
+  0%   { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+.inner2 .spiner, .inner2:before { background-color: #019858; }
+.inner2:after { background-color: #01b468; }
+    @keyframes spin {
+  0%   { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes second-half-hide {
+  0%        { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes second-half-show {
+  0%        { opacity: 0; }
+  50%, 100% { opacity: 1; }
+}
+</style>
+<body>
+	<div class="det-title">
+		<h1>Awesome CSS Loading Animation</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+Actually, this is a past blog, I wrote it when I was a sophomore. But it achieves an awesome loading effect. I remember this blog is done after I saw <a href="http://www.zhangxinxu.com/wordpress/2014/04/css3-pie-loading-waiting-animation/" target="_blank"> Zhang xinxu's</a> idea, in his blog, he used 8 labels to finish this effect and he also forgot the outer animation (He used the gif picture instead of CSS). So in this blog, I just finished this effect by using 4 labels without any gif. pictures.
+
+Let's begin! Just see the whole effect first:
+        </div>
+
+        <div class="wrap">
+            <div class="outer"></div>
+            <div class="inner">
+                <div class="spiner"></div>
+            </div>
+            <div class="inner2">
+                <div class="spiner"></div>
+            </div>
+        </div>
+
+        <div class="text">
+Is it awesome? Yes! Is it easy? Maybe~. Because this idea is from Zhang xinxu, and his blog already has a great detail explaination, what I did is improve its effect and cut some labels in order to reduce its total size. So I just want to show some code here and explain what effect they can achieve. Any questions, please contact me.
+
+(1) Outter animation             
+        </div>
+
+        <div class="csscode">   .outer { 
+        position: absolute; 
+        width: 100%; 
+        height: 100%; 
+        border-radius: 60px; 
+        background: -webkit-linear-gradient(top,#fff,#01b468); 
+        animation: spin 800ms infinite linear; 
+    }
+    .outer:before {
+        position: absolute;
+        content:"";
+        width:50px;
+        height:50px;
+        background: #fff;
+        border-radius: 50px;
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+    @-webkit-keyframes spin {
+      0%   { -webkit-transform: rotate(360deg); }
+      100% { -webkit-transform: rotate(0deg); }
+    }
+    @keyframes spin {
+      0%   { transform: rotate(360deg); }
+      100% { transform: rotate(0deg); }
+    }</div>
+
+        <div class="text">
+You can see the effect below. It's just two circle, and I use pseudo element to replace one and make its backgroud color be white. Use "linear-gradient" to create a circle with color gradient, and use CSS animation to let it rotate infinite. That's easy to finish, but hard to create this idea. In Zhang xinxu's blog, he just used a gif. picture. And I use this little CSS tips to create the same effect! 
+        </div>
+
+        <div class="wrap">
+            <div class="outer"></div>
+        </div>
+
+        <div class="text">
+
+(2) Inner components.
+        </div>
+
+        <div class="csscode">    .inner, .inner2 { position: absolute; width: 40px; height: 40px; border-radius: 40px; overflow: hidden; left: 10px; top: 10px; }
+    .inner { opacity: 1; background-color: #019858; animation: second-half-hide 1.6s steps(1, end) infinite; }
+    .inner2 { opacity: 0; background-color: #01b468; animation: second-half-show 1.6s steps(1, end) infinite; }
+    .spiner{ position: absolute; width: 50%; height: 100%; }
+    .inner:before, .inner:after, .inner2:before, .inner2:after { position: absolute; width: 50%; height: 100%;content:""; }
+    .spiner { border-radius: 40px 0 0 40px; background-color: #01b468; transform-origin: right center; animation: spin 800ms infinite linear; left: 0; top: 0; }
+    .inner:before,  .inner2:before { border-radius: 0 40px 40px 0; background-color: #01b468; animation: second-half-hide 800ms steps(1, end) infinite; left: 50%; top: 0; opacity: 1; }
+    .inner:after,  .inner2:after{ border-radius: 40px 0 0 40px; background-color: #019858; animation: second-half-show 800ms steps(1, end) infinite; left: 0; top: 0; opacity: 0; }
+    .inner2 .spiner, .inner2:before { background-color: #019858; }
+    .inner2:after { background-color: #01b468; }
+    @keyframes second-half-hide {
+        0%        { opacity: 1; }
+        50%, 100% { opacity: 0; }
+    }
+    @keyframes second-half-show {
+        0%        { opacity: 0; }
+        50%, 100% { opacity: 1; }
+    }</div>
+
+        <div class="text">
+Although I have used pseudo elements to replace 4 labels in order to make it more easy to write and read, however, it makes the idea difficult to understand. I recommend you to read Zhang xinxu's blog first. And then read my improved code. 
+
+The effect is like below: 
+        </div>
+
+        <div class="temp">
+            <div class="inner">
+                <div class="spiner"></div>
+            </div>
+            <div class="inner2">
+                <div class="spiner"></div>
+            </div>
+        </div>
+
+        <div class="text">
+
+(That's all)
+        </div>
+		
+	</div>
+</body>
+</html>
