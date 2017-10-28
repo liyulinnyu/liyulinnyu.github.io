@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Swordman(NYU Game center)</title>
+	<link rel="shortcut icon" href="icon/lyl.ico">
+	<link rel="bookmark" href="icon/lyl.ico" type="image/x-icon"　/>
+	<link rel="stylesheet" href="">
+</head>
+<style type="text/css" media="screen">
+	body, html{
+		margin:0;
+		padding: 0;
+		font-size: 100%;
+		overflow: hidden;
+	}
+	#thecanvas{
+		background: #222;
+	}
+	
+	.flashing {
+		left:0;
+		top:0;
+		width:100%;
+		height:100%;
+		position: absolute;
+		background: #ccc;
+		animation-name: flash;
+		animation-duration: 0.5s;
+		animation-timing-function: ease-in;
+		animation-iteration-count: 2;
+		opacity: 0;
+	}
+	@keyframes flash {
+		from {
+			opacity: 0.5;
+		},
+		to {
+			opacity: 0;
+		}
+	}
+</style>
+<body>
+
+	<script>
+	
+	// Finished by Yulin Li.
+
+	(function(){
+		var totalwidth = window.innerWidth,
+		    totalheight = window.innerHeight;
+
+		var createcanvas = "<canvas id='thecanvas' width='" + totalwidth + "px' height='" + totalheight + "px' ></canvas>";
+
+		document.body.insertAdjacentHTML("beforeEnd", createcanvas);
+
+		var thecanvas = document.querySelector("#thecanvas");
+		var context = thecanvas.getContext("2d");
+
+	/////////////////////////////////////////////////////////initial data/////////////////////////////////////////////////////////
+	
+		var gameloop = null; 	
+
+	//////////////////////////////////////////////////////////// all img ////////////////////////////////////////////////
+
+		var backimg = new Image(),
+			stoneboximg = new Image(),
+			stonehalfimg = new Image(),
+			stonemidimg = new Image(),
+			leftgetimg = new Image(),
+			rightgetimg = new Image(),
+			initialleftimg = new Image(),
+			initialrightimg = new Image(),
+			windowimg = new Image(),
+			rzimg = new Image();
+		backimg.src = "gameimg/swordmangame/backimg/bg.png";
+		stonehalfimg.src = "gameimg/swordmangame/backimg/halfstone.png";
+		stoneboximg.src = "gameimg/swordmangame/backimg/boxstone.png";
+		stonemidimg.src = "gameimg/swordmangame/backimg/midstone.png";
+		leftgetimg.src = "gameimg/swordmangame/backimg/leftget.png";
+		rightgetimg.src = "gameimg/swordmangame/backimg/rightget.png";
+		initialleftimg.src = "gameimg/swordmangame/backimg/initialleft.png";
+		initialrightimg.src = "gameimg/swordmangame/backimg/initialright.png";
+		windowimg.src = "gameimg/swordmangame/backimg/window.png";
+		rzimg.src = "gameimg/swordmangame/backimg/rz.png";
+
+		var man1_left_standimg = new Image(),
+			man1_right_standimg = new Image(),
+			man1_right_fallimg = new Image(),
+			man1_left_fallimg = new Image(),
+			man1_right_jumpimg = new Image(),
+			man1_left_jumpimg = new Image(),
+			man1_left_runimg1 = new Image(),
+			man1_left_runimg2 = new Image(),
+			man1_right_runimg1 = new Image(),
+			man1_right_runimg2 = new Image(),
+			man1_left_attackimg1 = new Image(),
+			man1_left_attackimg2 = new Image(),
+			man1_right_attackimg1 = new Image(),
+			man1_right_attackimg2 = new Image();
+
+		man1_right_standimg.src = "gameimg/swordmangame/manimg/user1_right_stand.png";
+		man1_right_fallimg.src = "gameimg/swordmangame/manimg/user1_right_fall.png";
+		man1_left_standimg.src = "gameimg/swordmangame/manimg/user1_left_stand.png";
+		man1_left_fallimg.src = "gameimg/swordmangame/manimg/user1_left_fall.png";
+		man1_left_jumpimg.src = "gameimg/swordmangame/manimg/user1_left_jump.png";
+		man1_right_jumpimg.src = "gameimg/swordmangame/manimg/user1_right_jump.png";
+		man1_left_runimg1.src = "gameimg/swordmangame/manimg/user1_left_run1.png";
+		man1_left_runimg2.src = "gameimg/swordmangame/manimg/user1_left_run2.png";
+		man1_right_runimg1.src = "gameimg/swordmangame/manimg/user1_right_run1.png";
+		man1_right_runimg2.src = "gameimg/swordmangame/manimg/user1_right_run2.png";
+		man1_left_attackimg1.src = "gameimg/swordmangame/manimg/user1_left_attack1.png";
+		man1_left_attackimg2.src = "gameimg/swordmangame/manimg/user1_left_attack2.png";
+		man1_right_attackimg1.src = "gameimg/swordmangame/manimg/user1_right_attack1.png";
+		man1_right_attackimg2.src = "gameimg/swordmangame/manimg/user1_right_attack2.png";
+
+
+		var man2_left_standimg = new Image(),
+			man2_right_standimg = new Image(),
+			man2_right_fallimg = new Image(),
+			man2_left_fallimg = new Image(),
+			man2_right_jumpimg = new Image(),
+			man2_left_jumpimg = new Image(),
+			man2_left_runimg1 = new Image(),
+			man2_left_runimg2 = new Image(),
+			man2_right_runimg1 = new Image(),
+			man2_right_runimg2 = new Image(),
+			man2_left_attackimg = new Image(),
+			man2_right_attackimg = new Image();
+
+		man2_right_standimg.src = "gameimg/swordmangame/man2img/user2_right_stand.png";
+		man2_right_fallimg.src = "gameimg/swordmangame/man2img/user2_right_fall.png";
+		man2_left_standimg.src = "gameimg/swordmangame/man2img/user2_left_stand.png";
+		man2_left_fallimg.src = "gameimg/swordmangame/man2img/user2_left_fall.png";
+		man2_left_jumpimg.src = "gameimg/swordmangame/man2img/user2_left_jump.png";
+		man2_right_jumpimg.src = "gameimg/swordmangame/man2img/user2_right_jump.png";
+		man2_left_runimg1.src = "gameimg/swordmangame/man2img/user2_left_run1.png";
+		man2_left_runimg2.src = "gameimg/swordmangame/man2img/user2_left_run2.png";
+		man2_right_runimg1.src = "gameimg/swordmangame/man2img/user2_right_run1.png";
+		man2_right_runimg2.src = "gameimg/swordmangame/man2img/user2_right_run2.png";
+		man2_left_attackimg.src = "gameimg/swordmangame/man2img/user2_left_attack.png";
+		man2_right_attackimg.src = "gameimg/swordmangame/man2img/user2_right_attack.png";
+
+		var man1_standimg = man1_right_standimg,
+			man1_fallimg = man1_right_fallimg,
+			man1_jumpimg = man1_right_jumpimg;
+
+		var man2_standimg = man2_left_standimg,
+			man2_fallimg = man2_left_fallimg,
+			man2_jumpimg = man2_left_jumpimg;
+
+		var userstandwidth = totalwidth*7/162,
+			userfallwidth = totalwidth*5/162;
+
+		var user2standwidth = totalwidth*5/162,
+			user2fallwidth = totalwidth*5/162;
+
+		var drawuser1moveanimation = null;
+		var drawuser1attackanimation = null;
+		var drawuser2moveanimation = null;
+		var drawuser2attackanimation = null;
+
+		// start img
+		var starwinimg = new Image(),
+			stariniimg = new Image();
+
+		starwinimg.src = "gameimg/swordmangame/backimg/starwin.png";
+		stariniimg.src = "gameimg/swordmangame/backimg/starini.png";
+
+
+	//////////////////////////////////////////////////////// user data ///////////////////////////////////////////////////////////
+
+		var UserFirst = {               // the data of first user
+			x : totalwidth*2/81,
+			y : totalwidth*2/81,
+			width : totalwidth*2/81,
+			height : totalwidth*4/81,
+			speedx : 5,
+			speedy : 3,
+			oriy : 0,
+			canjump : false,
+			canfall : false,
+			stopfall : false,
+			meetleftwall : false,
+			meetrightwall : false,
+			canjumpagian : true,
+			isjumpingup : false,
+			dir : "right",
+			isattacking : false,
+			star : [0, 0],
+			cansave : false
+		}
+
+		var UserSecond = {
+			x : totalwidth*77/81,
+			y : totalwidth*2/81,
+			width : totalwidth*2/81,
+			height : totalwidth*4/81,
+			speedx : 5,
+			speedy : 3,
+			oriy : 0,
+			canjump : false,
+			canfall : false,
+			stopfall : false,
+			meetleftwall : false,
+			meetrightwall : false,
+			canjumpagian : true,
+			isjumpingup : false,
+			dir : "left",
+			isattacking : false,
+			star : [0, 0],
+			cansave : false
+		}
+
+		var alluser = [UserFirst, UserSecond];
+	//////////////////////////////////////////////////////// event ///////////////////////////////////////////////////////////////
+
+		window.addEventListener("load", canvasApp, false); // add window listener
+		window.addEventListener("keydown", changeUserPosition, false);
+		window.addEventListener("keyup", removeKeys, false);
+
+	//////////////////////////////////////////////////////// draw canvas /////////////////////////////////////////////////////////
+
+		function canvasApp(){
+
+			function drawCanvas(){
+
+				if (UserFirst.star[1] === 1){
+					clearInterval(gameloop);
+					if (confirm("User1 wins! Play again?")){
+						 window.location.reload();
+					}
+				}
+				if (UserSecond.star[1] === 1){
+					clearInterval(gameloop);
+					if (confirm("User2 wins! Play again?")){
+						 window.location.reload();
+					}
+				}
+
+				// clear background
+				context.clearRect(0, 0, totalwidth, totalheight);
+				// draw background
+				drawBackground();
+				// draw users' position
+				drawUsers();
+				if (drawuser1moveanimation){
+					if (drawuser1moveanimation === "left"){
+						changeStandingimg(0, "left");
+					}else{
+						changeStandingimg(0, "right");
+					}
+				}
+				if (drawuser1attackanimation){
+					if (drawuser1attackanimation === "left"){
+						changeAttackingimg(0, "left");
+					}else{
+						changeAttackingimg(0, "right");
+					}
+				}
+
+				if (drawuser2moveanimation){
+					if (drawuser2moveanimation === "left"){
+						changeStandingimg(1, "left");
+					}else{
+						changeStandingimg(1, "right");
+					}
+				}
+				if (drawuser2attackanimation){
+					if (drawuser2attackanimation === "left"){
+						changeAttackingimg(1, "left");
+					}else{
+						changeAttackingimg(1, "right");
+					}
+				}
+
+				attackTest(UserFirst, UserSecond);
+
+				// get sayhi box?
+				getSayHiBox();
+
+				// can fall?
+				isFallingDown();
+
+				// meet top edge
+				isTopEdge();
+
+				// is meet wall?
+				isMeetRightWall();
+				// is meet wall?
+				isMeetLeftWall();
+
+				// userJump
+				userJump();
+				
+				// doChange
+				doChange();
+
+			}
+
+			gameloop = setInterval(drawCanvas, 20);
+		}
+
+		// draw background function
+		function drawBackground(){
+
+			context.fillStyle = "#666";
+			// bk
+			context.drawImage(backimg, 0, 0, totalwidth, totalheight);
+			// left top line
+			context.drawImage(stonehalfimg, totalwidth*2/27, totalheight*23/60, totalwidth/3, totalheight/20);
+			//context.fillRect(totalwidth*2/27, totalheight*23/60, totalwidth/3, totalheight/20);
+			// right top line
+			context.drawImage(stonehalfimg, totalwidth/3 + totalwidth*7/27, totalheight*23/60, totalwidth/3, totalheight/20);
+			// middle line
+			context.drawImage(stonemidimg, totalwidth/3 + totalwidth*4/27, totalheight*23/60, totalwidth/27, totalheight*37/60 - totalwidth*3/54);
+			// left bottom box
+			context.drawImage(stoneboximg, totalwidth*2/27, totalheight/2+totalwidth*2/27, totalwidth/3, totalheight/2-totalwidth*5/27);
+			// right bottom box
+			context.drawImage(stoneboximg, totalwidth/3 + totalwidth*7/27, totalheight/2+totalwidth*2/27, totalwidth/3, totalheight/2-totalwidth*5/27);
+
+			// left getline
+			//context.fillRect(totalwidth*17/108, 0, totalwidth/54, totalheight*23/60-totalwidth*3/54);  // width = middle line width / 2
+			context.drawImage(leftgetimg, totalwidth*16/108, 0, totalwidth*2/54, totalheight*23/60-totalwidth*3/54);
+
+			// right getline
+			//context.fillRect(totalwidth-totalwidth*19/108, 0, totalwidth/54, totalheight*23/60-totalwidth*3/54);
+			context.drawImage(rightgetimg, totalwidth-totalwidth*20/108, 0, totalwidth*2/54, totalheight*23/60-totalwidth*3/54);
+
+			// left hibox
+			//context.strokeStyle = "#666";
+			if (UserSecond.cansave){
+				context.drawImage(rzimg, totalwidth*19/108, 0, totalwidth/12, totalwidth/12);
+			}else{
+				context.drawImage(windowimg, totalwidth*19/108, 0, totalwidth/12, totalwidth/12);
+			}
+
+			
+			// right hibox
+			if (UserFirst.cansave){
+				context.drawImage(rzimg, totalwidth-totalwidth*28/108, 0, totalwidth/12, totalwidth/12);
+			}else{
+				context.drawImage(windowimg, totalwidth-totalwidth*28/108, 0, totalwidth/12, totalwidth/12);
+			}
+			
+
+			// left two star
+			if (UserFirst.star[0] === 0){
+				context.drawImage(stariniimg, totalwidth*29/108, 0, totalwidth*5/108, totalwidth*5/108);
+			}else{
+				context.drawImage(starwinimg, totalwidth*29/108, 0, totalwidth*5/108, totalwidth*5/108);
+			}
+
+			if (UserFirst.star[1] === 0){
+				context.drawImage(stariniimg, totalwidth*35/108, 0, totalwidth*5/108, totalwidth*5/108);
+			}else{
+				context.drawImage(starwinimg, totalwidth*35/108, 0, totalwidth*5/108, totalwidth*5/108);
+			}
+
+			// right two star
+			if (UserSecond.star[0] === 0){
+				context.drawImage(stariniimg, totalwidth-totalwidth*34/108, 0, totalwidth*5/108, totalwidth*5/108);
+			}else{
+				context.drawImage(starwinimg, totalwidth-totalwidth*34/108, 0, totalwidth*5/108, totalwidth*5/108);
+			}
+
+			if (UserSecond.star[1] === 0){
+				context.drawImage(stariniimg, totalwidth-totalwidth*40/108, 0, totalwidth*5/108, totalwidth*5/108);
+			}else{
+				context.drawImage(starwinimg, totalwidth-totalwidth*40/108, 0, totalwidth*5/108, totalwidth*5/108);
+			}
+
+			// left man initial stage
+			//context.fillRect(0, totalwidth*2/27, totalwidth*2/27, totalwidth/108);
+			context.drawImage(initialleftimg, 0, totalwidth*2/27, totalwidth*2/27, totalwidth*3/108);
+			// right man initial stage
+			//context.fillRect(totalwidth-totalwidth*2/27, totalwidth*2/27, totalwidth*2/27, totalwidth/108);
+			context.drawImage(initialrightimg, totalwidth-totalwidth*2/27, totalwidth*2/27, totalwidth*2/27, totalwidth*3/108)
+			context.fill();
+		}
+
+
+		// draw first user
+		function drawUsers(){
+			// test draw users
+			for (var i = 0; i < alluser.length; i++){
+				var user = alluser[i];
+
+				if (i === 0){
+					if (user.canfall){
+						context.drawImage(man1_fallimg, user.x, user.y, userfallwidth, user.height);
+						
+					}else if (user.isjumpingup){
+						context.drawImage(man1_jumpimg, user.x, user.y, userfallwidth, user.height);
+					}else{
+						if (drawuser1moveanimation){
+							context.drawImage(man1_standimg, user.x, user.y, userfallwidth+totalwidth/324, user.height);
+						}else{
+							context.drawImage(man1_standimg, user.x, user.y, userstandwidth, user.height);
+						}
+						
+					}
+				}else{
+
+					if (user.canfall){
+						context.drawImage(man2_fallimg, user.x, user.y, user2fallwidth, user.height);
+						
+					}else if (user.isjumpingup){
+						context.drawImage(man2_jumpimg, user.x, user.y, user2fallwidth, user.height);
+					}else{
+						if (drawuser2moveanimation){
+							context.drawImage(man2_standimg, user.x, user.y, user2fallwidth+totalwidth/324, user.height);
+						}else{
+							context.drawImage(man2_standimg, user.x, user.y, user2standwidth, user.height);
+						}
+						
+					}
+
+				}
+				
+
+			}
+			
+		}
+
+
+		// change user position function
+		var nowkeys = []; // contains the keys which are clicked down by users
+		function changeUserPosition(event){
+			
+			if (nowkeys.indexOf(event.keyCode) === -1 && event.keyCode !== 72 && event.keyCode !== 98){
+				nowkeys.push(event.keyCode);
+			}
+		}
+
+		// remove keys
+		function removeKeys(event){
+			var hascode = nowkeys.indexOf(event.keyCode);
+			if (hascode > -1){
+				nowkeys.splice(hascode, 1);
+			}
+
+			if (event.keyCode === 72 && (!alluser[0].canfall || alluser[0].meetrightwall || alluser[0].meetleftwall) && alluser[0].canjumpagian){      // jump 要加在keyup上
+				nowkeys.push(event.keyCode);
+			}else if (event.keyCode === 98 && (!alluser[1].canfall || alluser[1].meetrightwall || alluser[1].meetleftwall) && alluser[1].canjumpagian){
+				nowkeys.push(event.keyCode);
+			}
+
+		}
+
+		// doChange
+		function doChange(){
+			for (var i = 0; i < nowkeys.length; i++){
+				switch (nowkeys[i]){
+					case 65: UserFirst.x-=UserFirst.speedx;
+							man1_fallimg = man1_left_fallimg;
+							man1_jumpimg = man1_left_jumpimg;
+							drawuser1moveanimation = "left";
+							UserFirst.dir = "left";
+							break;
+					case 68: UserFirst.x+=UserFirst.speedx;
+							man1_fallimg = man1_right_fallimg;
+							man1_jumpimg = man1_right_jumpimg;
+							drawuser1moveanimation = "right";
+							UserFirst.dir = "right";
+							break;
+					case 37: UserSecond.x-=UserSecond.speedx;
+							man2_fallimg = man2_left_fallimg;
+							man2_jumpimg = man2_left_jumpimg;
+							drawuser2moveanimation = "left";
+							UserSecond.dir = "left";
+							break;
+					case 39: UserSecond.x+=UserSecond.speedx;
+							man2_fallimg = man2_right_fallimg;
+							man2_jumpimg = man2_right_jumpimg;
+							drawuser2moveanimation = "right";
+							UserSecond.dir = "right";
+							break;
+					case 72: UserFirst.oriy = UserFirst.y; UserFirst.canjump = true;UserFirst.stopfall = true;
+							 UserFirst.speedy = 3; 
+						     nowkeys.splice(nowkeys.indexOf(72),1); UserFirst.canjumpagian = false;	break;
+					case 98: UserSecond.oriy = UserSecond.y; UserSecond.canjump = true;UserSecond.stopfall = true;
+							 UserSecond.speedy = 3; 
+							 nowkeys.splice(nowkeys.indexOf(98),1); UserSecond.canjumpagian = false;break;
+					case 74: // user1 attack
+							 drawuser1attackanimation = UserFirst.dir;
+							 drawuser1moveanimation = null;
+							 nowkeys.splice(nowkeys.indexOf(65),1);
+							 nowkeys.splice(nowkeys.indexOf(68),1);
+							 break;
+					case 99: // user2 attack
+							 drawuser2attackanimation = UserSecond.dir;
+							 drawuser2moveanimation = null;
+							 nowkeys.splice(nowkeys.indexOf(37),1);
+							 nowkeys.splice(nowkeys.indexOf(39),1);
+							 break;
+				}
+			}
+		}
+
+
+		var user1runtime = 0;
+		var user2runtime = 0;
+		function changeStandingimg(index, dir){
+			if (index === 0){
+				// the first user
+				
+				if (dir === "right"){
+						if (user1runtime > 15){
+						man1_standimg = man1_right_standimg;
+						user1runtime = 0;
+						drawuser1moveanimation = null;
+						userstandwidth = totalwidth*7/162;
+						return;
+					}
+					if (user1runtime < 8){
+						man1_standimg = man1_right_runimg1;
+					}else {
+						man1_standimg = man1_right_runimg2;
+					}
+					user1runtime++;
+				}
+				if (dir === "left"){
+					if (user1runtime > 15){
+						man1_standimg = man1_left_standimg;
+						userstandwidth = totalwidth*7/162;
+						user1runtime = 0;
+						drawuser1moveanimation = null;
+						return;
+					}
+					if (user1runtime < 8){
+						man1_standimg = man1_left_runimg1;
+					}else {
+						man1_standimg = man1_left_runimg2;
+					}
+					user1runtime++;
+				}
+				
+			}else{
+				// the second user
+				if (dir === "right"){
+						if (user2runtime > 15){
+						man2_standimg = man2_right_standimg;
+						user2runtime = 0;
+						drawuser2moveanimation = null;
+						user2standwidth = totalwidth*5/162;
+						return;
+					}
+					if (user2runtime < 8){
+						man2_standimg = man2_right_runimg1;
+					}else {
+						man2_standimg = man2_right_runimg2;
+					}
+					user2runtime++;
+				}
+				if (dir === "left"){
+					if (user2runtime > 15){
+						man2_standimg = man2_left_standimg;
+						user2standwidth = totalwidth*5/162;
+						user2runtime = 0;
+						drawuser2moveanimation = null;
+						return;
+					}
+					if (user2runtime < 8){
+						man2_standimg = man2_left_runimg1;
+					}else {
+						man2_standimg = man2_left_runimg2;
+					}
+					user2runtime++;
+				}
+			}
+		}
+
+		var user1attacktime = 0;
+		var user2attacktime = 0;
+		function changeAttackingimg(index, dir){
+			
+			if (index === 0){
+				// the first user
+				
+				if (dir === "right"){
+					if (user1attacktime > 15){
+						man1_standimg = man1_right_standimg;
+						user1attacktime = 0;
+						drawuser1attackanimation = null;
+						userstandwidth = totalwidth*7/162;
+						UserFirst.isattacking = false;
+						return;
+					}
+
+					if (user1attacktime < 8){
+						userstandwidth = totalwidth*7/162;
+						man1_standimg = man1_right_attackimg1;
+					}else {
+						// change the standwidth
+						UserFirst.x += totalwidth*7/(162*5);
+						userstandwidth = totalwidth*7/162;
+						man1_standimg = man1_right_attackimg2;
+					}
+					user1attacktime++;
+					UserFirst.isattacking = true;
+				}
+				if (dir === "left"){
+					if (user1attacktime > 15){
+						man1_standimg = man1_left_standimg;
+						user1attacktime = 0;
+						drawuser1attackanimation = null;
+						userstandwidth = totalwidth*7/162;
+						UserFirst.isattacking = false;
+						return;
+					}
+					if (user1attacktime < 8){
+						userstandwidth = totalwidth*7/162;
+						man1_standimg = man1_left_attackimg1;
+					}else {
+						// change the standwidth
+						UserFirst.x -= totalwidth*7/(162*5);
+						userstandwidth = totalwidth*7/162;
+						man1_standimg = man1_left_attackimg2;
+					}
+					user1attacktime++;
+					UserFirst.isattacking = true;
+				}
+				
+			}else{
+				// the second user
+
+				if (dir === "right"){
+					if (user2attacktime > 15){
+						man2_standimg = man2_right_standimg;
+						user2attacktime = 0;
+						drawuser2attackanimation = null;
+						user2standwidth = totalwidth*5/162;
+						UserSecond.isattacking = false;
+						return;
+					}
+
+					if (user2attacktime < 8){
+						man2_standimg = man2_right_attackimg;
+						user2standwidth = totalwidth*8/162;
+					}else {
+						// change the standwidth
+						UserSecond.x += totalwidth*7/(162*5);
+						user2standwidth = totalwidth*8/162;
+						man2_standimg = man2_right_attackimg;
+					}
+					user2attacktime++;
+					UserSecond.isattacking = true;
+				}
+				if (dir === "left"){
+					if (user2attacktime > 15){
+						man2_standimg = man2_left_standimg;
+						user2attacktime = 0;
+						drawuser2attackanimation = null;
+						user2standwidth = totalwidth*5/162;
+						UserSecond.isattacking = false;
+						return;
+					}
+					if (user2attacktime < 8){
+						man2_standimg = man2_left_attackimg;
+						user2standwidth = totalwidth*8/162;
+					}else {
+						// change the standwidth
+						UserSecond.x -= totalwidth*7/(162*5);
+						user2standwidth = totalwidth*8/162;
+						man2_standimg = man2_left_attackimg;
+					}
+					user2attacktime++;
+					UserSecond.isattacking = true;
+				}
+			}
+			
+		}
+
+
+
+
+		// attack test
+		function attackTest(obj1, obj2){
+
+			if (obj1.isattacking && obj2.isattacking){
+				return;
+			}
+
+			// meet
+			if (obj1.isattacking){
+				if (obj1.dir === "left"){
+					// turn left
+					if (obj1.x > obj2.x && obj1.x < obj2.x + obj2.width && !(obj1.y > obj2.y + obj2.height - obj2.height*0.4 || obj1.y + obj1.height < obj2.y + obj2.height*0.4 )){
+						var div = document.createElement("div");
+						div.className = "flashing";
+						document.body.appendChild(div);
+						
+						clearInterval(gameloop);
+
+						obj2.x = totalwidth*77/81,
+						obj2.y = totalwidth*2/81;
+
+						setTimeout(function(){
+							if (UserSecond.cansave){
+								UserSecond.cansave = false;
+							}else{
+								UserFirst.cansave = true;
+							}
+							canvasApp();
+						}, 1000);
+						
+					}
+				}else{
+					// turn right
+					if (obj1.x + obj1.width > obj2.x && obj1.x + obj1.width < obj2.x + obj2.width && !(obj1.y > obj2.y + obj2.height - obj2.height*0.4 || obj1.y + obj1.height < obj2.y + obj2.height*0.4 )){
+						var div = document.createElement("div");
+						div.className = "flashing";
+						document.body.appendChild(div);
+						clearInterval(gameloop);
+
+						obj2.x = totalwidth*77/81,
+						obj2.y = totalwidth*2/81;
+
+						setTimeout(function(){
+							if (UserSecond.cansave){
+								UserSecond.cansave = false;
+							}else{
+								UserFirst.cansave = true;
+							}
+							canvasApp();
+						}, 1000);
+					}
+				}
+
+				
+			}
+
+			if (obj2.isattacking){
+				if (obj2.dir === "left"){
+					// turn left
+					if (obj2.x > obj1.x && obj2.x < obj1.x + obj1.width && !(obj2.y > obj1.y + obj1.height - obj1.height*0.4 || obj2.y + obj2.height < obj1.y + obj1.height*0.4 )){
+						var div = document.createElement("div");
+						div.className = "flashing";
+						document.body.appendChild(div);
+						clearInterval(gameloop);
+
+						obj1.x = totalwidth*2/81,
+						obj1.y = totalwidth*2/81;
+
+						setTimeout(function(){
+							if (UserFirst.cansave){
+								UserFirst.cansave = false;
+							}else{
+								UserSecond.cansave = true;
+							}
+							canvasApp();
+						}, 1000);
+					}
+				}else{
+					// turn right
+					if (obj2.x + obj2.width > obj1.x && obj2.x + obj2.width < obj1.x + obj1.width && !(obj2.y > obj1.y + obj1.height - obj1.height*0.4 || obj2.y + obj2.height < obj1.y + obj1.height*0.4 )){
+						var div = document.createElement("div");
+						div.className = "flashing";
+						document.body.appendChild(div);
+						clearInterval(gameloop);
+
+						obj1.x = totalwidth*2/81,
+						obj1.y = totalwidth*2/81;
+
+						setTimeout(function(){
+							if (UserFirst.cansave){
+								UserFirst.cansave = false;
+							}else{
+								UserSecond.cansave = true;
+							}
+							canvasApp();
+						}, 1000);
+					}
+				}
+
+				
+			}
+
+		}
+
+
+		// get sayhi box
+		function getSayHiBox(){
+			var obj1 = UserFirst;
+			var obj2 = UserSecond;
+
+			// first user can save
+			if (obj1.y < totalwidth / 24 && obj1.x > totalwidth-totalwidth*28/108 && obj1.x + obj1.width < totalwidth-totalwidth*19/108 && obj1.cansave){
+				if (obj1.star[0] === 0){
+					obj1.star[0] = 1;
+				}else{
+					obj1.star[1] = 1;
+				}
+				obj1.cansave = false;
+
+				var div = document.createElement("div");
+				div.className = "flashing";
+				document.body.appendChild(div);
+				clearInterval(gameloop);
+
+				obj1.x = totalwidth*2/81,
+				obj1.y = totalwidth*2/81;
+				obj2.x = totalwidth*77/81,
+				obj2.y = totalwidth*2/81;
+
+				setTimeout(function(){
+					canvasApp();
+				}, 1000);
+			}
+			// second user can save
+			if (obj2.y < totalwidth / 24 && obj2.x > totalwidth*19/108 && obj2.x + obj2.width < totalwidth*28/108 && obj2.cansave){
+				if (obj2.star[0] === 0){
+					obj2.star[0] = 1;
+				}else{
+					obj2.star[1] = 1;
+				}
+				obj2.cansave = false;
+
+				var div = document.createElement("div");
+				div.className = "flashing";
+				document.body.appendChild(div);
+				clearInterval(gameloop);
+
+				obj1.x = totalwidth*2/81,
+				obj1.y = totalwidth*2/81;
+				obj2.x = totalwidth*77/81,
+				obj2.y = totalwidth*2/81;
+
+				setTimeout(function(){
+					canvasApp();
+				}, 1000);
+			}
+
+		}
+
+
+		// meet top edge
+		function isTopEdge(){
+
+			for (var i = 0; i < alluser.length; i++){
+				if (alluser[i].y <= -alluser[i].height && i === 0){
+					nowkeys.splice(nowkeys.indexOf(72), 1);
+				}
+				if (alluser[i].y <= -alluser[i].height && i === 1){
+					nowkeys.splice(nowkeys.indexOf(98), 1);
+				}
+			}
+
+		}
+
+
+		// fall down
+
+		
+		function isFallingDown(){
+			var userfoot = [UserFirst.y + UserFirst.height, UserSecond.y + UserSecond.height];      // foot
+			var userbary = [UserFirst.x+UserFirst.width/4, UserSecond.x+UserSecond.width/4];   // barycenter
+			// make sure can fall down?
+			for (var i = 0; i < alluser.length; i++){
+				if (alluser[i].stopfall){
+					continue;              // 如果对应的玩家在跳跃，则不能fall down
+				}
+				if (userfoot[i] >= Math.floor(totalwidth*2/27)-10 && userfoot[i] <= Math.ceil(totalwidth*2/27)+10 && userbary[i] <= totalwidth*2/27){
+					// left man initial stage
+					alluser[i].y = totalwidth*2/27 - alluser[i].height;
+					changeItem(alluser[i]);
+				}else if (userfoot[i] >= Math.floor(totalheight*23/60)-10 && userfoot[i] <= Math.ceil(totalheight*23/60)+10 && userbary[i] + UserFirst.width >= Math.floor(totalwidth*2/27) && userbary[i] <= Math.ceil(totalwidth*11/27)){
+					// left top line
+					alluser[i].y = totalheight*23/60 - alluser[i].height;
+					changeItem(alluser[i]);
+				}else if (userfoot[i] >= Math.floor(totalheight/2+totalwidth*2/27)-10 && userfoot[i] <= Math.ceil(totalheight/2+totalwidth*2/27)+10 && userbary[i] + UserFirst.width >= Math.floor(totalwidth*2/27) && userbary[i] <= Math.ceil(totalwidth*11/27)){
+					// left bottom box
+					alluser[i].y = totalheight/2+totalwidth*2/27 - alluser[i].height;
+					changeItem(alluser[i]);
+				}else if (userfoot[i] >= Math.floor(totalheight*23/60)-10 && userfoot[i] <= Math.ceil(totalheight*23/60)+10 && userbary[i] + UserFirst.width >= Math.floor(totalwidth*13/27) && userbary[i] <= Math.ceil(totalwidth*14/27)){
+					// middle line
+					alluser[i].y = totalheight*23/60 - alluser[i].height;
+					changeItem(alluser[i]);
+				}else if (userfoot[i] >= Math.floor(totalheight*23/60)-10 && userfoot[i] <= Math.ceil(totalheight*23/60)+10 && userbary[i] + UserFirst.width >= Math.floor(totalwidth*16/27) && userbary[i] <= Math.ceil(totalwidth*25/27)){
+					// right top line
+					alluser[i].y = totalheight*23/60 - alluser[i].height;
+					changeItem(alluser[i]);
+				}else if(userfoot[i] >= Math.floor(totalwidth*2/27)-10 && userfoot[i] <= Math.ceil(totalwidth*2/27)+10 && userbary[i] + UserSecond.width >= totalwidth*25/27){
+					// right man initial stage
+					alluser[i].y = totalwidth*2/27 - alluser[i].height;
+					changeItem(alluser[i]);
+				}else if (userfoot[i] >= Math.floor(totalheight/2+totalwidth*2/27)-10 && userfoot[i] <= Math.ceil(totalheight/2+totalwidth*2/27)+10 && userbary[i] + UserFirst.width >= Math.floor(totalwidth*16/27) && userbary[i] <= Math.ceil(totalwidth*25/27)){
+					// right bottom box
+					alluser[i].y = totalheight/2+totalwidth*2/27 - alluser[i].height;
+					changeItem(alluser[i]);
+				}else if (userfoot[i] >= Math.floor(totalheight)-10 && userfoot[i] <= Math.ceil(totalheight)+20){
+					alluser[i].y = totalheight - alluser[i].height;
+					changeItem(alluser[i]);
+				}else{
+					alluser[i].canfall = true;
+				}
+
+				if (alluser[i].canfall && alluser[i].stopfall === false){
+					increaseY(i);
+				}
+
+			}
+			
+		}
+
+
+		// change items of user
+		function changeItem(obj){
+			obj.canfall = false;
+			obj.speedy = 3;
+			obj.canjumpagian = true;
+			obj.meetrightwall = false;
+			obj.meetleftwall = false;
+		}
+
+		// increase y
+		function increaseY(i){
+			alluser[i].y += alluser[i].speedy;
+			alluser[i].speedy *= 1.05;
+		}
+
+		// user jump
+		function userJump(){
+			for (var i = 0; i < alluser.length; i++){
+				var obj = alluser[i];
+				if (obj.canjump){
+
+					if (obj.y > obj.oriy - obj.height + 2){    // 弥补像素缺漏
+						// 起跳
+						obj.isjumpingup = true;
+						obj.y -= 5;
+					}else{
+						obj.isjumpingup = false;
+						obj.canjump = false;
+						obj.stopfall = false;
+						obj.canfall = true;
+					}
+				}else{
+					if (obj.y >= obj.oriy){
+						obj.canjumpagian = true;
+					}
+				}
+				
+				
+			}
+			
+		}
+
+
+		// is meet right wall function
+		function isMeetRightWall(){
+
+			for (var i = 0; i < alluser.length; i++){
+				var obj = alluser[i];
+
+				// meet the right edge
+				if (obj.x + obj.width >= totalwidth){
+					obj.x = totalwidth - obj.width;
+					obj.canjumpagian = true;
+					obj.meetrightwall = true;
+					continue;
+				}
+				// meet the left middle line
+				if ((obj.x + obj.width >= totalwidth/3 + totalwidth*4/27) && (obj.x + obj.width <= totalwidth/3 + totalwidth*9/54) && (obj.y + obj.height > totalheight*23/60) && (obj.y < totalheight - totalwidth*3/54)){
+					obj.x = totalwidth/3 + totalwidth*4/27 - obj.width;
+					obj.canjumpagian = true;
+					obj.meetrightwall = true;
+					continue;
+				}
+
+				// meet the left of left getline 
+				if ((obj.x + obj.width >= totalwidth*17/108) && (obj.x + obj.width <= totalwidth*18/108) && (obj.y + obj.height > 0) && (obj.y < totalheight*23/60-totalwidth*3/54)){
+					obj.x = totalwidth*17/108 - obj.width;
+					obj.canjumpagian = true;
+					obj.meetrightwall = true;
+					continue;
+				}
+
+				// meet the left of right getline 
+				if ((obj.x + obj.width >= totalwidth-totalwidth*19/108) && (obj.x + obj.width <= totalwidth-totalwidth*18/108) && (obj.y + obj.height > 0) && (obj.y < totalheight*23/60-totalwidth*3/54)){
+					obj.x = totalwidth-totalwidth*19/108 - obj.width;
+					obj.canjumpagian = true;
+					obj.meetrightwall = true;
+					continue;
+				}
+
+				// meet the left of left bottom box 
+				if ((obj.x + obj.width >= totalwidth*2/27) && (obj.x + obj.width <= totalwidth*3/27) && (obj.y + obj.height > totalheight/2+totalwidth*2/27) && (obj.y < totalheight-totalwidth*3/27)){
+					obj.x = totalwidth*2/27 - obj.width;
+					obj.canjumpagian = true;
+					obj.meetrightwall = true;
+					continue;
+				}
+
+				// meet the left of right bottom box 
+				if ((obj.x + obj.width >= totalwidth/3 + totalwidth*7/27) && (obj.x + obj.width <= totalwidth/3 + totalwidth*8/27) && (obj.y + obj.height > totalheight/2+totalwidth*2/27) && (obj.y < totalheight-totalwidth*3/27)){
+					obj.x = totalwidth/3 + totalwidth*7/27 - obj.width;
+					obj.canjumpagian = true;
+					obj.meetrightwall = true;
+					continue;
+				}
+
+				// not meet
+				obj.meetrightwall = false;
+
+			}
+
+		}
+
+
+		// is meet left wall function
+		function isMeetLeftWall(){
+
+			for (var i = 0; i < alluser.length; i++){
+				var obj = alluser[i];
+
+				// meet the left edge
+				if (obj.x <= 0){
+					obj.x = 0;
+					obj.canjumpagian = true;
+					obj.meetleftwall = true;
+					continue;
+				}
+				// meet the right middle line
+				if ((obj.x <= totalwidth/3 + totalwidth*5/27) && (obj.x > totalwidth/3 + totalwidth*9/54) && (obj.y + obj.height > totalheight*23/60) && (obj.y < totalheight - totalwidth*3/54)){
+					obj.x = totalwidth/3 + totalwidth*5/27;
+					obj.canjumpagian = true;
+					obj.meetleftwall = true;
+					continue;
+				}
+
+				// meet the right of left getline 
+				if ((obj.x <= totalwidth*19/108) && (obj.x > totalwidth*18/108) && (obj.y + obj.height > 0) && (obj.y < totalheight*23/60-totalwidth*3/54)){
+					obj.x = totalwidth*19/108;
+					obj.canjumpagian = true;
+					obj.meetleftwall = true;
+					continue;
+				}
+
+				// meet the right of right getline 
+				if ((obj.x <= totalwidth-totalwidth*17/108) && (obj.x > totalwidth-totalwidth*18/108) && (obj.y + obj.height > 0) && (obj.y < totalheight*23/60-totalwidth*3/54)){
+					obj.x = totalwidth-totalwidth*17/108;
+					obj.canjumpagian = true;
+					obj.meetleftwall = true;
+					continue;
+				}
+
+				// meet the right of left bottom box 
+				if ((obj.x <= totalwidth*11/27) && (obj.x > totalwidth*43/108) && (obj.y + obj.height > totalheight/2+totalwidth*2/27) && (obj.y < totalheight-totalwidth*3/27)){
+					obj.x = totalwidth*11/27;
+					obj.canjumpagian = true;
+					obj.meetleftwall = true;
+					continue;
+				}
+
+				// meet the right of right bottom box 
+				if ((obj.x <= totalwidth*2/3 + totalwidth*7/27) && (obj.x > totalwidth*2/3 + totalwidth*27/108) && (obj.y + obj.height > totalheight/2+totalwidth*2/27) && (obj.y < totalheight-totalwidth*3/27)){
+					obj.x = totalwidth*2/3 + totalwidth*7/27;
+					obj.canjumpagian = true;
+					obj.meetleftwall = true;
+					continue;
+				}
+
+				// not meet
+				obj.meetleftwall = false;
+
+			}
+
+		}
+
+		
+
+	})();
+
+
+	</script>
+	
+</body>
+</html>
