@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Translucent border and Multiple border</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+.wrap{
+    width:100%;
+    height:200px;
+    top:0;
+    left:0;
+    background: #8234aa;
+    text-align: center;
+}
+.inner {
+    position: absolute;
+    box-sizing:border-box;
+    width:40%;
+    height:100px;
+    margin-left:30%;
+    margin-top: 50px;
+    background: white;
+    border:10px solid rgba(255,255,255,0.5);
+}
+.inner2 {
+    background-clip: padding-box;
+}
+.inner3 {
+    background-clip: padding-box;
+    box-shadow: 0 0 0 10px #655;
+}
+.inner4 {
+    background-clip: padding-box;
+    outline: 5px dashed deeppink;
+}
+.inner5 {
+    border-radius: 5px;
+    background-clip: padding-box;
+    box-shadow: 0 0 0 10px #655,
+                0 0 0 15px rgba(255,255,255,0.5),
+                0 2px 5px 15px rgba(0,0,0,0.6);
+}
+</style>
+<body>
+	<div class="det-title">
+		<h1>Translucent border and Multiple border</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+How to create a translucent border? And how to create mutiple borders effect for a "div"? It's not comlex but contains some tips. Let's do it together.
+
+<h4>1. Translucent border</h4>It's easy to create a translucent background, you can use "opacity". However, as for border, we have to use "rgba". But is that all? No! Absolutely not! If you don't believe, just look at an example:
+        </div>
+
+        <div class="csscode">   .wrap{
+        width:100%;
+        height:200px;
+        top:0;
+        left:0;
+        background: #8234aa;
+        text-align: center;
+    }
+    .inner {
+        position: absolute;
+        box-sizing:border-box;
+        width:40%;
+        height:100px;
+        margin-left:30%;
+        margin-top: 50px;
+        background: white;
+        border:10px solid rgba(255,255,255,0.5);
+    }</div>
+
+        <div class="text">
+And it's effect:
+        </div>
+
+        <div class="wrap">
+            <div class="inner">
+                
+            </div>
+        </div>
+
+        <div class="text">
+So what's happenning? We have already set the "rgba" attribute, but where is my translucent border? Actually, we forget one thing, because the border belongs to content, it's one part of content, it is really set translucent, but because the background is white, we cannot see the transluent effect. How to do? "background-clip"!
+        </div>
+
+        <div class="csscode">   .inner2 {
+        background-clip: padding-box;
+    }</div>
+
+        <div class="text">
+Ok, in this example we get a perfect effect.
+        </div>
+
+        <div class="wrap">
+            <div class="inner inner2">
+                
+            </div>
+        </div>
+
+        <div class="text">
+<h4>2. Multiple borders</h4> If you want to set more than one border for a "div". What would you do? There are two methods for you! 
+
+(1) Box-shadow
+This attribute allows you to create infinite borders, what you need to do is to set the fourth parameter. It means shadow dilation. Let's see an example!
+        </div>
+
+        <div class="csscode">   .inner3 {
+        box-shadow: 0 0 0 10px #655;
+    }</div>
+
+        <div class="text">
+The effect, the "div" has two borders already. If you want to create a inner border, just add "inset" key word.
+        </div>
+
+        <div class="wrap">
+            <div class="inner inner3">
+                
+            </div>
+        </div>
+
+        <div class="text">
+(2) Outline
+If you think box-shadow is perfect, I will ask you to create two dashed borders for a "div", what will you do? Of course in this case, the "box-shadow" can do nothing. We should use "outline" to help us. Let's see an example: 
+        </div>
+
+        <div class="csscode">   .inner4 {
+        outline: 5px dashed deeppink;
+    }</div>
+
+        <div class="text">
+And it's effect as below. The "outline" can also be set negetive number in order to create inner dashed border.
+        </div>
+
+        <div class="wrap">
+            <div class="inner inner4">
+                
+            </div>
+        </div>
+
+        <div class="text">
+<h4>3. Tips</h4>(1) The "outline" can only use once. It means if you want to create more than two borders, you must use "box-shadow" or use another methods.
+
+(2) The "outline" cannot create radius border. It means the outline border will also be the 90 degree. Maybe this bug will be revised in the future. But now, if you want to create radius border, please use "box-shadow" or another methods.
+
+The final example, four radius borders:
+        </div>
+
+        <div class="csscode">   .inner {
+        border-radius: 5px;
+        background-clip: padding-box;
+        box-shadow: 0 0 0 10px #655,
+                    0 0 0 15px rgba(255,255,255,0.5),
+                    0 2px 5px 15px rgba(0,0,0,0.6);
+    }</div>
+        
+        <div class="text">
+Effect:
+        </div>
+
+        <div class="wrap">
+            <div class="inner inner5">
+                
+            </div>
+        </div>
+
+        <div class="text">
+(That's all)
+        </div>
+		
+	</div>
+</body>
+</html>
