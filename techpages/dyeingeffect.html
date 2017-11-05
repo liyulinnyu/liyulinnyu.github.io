@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Dyeing effect</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+.dyeing_11_4_2017 {
+
+}
+
+.dyeing_11_4_2017 img {
+    transition:0.5s filter;
+    filter: sepia(1)  hue-rotate(50deg);
+}
+.dyeing_11_4_2017 img:hover {
+    filter:none;
+}
+</style>
+<body>
+	<div class="det-title">
+		<h1>Dyeing effect</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+"Miss you, miss you, miss you." In this blog, I want to use some methods to achieve picture dyeing effect. What is dyeing effect? Just move your mouse on the picture below, if your browser is IE13+, you will see the effect. If not, don't be worry, I will also use some examples to introduce how to achieve this effect in IE9+! 
+        </div>
+
+        <div class="imgdiv dyeing_11_4_2017">
+            <img src="../img/howcanitbe.jpg" alt="">
+        </div>
+
+        <div class="text">
+Maybe you will say:" Come on, there are just two pictures". No! Just one picture, it means we should use CSS to control saturate and pixel of picture. We all know it's easy to do this using Canvas. However, as for CSS we should use "filter" or "blend-mode". And I will introduce three CSS methods and one JS(Canvas) method.
+        
+<h4>1. CSS methods</h4>(1) Filter 
+This method only need an "img" label and use the code below, what you should know is that we use "sepia" and "saturate" to add saturation to the picture, and use "hue-rotate" to add fixed value to each pixel.       
+        </div>
+
+        <div class="csscode">    img {
+        transition:0.5s filter;
+        filter: sepia(1) saturate(2) hue-rotate(50deg);
+    }
+    img:hover, img:focus{
+        filter:none;
+    }</div>
+
+        <div class="text">
+(2) Mix-blend-mode
+When using this method, you should add a parent element to "img" label. The difference between "filter" and "blend-mode" is that "filter" changes the pixel value directly, but the "blend-mode" is using a method called color overlap, it means we should set a background color for the parent element, and set the img be blend mode. Let's see an example:
+        </div>
+
+        <div class="csscode">    a { 
+        background: hsl(335, 100%, 50%);
+    } 
+    img {     
+        mix-blend-mode: luminosity; 
+    }</div>
+
+        <div class="text">
+(3) Background-blend-mode
+This method is similar with the above one. The only difference is we should put the picture as a bacnground picture into a "div" label.  
+        </div>
+
+        <div class="csscode">    div {
+        width: 640px; 
+        height: 440px;     
+        background-size: cover;     
+        background-color: hsl(335, 100%, 50%);     
+        background-blend-mode: luminosity;     
+        transition: 0.5s background-color;
+    } 
+    div:hover {     
+        background-color: transparent; 
+    }</div>
+
+        <div class="text">
+So what's next? 
+
+Canvas!
+
+<h4>2. Canvas method</h4>Why do wo need Canvas? The CSS filter can only be supported by IE13+, for good compatibility, we need Canvas.
+(1) Set canvas and img label
+        </div>
+
+        <div class="jscode">    var img = new Image();
+    img.src = "../img/nyu.jpg";
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext("2d");
+
+    img.onload = function(e){
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+    }</div>
+
+        <div class="text">
+(2) onmouseover
+Remember we should use "mouseover" instead of "mouseenter", because we should emit the event on "canvas" label, not "img" label, and "mouseenter" event cannot add events to its children elements. 
+(If you try this effect, please put it in the server, because the "getimagedata" method of canvas need the Same Origin Policy)
+        </div>
+
+        <div class="jscode">    canvas.onmouseover = function(e){
+        var c = context.getImageData(0, 0, canvas.width, canvas.height);
+        for(var i = 0; i < c.height; ++i){
+            for(var j = 0; j < c.width; ++j){
+                var x = i*4*c.width + 4*j,  
+                    r = c.data[x],
+                    g = c.data[x+1],
+                    b = c.data[x+2];
+                c.data[x+3] = 150;
+                c.data[x] = 255-r;
+                c.data[x+1] = 255-g;
+                c.data[x+2] = 255-b; 
+            }
+        }
+        ctx.putImageData(c, 0, 0, canvas.width, canvas.height);
+    }</div>
+
+        <div class="text">
+(3) onmouseout
+Sure, we should use "mouseout" instead of "mouseleave". And the only difference is the opacity pixel in the picture. 
+        </div>
+
+        <div class="jscode">    canvas.onmouseover = function(e){
+        var c = context.getImageData(0, 0, canvas.width, canvas.height);
+        for(var i = 0; i < c.height; ++i){
+            for(var j = 0; j < c.width; ++j){
+                var x = i*4*c.width + 4*j,  
+                    r = c.data[x],
+                    g = c.data[x+1],
+                    b = c.data[x+2];
+                c.data[x+3] = 0;    <span class="note">// Only difference</span>
+                c.data[x] = 255-r;
+                c.data[x+1] = 255-g;
+                c.data[x+2] = 255-b; 
+            }
+        }
+        ctx.putImageData(c, 0, 0, canvas.width, canvas.height);
+    }</div>
+
+        <div class="text">
+(That's all)
+        </div>		
+	</div>
+</body>
+</html>
