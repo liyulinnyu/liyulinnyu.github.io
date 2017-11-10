@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>CSS Hardware Acceleration</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+.text > span {
+    font-weight: bold;
+}
+</style>
+<body>
+	<div class="det-title">
+		<h1>CSS Hardware Acceleration</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+When we use CSS animation, maybe the rendering speed will be slow. In order to solve this problem, we can choose the hardware acceleration to help us. But that's the key, sometimes it will appear some bugs in Chrome, in my opinion, it's because the wrong compositing layer rendering which we can solve using hack. 
+
+So in this blog, let's talk about the CSS hardware Acceleration.
+
+<h4>1. Start hardware Acceleration</h4>We can use two methods below, when we use the hardware acceleration, the fps will be double increased.
+        </div>
+
+        <div class="csscode">    webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);</div>
+
+        <div class="text">
+Or
+        </div>
+
+        <div class="csscode">    webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    -o-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);</div>
+
+        <div class="text">
+<h4>2. First Bug!</h4><span>Q :</span> 
+When we use the hardware acceleration for lots of "div" which set "position:absolute", some "div" will disappear automatically. 
+<span>Why? </span>
+Nobody knows, maybe because of the Chrome itself.
+<span>How to solve?</span>  
+(1) Please do better not use "position:absolute/fixed" for those elements.
+(2) Or you can decrease the number of animation blocks.
+
+<h4>3. Second Bug!</h4><span>Q :</span> 
+Browser flicker or jitter
+<span>Why? </span>
+Browsers will start 3d animation effect, even though you use translateZ(0).
+<span>How to solve?</span>  
+Set: -webkit-backface-visibility:hidden;
+    -webkit-perspective:1000;
+
+<h4>4. Third Bug!</h4><span>Q :</span> 
+If we use the carousel figure or loading animation for a certain "div", some other blocks will also be added to compositing layers even they are not set 3d hardware acceleration. This bug will cause a very slow rendering event in mobile devices.  
+<span>Why? </span>
+The Chrome will create compositing layer for each "div" when it has at least one following case:
+(1) 3d animation or perspective transform
+(2) Using accelerated video decoding
+(3) WebGL or Canvas
+(4) Flash
+(5) Changing opacity
+(6) Child element whose parent has above situation
+(7) Element has a sibling with a lower z-index which has a compositing layer (in other words the it’s rendered on top of a composited layer)
+
+What's the key? The last one!
+<span>How to solve?</span>  
+Obviously, we should set "z-index:1;" for the element which used 3d hardware acceleration.  
+
+<h4>5. When do we need hardware acceleration?</h4>(1) Use many large pictures to do the animation (especially PNG24).
+(2) Use "background-size:cover" for background picture. <a href="https://coderwall.com/p/j5udlw/improve-scroll-performance-of-chrome-when-using-background-size-cover">(For more details)</a>
+(3) Lots of CSS3 DOM animation
+
+(That's all)
+        </div>
+		
+	</div>
+</body>
+</html>
