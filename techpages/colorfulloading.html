@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />     
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="format-detection" content="telephone=no" />
+    <title>Colorful Loading</title>
+    <link rel="shortcut icon" href="../icon/lyl.ico">
+    <link rel="bookmark" href="../icon/lyl.ico" type="image/x-icon"　/>
+    <link rel="stylesheet" href="../css/subpage.css">
+</head>
+<style>
+.circle {
+    margin-left: calc(50% - 100px);
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+.circleline {
+    margin-top: 20px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    margin-left: calc(50% - 100px);
+    position: relative;
+    overflow: hidden;
+    -webkit-mask: radial-gradient(transparent, transparent 70px, #000 82px);
+    mask: radial-gradient(transparent 70px, #000 82px);
+}
+@keyframes loop {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transition: rotate(360);
+    }
+}
+.circle-group {
+    width: 100%; height: 100%;
+    -webkit-filter: blur(15px);
+    filter: blur(15px);
+    transform: scale(1.2);
+}
+.circle-group i {
+    width: 100%; height: 100%;
+    clip: rect(0 200px 200px 100px);
+    position: absolute;
+    overflow: hidden;
+    animation: loop 3s linear infinite;
+}
+.circle-group i::after {
+    content: '';
+    width: 100%; height: 100%;
+    background: currentColor;
+    position: absolute;
+    clip: rect(0 100px 200px 0);
+    transform: rotate(31deg);
+    border-radius: 50%;
+    
+}
+
+.circle-group i:nth-of-type(1) {
+    transform: rotate(0);
+    color: #9ED110; 
+}
+.circle-group i:nth-of-type(2) {
+    transform: rotate(30deg);
+    color: #50B517; 
+}
+.circle-group i:nth-of-type(3) {
+    transform: rotate(60deg);
+    color: #179067; 
+}
+.circle-group i:nth-of-type(4) {
+    transform: rotate(90deg);
+    color: #476EAF; 
+}
+.circle-group i:nth-of-type(5) {
+    transform: rotate(120deg);
+    color: #9f49ac; 
+}
+.circle-group i:nth-of-type(6) {
+    transform: rotate(150deg);
+    color: #CC42A2; 
+}
+.circle-group i:nth-of-type(7) {
+    transform: rotate(180deg);
+    color: #FF3BA7; 
+}
+.circle-group i:nth-of-type(8) {
+    transform: rotate(210deg);
+    color: #FF5800;
+}
+.circle-group i:nth-of-type(9) {
+    transform: rotate(240deg);
+    color: #FF8100; 
+}
+.circle-group i:nth-of-type(10) {
+    transform: rotate(270deg);
+    color: #FEAC00; 
+}
+.circle-group i:nth-of-type(11) {
+    transform: rotate(300deg);
+    color: #FFCC00; 
+}
+.circle-group i:nth-of-type(12) {
+    transform: rotate(330deg);
+    color: #EDE604; 
+}
+.testcircle {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+.testsector {
+    width: 200px; height: 200px;
+    position: absolute;
+    clip: rect(0 200px 200px 100px);
+    overflow: hidden;
+    transform: scale(1.2);
+}
+.testsector:nth-of-type(1)::after {
+    content: '';
+    width: 100%; height: 100%;
+    background: currentColor;
+    position: absolute;
+    clip: rect(0 100px 200px 0);
+    transform: rotate(30deg);
+    border-radius: 50%;
+}
+.testsector:nth-of-type(1) {
+    transform: rotate(30);
+    color: #9ED110;    
+}
+</style>
+<body>
+	<div class="det-title">
+		<h1>Colorful loading animation</h1>
+	</div>
+	<div class="det-content">
+		
+        <div class="text">
+When I enjoyed Zhangxinxu's blog, I found he did a colorful circle just using CSS3, amazing! And I learned that idea, and found if we could let the circle rotate infinite, it looks like a loading circle, right? 
+        </div>
+
+        <div id="circle" class="circle">
+            <div class="circle-group">
+                <i></i><i></i><i></i><i></i>
+                <i></i><i></i><i></i><i></i>
+                <i></i><i></i><i></i><i></i>
+            </div>
+        </div>
+        <div id="circleline" class="circleline">
+            <div class="circle-group">
+                <i></i><i></i><i></i><i></i>
+                <i></i><i></i><i></i><i></i>
+                <i></i><i></i><i></i><i></i>
+            </div>
+        </div>
+
+        <div class="text">
+So how to make a circle like this? First we should make a sector like below, apparently, if we make 12 sectors with different color, then they can form a coloful circle.
+        </div>
+
+        <div class="testcircle">
+            <div class="testsector"></div>
+        </div>
+
+        <div class="text">
+However, how to create a sector, that's a little bit difficult. Let's look the following picture, if we want a sector, we should create a circle first, and use clip attribute which can allow only the right half circle appear. Then we will use ":after" pesudo element and set the same clip attribute for it with rotate action.    
+        </div>
+
+        <div class="imgdiv">
+            <img src="../img/2017_12_1_1.png" alt="">
+        </div>
+
+        <div class="text">
+Ok, we can create 12 sector like this to form a circle like below:
+        </div>
+
+        <div class="imgdiv">
+            <img src="../img/2017_12_1_2.png" alt="">
+        </div>
+
+        <div class="text">
+In order to get smooth edge, we should use "blur" for every sector, and then we should use "scale" attribute to prevent the blur pixels going out of the circle. For example, we give a class name for all sectors, and use the css code like below. 
+        </div>
+
+        <div class="csscode">   .circle-group {
+        width: 100%; height: 100%;
+        -webkit-filter: blur(15px);
+        filter: blur(15px);
+        transform: scale(1.2);
+    }</div>
+
+        <div class="imgdiv">
+            <img src="../img/2017_12_1_3.png" alt="">
+        </div>
+
+        <div class="text">
+Ok, until this step, we have finished most work, but how to make it rotate as a loading picture? Can we add animation to the circle? No, it doesn't work. The key is to add animation to every sector like below:
+        </div>
+
+        <div class="csscode">   .circle-group i {
+        width: 100%; height: 100%;
+        clip: rect(0 200px 200px 100px);
+        position: absolute;
+        overflow: hidden;
+        animation: loop 3s linear infinite;
+    }
+    @keyframes loop {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transition: rotate(360);
+        }
+    }</div>
+
+        <div class="text">
+Ok, everything has done! What? How about the second loading animation? Haha, we should use the last blog's tech/skill to get it! It's "mask" attribute, and we will use css gradient as the mask image.
+        </div>
+
+        <div class="csscode">   .circleline {
+        width: 200px; height: 200px;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        -webkit-mask: radial-gradient(transparent, transparent 70px, #000 82px);
+        mask: radial-gradient(transparent 70px, #000 82px);
+    }</div>
+
+        <div id="circleline" class="circleline">
+            <div class="circle-group">
+                <i></i><i></i><i></i><i></i>
+                <i></i><i></i><i></i><i></i>
+                <i></i><i></i><i></i><i></i>
+            </div>
+        </div>
+
+        <div class="text">
+Finally, thanks Zhangxinxu's idea, he is brilliant and smart, talented in front end development. Thanks!
+
+(That's all)
+        </div>
+		
+	</div>
+</body>
+</html>
